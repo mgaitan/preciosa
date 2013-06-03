@@ -29,8 +29,9 @@ Estamos empezando y hay mucho por hacer.  Anotate en la `lista de correo`_.
 ¿Cómo trabajamos?
 -----------------
 
-Cuando definamos las cuestiones básicas crearemos tareas en el `issue tracker`_. Luego fork y pull request de tus aportes!
+Cuando definamos las cuestiones básicas crearemos tareas en el `issue tracker`_. Luego fork y pull request (contra la rama ``develop`` [1]_ ) de tus aportes!
 
+.. [1] Usaremos `git-flow <https://github.com/nvie/gitflow>`_
 
 .. _lista de correo: https://groups.google.com/forum/?fromgroups#!forum/preciosa-devs
 .. _issue tracker: https://github.com/mgaitan/preciosa/issues
