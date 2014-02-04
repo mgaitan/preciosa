@@ -1,0 +1,101 @@
+[
+{
+  "pk": 1,
+  "model": "precios.cadena",
+  "fields": {
+    "nombre": "Walmart",
+    "cadena_madre": null,
+    "logo": ""
+  }
+},
+{
+  "pk": 2,
+  "model": "precios.cadena",
+  "fields": {
+    "nombre": "Coto",
+    "cadena_madre": null,
+    "logo": ""
+  }
+},
+{
+  "pk": 3,
+  "model": "precios.cadena",
+  "fields": {
+    "nombre": "Cencosud",
+    "cadena_madre": null,
+    "logo": ""
+  }
+},
+{
+  "pk": 4,
+  "model": "precios.cadena",
+  "fields": {
+    "nombre": "Jumbo",
+    "cadena_madre": 3,
+    "logo": ""
+  }
+},
+{
+  "pk": 5,
+  "model": "precios.cadena",
+  "fields": {
+    "nombre": "Vea",
+    "cadena_madre": 3,
+    "logo": ""
+  }
+},
+{
+  "pk": 6,
+  "model": "precios.cadena",
+  "fields": {
+    "nombre": "Disco",
+    "cadena_madre": 3,
+    "logo": ""
+  }
+},
+{
+  "pk": 7,
+  "model": "precios.cadena",
+  "fields": {
+    "nombre": "Carrefour",
+    "cadena_madre": null,
+    "logo": ""
+  }
+},
+{
+  "pk": 8,
+  "model": "precios.cadena",
+  "fields": {
+    "nombre": "La An\u00f3nima",
+    "cadena_madre": null,
+    "logo": ""
+  }
+},
+{
+  "pk": 9,
+  "model": "precios.cadena",
+  "fields": {
+    "nombre": "Casrech (Red China)",
+    "cadena_madre": null,
+    "logo": ""
+  }
+},
+{
+  "pk": 10,
+  "model": "precios.cadena",
+  "fields": {
+    "nombre": "Libertad",
+    "cadena_madre": null,
+    "logo": ""
+  }
+},
+{
+  "pk": 11,
+  "model": "precios.cadena",
+  "fields": {
+    "nombre": "Cooperativa Obrera",
+    "cadena_madre": null,
+    "logo": ""
+  }
+}
+]

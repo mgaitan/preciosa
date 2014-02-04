@@ -1,0 +1,1484 @@
+[
+{
+  "pk": 1,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Alsina",
+    "cadena": 2,
+    "ciudad": 487,
+    "horarios": "Lunes a Jueves: 8:30 a 22:00\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 22:00",
+    "nombre": "Spinetto",
+    "cp": null,
+    "telefono": "4954-3442"
+  }
+},
+{
+  "pk": 2,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Cnel Roca 1345",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 8:30 a 21:30",
+    "nombre": "Pompeya",
+    "cp": null,
+    "telefono": "4919-0484"
+  }
+},
+{
+  "pk": 3,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Mitre 3300",
+    "cadena": 2,
+    "ciudad": 190,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 8:30 a 21:30",
+    "nombre": "Sarandi",
+    "cp": null,
+    "telefono": "4205-7808"
+  }
+},
+{
+  "pk": 4,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Bernardino Rivadavia 2602",
+    "cadena": 2,
+    "ciudad": 688,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 8:30 a 21:30",
+    "nombre": "Lanus",
+    "cp": null,
+    "telefono": "4239-9300"
+  }
+},
+{
+  "pk": 5,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Aguero 670/668/616/624",
+    "cadena": 2,
+    "ciudad": 1289,
+    "horarios": "Lunes a Jueves: 8:30 a 22:00\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 8:30 a 22:00",
+    "nombre": "Abasto",
+    "cp": null,
+    "telefono": "4865-7515"
+  }
+},
+{
+  "pk": 6,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Venezuela 114 Bis",
+    "cadena": 2,
+    "ciudad": 2127,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 8:30 a 21:30",
+    "nombre": "Fisherton Rosario",
+    "cp": null,
+    "telefono": "0341-451-4583"
+  }
+},
+{
+  "pk": 7,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Hipolito Irigoyen 10699",
+    "cadena": 2,
+    "ciudad": 631,
+    "horarios": "Lunes a Jueves: 8:30 a 22:00\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:30\nDomingo: 8:30 a 22:00",
+    "nombre": "Temperley",
+    "cp": null,
+    "telefono": "4239-3000"
+  }
+},
+{
+  "pk": 8,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Comesa\u00e3\u00b1A S/N - E/Reconquista Y Acceso Oeste",
+    "cadena": 2,
+    "ciudad": 1084,
+    "horarios": "Lunes a Jueves: 8:30 a 22:00\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:30\nDomingo: 8:30 a 22:00",
+    "nombre": "Ciudadela",
+    "cp": null,
+    "telefono": "4657-5539"
+  }
+},
+{
+  "pk": 9,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "H. Irigoyen 1826",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 8:30 a 22:00",
+    "nombre": "Jose C. Paz",
+    "cp": null,
+    "telefono": "02320-428689"
+  }
+},
+{
+  "pk": 10,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Avda. Junin Y Thedy",
+    "cadena": 2,
+    "ciudad": 2127,
+    "horarios": "Lunes a Jueves: 9:00 a 22:00\nViernes: 9:00 a 22:00\nS\u00e1bado: 9:00 a 22:00\nDomingo: 9:00 a 22:00",
+    "nombre": "Rosario Talleres",
+    "cp": null,
+    "telefono": "0341-435-7060"
+  }
+},
+{
+  "pk": 11,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Ruta 11 Km 404",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 9:00 a 21:00, Martes cerrado\nViernes: 9:00 a 21:00\nS\u00e1bado: 9:00 a 21:00\nDomingo: 9:00 a 21:00",
+    "nombre": "Madariaga",
+    "cp": null,
+    "telefono": "02254-571824/26/27/30"
+  }
+},
+{
+  "pk": 12,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Colectora Pilar Norte N\u00e2\u00ba 4002 - Ruta 9 Pn",
+    "cadena": 2,
+    "ciudad": 615,
+    "horarios": "Lunes a Jueves: -\nViernes: -\nS\u00e1bado: -\nDomingo: -",
+    "nombre": "Colect Pilar 4002",
+    "cp": null,
+    "telefono": ""
+  }
+},
+{
+  "pk": 13,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Prov. 205 E/Rp 52 Y Calles S. Cabral Y S. Salvadores",
+    "cadena": 2,
+    "ciudad": 898,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 22:00\nDomingo: 8:30 a 21:30",
+    "nombre": "Ezeiza",
+    "cp": null,
+    "telefono": "4389-5251 / 4389-5252"
+  }
+},
+{
+  "pk": 14,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Av Gral Manuel Belgrano 950",
+    "cadena": 2,
+    "ciudad": 864,
+    "horarios": "Lunes a Jueves: -\nViernes: -\nS\u00e1bado: -\nDomingo: -",
+    "nombre": "Garin",
+    "cp": null,
+    "telefono": ""
+  }
+},
+{
+  "pk": 15,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Cabildo 545",
+    "cadena": 2,
+    "ciudad": 1184,
+    "horarios": "Lunes a Jueves: 8:30 a 22:00\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 22:00",
+    "nombre": "Cabildo",
+    "cp": null,
+    "telefono": "4771-1012"
+  }
+},
+{
+  "pk": 16,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Honduras 3862",
+    "cadena": 2,
+    "ciudad": 477,
+    "horarios": "Lunes a Jueves: 8:30 a 22:00\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Honduras",
+    "cp": null,
+    "telefono": "4861-8926"
+  }
+},
+{
+  "pk": 17,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Juan B.Alberdi 1737/49",
+    "cadena": 2,
+    "ciudad": 880,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Alberdi",
+    "cp": null,
+    "telefono": "4631-0091"
+  }
+},
+{
+  "pk": 18,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "H.Yrigoyen 380",
+    "cadena": 2,
+    "ciudad": 307,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Quilmes",
+    "cp": null,
+    "telefono": "4224-6054"
+  }
+},
+{
+  "pk": 19,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "French 2417",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 22:00\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 22:00",
+    "nombre": "French",
+    "cp": null,
+    "telefono": "4807-5597"
+  }
+},
+{
+  "pk": 20,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Eva Peron 4730/32",
+    "cadena": 2,
+    "ciudad": 565,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Eva Peron",
+    "cp": null,
+    "telefono": "4635-4441"
+  }
+},
+{
+  "pk": 21,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Segurola 1701",
+    "cadena": 2,
+    "ciudad": 4411,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 8:30 a 21:30",
+    "nombre": "Georgalos",
+    "cp": null,
+    "telefono": "4566-9750"
+  }
+},
+{
+  "pk": 22,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Maipu 1758/60/62",
+    "cadena": 2,
+    "ciudad": 114,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 8:30 a 21:30",
+    "nombre": "Vte Lopez",
+    "cp": null,
+    "telefono": "4795-0702"
+  }
+},
+{
+  "pk": 23,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Cnel Juan Piran 801",
+    "cadena": 2,
+    "ciudad": 2595,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 8:30 a 21:30",
+    "nombre": "Parana",
+    "cp": null,
+    "telefono": "0343-422-0224"
+  }
+},
+{
+  "pk": 24,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Charcas 2980",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 22:00\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Charcas",
+    "cp": null,
+    "telefono": "4825-7925/3620"
+  }
+},
+{
+  "pk": 25,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Antartida Argentina 1160",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:00",
+    "nombre": "Sados",
+    "cp": null,
+    "telefono": "4312-4660"
+  }
+},
+{
+  "pk": 26,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Ricardo Balbin",
+    "cadena": 2,
+    "ciudad": 267,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Saavedra",
+    "cp": null,
+    "telefono": "4-544-7106/ 7146/ 7207"
+  }
+},
+{
+  "pk": 27,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Bartolome Mitre 2951",
+    "cadena": 2,
+    "ciudad": 114,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Munro Av Mitre 2951/65",
+    "cp": null,
+    "telefono": "4762-5381 / 4756-4528"
+  }
+},
+{
+  "pk": 28,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Uruguay 4691",
+    "cadena": 2,
+    "ciudad": 232,
+    "horarios": "Lunes a Jueves: -\nViernes: -\nS\u00e1bado: -\nDomingo: -",
+    "nombre": "La Horqueta",
+    "cp": null,
+    "telefono": ""
+  }
+},
+{
+  "pk": 29,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Boedo 777",
+    "cadena": 2,
+    "ciudad": 1171,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Boedo",
+    "cp": null,
+    "telefono": "4931-9801"
+  }
+},
+{
+  "pk": 30,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Monroe 3284/98",
+    "cadena": 2,
+    "ciudad": 1184,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:00",
+    "nombre": "Monroe",
+    "cp": null,
+    "telefono": "4542-0789"
+  }
+},
+{
+  "pk": 31,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Rivadavia 2846",
+    "cadena": 2,
+    "ciudad": 487,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 22:00\nDomingo: Cerrado",
+    "nombre": "Once",
+    "cp": null,
+    "telefono": "4861-6621"
+  }
+},
+{
+  "pk": 32,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Directorio 2647/57",
+    "cadena": 2,
+    "ciudad": 880,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 14:00",
+    "nombre": "Directorio",
+    "cp": null,
+    "telefono": "4611-1011"
+  }
+},
+{
+  "pk": 33,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "San Martin 251/75",
+    "cadena": 2,
+    "ciudad": 584,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 14:00",
+    "nombre": "Mar De Ajo",
+    "cp": null,
+    "telefono": "02257-420229"
+  }
+},
+{
+  "pk": 34,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Rivadavia 13810",
+    "cadena": 2,
+    "ciudad": 295,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Ramos Mejia",
+    "cp": null,
+    "telefono": "4656-6497"
+  }
+},
+{
+  "pk": 35,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Maure 1730",
+    "cadena": 2,
+    "ciudad": 1184,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Maure",
+    "cp": null,
+    "telefono": "4777-1237"
+  }
+},
+{
+  "pk": 36,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Libertador 18243",
+    "cadena": 2,
+    "ciudad": 314,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:00",
+    "nombre": "Punta Chica",
+    "cp": null,
+    "telefono": "4747-2707"
+  }
+},
+{
+  "pk": 37,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Mexico 2236 Y Pichincha",
+    "cadena": 2,
+    "ciudad": 243,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: Cerrado",
+    "nombre": "Pichincha",
+    "cp": null,
+    "telefono": "4308-6665"
+  }
+},
+{
+  "pk": 38,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Malabia 103/43",
+    "cadena": 2,
+    "ciudad": 92,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:00",
+    "nombre": "Murillo",
+    "cp": null,
+    "telefono": "4857-6799"
+  }
+},
+{
+  "pk": 39,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Castro Barros 24",
+    "cadena": 2,
+    "ciudad": 1262,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Castro Barros",
+    "cp": null,
+    "telefono": "4983-4011"
+  }
+},
+{
+  "pk": 40,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Boulogne Sur Mer Y Av Cooperacion",
+    "cadena": 2,
+    "ciudad": 159,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:00",
+    "nombre": "Tapiales",
+    "cp": null,
+    "telefono": "4462-1810"
+  }
+},
+{
+  "pk": 41,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Urquiza 1644/62/64/66",
+    "cadena": 2,
+    "ciudad": 2127,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Rosario (Urquiza)",
+    "cp": null,
+    "telefono": "0341-440-7475"
+  }
+},
+{
+  "pk": 42,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "3 De Febrero",
+    "cadena": 2,
+    "ciudad": 2127,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Rosario (3 De Febrero)",
+    "cp": null,
+    "telefono": "0341-4254913"
+  }
+},
+{
+  "pk": 43,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Italia 62",
+    "cadena": 2,
+    "ciudad": 1223,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:00",
+    "nombre": "Avellaneda",
+    "cp": null,
+    "telefono": "4222-6555"
+  }
+},
+{
+  "pk": 44,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Gaona 1902/50",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 8:30 a 21:30",
+    "nombre": "Ivonne",
+    "cp": null,
+    "telefono": "4584-9393"
+  }
+},
+{
+  "pk": 45,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "12 De Octubre 3054",
+    "cadena": 2,
+    "ciudad": 307,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 14:00",
+    "nombre": "Quilmes",
+    "cp": null,
+    "telefono": "4250-7066"
+  }
+},
+{
+  "pk": 46,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Boulevard Bs. As. 710. Esq. Alvear",
+    "cadena": 2,
+    "ciudad": 533,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 22:00\nDomingo: 8:30 a 21:30",
+    "nombre": "Monte Grande",
+    "cp": null,
+    "telefono": "4281-8435 / 8380"
+  }
+},
+{
+  "pk": 47,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Cabildo 4125/65",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Cabildo",
+    "cp": null,
+    "telefono": "4704-9300"
+  }
+},
+{
+  "pk": 48,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Ruta 8 Km",
+    "cadena": 2,
+    "ciudad": 2006,
+    "horarios": "Lunes a Jueves: 8:00 a 21:30\nViernes: 8:00 a 21:30\nS\u00e1bado: 8:00 a 21:30\nDomingo: 9:00 a 21:00",
+    "nombre": "San Martin Ruta 8",
+    "cp": null,
+    "telefono": "4754-1640"
+  }
+},
+{
+  "pk": 49,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "J.M. Estrada 878/80",
+    "cadena": 2,
+    "ciudad": 1143,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:00",
+    "nombre": "Campana",
+    "cp": null,
+    "telefono": "03489-439461"
+  }
+},
+{
+  "pk": 50,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "San Juan 2168",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 14:00",
+    "nombre": "San Juan",
+    "cp": null,
+    "telefono": "4942-6228"
+  }
+},
+{
+  "pk": 51,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Asamblea 1176",
+    "cadena": 2,
+    "ciudad": 457,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: Cerrado",
+    "nombre": "Asamblea",
+    "cp": null,
+    "telefono": "4924-9451/9458"
+  }
+},
+{
+  "pk": 52,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Tapia De Cruz 420",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Escobar",
+    "cp": null,
+    "telefono": "03488-43-0957"
+  }
+},
+{
+  "pk": 53,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Nazca 1244",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:00",
+    "nombre": "Nazca",
+    "cp": null,
+    "telefono": "4588-0736/1095"
+  }
+},
+{
+  "pk": 54,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Sarmiento 524 (Ruta 205)",
+    "cadena": 2,
+    "ciudad": 898,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:30",
+    "nombre": "Tristan Suarez",
+    "cp": null,
+    "telefono": "4234-2127 4386-1573"
+  }
+},
+{
+  "pk": 55,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "San Martin 2095",
+    "cadena": 2,
+    "ciudad": 443,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: Cerrado",
+    "nombre": "Av.San Martin",
+    "cp": null,
+    "telefono": "4585-2244"
+  }
+},
+{
+  "pk": 56,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Lima 1553",
+    "cadena": 2,
+    "ciudad": 1010,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:30\nDomingo: Cerrado",
+    "nombre": "Constitucion",
+    "cp": null,
+    "telefono": "4305-5062"
+  }
+},
+{
+  "pk": 57,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "El Cano 3002",
+    "cadena": 2,
+    "ciudad": 1184,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:30",
+    "nombre": "Elcano",
+    "cp": null,
+    "telefono": "4554-4935"
+  }
+},
+{
+  "pk": 58,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Scalabrini Ortiz 1688",
+    "cadena": 2,
+    "ciudad": 477,
+    "horarios": "Lunes a Jueves: 8:00 a 21:30\nViernes: 8:00 a 21:30\nS\u00e1bado: 8:00 a 22:00\nDomingo: Cerrado",
+    "nombre": "Scalabrini Ortiz",
+    "cp": null,
+    "telefono": "4831-2538"
+  }
+},
+{
+  "pk": 59,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Peru 1496",
+    "cadena": 2,
+    "ciudad": 200,
+    "horarios": "Lunes a Jueves: 8:00 a 21:30\nViernes: 8:00 a 21:30\nS\u00e1bado: 8:00 a 21:30\nDomingo: Cerrado",
+    "nombre": "San Telmo",
+    "cp": null,
+    "telefono": "4362-5319"
+  }
+},
+{
+  "pk": 60,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "San Martin 3029",
+    "cadena": 2,
+    "ciudad": 878,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:30",
+    "nombre": "Florida",
+    "cp": null,
+    "telefono": "4730-2880"
+  }
+},
+{
+  "pk": 61,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Diaz Velez 4531",
+    "cadena": 2,
+    "ciudad": 1262,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:30",
+    "nombre": "Diaz Velez",
+    "cp": null,
+    "telefono": "4983-3129"
+  }
+},
+{
+  "pk": 62,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Paraguay 2672/94",
+    "cadena": 2,
+    "ciudad": 1193,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: Cerrado",
+    "nombre": "Paraguay",
+    "cp": null,
+    "telefono": "4963-8812"
+  }
+},
+{
+  "pk": 63,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Amenabar 2134/52",
+    "cadena": 2,
+    "ciudad": 1184,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Amenabar",
+    "cp": null,
+    "telefono": "4786-6061"
+  }
+},
+{
+  "pk": 64,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Sanabria 3320",
+    "cadena": 2,
+    "ciudad": 4411,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: Cerrado",
+    "nombre": "Sanabria",
+    "cp": null,
+    "telefono": "4504-1343"
+  }
+},
+{
+  "pk": 65,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "La Plata 3635",
+    "cadena": 2,
+    "ciudad": 194,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:30\nDomingo: Cerrado",
+    "nombre": "Santos Lugares",
+    "cp": null,
+    "telefono": "4757-0808"
+  }
+},
+{
+  "pk": 66,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Martin Garcia 495",
+    "cadena": 2,
+    "ciudad": 1203,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 14:00",
+    "nombre": "Barracas",
+    "cp": null,
+    "telefono": "4307-1011"
+  }
+},
+{
+  "pk": 67,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Avellaneda 3758",
+    "cadena": 2,
+    "ciudad": 879,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 14:00",
+    "nombre": "Avellaneda",
+    "cp": null,
+    "telefono": "4671-7787"
+  }
+},
+{
+  "pk": 68,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "San Martin 122",
+    "cadena": 2,
+    "ciudad": 2006,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: Cerrado",
+    "nombre": "San Martin",
+    "cp": null,
+    "telefono": "4752-5245"
+  }
+},
+{
+  "pk": 69,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Viamonte 1571",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:00 a 21:30\nViernes: 8:00 a 21:30\nS\u00e1bado: 8:00 a 22:00\nDomingo: Cerrado",
+    "nombre": "Viamonte",
+    "cp": null,
+    "telefono": "4811-1091"
+  }
+},
+{
+  "pk": 70,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Monroe 5055/87",
+    "cadena": 2,
+    "ciudad": 839,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Urquiza",
+    "cp": null,
+    "telefono": "4523-4965"
+  }
+},
+{
+  "pk": 71,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Albarellos 854",
+    "cadena": 2,
+    "ciudad": 1287,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:00",
+    "nombre": "Albarellos",
+    "cp": null,
+    "telefono": "4793-9249"
+  }
+},
+{
+  "pk": 72,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Jorge Newbery 555",
+    "cadena": 2,
+    "ciudad": 666,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:00",
+    "nombre": "Las Lomas",
+    "cp": null,
+    "telefono": "4723-5095"
+  }
+},
+{
+  "pk": 73,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "La Salle 653",
+    "cadena": 2,
+    "ciudad": 232,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:00",
+    "nombre": "San Isidro Tren Dela Costa",
+    "cp": null,
+    "telefono": "4732-1552"
+  }
+},
+{
+  "pk": 74,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Libertador 3100",
+    "cadena": 2,
+    "ciudad": 490,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:00",
+    "nombre": "Olivos Tren De La Costa",
+    "cp": null,
+    "telefono": "4790-7616"
+  }
+},
+{
+  "pk": 75,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Gallo 250",
+    "cadena": 2,
+    "ciudad": 1262,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:30\nDomingo: Cerrado",
+    "nombre": "Gallo",
+    "cp": null,
+    "telefono": "4864-7770"
+  }
+},
+{
+  "pk": 76,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Rivadavia 9840 / 54",
+    "cadena": 2,
+    "ciudad": 54,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 14:00",
+    "nombre": "Villa Luro",
+    "cp": null,
+    "telefono": "4635-4415"
+  }
+},
+{
+  "pk": 77,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Mendoza 3905 Esq Alsina",
+    "cadena": 2,
+    "ciudad": 2127,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:30",
+    "nombre": "La Reina)",
+    "cp": null,
+    "telefono": "0341-4389283"
+  }
+},
+{
+  "pk": 78,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Soldado De La Frontera 5258/70",
+    "cadena": 2,
+    "ciudad": 55,
+    "horarios": "Lunes a Jueves: 8:00 a 21:00\nViernes: 8:00 a 21:30\nS\u00e1bado: 8:00 a 21:30\nDomingo: 9:00 a 14:00",
+    "nombre": "Lugano",
+    "cp": null,
+    "telefono": "4605-4070"
+  }
+},
+{
+  "pk": 79,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Rivadavia 3396",
+    "cadena": 2,
+    "ciudad": 1971,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:30",
+    "nombre": "Santa Fe",
+    "cp": null,
+    "telefono": "0342-453-3372"
+  }
+},
+{
+  "pk": 80,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "O Higgins 1280",
+    "cadena": 2,
+    "ciudad": 1183,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:00\nDomingo: Cerrado",
+    "nombre": "Bella Vista",
+    "cp": null,
+    "telefono": "4668-2636"
+  }
+},
+{
+  "pk": 81,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Dardo Rocha 251/259",
+    "cadena": 2,
+    "ciudad": 1177,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 14:00",
+    "nombre": "Bernal",
+    "cp": null,
+    "telefono": "4251-5950"
+  }
+},
+{
+  "pk": 82,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Pedro Goyena 565/71",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: Cerrado",
+    "nombre": "Pedro Goyena",
+    "cp": null,
+    "telefono": "4926-0406"
+  }
+},
+{
+  "pk": 83,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Calle 43 Nro 782",
+    "cadena": 2,
+    "ciudad": 682,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:00",
+    "nombre": "La Plata",
+    "cp": null,
+    "telefono": "0221-4221824"
+  }
+},
+{
+  "pk": 84,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Alvarez Jonte 2502",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:30",
+    "nombre": "Jonte",
+    "cp": null,
+    "telefono": "4585-9494/9495"
+  }
+},
+{
+  "pk": 85,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Bartolome Mitre 1558",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:00",
+    "nombre": "Mitre",
+    "cp": null,
+    "telefono": "4383-2615/2598"
+  }
+},
+{
+  "pk": 86,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Junin 1073",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 14:00",
+    "nombre": "Junin",
+    "cp": null,
+    "telefono": "4826-8775/8784"
+  }
+},
+{
+  "pk": 87,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Jos\u00e3\u00a9 Hern\u00e3\u00a1Ndez 2965",
+    "cadena": 2,
+    "ciudad": 100,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:30\nDomingo: Cerrado",
+    "nombre": "Villa Ballester",
+    "cp": null,
+    "telefono": "4767-6404/6401"
+  }
+},
+{
+  "pk": 88,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Santa Fe 4544",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 15:00",
+    "nombre": "Santa Fe Y Oro",
+    "cp": null,
+    "telefono": "4777-4679/4681"
+  }
+},
+{
+  "pk": 89,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Corrientes 5748",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:00",
+    "nombre": "Villa Crespo",
+    "cp": null,
+    "telefono": "4855-8067/8063"
+  }
+},
+{
+  "pk": 90,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Libertador 6840",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Libertador",
+    "cp": null,
+    "telefono": "4896-4410/11/12"
+  }
+},
+{
+  "pk": 91,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Teodoro Garcia 2419",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 22:00\nDomingo: Cerrado",
+    "nombre": "Teodoro Garcia",
+    "cp": null,
+    "telefono": "4781-8717"
+  }
+},
+{
+  "pk": 92,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "27 De Febrero N\u00e2\u00b0 2320",
+    "cadena": 2,
+    "ciudad": 1971,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 22:00\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 22:00",
+    "nombre": "Santa Fe Puerto",
+    "cp": null,
+    "telefono": "0342-483-1640/1370"
+  }
+},
+{
+  "pk": 93,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "San Pedrito 72",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 22:00\nDomingo: Cerrado",
+    "nombre": "San Pedrito",
+    "cp": null,
+    "telefono": "4612-0933/2500/2586"
+  }
+},
+{
+  "pk": 94,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "H. Irigoyen 8028",
+    "cadena": 2,
+    "ciudad": 1207,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Banfield",
+    "cp": null,
+    "telefono": "4202-0347 / 3077"
+  }
+},
+{
+  "pk": 95,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Hipolito Yrigoyen 6174",
+    "cadena": 2,
+    "ciudad": 688,
+    "horarios": "Lunes a Jueves: 8:30 a 21:30\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 22:00\nDomingo: 9:00 a 21:30",
+    "nombre": "Lanus",
+    "cp": null,
+    "telefono": "4248-3271/3272/3279"
+  }
+},
+{
+  "pk": 96,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Juan De Garay",
+    "cadena": 2,
+    "ciudad": 455,
+    "horarios": "Lunes a Jueves: 8:30 a 20:30\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:00\nDomingo: Cerrado",
+    "nombre": "Juan De Garay",
+    "cp": null,
+    "telefono": "4308-0071"
+  }
+},
+{
+  "pk": 97,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Emilio Castro 7661",
+    "cadena": 2,
+    "ciudad": 639,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:00\nDomingo: Cerrado",
+    "nombre": "Emilio Castro",
+    "cp": null,
+    "telefono": "4642-9909 4644-3272"
+  }
+},
+{
+  "pk": 98,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Eva Peron 2202",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:00\nDomingo: Cerrado",
+    "nombre": "Av.Del Trabajo",
+    "cp": null,
+    "telefono": "4631-6212"
+  }
+},
+{
+  "pk": 99,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "La Plata 541/43/45",
+    "cadena": 2,
+    "ciudad": 1154,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:00\nDomingo: Cerrado",
+    "nombre": "Av. La Plata",
+    "cp": null,
+    "telefono": "4903-6020"
+  }
+},
+{
+  "pk": 100,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Larrazabal 3443/55",
+    "cadena": 2,
+    "ciudad": 565,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:00\nDomingo: Cerrado",
+    "nombre": "Larrazabal",
+    "cp": null,
+    "telefono": "4601-4685 4784-5120"
+  }
+},
+{
+  "pk": 101,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Lope De Vega 1742",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:00\nDomingo: Cerrado",
+    "nombre": "Lope De Vega",
+    "cp": null,
+    "telefono": "4639-0108"
+  }
+},
+{
+  "pk": 102,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Highland Park E/Los Jazmines Y Las Campanillas",
+    "cadena": 2,
+    "ciudad": 423,
+    "horarios": "Lunes a Jueves: 8:30  a 14:00 y de 16:00 a  21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:00\nDomingo: 8:30 a 21:00",
+    "nombre": "155 Highland Park",
+    "cp": null,
+    "telefono": "02320-476471/470179"
+  }
+},
+{
+  "pk": 103,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Panamericana Kmt 37.5",
+    "cadena": 2,
+    "ciudad": 423,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: 9:00 a 21:30",
+    "nombre": "Tortuguitas",
+    "cp": null,
+    "telefono": "02320-623-534/535"
+  }
+},
+{
+  "pk": 104,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Cullen 5085",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: Cerrado",
+    "nombre": "Cullen",
+    "cp": null,
+    "telefono": "4522-3286"
+  }
+},
+{
+  "pk": 105,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Pte. Peron 2070",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:30\nS\u00e1bado: 8:30 a 21:30\nDomingo: Cerrado",
+    "nombre": "Pte. Peron",
+    "cp": null,
+    "telefono": "4953-8641"
+  }
+},
+{
+  "pk": 106,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "La Plata 2392",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 20:30\nViernes: 8:30 a 20:30\nS\u00e1bado: 8:30 a 21:00\nDomingo: Cerrado",
+    "nombre": "Av. La Plata",
+    "cp": null,
+    "telefono": "4923-2590"
+  }
+},
+{
+  "pk": 107,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Ruta 3 Km 44.400",
+    "cadena": 2,
+    "ciudad": 817,
+    "horarios": "Lunes a Jueves: 8:00 a 13:00 - 16:00 a 20:00\nViernes: 8:00 a 13:00 - 16:00 a 20:00\nS\u00e1bado: 8:00 a 21:00\nDomingo: -",
+    "nombre": "Ruta 3",
+    "cp": null,
+    "telefono": "02202-495279"
+  }
+},
+{
+  "pk": 108,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "H.Yrigoyen 3702",
+    "cadena": 2,
+    "ciudad": 487,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:00\nDomingo: Cerrado",
+    "nombre": "H.Yrigoyen",
+    "cp": null,
+    "telefono": "4932-3563"
+  }
+},
+{
+  "pk": 109,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Elcano 3693",
+    "cadena": 2,
+    "ciudad": 1184,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:00\nDomingo: Cerrado",
+    "nombre": "Av El Cano",
+    "cp": null,
+    "telefono": "4553-4831"
+  }
+},
+{
+  "pk": 110,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Cervinio 3515",
+    "cadena": 2,
+    "ciudad": 477,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:00\nDomingo: Cerrado",
+    "nombre": "Cervino",
+    "cp": null,
+    "telefono": "4802-3970"
+  }
+},
+{
+  "pk": 111,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Lopez De Vega 2503",
+    "cadena": 2,
+    "ciudad": 85,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:00\nDomingo: Cerrado",
+    "nombre": "Lopez De Vega",
+    "cp": null,
+    "telefono": "4568-1952"
+  }
+},
+{
+  "pk": 112,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Piedra Buena 4902",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:00\nDomingo: Cerrado",
+    "nombre": "Lugano",
+    "cp": null,
+    "telefono": "4602-8499"
+  }
+},
+{
+  "pk": 113,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Martin De Gainza 90",
+    "cadena": 2,
+    "ciudad": 1154,
+    "horarios": "Lunes a Jueves: 8:30 a 21:00\nViernes: 8:30 a 21:00\nS\u00e1bado: 8:30 a 21:00\nDomingo: Cerrado",
+    "nombre": "Yerbal",
+    "cp": null,
+    "telefono": "4431-3879 4988-1114"
+  }
+},
+{
+  "pk": 114,
+  "model": "precios.sucursal",
+  "fields": {
+    "direccion": "Ruta Panamericana Km 37",
+    "cadena": 2,
+    "ciudad": 1157,
+    "horarios": "Lunes a Jueves: 9:00 a 14:00 y de 16:00 a 20:30 Lunes (cerrado)\nViernes: 9:00 a 21:00\nS\u00e1bado: 9:00 a 21:00\nDomingo: 9:00 a 20:30",
+    "nombre": "Miraflores",
+    "cp": null,
+    "telefono": "3327-454626"
+  }
+}
+]
