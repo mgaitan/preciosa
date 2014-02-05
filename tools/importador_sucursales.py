@@ -145,5 +145,37 @@ def importador_laanonima(url_id=None, start=1):
                 revisar.append(i)
         print "Revisar:", revisar
 
+
+def walmart():
+	"""importador de walmart"""
+
+    def parse_info(url):
+        pq = PyQuery(url)
+        nombre = pq('p#direccion').text().split(':')[1]
+        direccion = pq(pq('p#direccion strong')[0]).text().replace(':', '').capitalize()
+
+
+
+
+
+    WALMART = Cadena.objects.get(id=1)
+    pq = PyQuery('http://www.walmart.com.ar/sucursales/cabildo.php')
+
+    for i in pq('ol#sucursalessidemenu li'):
+
+
+
+    Sucursal.objects.create(nombre=nombre,
+                            ciudad=ciudad,
+                            direccion=direccion,
+                            horarios=horarios,
+                            telefono=telefono,
+                            cadena=WALMART,
+                                   cp=cp)
+
+
+
+
+
 if __name__ == '__main__':
-    importador_laanonima()
+    importador_walmart()
