@@ -92,7 +92,6 @@ class Sucursal(models.Model):
     nombre = models.CharField(max_length=100, null=True, blank=True,
                               help_text="Denominación común. Ej: Jumbo de Alberdi")
     direccion = models.CharField(max_length=120)
-    # ciudad deberia ser estandarizado, usando algo como django-cities-light
     ciudad = models.ForeignKey('cities_light.City')
     cp = models.CharField(max_length=100, null=True, blank=True)
     telefono = models.CharField(max_length=100, null=True, blank=True)

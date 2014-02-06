@@ -5,6 +5,8 @@ fast and dirty scrapping para cargar datos de
 sucursales de supermercados de argentina
 """
 
+import json
+import urllib
 from pprint import pprint
 import re
 from django.db import IntegrityError
@@ -271,5 +273,53 @@ def jumbo():
         pprint(parse(i))
 
 
+
+def vea():
+
+    def get_city(c):
+
+        d = {'Tafi Viejo': u'Tafí Viejo',
+             'San Clemente del Tuyu': 'San Clemente del Tuyú',
+             'Libertador General San Martin':  5670,
+             'Gualeguaychu': u'Gualeguaychú', 'Moron': u'Morón',
+             'Neuquen': 'Neuquén', 'Bahia Blanca': u'Bahía Blanca',
+             'Rio tercero': 'Río Tercero', 'Las Heras': 5667,
+             'San Ramon de la Nueva Oran': u'San Ramón de la Nueva Orán',
+             'Maipu': u'Maipú', 'Lujan': u'Luján', 'Junin': u'Junín',
+             'San Miguel de Tucuman': u'San Miguel de Tucumán',
+             'Chajari': u'Chajarí', 'Tunuyan': u'Tunuyán',
+             'Lujan de Cuyo': u'Luján de Cuyo', 'Concepcion': 5671,
+             'Lanus': u'Lanús', 'Villa Maria': 5672, 'San Martin': 2006,
+             'Malargue': 2995, 'Capital': 5673, 'San Juan': 5673, 'San Miguel': 5674,
+             'Guaymallen': u'Guaymallén', 'Canuelas': u'Cañuelas',
+             'Cordoba': u'Córdoba', 'Marcos Juarez': u'Marcos Juárez',
+             'Rio Cuarto': u'Río Cuarto', 'Paso de Los Libres': 'Paso de los Libres',
+             'Parana': u'Paraná', 'Juan Bautista Alberdi': 1535, 'Yerba Buena': 5669
+             }
+
+        c = d.get(c, c)
+        if isinstance(c, int):
+            c = City.objects.get(id=c)
+        else:
+            c = City.objects.get(name=c)
+        return c
+
+    VEA = Cadena.objects.get(id=5)
+
+    for s in json.load(urllib.urlopen('http://www.supermercadosvea.com.ar/sucursales-obtener.html?provincia_id=X')):
+        if s['descripcion_url'] == u'bell-ville-bv-colon-850':
+            s['direccion'] = u'Bv Colón 850'
+        elif s['descripcion_url'] == u'roca-r22-y-gdorvetirgory':
+            s['direccion'] = u'Ruta 22 y Gdor. Vetirgory'
+
+
+        print(Sucursal.objects.create(nombre=s['descripcion'],
+                                       ciudad=get_city(s['vea_localidades_desc']),
+                                       direccion=s['direccion'],
+                                       horarios=s['horarios'],
+                                       telefono=s['telefonos'],
+                                       cadena=VEA))
+
+
 if __name__ == '__main__':
-    jumbo()
+    vea()
