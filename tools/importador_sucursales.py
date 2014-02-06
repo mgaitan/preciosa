@@ -238,6 +238,38 @@ def walmart():
         pprint(parse_info('http://www.walmart.com.ar' + i))
 
 
+def jumbo():
+    JUMBO = Cadena.objects.get(id=4)
+    pq = PyQuery('http://www.jumbo.com.ar/sucursales.html')
+    def get_city(item):
+        c = pq('p.localidad', item).text()
+
+        d = {'Chacras': u'Luján de Cuyo', 'Mendoza': 'Godoy Cruz',
+             'Pacheco Novo': 'General Pacheco', 'Quilmes 1': 'Quilmes',
+             'Quilmes 2': 'Quilmes', u'San Martín': u'General San Martín',
+             'Unicenter': u'Martínez', u'Tucumán': u'Yerba Buena',
+             'Acoyte': 'Caballito', 'Almagro': 'Almagro',
+             'Av. Santa Fe': 'Palermo', 'Juan B. Justo': 'Flores',
+             'Madero Harbour': 'Puerto Madero', 'Parque Brown': 'Villa Lugano',
+            'Tronador': 'Villa Urquiza', 'Escobar': u'Belén de Escobar'}
+        return list(City.objects.filter(name=d.get(c, c)))[-1]
+
+    def parse(i):
+        nombre = pq('p.localidad', i).text()
+        ciudad = get_city(i)
+        direccion, telefono = pq('p.direccion', i).html().split('<br />')[:2]
+        return Sucursal.objects.create(nombre=nombre,
+                                ciudad=ciudad,
+                                direccion=direccion,
+                                horarios="Todos los dias de 9 a 22hs",
+                                telefono=telefono,
+                                cadena=JUMBO)
+
+
+
+    for i in pq('div.itemAcordeon'):
+        pprint(parse(i))
+
 
 if __name__ == '__main__':
-    walmart()
+    jumbo()
