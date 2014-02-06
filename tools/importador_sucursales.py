@@ -5,6 +5,7 @@ fast and dirty scrapping para cargar datos de
 sucursales de supermercados de argentina
 """
 
+from pprint import pprint
 import re
 from django.db import IntegrityError
 from django.db.models import Q
@@ -147,35 +148,96 @@ def importador_laanonima(url_id=None, start=1):
 
 
 def walmart():
-	"""importador de walmart"""
+    """importador de walmart"""
+
+
+    def clean_city(text):
+
+        text = text.replace('GBA', '').replace('Bs As', '').replace('Mendoza', '')
+        text = text.replace('-', '').strip()
+        d = {'Cabildo': u'Núñez', 'Constituyentes': 'Villa Urquiza',
+             'DOT  Baires': 'Saavedra', u'Nogoyá': 'Villa del Parque',
+              u'Ramón Falcón': 'Flores', 'Supermercado Caballito': 'Caballito',
+              u'Supermercado Honorio Pueyrredón': 'Caballito',
+              u'Córdoba Sur': u'Córdoba', u'Córdoba Av. Colón': u'Córdoba',
+              u'Córdoba Barrio Talleres': u'Córdoba', 'Comodoro Norte': 'Comodoro Rivadavia',
+              u'Tucumán': u'San Miguel de Tucumán', 'Resistencia  Chaco': 'Resistencia',
+              'Santa Fe': 'Santa Fe de la Vera Cruz'
+            }
+        return list(City.objects.filter(name=d.get(text, text)))[-1]
 
     def parse_info(url):
         pq = PyQuery(url)
-        nombre = pq('p#direccion').text().split(':')[1]
-        direccion = pq(pq('p#direccion strong')[0]).text().replace(':', '').capitalize()
+        ciudad = clean_city(pq('a.selected').text())
 
-
+        direccion = re.findall(': (.*)(Aper|Hora)', pq('p#direccion').text())[0][0].strip()
+        nombre = pq(pq('p#direccion strong')[0]).text().replace(':', '')
+        horarios = re.findall(u'[aA]tención:[ \n\t]+(.*)\.', pq('p#direccion').text(), re.MULTILINE)
+        horarios = horarios[0] if len(horarios) else ''
+        return Sucursal.objects.create(nombre=nombre,
+                                ciudad=ciudad,
+                                direccion=direccion,
+                                horarios=horarios,
+                                cadena=WALMART)
 
 
 
     WALMART = Cadena.objects.get(id=1)
-    pq = PyQuery('http://www.walmart.com.ar/sucursales/cabildo.php')
 
-    for i in pq('ol#sucursalessidemenu li'):
+    urls = [
+    '/sucursales/cabildo.php',
+    '/sucursales/constituyentes.php',
+     '/sucursales/saavedra.php',
+     '/sucursales/nogoya.php',
+     '/sucursales/ramon_falcon.php',
+     '/sucursales/supermercado_alberdi_caballito.php',
+     '/sucursales/supermercado_honorio_pueyrredon.php',
+
+    '/sucursales/avellaneda.php',
+    '/sucursales/parque_avellaneda.php',
+    '/sucursales/san_justo.php',
+    '/sucursales/quilmes.php',
+    '/sucursales/la_tablada.php',
+    '/sucursales/pilar.php',
+    '/sucursales/san_fernando.php',
 
 
+     '/sucursales/la_plata.php',
+     '/sucursales/bahia_blanca.php',
+     '/sucursales/lujan.php',
+     '/sucursales/olavarria.php',
+     '/sucursales/laferrere.php',
 
-    Sucursal.objects.create(nombre=nombre,
-                            ciudad=ciudad,
-                            direccion=direccion,
-                            horarios=horarios,
-                            telefono=telefono,
-                            cadena=WALMART,
-                                   cp=cp)
+     '/sucursales/cordoba_talleres.php',
+     '/sucursales/cordoba_colon.php',
+     '/sucursales/cordoba_sur.php',
+     '/sucursales/rio_cuarto.php',
+
+    '/sucursales/mendoza_guaymallen.php',
+    '/sucursales/mendoza_las_heras.php',
+    '/sucursales/mendoza_palmares.php',
+
+     '/sucursales/comodoro_rivadavia.php',
+     '/sucursales/comodoro_norte.php',
+     '/sucursales/corrientes.php',
+     '/sucursales/mendoza_guaymallen.php',
+     '/sucursales/mendoza_las_heras.php',
+     '/sucursales/mendoza_palmares.php',
 
 
+     '/sucursales/neuquen.php',
+     '/sucursales/parana.php',
+     '/sucursales/san_juan.php',
+     '/sucursales/santa_fe.php',
+     '/sucursales/san_luis.php',
+     '/sucursales/tucuman.php',
+     '/sucursales/chaco_resistencia.php']
+
+
+    for i in urls:
+        pprint(parse_info('http://www.walmart.com.ar' + i))
 
 
 
 if __name__ == '__main__':
-    importador_walmart()
+    walmart()
