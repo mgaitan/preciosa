@@ -1,5 +1,5 @@
 # preciosa
-fixtures/ciudades.json
+
 *.db
 
 *.py[cod]
