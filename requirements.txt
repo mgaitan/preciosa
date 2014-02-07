@@ -1,18 +1,19 @@
 -f file:///home/tin/.pip_packages
-Django==1.6.1
+Django==1.6.2
 Pillow==2.0.0
 South==0.8.1
+Unidecode==0.04.14
 argparse==1.2.1
 cssselect==0.8
 django-appconf==0.6
-django-autoslug==1.6.1
+django-autoslug==1.7.2
 django-bootstrap-form==3.1
-django-cities-light==2.0.7
+django-cities-light==2.1.11
 django-extensions==1.1.1
 django-forms-bootstrap==3.0.0
 django-jsonfield==0.8.12
 django-model-utils==1.4.0
-django-treebeard==2.0b1
+django-treebeard==2.0b2
 django-user-accounts==1.0b8
 djangorestframework==2.3.12
 eventlog==0.6.2
@@ -27,5 +28,6 @@ pinax-utils==1.0b1.dev3
 progressbar==2.2
 pyquery==1.2.4
 pytz==2012j
+requests==2.2.1
 six==1.5.2
 wsgiref==0.1.2
