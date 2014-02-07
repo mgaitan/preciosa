@@ -12,7 +12,7 @@ import lxml.html
 
 
 class HiperLibertad:
-    """ Clase para scrapping de datos del Híper Libertad"""
+    """ Clase para scraping de datos del Híper Libertad"""
 
     base_url = 'https://www.libertadsa.com.ar/misucursal_'
     city_url = {'Cordoba': 'cordoba.php',
@@ -37,7 +37,7 @@ class HiperLibertad:
         htmlraw = urllib.urlopen(self.base_url + comp_url)
         doc = lxml.html.document_fromstring(htmlraw.read())
         
-        #Scrapping de datos.
+        #scraping de datos.
         sucursales = []
         i = 3
         while True:
