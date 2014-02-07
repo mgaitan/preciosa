@@ -30,9 +30,15 @@ class Producto(models.Model):
     UM_ML = 'ml'
     UM_L = 'l'
     UM_UN = 'unidad'
+    UM_SM = 'SM'
+    UM_MR = 'MR'
+
+    UM_TRANS = {u'LT': 'l', u'UN': 'unidad'}
+
     UNIDADES_PESO = [UM_GRAMO, UM_KILO]
     UNIDADES_VOLUMEN = [UM_ML, UM_L]
-    UNIDADES_CHOICES = Choices(UM_GRAMO, UM_KILO, UM_ML, UM_L, UM_UN)
+    UNIDADES_CHOICES = Choices(UM_GRAMO, UM_KILO, UM_ML, UM_L,
+                               UM_UN, UM_SM, UM_MR)
 
     descripcion = models.CharField(max_length=100)
     upc = models.CharField(verbose_name=u"Código de barras",
@@ -116,6 +122,9 @@ class Precio(TimeStampedModel):
     sucursal = models.ForeignKey('Sucursal')
     precio = models.DecimalField(max_digits=8, decimal_places=2)
     usuario = models.ForeignKey(User, null=True, blank=True)
+
+    def __unicode__(self):
+        return u'%s: $ %s' % (self.producto, self.precio)
 
 
 class PrecioEnAcuerdo(models.Model):
