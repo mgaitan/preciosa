@@ -71,7 +71,64 @@ class HiperLibertad:
         return format_datos
 
 
+class Yaguar:
+    """ Clase para scraping de datos de la cadena yaguar"""
+
+    base_url = 'http://www.yaguar.com/frontendSP/asp/'
+    suc_url = {'CABA': 'iframe_Autopista.asp',
+               'Santa Fe': 'iframe_sucursalSantaFe.asp',
+               'Resistencia': 'iframe_SucursalesChaco.asp',
+               'Mendoza': 'iframe_SucursalesMendoza.asp',
+               'Bahia Blanca': 'iframe_Sucursalesbahiablanca.asp',
+               'Campana': 'iframe_SucursalesCampana.asp',
+               'Moreno': 'iframe_SucursalesMoreno.asp',
+               'Jose C Paz': 'iframe_SucursalesjoseCpaz.asp',
+               'Cordoba': 'iframe_sucursalescordoba.asp',
+               'Tigre': 'iframe_SucursalesTigre.asp',
+               'Neuquen': 'iframe_sucursalesneuquen.asp',
+               'Salta': 'iframe_sucursalesSalta.asp',
+               'Mar del Plata': 'iframe_MardelPlata.asp',
+               'San Juan': 'iframe_SanJuan.asp'}
+
+    def __init__(self):
+
+        self.data = []
+
+        # Retornar un listado de sucursales para la cadena yaguar
+        for ciudad in self.suc_url.keys():
+            self.data.append(self.get_page_data(ciudad))
+
+    def get_page_data(self, ciudad):
+        """ Realiza el scraping de datos para la cadena Yaguar.
+        El scraping es de a una url por vez """
+
+        htmlraw = urllib.urlopen(self.base_url + self.suc_url[ciudad])
+        doc = lxml.html.document_fromstring(htmlraw.read())
+
+        # Scraping usando xpath
+        sucursal = {}
+    
+        datos1 = doc.xpath('//*[@class]/text()')
+        datos2 = doc.xpath('//*[@class]/b/text()')
+
+        # formateo de datos.
+        sucursal['nombre'] = datos1[0]
+        sucursal['direccion'] = datos2[0]
+        sucursal['horarios'] = datos1[1] + '-' + datos1[2]
+        sucursal['telefono'] = datos1[4]
+        sucursal['ciudad'] = ciudad
+        
+        return sucursal
+        
+
 if __name__ == '__main__':
-    libertad = HiperLibertad()
-    for i in range(len(libertad.data)):
-        print(libertad.data[i])
+#    libertad = HiperLibertad()
+#    for i in range(len(libertad.data)):
+#        print(libertad.data[i])
+
+    yag = Yaguar()
+    for i in range(len(yag.data)):
+        print(yag.data[i])
+#        print(yag.data[i]['horarios'] + '\n\n')
+
+
