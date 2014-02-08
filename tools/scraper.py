@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 """
-Cada Cadena de supermecados entrega un diccionario. Las llaves (keys) del diccionario son las ciudades.
-Cada ciudad apunta a una lista de sucursales. A su vez, cada sucursal es un diccionario cuyas claves son:
-    'Nombre' -> Nombre de la sucursal, 'TE' -> teléfono de la sucursal, 'Horarios', etc
+Cada Cadena de supermecados entrega una lista de sucursales. A su vez, cada sucursal es un 
+diccionario cuyas claves son: 'nombre' -> Nombre de la sucursal, 'telefono' -> teléfono de 
+la sucursal, 'horarios', etc
 """
 
 import httplib
@@ -27,19 +27,24 @@ class HiperLibertad:
 
     def __init__(self):
 
-        self.data = {}
-
+        self.data = []
+        
+        # Ordena los datos. Construye una lista de sucursales
+        # para la cadena HiperLibertad.
         for city in self.city_url.keys():
-            self.data[city] = self.get_page_data(self.city_url[city])
+            self.data.append(self.get_page_data(city))
 
-    def get_page_data(self, comp_url):
+    def get_page_data(self, city):
+        """ Realiza el scraping, de a una url por vez.
+        Entrega una lista de sucursales scrapeadas de
+        base_url + comp_url. """
 
-        htmlraw = urllib.urlopen(self.base_url + comp_url)
+        htmlraw = urllib.urlopen(self.base_url + self.city_url[city])
         doc = lxml.html.document_fromstring(htmlraw.read())
         
-        #scraping de datos.
+        #scraping de datos usando xpath.
         sucursales = []
-        i = 3
+        i = 3  # Para i < 3 no hay datos :(.
         while True:
             sucursales.append( doc.xpath('/html/body/div/div[9]/div[2]/div[2]/p['
                     + str(i) + ']/span/text() | /html/body/div/div[9]/div[2]/div[2]/p['
@@ -49,24 +54,24 @@ class HiperLibertad:
                 break
             i += 1
 
-        # Formato de datos: Lista de sucursales. Cada sucursal es un 
-        # dict (claves: 'Nombre', 'Direccion', etc
+        # Formateo de datos: Lista de sucursales. Cada sucursal es un 
+        # dict (claves: 'nombre', 'direccion', etc)
         format_datos = []
         _ = {}
-        for sucursal in sucursales:
+        for sucursal in sucursales:             #Este filtro es feo... mejorar?
             datos = filter(lambda s: s != '\n        ' and s!= '\n          ', sucursal)
-            _['Nombre'] = datos[0]
-            _['Direccion'] = datos[1]
-            _['CP'] = datos[2]
-            _['TE'] = datos[3]
-            _['Horarios'] = datos[4]
-            _['Director'] = datos[5]
+            _['nombre'] = datos[0]
+            _['direccion'] = datos[1]
+            _['cp'] = datos[2]
+            _['telefono'] = datos[3]
+            _['horarios'] = datos[4]
+            _['director'] = datos[5]
+            _['ciudad'] = city
             format_datos.append(_)
         return format_datos
 
 
 if __name__ == '__main__':
     libertad = HiperLibertad()
-    print(libertad.data['San Juan'])
-    print('\n\n')
-    print(libertad.data['Cordoba'])
+    for i in range(len(libertad.data)):
+        print(libertad.data[i])
