@@ -32,7 +32,8 @@ class HiperLibertad:
         # Ordena los datos. Construye una lista de sucursales
         # para la cadena HiperLibertad.
         for city in self.city_url.keys():
-            self.data.append(self.get_page_data(city))
+            for sucursal in self.get_page_data(city):
+                self.data.append(sucursal)
 
     def get_page_data(self, city):
         """ Realiza el scraping, de a una url por vez.
@@ -57,8 +58,8 @@ class HiperLibertad:
         # Formateo de datos: Lista de sucursales. Cada sucursal es un 
         # dict (claves: 'nombre', 'direccion', etc)
         format_datos = []
-        _ = {}
         for sucursal in sucursales:             #Este filtro es feo... mejorar?
+            _ = {}
             datos = filter(lambda s: s != '\n        ' and s!= '\n          ', sucursal)
             _['nombre'] = datos[0]
             _['direccion'] = datos[1]
@@ -166,11 +167,13 @@ class MarianoMax:
 
 
 if __name__ == '__main__':
-#    libertad = HiperLibertad()
-#    for i in range(len(libertad.data)):
-#        print(libertad.data[i])
+    libertad = HiperLibertad()
+    for i in range(len(libertad.data)):
+        print(libertad.data[i])
 
-    mmax = MarianoMax()
-    print mmax.data
+    print len(libertad.data)
+
+#    mmax = MarianoMax()
+#    print mmax.data
 
 
