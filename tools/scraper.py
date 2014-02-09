@@ -8,6 +8,7 @@ la sucursal, 'horarios', etc
 
 import urllib
 import lxml.html
+import json
 
 
 class HiperLibertad:
@@ -34,6 +35,8 @@ class HiperLibertad:
             for sucursal in self.get_page_data(city):
                 self.data.append(sucursal)
 
+        self.json = json.dumps(self.data)
+
     def get_page_data(self, city):
         """ Realiza el scraping, de a una url por vez.
         Entrega una lista de sucursales scrapeadas de
@@ -57,11 +60,9 @@ class HiperLibertad:
         # Formateo de datos: Lista de sucursales. Cada sucursal es un 
         # dict (claves: 'nombre', 'direccion', etc)
         format_datos = []
-        for sucursal in sucursales:             #Este filtro es feo... mejorar?
+        for sucursal in sucursales:
             _ = {}
-            #CleanUp de datos
-            sucursal = [' '.join(x.split()) for x in sucursal]
-            datos = filter(lambda s: s != '\n        ' and s!= '\n          ', sucursal)
+            datos = filter(None, [' '.join(x.split()) for x in sucursal])  # CleanUp de datos 
             _['nombre'] = datos[0]
             _['direccion'] = datos[1]
             _['cp'] = datos[2]
@@ -100,6 +101,8 @@ class Yaguar:
         for ciudad in self.suc_url.keys():
             self.data.append(self.get_page_data(ciudad))
 
+        self.json = json.dumps(self.data)
+
     def get_page_data(self, ciudad):
         """ Realiza el scraping de datos para la cadena Yaguar.
         El scraping es de a una url por vez """
@@ -107,20 +110,21 @@ class Yaguar:
         htmlraw = urllib.urlopen(self.base_url + self.suc_url[ciudad])
         doc = lxml.html.document_fromstring(htmlraw.read())
 
-        # Scraping usando xpath
         sucursal = {}
-    
-        datos1 = doc.xpath('//*[@class]/text()')
+        # Scraping usando xpath
+        datos1 = doc.xpath('//*[@class]/text()')  
         datos2 = doc.xpath('//*[@class]/b/text()')
 
-        # CleanUP de datos
-        datos1 = [' '.join(item.split()) for item in datos1]
-        datos2 = [' '.join(item.split()) for item in datos2]
+        #CleanUp de datos
+        datos1 = [ item.replace('(ex Ruta 197)', '') for item in datos1]   # Hack feo...
+        datos1 = filter(None, [' '.join(item.split()) for item in datos1])
+        datos2 = filter(None, [' '.join(item.split()) for item in datos2])
+        datos2 = ' '.join(datos2).replace('Rubros:', '')
 
         # formateo de datos.
         sucursal['nombre'] = datos1[0]
-        sucursal['direccion'] = datos2[0]
-        sucursal['horarios'] = datos1[1] + ' - ' + datos1[2]
+        sucursal['direccion'] = datos2
+        sucursal['horarios'] = datos1[1] + ' ' + datos1[2]
         sucursal['telefono'] = datos1[4]
         sucursal['ciudad'] = ciudad
         
@@ -143,6 +147,8 @@ class MarianoMax:
             for i in range(len(self.suc_url[ciudad])):
                 self.data.append(self.get_page_data(ciudad, 
                     self.suc_url[ciudad][i]))
+
+        self.json = json.dumps(self.data)
             
     def get_page_data(self, ciudad, numero):
         """ Realiza el scraping de datos de la cadena Mariano Max.
@@ -174,7 +180,9 @@ class MarianoMax:
 
 
 if __name__ == '__main__':
-    libertad = HiperLibertad()
-    for i in range(len(libertad.data)):
-        print libertad.data[i]
+#    libertad = HiperLibertad()
+#    print libertad.json
+
+    mmax = MarianoMax()
+    print mmax.json
 
