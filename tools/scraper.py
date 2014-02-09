@@ -6,7 +6,6 @@ diccionario cuyas claves son: 'nombre' -> Nombre de la sucursal, 'telefono' -> t
 la sucursal, 'horarios', etc
 """
 
-import httplib
 import urllib
 import lxml.html
 
@@ -18,7 +17,7 @@ class HiperLibertad:
     city_url = {'Cordoba': 'cordoba.php',
                 'Mendoza': 'mendoza.php',
                 'Salta': 'salta.php',
-                'Santa Fe': 'santafe.php',
+                'Rosario': 'santafe.php',
                 'Resistencia': 'chaco.php',
                 'Posadas': 'misiones.php',
                 'San Juan': 'sanjuan.php',
@@ -60,6 +59,8 @@ class HiperLibertad:
         format_datos = []
         for sucursal in sucursales:             #Este filtro es feo... mejorar?
             _ = {}
+            #CleanUp de datos
+            sucursal = [' '.join(x.split()) for x in sucursal]
             datos = filter(lambda s: s != '\n        ' and s!= '\n          ', sucursal)
             _['nombre'] = datos[0]
             _['direccion'] = datos[1]
@@ -112,10 +113,14 @@ class Yaguar:
         datos1 = doc.xpath('//*[@class]/text()')
         datos2 = doc.xpath('//*[@class]/b/text()')
 
+        # CleanUP de datos
+        datos1 = [' '.join(item.split()) for item in datos1]
+        datos2 = [' '.join(item.split()) for item in datos2]
+
         # formateo de datos.
         sucursal['nombre'] = datos1[0]
         sucursal['direccion'] = datos2[0]
-        sucursal['horarios'] = datos1[1] + '-' + datos1[2]
+        sucursal['horarios'] = datos1[1] + ' - ' + datos1[2]
         sucursal['telefono'] = datos1[4]
         sucursal['ciudad'] = ciudad
         
@@ -129,7 +134,6 @@ class MarianoMax:
                'Jesus Maria': ['4'],
                'Cruz del eje': ['6']}
 
-
     def __init__(self):
 
         self.data = []
@@ -140,7 +144,6 @@ class MarianoMax:
                 self.data.append(self.get_page_data(ciudad, 
                     self.suc_url[ciudad][i]))
             
-
     def get_page_data(self, ciudad, numero):
         """ Realiza el scraping de datos de la cadena Mariano Max.
         As usual una url a la vez.
@@ -157,6 +160,10 @@ class MarianoMax:
         datos2 = doc.xpath('//*[@class="article"]//p/text() |' +
                 '//*[@class="article"]//span/text()')
 
+        # CleanUP de datos
+        datos1 = [' '.join(item.split()) for item in datos1]
+        datos2 = [' '.join(item.split()) for item in datos2]
+
         # formateo de datos. Cada sucursal es un dict.
         sucursal['nombre'] = datos1[0]
         sucursal['direccion'] = datos2[0]
@@ -169,11 +176,5 @@ class MarianoMax:
 if __name__ == '__main__':
     libertad = HiperLibertad()
     for i in range(len(libertad.data)):
-        print(libertad.data[i])
-
-    print len(libertad.data)
-
-#    mmax = MarianoMax()
-#    print mmax.data
-
+        print libertad.data[i]
 
