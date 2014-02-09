@@ -119,16 +119,58 @@ class Yaguar:
         sucursal['ciudad'] = ciudad
         
         return sucursal
+
+
+class MarianoMax:
+
+    base_url = 'http://mmax.com.ar/index.php/sucursales/sucursal-'
+    suc_url = {'Cordoba': ['1', '2', '3', '5', '7'],
+               'Jesus Maria': ['4'],
+               'Cruz del eje': ['6']}
+
+
+    def __init__(self):
+
+        self.data = []
+
+        # Retornar un listado de sucursales Mariano Max.
+        for ciudad in self.suc_url.keys():
+            for i in range(len(self.suc_url[ciudad])):
+                self.data.append(self.get_page_data(ciudad, 
+                    self.suc_url[ciudad][i]))
+            
+
+    def get_page_data(self, ciudad, numero):
+        """ Realiza el scraping de datos de la cadena Mariano Max.
+        As usual una url a la vez.
+        'numero' debe ser string."""
         
+        htmlraw = urllib.urlopen(self.base_url + numero)
+        doc = lxml.html.document_fromstring(htmlraw.read())
+
+        sucursal = {}
+
+        # Scraping usando xpath
+        datos1 = doc.xpath('/html/body/div[2]/div/div/div/div/' +
+            'div/div/div/div[2]/div[2]/div/div/h3/span/span/text()')
+        datos2 = doc.xpath('//*[@class="article"]//p/text() |' +
+                '//*[@class="article"]//span/text()')
+
+        # formateo de datos. Cada sucursal es un dict.
+        sucursal['nombre'] = datos1[0]
+        sucursal['direccion'] = datos2[0]
+        sucursal['horarios'] = datos2[1] + datos2[2]
+        sucursal['ciudad'] = ciudad
+
+        return sucursal
+
 
 if __name__ == '__main__':
 #    libertad = HiperLibertad()
 #    for i in range(len(libertad.data)):
 #        print(libertad.data[i])
 
-    yag = Yaguar()
-    for i in range(len(yag.data)):
-        print(yag.data[i])
-#        print(yag.data[i]['horarios'] + '\n\n')
+    mmax = MarianoMax()
+    print mmax.data
 
 
