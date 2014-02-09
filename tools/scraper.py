@@ -9,21 +9,40 @@ la sucursal, 'horarios', etc
 import urllib
 import lxml.html
 import json
+import pprint
+
+
+def ciudad_a_ID(ciud, prov):
+    """Para buscar ID de ciudad de acuerdo al fixture"""
+    with open('../fixtures/ciudades.json') as json_data:
+        data = json.load(json_data)
+        json_data.close()
+        res = [item for item in data if 'search_names' in item['fields'].keys()
+                and ciud.lower()+prov.lower() in item['fields']['search_names']]
+        pprint(res)
+
+def ID_a_ciudad(numero):
+    """Para ver a que ciudad corresponde cierto ID"""
+    with open('../fixtures/ciudades.json') as json_data:
+        data = json.load(json_data)
+        json_data.close()
+        res = [item for item in data if item['pk'] == numero]
+        pprint(res)
 
 
 class HiperLibertad:
     """ Clase para scraping de datos del Híper Libertad"""
 
     base_url = 'https://www.libertadsa.com.ar/misucursal_'
-    city_url = {'Cordoba': 'cordoba.php',
-                'Mendoza': 'mendoza.php',
-                'Salta': 'salta.php',
-                'Rosario': 'santafe.php',
-                'Resistencia': 'chaco.php',
-                'Posadas': 'misiones.php',
-                'San Juan': 'sanjuan.php',
-                'San Miguel': 'tucuman.php',
-                'Santiago del Estero': 'santiago.php'}
+    city_url = {4546: 'cordoba.php',                    #Cordoba
+                2896: 'mendoza.php',                    #Mendoza
+                2081: 'salta.php',                      #Salta
+                5676: 'santafe.php',               #Rosario
+                286: 'chaco.php',                       #Resistencia
+                409: 'misiones.php',                    #Posadas
+                5673: 'sanjuan.php',                    #San Juan
+                1999: 'tucuman.php',                    #San Miguel
+                1945: 'santiago.php'}                   #Santiago
 
     def __init__(self):
 
@@ -78,20 +97,20 @@ class Yaguar:
     """ Clase para scraping de datos de la cadena yaguar"""
 
     base_url = 'http://www.yaguar.com/frontendSP/asp/'
-    suc_url = {'CABA': 'iframe_Autopista.asp',
-               'Santa Fe': 'iframe_sucursalSantaFe.asp',
-               'Resistencia': 'iframe_SucursalesChaco.asp',
-               'Mendoza': 'iframe_SucursalesMendoza.asp',
-               'Bahia Blanca': 'iframe_Sucursalesbahiablanca.asp',
-               'Campana': 'iframe_SucursalesCampana.asp',
-               'Moreno': 'iframe_SucursalesMoreno.asp',
-               'Jose C Paz': 'iframe_SucursalesjoseCpaz.asp',
-               'Cordoba': 'iframe_sucursalescordoba.asp',
-               'Tigre': 'iframe_SucursalesTigre.asp',
-               'Neuquen': 'iframe_sucursalesneuquen.asp',
-               'Salta': 'iframe_sucursalesSalta.asp',
-               'Mar del Plata': 'iframe_MardelPlata.asp',
-               'San Juan': 'iframe_SanJuan.asp'}
+    suc_url = {1157: 'iframe_Autopista.asp',                        #CABA
+               2938: 'iframe_sucursalSantaFe.asp',                  #Santa Fe
+               286: 'iframe_SucursalesChaco.asp',                   #Resistencia
+               2896: 'iframe_SucursalesMendoza.asp',                #Mendoza
+               5232: 'iframe_Sucursalesbahiablanca.asp',            #Bahia Blanca
+               1143: 'iframe_SucursalesCampana.asp',                #Campana
+               5606: 'iframe_SucursalesMoreno.asp',                 #Moreno
+               1111111: 'iframe_SucursalesjoseCpaz.asp',            #Jose C Paz
+               4546: 'iframe_sucursalescordoba.asp',                #Cordoba
+               151: 'iframe_SucursalesTigre.asp',                   #Tigre
+               2758: 'iframe_sucursalesneuquen.asp',                #Neuquen
+               2081: 'iframe_sucursalesSalta.asp',                  #Salta
+               582: 'iframe_MardelPlata.asp',                       #Mar del Plata
+               5673: 'iframe_SanJuan.asp'}                          #San Juan
 
     def __init__(self):
 
@@ -134,9 +153,9 @@ class Yaguar:
 class MarianoMax:
 
     base_url = 'http://mmax.com.ar/index.php/sucursales/sucursal-'
-    suc_url = {'Cordoba': ['1', '2', '3', '5', '7'],
-               'Jesus Maria': ['4'],
-               'Cruz del eje': ['6']}
+    suc_url = {4546: ['1', '2', '3', '5', '7'],     #Cordoba
+               3649: ['4'],                         #Jesus Maria
+               4471: ['6']}                         #Cruz del eje
 
     def __init__(self):
 
@@ -180,9 +199,15 @@ class MarianoMax:
 
 
 if __name__ == '__main__':
-#    libertad = HiperLibertad()
-#    print libertad.json
+    libertad = HiperLibertad()
+    print libertad.json
+
+    print '\n'
 
     mmax = MarianoMax()
     print mmax.json
 
+    print '\n'
+
+    yag = Yaguar()
+    print yag.json
