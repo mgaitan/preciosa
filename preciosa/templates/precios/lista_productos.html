@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block body %}
+        <ul class="list-group">
+        {% for item in productos %}
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-2 col-md-1">
+                        <img alt="" class="img-circle img-responsive" src="http://placehold.it/80"></div>
+                    <div class="col-xs-10 col-md-11">
+                        <div>
+                            <a href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
+                                {{ item.descripcion }}
+                                </a>
+                            <div class="mic-info">
+                                By: <a href="#">Bhaumik Patel</a> on 2 Aug 2013
+                            </div>
+                        </div>
+                        <div class="comment-text">
+                            Awesome design
+                        </div>
+                        <div class="action">
+                            <button title="Edit" class="btn btn-primary btn-xs" type="button">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                            <button title="Approved" class="btn btn-success btn-xs" type="button">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                            <button title="Delete" class="btn btn-danger btn-xs" type="button">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+{% endblock %}

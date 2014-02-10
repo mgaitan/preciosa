@@ -4,6 +4,7 @@ import os.path
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 from model_utils import Choices
 from model_utils.models import TimeStampedModel
 from treebeard.mp_tree import MP_Node
@@ -22,6 +23,10 @@ class Categoria(MP_Node):
         if not self.is_root():
             return unicode(self.get_parent()) + " > " + self.nombre
         return self.nombre
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('lista_productos', (self.id, slugify(self.nombre)), {})
 
 
 class Producto(models.Model):

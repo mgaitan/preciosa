@@ -1,4 +1,9 @@
-from preciosa.precios.models import Cadena, Sucursal
+
+from django.shortcuts import get_object_or_404
+from django.views.generic import ListView
+
+
+from preciosa.precios.models import Cadena, Sucursal, Producto, Categoria
 from cities_light.models import City
 
 from rest_framework import viewsets
@@ -18,3 +23,14 @@ class CadenaViewSet(viewsets.ModelViewSet):
 class SucursalViewSet(viewsets.ModelViewSet):
     queryset = Sucursal.objects.all()
     serializer_class = SucursalSerializer   # Create your views here.
+
+
+
+class ProductosListView(ListView):
+
+    context_object_name = "productos"
+    template_name = "precios/lista_productos.html"
+
+    def get_queryset(self):
+        categoria = get_object_or_404(Categoria, id=self.args[0])
+        return Producto.objects.filter(categoria=categoria)

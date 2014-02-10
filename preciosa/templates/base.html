@@ -104,16 +104,16 @@
 
                     {% for item in menu %}
                     <li>
-                        <a href="index.html"><i class="fa fa-plus fa-fw"></i>{{ item.nombre }}<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-plus fa-fw"></i>{{ item.nombre }}<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             {% for subitem in item.get_children %}
                             <li>
-                                <a href="index.html">{{ subitem.nombre }}<span class="fa arrow"></span></a>
+                                <a href="#">{{ subitem.nombre }}<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                 {% for subitem in subitem.get_children %}
                                 <li>
-                                    <a href="index.html">{{ subitem.nombre }}</a>
+                                    <a href="{{ subitem.get_absolute_url }} ">{{ subitem.nombre }}</a>
                                 </li>
                                 {% endfor %}
                                 </ul>
@@ -133,12 +133,16 @@
         {% endcache %}
 
         <div id="page-wrapper">
+            {% block page-wrapper %}
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Blank</h1>
+                    <h1 class="page-header">{% block page-header %}Blank{% endblock %}</h1>
+
+                    {% block body %}{% endblock %}
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+            {% endblock %}
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
