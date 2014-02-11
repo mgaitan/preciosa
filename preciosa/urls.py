@@ -24,6 +24,9 @@ urlpatterns = patterns("",
     url(r"^account/", include("account.urls")),
     url(r'^(\d+)-([a-z0-9-]+)/$',
         views.ProductosListView.as_view(), name='lista_productos'),
+
+    url(r'^(\d+)-([a-z0-9-]+)/(?P<pk>\d+)-([a-z0-9-]+)$', views.ProductoDetailView.as_view(),
+        name='detalle_producto')
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
