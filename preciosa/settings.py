@@ -144,6 +144,9 @@ INSTALLED_APPS = [
     "easy_thumbnails",
     "rest_framework",
 
+    #blog
+    "radpress",
+
     # project
     "preciosa",
     "preciosa.precios",
@@ -193,6 +196,14 @@ LOGGING = {
         },
     }
 }
+
+
+RADPRESS_TITLE = 'Preciosa | Blog'
+RADPRESS_DESCRIPTION = "El blog del proyecto Preciosa"
+RADPRESS_LIMIT = 5
+RADPRESS_DISQUS = 'preciosa'
+RADPRESS_HIDE_EMAIL = True
+
 
 CITIES_LIGHT_TRANSLATION_LANGUAGES = ['es']
 CITIES_LIGHT_CITY_SOURCES = ['http://download.geonames.org/export/dump/AR.zip']

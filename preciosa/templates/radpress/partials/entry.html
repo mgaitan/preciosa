@@ -1,0 +1,52 @@
+{% comment %}
+Arguments:
+- summary: Default, 0
+{% endcomment %}
+
+{% load blocktrans trans from i18n %}
+{% load radpress_full_name radpress_datetime from radpress_tags %}
+{% load url from future %}
+
+<div class="post">
+  {% if object.cover_image %}
+    <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" class="post-image">
+      <img src="{{ object.cover_image.image.url }}" alt="{{ object.cover_image.name }}" />
+    </a>
+  {% endif %}
+
+  <div class="title content-space">
+    {% if user == object.author %}
+      <a href="{% url 'radpress-zen-mode-update' object.pk %}" class="edit-button pull-right">{% trans "Edit" %}</a>
+    {% endif %}
+    <h2><a href="{{ object.get_absolute_url }}" title="{{ object.title }}">{{ object.title }}</a></h2>
+
+    <p>
+          <i class="fa fa-user"></i> {{ object.author|radpress_full_name }}
+          | <i class="fa fa-calendar"></i> {% radpress_datetime object.updated_at %}
+        </p>
+
+  </div>
+
+  <div class="post-content content-space">
+    {% if summary %}
+      {{ object.content_by_more|safe }}
+      <p><a class="more-link" href="{{ object.get_absolute_url }}">{% trans "Read more" %} →</a></p>
+    {% else %}
+      {{ object.content_body|safe }}
+    {% endif %}
+  </div>
+
+  <div class="post-footer">
+    <div class="share pull-right">
+      {% include "radpress/partials/share.html" %}
+    </div>
+
+    {% if object.tags.count %}
+      <div class="tags">
+        {% for tag in object.tags.all %}
+          <a rel="tag" title="{% blocktrans %}View all posts in {{ tag.name }}{% endblocktrans %}" href="{% url 'radpress-article-archive' %}?tag={{ tag.slug }}">{{ tag.name }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>

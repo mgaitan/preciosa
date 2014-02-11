@@ -1,5 +1,8 @@
 {% load staticfiles %}
 {% load url from future %}
+{% load blocktrans trans from i18n %}
+{% load radpress_static_url from radpress_tags %}
+
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 
@@ -42,6 +45,7 @@
         {% block extra_head %}{% endblock %}
     {% endblock %}
 
+     <link href="{% url 'radpress-rss' %}" title="{{ RADPRESS_TITLE }} » {% trans "Feed" %}" type="application/rss+xml" rel="alternate" />
 </head>
 
 <body data-cat='{% block cat %}{% endblock cat %}'>
@@ -49,6 +53,9 @@
     <div id="wrapper">
 
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+
+
+
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -57,6 +64,19 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/">Preciosa</a>
+
+            <ul class="nav navbar-nav">
+                  <li>
+                    <a href="{% url 'radpress-article-list' %}">{% trans "Blog" %}</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'radpress-article-archive' %}">{% trans "Archivo" %}</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'radpress-rss' %}">{% trans "RSS" %}</a>
+                    </li>
+            </ul>
+
             </div>
             <!-- /.navbar-header -->
 
@@ -137,9 +157,10 @@
             {% block page-wrapper %}
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">{% block page-header %}Blank{% endblock %}</h1>
 
-                    {% block body %}{% endblock %}
+                    {% block body %}
+                        <h1 class="page-header"></h1>
+                    {% endblock %}
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
