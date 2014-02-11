@@ -1,18 +1,18 @@
 [
     {
-        "pk": 1, 
-        "model": "sites.site", 
+        "pk": 1,
+        "model": "sites.site",
         "fields": {
-            "domain": "localhost:8000", 
-            "name": "example.com [localhost]"
+            "domain": "localhost:8000",
+            "name": "Preciosa - Precios de Argentina [localhost]"
         }
     },
     {
-        "pk": 2, 
-        "model": "sites.site", 
+        "pk": 2,
+        "model": "sites.site",
         "fields": {
-            "domain": "example.com", 
-            "name": "example.com"
+            "domain": "preciosdeargentina.com.ar",
+            "name": "Preciosa - Precios de Argentina"
         }
     }
 ]
