@@ -236,3 +236,9 @@ AUTHENTICATION_BACKENDS = [
 # See http://django-newsletter.readthedocs.org/en/latest/installation.html
 NEWSLETTER_CONFIRM_EMAIL = False
 NEWSLETTER_RICHTEXT_WIDGET = "imperavi.widget.ImperaviWidget"
+
+
+try:
+    from local_settings import *
+except:
+    pass
