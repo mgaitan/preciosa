@@ -24,9 +24,9 @@ urlpatterns = patterns("",
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r"^admin/", include(admin.site.urls)),
     url(r"^account/", include("account.urls")),
+    url(r'^newsletter/', include('newsletter.urls')),
     url(r'^(\d+)-([a-z0-9-]+)/$',
         views.ProductosListView.as_view(), name='lista_productos'),
-
     url(r'^(\d+)-([a-z0-9-]+)/(?P<pk>\d+)-([a-z0-9-]+)$', views.ProductoDetailView.as_view(),
         name='detalle_producto'),
 
