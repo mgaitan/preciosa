@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 import os.path
-
+from datetime import datetime, timedelta
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from django.db.models import Min
+
 from model_utils import Choices
 from model_utils.models import TimeStampedModel
 from treebeard.mp_tree import MP_Node
@@ -56,17 +58,22 @@ class Producto(models.Model):
                                      choices=UNIDADES_CHOICES, null=True, blank=True)
     notas = models.TextField(null=True, blank=True)
     foto = models.ImageField(null=True, blank=True,
-                             upload_to=os.path.join(settings.MEDIA_ROOT, 'productos'))
+                             upload_to='productos')
     acuerdos = models.ManyToManyField('Cadena', through='PrecioEnAcuerdo')
 
     def __unicode__(self):
         return self.descripcion
 
+    def mejor_precio(self):
+        last_month = datetime.today() - timedelta(days=30)
+        best = self.precio_set.filter(created__gte=last_month).aggregate(Min('precio'))
+        return best['precio__min']
+
 
 class Marca(models.Model):
     nombre = models.CharField(max_length=100, unique=True)
     logo = models.ImageField(null=True, blank=True,
-                             upload_to=os.path.join(settings.MEDIA_ROOT, 'marcas'))
+                             upload_to='marcas')
     fabricante = models.ForeignKey('EmpresaFabricante', null=True, blank=True)
 
     def __unicode__(self):
@@ -79,7 +86,7 @@ class Marca(models.Model):
 class AbstractEmpresa(models.Model):
     nombre = models.CharField(max_length=100, unique=True)
     logo = models.ImageField(null=True, blank=True,
-                             upload_to=os.path.join(settings.MEDIA_ROOT, 'empresas'))
+                             upload_to='empresas')
 
     def __unicode__(self):
         return self.nombre
