@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load thumbnail %}
 
 {% block body %}
         <ul class="list-group">
@@ -6,16 +7,20 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-xs-2 col-md-1">
-                        <img alt="" class="img-circle img-responsive" src="http://placehold.it/80"></div>
+                        <img alt="" src="{% thumbnail item.foto 70x70 crop %}"></div>
                     <div class="col-xs-10 col-md-11">
                         <div>
                             <a href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
                                 {{ item.descripcion }}
                                 </a>
                             <div class="mic-info">
-                                By: <a href="#">Bhaumik Patel</a> on 2 Aug 2013
+                                desde
+                                <strong>
+                                    $ {{ item.mejor_precio }}
+                                </strong>
                             </div>
                         </div>
+                        {% comment %}
                         <div class="comment-text">
                             Awesome design
                         </div>
@@ -30,6 +35,7 @@
                                 <span class="glyphicon glyphicon-trash"></span>
                             </button>
                         </div>
+                        {% endcomment %}
                     </div>
                 </div>
             </li>
