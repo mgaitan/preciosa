@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 
+{% block cat %}{{ active }}{% endblock cat %}
+{% block page-header %}{{ categoria.nombre }}{% endblock %}
 {% block body %}
         <ul class="list-group">
         {% for item in productos %}

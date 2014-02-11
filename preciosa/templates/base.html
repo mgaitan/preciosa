@@ -44,7 +44,7 @@
 
 </head>
 
-<body>
+<body data-cat='{% block cat %}{% endblock cat %}'>
 
     <div id="wrapper">
 
@@ -103,16 +103,16 @@
                     </li>
 
                     {% for item in menu %}
-                    <li>
+                    <li class="cat-{{ item.id }}">
                         <a href="#"><i class="fa fa-plus fa-fw"></i>{{ item.nombre }}<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             {% for subitem in item.get_children %}
-                            <li>
+                            <li class="cat-{{ subitem.id }}">
                                 <a href="#">{{ subitem.nombre }}<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                 {% for subitem in subitem.get_children %}
-                                <li>
+                                <li class="cat-{{ subitem.id }}">
                                     <a href="{{ subitem.get_absolute_url }} ">{{ subitem.nombre }}</a>
                                 </li>
                                 {% endfor %}
