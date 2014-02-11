@@ -30,7 +30,7 @@ Es un proyecto basado en el framework Django_ (y Pinax_), usando django-rest-fra
 ¿Puedo ayudar en las aplicaciones móviles?
 ------------------------------------------
 
-Por supuesto. El respositorio está `acá <https://github.com/mgaitan/preciosa_mobile>`_. La aplicación cliente es común para las distintas plataformas (a priori, Android y iOS) y está basada en HTML5 y javascript utilizando Phonegap_
+Por supuesto. El respositorio está `acá <https://github.com/mgaitan/preciosa_mobile>`_. La aplicación cliente es común para las distintas plataformas (a priori, Android e iOS) y está basada en HTML5 y javascript utilizando Phonegap_
 
 
 ¿Querés ayudar?

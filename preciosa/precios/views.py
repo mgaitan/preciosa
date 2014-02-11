@@ -1,7 +1,7 @@
 
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView
-
+from django.db.models import Q
 
 from preciosa.precios.models import Cadena, Sucursal, Producto, Categoria
 from cities_light.models import City
@@ -59,3 +59,19 @@ class ProductoDetailView(DetailView):
         # Add in the publisher
         context['active'] = ','.join(['li.cat-%d a:first' % p.id for p in self.object.categoria.get_ancestors()])
         return context
+
+
+def autocomplete(request,
+        template_name='precios/autocomplete.html'):
+
+    q = request.GET.get('q', '')
+    context = {'q': q}
+
+    queries = {}
+    queries['productos'] = Producto.objects.filter(
+        Q(descripcion__icontains=q) |
+        Q(upc__startswith=q)).distinct()[:6]
+
+    context.update(queries)
+
+    return render(request, template_name, context)

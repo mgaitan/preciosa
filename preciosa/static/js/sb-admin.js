@@ -4,6 +4,8 @@ $(function() {
     var cat_id = $('body').data('cat');
     $(cat_id).click();
 
+
+
 });
 
 //Loads the correct sidebar on window load,

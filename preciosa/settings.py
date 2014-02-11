@@ -133,12 +133,14 @@ INSTALLED_APPS = [
     "pinax_theme_bootstrap_account",
 
     # external
+    "annoying",
     "account",
     "metron",
     "eventlog",
     "treebeard",
     "django_extensions",
     "cities_light",
+    "autocomplete_light",
     "easy_thumbnails",
     "rest_framework",
 

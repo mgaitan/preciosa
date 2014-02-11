@@ -92,7 +92,8 @@
                 <ul class="nav" id="side-menu">
                     <li class="sidebar-search">
                         <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" placeholder="Buscar...">
+
+                            <input id="buscar" type="text" class="form-control" placeholder="Buscar...">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
@@ -155,12 +156,23 @@
     <script src="{% static "js/jquery-1.10.2.js" %}"></script>
     <script src="{% static "js/bootstrap.min.js" %}"></script>
     <script src="{% static "js/plugins/metisMenu/jquery.metisMenu.js" %}"></script>
-
+    {% include 'autocomplete_light/static.html' %}
     <!-- Page-Level Plugin Scripts - Blank -->
 
     <!-- SB Admin Scripts - Include with every page -->
     <script src="{% static "js/sb-admin.js" %}"></script>
 
+    <script type="text/javascript">
+
+    $(function(){
+  // Make a javascript Autocomplete object and set it up
+    var autocomplete = $('#buscar').yourlabsAutocomplete({
+        url: '{% url "autocomplete" %}',
+    });
+
+    });
+
+    </script>
 
 </body>
 

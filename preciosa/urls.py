@@ -10,6 +10,8 @@ router.register(r'cadenas', views.CadenaViewSet)
 router.register(r'sucursales', views.SucursalViewSet)
 router.register(r'ciudades', views.CityViewSet)
 
+import autocomplete_light
+autocomplete_light.autodiscover()
 
 from django.contrib import admin
 admin.autodiscover()
@@ -26,7 +28,10 @@ urlpatterns = patterns("",
         views.ProductosListView.as_view(), name='lista_productos'),
 
     url(r'^(\d+)-([a-z0-9-]+)/(?P<pk>\d+)-([a-z0-9-]+)$', views.ProductoDetailView.as_view(),
-        name='detalle_producto')
+        name='detalle_producto'),
+
+    url(r'^autocomplete/', views.autocomplete, name='autocomplete'),
+
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
