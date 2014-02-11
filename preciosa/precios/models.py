@@ -64,6 +64,14 @@ class Producto(models.Model):
     def __unicode__(self):
         return self.descripcion
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('detalle_producto',
+                (self.categoria.id, slugify(self.categoria.nombre),
+                 self.id, slugify(self.descripcion)), {})
+
+
+
     def mejor_precio(self):
         last_month = datetime.today() - timedelta(days=30)
         best = self.precio_set.filter(created__gte=last_month).aggregate(Min('precio'))
