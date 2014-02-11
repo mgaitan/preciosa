@@ -139,6 +139,7 @@ INSTALLED_APPS = [
     "treebeard",
     "django_extensions",
     "cities_light",
+    "easy_thumbnails",
     "rest_framework",
 
     # project
