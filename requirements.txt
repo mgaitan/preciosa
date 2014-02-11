@@ -26,7 +26,6 @@ lxml==3.2.1
 metron==1.1
 pinax-theme-bootstrap==5.0.3
 pinax-theme-bootstrap-account==1.0b2
-pinax-utils==1.0b1.dev3
 progressbar==2.2
 pyquery==1.2.4
 pytz==2012j

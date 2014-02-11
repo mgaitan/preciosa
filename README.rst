@@ -36,7 +36,11 @@ Por supuesto. El respositorio está `acá <https://github.com/mgaitan/preciosa_m
 ¿Querés ayudar?
 ---------------
 
-Estamos empezando y hay mucho por hacer.  Anotate en la `lista de correo`_.
+Estamos empezando y hay mucho por hacer.  Anotate en la `lista de correo`_ de colaboradores.
+
+:Contacto: gaitan@gmail.com
+:Twitter: `@tin_nqn_  <http://twitter.com/tin_nqn_>`_
+
 
 ¿Cómo trabajamos?
 -----------------
