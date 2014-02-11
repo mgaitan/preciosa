@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load blocktrans trans from i18n %}
+{% load radpress_static_url from radpress_tags %}"
+{% load radpress_widget_latest_posts from radpress_tags %}
+
+
+
+
+{% block body %}
+
+
+  <div id="wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-11">
+          {% block base_content %}
+            <div id="content">
+              {% block content %}{% endblock %}
+            </div>
+          {% endblock %}
+
+          {% block extra_content %}{% endblock %}
+        </div>
+
+        {% comment %}
+        <div class="col-lg-3">
+          <div id="sidebar">
+            {% include "radpress/partials/search_form.html" %}
+            {% radpress_widget_latest_posts %}
+
+            {% if tag_list %}
+              {% include "radpress/partials/tag_cloud.html" %}
+            {% endif %}
+          </div>
+        </div>
+        {% endcomment %}
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

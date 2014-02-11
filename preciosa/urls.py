@@ -18,7 +18,7 @@ admin.autodiscover()
 
 
 urlpatterns = patterns("",
-    url(r"^$", TemplateView.as_view(template_name="homepage.html"), name="home"),
+    # url(r"^$", TemplateView.as_view(template_name="homepage.html"), name="home"),
 
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
@@ -32,6 +32,8 @@ urlpatterns = patterns("",
 
     url(r'^autocomplete/', views.autocomplete, name='autocomplete'),
 
+
+    (r'^', include('radpress.urls'))
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
