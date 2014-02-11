@@ -31,7 +31,7 @@ TIME_ZONE = "UTC"
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = "es-AR"
+LANGUAGE_CODE = "es"
 
 SITE_ID = int(os.environ.get("SITE_ID", 1))
 
@@ -147,6 +147,11 @@ INSTALLED_APPS = [
     #blog
     "radpress",
 
+    #newsletter
+    'imperavi',
+    'sorl.thumbnail',
+    'newsletter',
+
     # project
     "preciosa",
     "preciosa.precios",
@@ -227,3 +232,7 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
 AUTHENTICATION_BACKENDS = [
     "account.auth_backends.UsernameAuthenticationBackend",
 ]
+
+# See http://django-newsletter.readthedocs.org/en/latest/installation.html
+NEWSLETTER_CONFIRM_EMAIL = False
+NEWSLETTER_RICHTEXT_WIDGET = "imperavi.widget.ImperaviWidget"
