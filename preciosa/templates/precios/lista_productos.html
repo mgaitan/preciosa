@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block cat %}{{ active }}{% endblock cat %}
+{% block page-header %}{{ categoria.nombre }}{% endblock %}
+{% block body %}
+        <ul class="list-group">
+        {% for item in productos %}
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-2 col-md-1">
+                        <img alt="" src="{% thumbnail item.foto 70x70 crop %}"></div>
+                    <div class="col-xs-10 col-md-11">
+                        <div>
+                            <a href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
+                                {{ item.descripcion }}
+                                </a>
+                            <div class="mic-info">
+                                desde
+                                <strong>
+                                    $ {{ item.mejor_precio }}
+                                </strong>
+                            </div>
+                        </div>
+                        {% comment %}
+                        <div class="comment-text">
+                            Awesome design
+                        </div>
+                        <div class="action">
+                            <button title="Edit" class="btn btn-primary btn-xs" type="button">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                            <button title="Approved" class="btn btn-success btn-xs" type="button">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                            <button title="Delete" class="btn btn-danger btn-xs" type="button">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </div>
+                        {% endcomment %}
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+{% endblock %}

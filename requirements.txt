@@ -4,6 +4,7 @@ Pillow==2.0.0
 South==0.8.1
 Unidecode==0.04.14
 argparse==1.2.1
+backports.ssl-match-hostname==3.4.0.2
 cssselect==0.8
 django-appconf==0.6
 django-autoslug==1.7.2
@@ -16,6 +17,7 @@ django-model-utils==1.4.0
 django-treebeard==2.0b2
 django-user-accounts==1.0b8
 djangorestframework==2.3.12
+easy-thumbnails==1.4
 eventlog==0.6.2
 factory-boy==2.3.1
 ipdb==0.7
@@ -28,6 +30,9 @@ pinax-utils==1.0b1.dev3
 progressbar==2.2
 pyquery==1.2.4
 pytz==2012j
+pyzmq==14.0.1
 requests==2.2.1
+selenium==2.39.0
 six==1.5.2
+tornado==3.2
 wsgiref==0.1.2

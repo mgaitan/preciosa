@@ -139,12 +139,20 @@ INSTALLED_APPS = [
     "treebeard",
     "django_extensions",
     "cities_light",
+    "easy_thumbnails",
     "rest_framework",
 
     # project
     "preciosa",
     "preciosa.precios",
 ]
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
