@@ -19,7 +19,7 @@ class preciosa(Node):
     python = virtual_env_location + '/bin/python'
     pip = virtual_env_location + '/bin/pip'
 
-    preciosa_project = '/projects/preciosa/src'
+    preciosa_project = '/projects/preciosa'
     project_logs = '/projects/preciosa/logs'
 
 
