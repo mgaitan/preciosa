@@ -1,0 +1,46 @@
+{% extends "radpress/base.html" %}
+
+{% load trans from i18n %}
+{% load url from future %}
+{% load radpress_datetime radpress_full_name from radpress_tags %}
+
+{% block title %}{% trans "Mainpage" %}{% endblock %}
+
+{% block content %}
+  {% for object in object_list %}
+    {% include "radpress/partials/entry.html" with summary=1 %}
+  {% empty %}
+    <p>{% trans "No se encontraron artículos" %}</p>
+  {% endfor %}
+{% endblock %}
+
+{% block body_wide %}9{% endblock body_wide %}
+{% block blog_sidebar %}
+
+        <div class="col-lg-3">
+          <div id="sidebar">
+            {% comment %}
+                {% include "radpress/partials/search_form.html" %}
+                {% radpress_widget_latest_posts %}
+
+                {% if tag_list %}
+                  {% include "radpress/partials/tag_cloud.html" %}
+                {% endif %}
+            {% endcomment %}
+            <p></p>
+            <a class="twitter-timeline"  href="https://twitter.com/PreciosaApp"  data-widget-id="433470267080192001">Tweets de @PreciosaApp</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+
+          </div>
+        </div>
+{% endblock blog_sidebar %}
+
+{% block extra_content %}
+  <ul class="pager">
+    <li class="previous">
+      <a href="{% url "radpress-article-archive" %}">&larr; Artículos anteriores</a>
+    </li>
+  </ul>
+{% endblock %}

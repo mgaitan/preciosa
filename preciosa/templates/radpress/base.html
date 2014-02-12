@@ -10,7 +10,7 @@
 
 
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-{% block body_wide %}12{% endblock body_wide %}">
           {% block base_content %}
             <div id="content">
               {% block content %}{% endblock %}
@@ -20,18 +20,9 @@
           {% block extra_content %}{% endblock %}
         </div>
 
-        {% comment %}
-        <div class="col-lg-3">
-          <div id="sidebar">
-            {% include "radpress/partials/search_form.html" %}
-            {% radpress_widget_latest_posts %}
+        {% block blog_sidebar %}
+        {% endblock blog_sidebar %}
 
-            {% if tag_list %}
-              {% include "radpress/partials/tag_cloud.html" %}
-            {% endif %}
-          </div>
-        </div>
-        {% endcomment %}
     </div>
 
 {% endblock %}
