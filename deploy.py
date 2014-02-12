@@ -8,10 +8,10 @@ class PhasetyVPS(SSHHost):
     username = 'root'
 
 
-class preciosa(Node):
+class Preciosa(Node):
 
     class Hosts:
-        host = [PhasetyVPS]
+        host = PhasetyVPS
 
     # Location of the virtual env
     ip = '162.243.67.151'
@@ -29,6 +29,7 @@ class preciosa(Node):
 
     def restart(self):
         self.hosts.run('sudo supervisorctl restart preciosa')
+        self.hosts.run('sudo service nginx restart')
 
     def run_in_preciosa(self, command):
         with self.hosts.cd(self.preciosa_project):
@@ -75,4 +76,4 @@ class preciosa(Node):
 
 if __name__ == '__main__':
     from deployer.client import start
-    start(preciosa)
+    start(Preciosa)
