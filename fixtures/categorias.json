@@ -1,0 +1,7702 @@
+[
+{
+  "pk": 2, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002", 
+    "depth": 1, 
+    "numchild": 23, 
+    "nombre": "Almacen"
+  }
+},
+{
+  "pk": 3, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00020001", 
+    "depth": 2, 
+    "numchild": 6, 
+    "nombre": "Aceites"
+  }
+},
+{
+  "pk": 4, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00020002", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Aceitunas y encurtidos"
+  }
+},
+{
+  "pk": 5, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00020003", 
+    "depth": 2, 
+    "numchild": 6, 
+    "nombre": "Arroz"
+  }
+},
+{
+  "pk": 6, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00020004", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Azucar y edulcorante"
+  }
+},
+{
+  "pk": 7, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00020005", 
+    "depth": 2, 
+    "numchild": 8, 
+    "nombre": "Cereales"
+  }
+},
+{
+  "pk": 8, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00020006", 
+    "depth": 2, 
+    "numchild": 10, 
+    "nombre": "Condimentos"
+  }
+},
+{
+  "pk": 9, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00020007", 
+    "depth": 2, 
+    "numchild": 5, 
+    "nombre": "Conservas"
+  }
+},
+{
+  "pk": 10, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00020008", 
+    "depth": 2, 
+    "numchild": 5, 
+    "nombre": "Dulces"
+  }
+},
+{
+  "pk": 11, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00020009", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Frutas secas"
+  }
+},
+{
+  "pk": 12, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000A", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Harinas"
+  }
+},
+{
+  "pk": 13, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000B", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Huevos"
+  }
+},
+{
+  "pk": 14, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000C", 
+    "depth": 2, 
+    "numchild": 7, 
+    "nombre": "Infusiones"
+  }
+},
+{
+  "pk": 15, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000D", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Leche en polvo"
+  }
+},
+{
+  "pk": 16, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000E", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Legumbres"
+  }
+},
+{
+  "pk": 17, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000F", 
+    "depth": 2, 
+    "numchild": 6, 
+    "nombre": "Panificados"
+  }
+},
+{
+  "pk": 18, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000G", 
+    "depth": 2, 
+    "numchild": 5, 
+    "nombre": "Pastas"
+  }
+},
+{
+  "pk": 19, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000H", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Postres"
+  }
+},
+{
+  "pk": 20, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000I", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Pure instantaneo"
+  }
+},
+{
+  "pk": 21, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000J", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Reposteria"
+  }
+},
+{
+  "pk": 22, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000K", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Semillas"
+  }
+},
+{
+  "pk": 23, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000L", 
+    "depth": 2, 
+    "numchild": 5, 
+    "nombre": "Snacks"
+  }
+},
+{
+  "pk": 24, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000M", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Sopas y caldos"
+  }
+},
+{
+  "pk": 25, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000N", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Tomates y salsas"
+  }
+},
+{
+  "pk": 26, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0003", 
+    "depth": 1, 
+    "numchild": 4, 
+    "nombre": "Automotor"
+  }
+},
+{
+  "pk": 27, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00030001", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 28, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00030002", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Aromatizantes"
+  }
+},
+{
+  "pk": 29, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00030003", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Cubiertas"
+  }
+},
+{
+  "pk": 30, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00030004", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Llantas"
+  }
+},
+{
+  "pk": 31, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0004", 
+    "depth": 1, 
+    "numchild": 15, 
+    "nombre": "Bazar"
+  }
+},
+{
+  "pk": 32, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00040001", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Aromatizadores"
+  }
+},
+{
+  "pk": 33, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00040002", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Cajas"
+  }
+},
+{
+  "pk": 34, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00040003", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Carritos y bolsas"
+  }
+},
+{
+  "pk": 35, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00040004", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Coccion"
+  }
+},
+{
+  "pk": 36, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00040005", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Colchones y sommier"
+  }
+},
+{
+  "pk": 37, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00040006", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Cristaleria"
+  }
+},
+{
+  "pk": 38, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00040007", 
+    "depth": 2, 
+    "numchild": 5, 
+    "nombre": "Deco"
+  }
+},
+{
+  "pk": 39, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00040008", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Hermeticos"
+  }
+},
+{
+  "pk": 40, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00040009", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Mates y termos"
+  }
+},
+{
+  "pk": 41, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0004000A", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Plasticos"
+  }
+},
+{
+  "pk": 42, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0004000B", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Plasticos limpieza"
+  }
+},
+{
+  "pk": 43, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0004000C", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Ropa"
+  }
+},
+{
+  "pk": 44, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0004000D", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Tablas de madera"
+  }
+},
+{
+  "pk": 45, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0004000E", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Vajilla"
+  }
+},
+{
+  "pk": 46, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0004000F", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Varios"
+  }
+},
+{
+  "pk": 47, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0005", 
+    "depth": 1, 
+    "numchild": 10, 
+    "nombre": "Bebidas con alcohol"
+  }
+},
+{
+  "pk": 48, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00050001", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Aperitivos"
+  }
+},
+{
+  "pk": 49, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00050002", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Blancas"
+  }
+},
+{
+  "pk": 50, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00050003", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Cervezas"
+  }
+},
+{
+  "pk": 51, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00050004", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Espumantes"
+  }
+},
+{
+  "pk": 52, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00050005", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Estuches"
+  }
+},
+{
+  "pk": 53, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00050006", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Licores"
+  }
+},
+{
+  "pk": 54, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00050007", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Sidras- otros"
+  }
+},
+{
+  "pk": 55, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00050008", 
+    "depth": 2, 
+    "numchild": 5, 
+    "nombre": "Vino blanco"
+  }
+},
+{
+  "pk": 56, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00050009", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Vino rosado"
+  }
+},
+{
+  "pk": 57, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0005000A", 
+    "depth": 2, 
+    "numchild": 8, 
+    "nombre": "Vino tinto"
+  }
+},
+{
+  "pk": 58, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0006", 
+    "depth": 1, 
+    "numchild": 6, 
+    "nombre": "Bebidas sin alcohol"
+  }
+},
+{
+  "pk": 59, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00060001", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Aguas"
+  }
+},
+{
+  "pk": 60, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00060002", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Energizantes"
+  }
+},
+{
+  "pk": 61, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00060003", 
+    "depth": 2, 
+    "numchild": 6, 
+    "nombre": "Gaseosas"
+  }
+},
+{
+  "pk": 62, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00060004", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Hierbas"
+  }
+},
+{
+  "pk": 63, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00060005", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Isotonicas"
+  }
+},
+{
+  "pk": 64, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00060006", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Jugos"
+  }
+},
+{
+  "pk": 65, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0007", 
+    "depth": 1, 
+    "numchild": 1, 
+    "nombre": "Calzado"
+  }
+},
+{
+  "pk": 66, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00070001", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Alpargatas rueda"
+  }
+},
+{
+  "pk": 67, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0008", 
+    "depth": 1, 
+    "numchild": 5, 
+    "nombre": "Carniceria"
+  }
+},
+{
+  "pk": 68, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00080001", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Carbon"
+  }
+},
+{
+  "pk": 69, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00080002", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Cerdo"
+  }
+},
+{
+  "pk": 70, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00080003", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Embutidos"
+  }
+},
+{
+  "pk": 71, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00080004", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Granja"
+  }
+},
+{
+  "pk": 72, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00080005", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Vacuna"
+  }
+},
+{
+  "pk": 73, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0009", 
+    "depth": 1, 
+    "numchild": 6, 
+    "nombre": "Congelados"
+  }
+},
+{
+  "pk": 74, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00090001", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Comidas"
+  }
+},
+{
+  "pk": 75, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00090002", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Hamburguesas"
+  }
+},
+{
+  "pk": 76, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00090003", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Helados"
+  }
+},
+{
+  "pk": 77, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00090004", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Papas fritas"
+  }
+},
+{
+  "pk": 78, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00090005", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Rebozados"
+  }
+},
+{
+  "pk": 79, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00090006", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Vegetales"
+  }
+},
+{
+  "pk": 80, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000B", 
+    "depth": 1, 
+    "numchild": 3, 
+    "nombre": "Farmacia"
+  }
+},
+{
+  "pk": 81, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000B0001", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Cuidado personal"
+  }
+},
+{
+  "pk": 82, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000B0002", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Medicamentos"
+  }
+},
+{
+  "pk": 83, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000B0003", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Primeros auxilios"
+  }
+},
+{
+  "pk": 84, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C", 
+    "depth": 1, 
+    "numchild": 5, 
+    "nombre": "Ferreteria"
+  }
+},
+{
+  "pk": 85, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C0001", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Adhesivos"
+  }
+},
+{
+  "pk": 86, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C0002", 
+    "depth": 2, 
+    "numchild": 5, 
+    "nombre": "Herramientas"
+  }
+},
+{
+  "pk": 87, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C0003", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Lamparitas"
+  }
+},
+{
+  "pk": 88, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C0004", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Pilas"
+  }
+},
+{
+  "pk": 89, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C0005", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Pintureria"
+  }
+},
+{
+  "pk": 90, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D", 
+    "depth": 1, 
+    "numchild": 5, 
+    "nombre": "Fiambreria"
+  }
+},
+{
+  "pk": 91, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D0001", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Aceitunas/ encurtidos"
+  }
+},
+{
+  "pk": 92, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D0002", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Dulces"
+  }
+},
+{
+  "pk": 93, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D0003", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Embutidos"
+  }
+},
+{
+  "pk": 94, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D0004", 
+    "depth": 2, 
+    "numchild": 7, 
+    "nombre": "Fiambres"
+  }
+},
+{
+  "pk": 95, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D0005", 
+    "depth": 2, 
+    "numchild": 7, 
+    "nombre": "Quesos"
+  }
+},
+{
+  "pk": 96, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000E", 
+    "depth": 1, 
+    "numchild": 2, 
+    "nombre": "Frutas y verduras"
+  }
+},
+{
+  "pk": 97, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000E0001", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Frutas"
+  }
+},
+{
+  "pk": 98, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000E0002", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Verduras"
+  }
+},
+{
+  "pk": 99, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F", 
+    "depth": 1, 
+    "numchild": 6, 
+    "nombre": "Golosinas y galletitas"
+  }
+},
+{
+  "pk": 100, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F0001", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Barra de cereal"
+  }
+},
+{
+  "pk": 101, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F0002", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Bizcochos"
+  }
+},
+{
+  "pk": 102, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F0003", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Galletitas de arroz"
+  }
+},
+{
+  "pk": 103, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F0004", 
+    "depth": 2, 
+    "numchild": 5, 
+    "nombre": "Galletitas dulces"
+  }
+},
+{
+  "pk": 104, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F0005", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Galletitas saladas"
+  }
+},
+{
+  "pk": 105, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F0006", 
+    "depth": 2, 
+    "numchild": 7, 
+    "nombre": "Golosinas"
+  }
+},
+{
+  "pk": 106, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000G", 
+    "depth": 1, 
+    "numchild": 3, 
+    "nombre": "Jardin"
+  }
+},
+{
+  "pk": 107, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000G0001", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 108, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000G0002", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Muebles"
+  }
+},
+{
+  "pk": 109, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000G0003", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Piletas"
+  }
+},
+{
+  "pk": 110, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H", 
+    "depth": 1, 
+    "numchild": 6, 
+    "nombre": "Juguetes"
+  }
+},
+{
+  "pk": 111, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H0001", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 112, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H0002", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Juegos de mesa"
+  }
+},
+{
+  "pk": 113, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H0003", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Juguetes"
+  }
+},
+{
+  "pk": 114, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H0004", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Musica y peliculas"
+  }
+},
+{
+  "pk": 115, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H0005", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Perfumes"
+  }
+},
+{
+  "pk": 116, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H0006", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Rodados"
+  }
+},
+{
+  "pk": 117, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I", 
+    "depth": 1, 
+    "numchild": 11, 
+    "nombre": "Lacteos"
+  }
+},
+{
+  "pk": 118, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I0001", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Cremas"
+  }
+},
+{
+  "pk": 119, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I0002", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Dulce de leche"
+  }
+},
+{
+  "pk": 120, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I0003", 
+    "depth": 2, 
+    "numchild": 6, 
+    "nombre": "Leche"
+  }
+},
+{
+  "pk": 121, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I0004", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Levaduras y grasas"
+  }
+},
+{
+  "pk": 122, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I0005", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Manteca/ margarina"
+  }
+},
+{
+  "pk": 123, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I0006", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Postres y flanes"
+  }
+},
+{
+  "pk": 124, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I0007", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Quesos untables"
+  }
+},
+{
+  "pk": 125, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I0008", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Ricota"
+  }
+},
+{
+  "pk": 126, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I0009", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Salud activa"
+  }
+},
+{
+  "pk": 127, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I000A", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Yogur descremado"
+  }
+},
+{
+  "pk": 128, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I000B", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Yogur entero"
+  }
+},
+{
+  "pk": 129, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J", 
+    "depth": 1, 
+    "numchild": 6, 
+    "nombre": "Libreria"
+  }
+},
+{
+  "pk": 130, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J0001", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Carpetas"
+  }
+},
+{
+  "pk": 131, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J0002", 
+    "depth": 2, 
+    "numchild": 7, 
+    "nombre": "Escritura"
+  }
+},
+{
+  "pk": 132, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J0003", 
+    "depth": 2, 
+    "numchild": 8, 
+    "nombre": "Manualidades"
+  }
+},
+{
+  "pk": 133, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J0004", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Mochilas y cartucheras"
+  }
+},
+{
+  "pk": 134, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J0005", 
+    "depth": 2, 
+    "numchild": 6, 
+    "nombre": "Oficina"
+  }
+},
+{
+  "pk": 135, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J0006", 
+    "depth": 2, 
+    "numchild": 6, 
+    "nombre": "Repuestos y cuadernos"
+  }
+},
+{
+  "pk": 136, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000K", 
+    "depth": 1, 
+    "numchild": 3, 
+    "nombre": "Libros, musica y peliculas"
+  }
+},
+{
+  "pk": 137, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000K0001", 
+    "depth": 2, 
+    "numchild": 6, 
+    "nombre": "Libros"
+  }
+},
+{
+  "pk": 138, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000K0002", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Musica"
+  }
+},
+{
+  "pk": 139, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000K0003", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Peliculas"
+  }
+},
+{
+  "pk": 140, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L", 
+    "depth": 1, 
+    "numchild": 19, 
+    "nombre": "Limpieza"
+  }
+},
+{
+  "pk": 141, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L0001", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Baldes"
+  }
+},
+{
+  "pk": 142, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L0002", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Ba\u00f1o"
+  }
+},
+{
+  "pk": 143, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L0003", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Calzado"
+  }
+},
+{
+  "pk": 144, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L0004", 
+    "depth": 2, 
+    "numchild": 10, 
+    "nombre": "Cocina"
+  }
+},
+{
+  "pk": 145, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L0005", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Desinfectantes"
+  }
+},
+{
+  "pk": 146, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L0006", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Desodorante de ambiente"
+  }
+},
+{
+  "pk": 147, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L0007", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Escobas y cabos"
+  }
+},
+{
+  "pk": 148, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L0008", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Esponjas"
+  }
+},
+{
+  "pk": 149, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L0009", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Guantes"
+  }
+},
+{
+  "pk": 150, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000A", 
+    "depth": 2, 
+    "numchild": 5, 
+    "nombre": "Insecticidas"
+  }
+},
+{
+  "pk": 151, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000B", 
+    "depth": 2, 
+    "numchild": 5, 
+    "nombre": "Limpiadores"
+  }
+},
+{
+  "pk": 152, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000C", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Muebles"
+  }
+},
+{
+  "pk": 153, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000D", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Multiuso"
+  }
+},
+{
+  "pk": 154, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000F", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Pa\u00f1os"
+  }
+},
+{
+  "pk": 155, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000E", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Papeles"
+  }
+},
+{
+  "pk": 156, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000G", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Pisos"
+  }
+},
+{
+  "pk": 157, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000H", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Plumeros- limpiavidrios"
+  }
+},
+{
+  "pk": 158, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000I", 
+    "depth": 2, 
+    "numchild": 8, 
+    "nombre": "Ropa"
+  }
+},
+{
+  "pk": 159, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000J", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Varios"
+  }
+},
+{
+  "pk": 160, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M", 
+    "depth": 1, 
+    "numchild": 14, 
+    "nombre": "Mamas y bebes"
+  }
+},
+{
+  "pk": 161, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M0001", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 162, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M0002", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Aceites y cremas"
+  }
+},
+{
+  "pk": 163, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M0003", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Alimentacion infantil"
+  }
+},
+{
+  "pk": 164, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M0004", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Chupetes/ mamaderas"
+  }
+},
+{
+  "pk": 165, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M0005", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Cuidado mama"
+  }
+},
+{
+  "pk": 166, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M0006", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Fragancias"
+  }
+},
+{
+  "pk": 167, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M0007", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Oleo calcareo"
+  }
+},
+{
+  "pk": 168, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M0009", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Pa\u00f1ales"
+  }
+},
+{
+  "pk": 169, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M0008", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Para el ba\u00f1o"
+  }
+},
+{
+  "pk": 170, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M000A", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Rodados y cunas"
+  }
+},
+{
+  "pk": 171, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M000B", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Seguridad"
+  }
+},
+{
+  "pk": 172, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M000C", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Talco/ fecula"
+  }
+},
+{
+  "pk": 173, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M000D", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Toallitas humedas"
+  }
+},
+{
+  "pk": 174, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M000E", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Varios"
+  }
+},
+{
+  "pk": 175, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000N", 
+    "depth": 1, 
+    "numchild": 3, 
+    "nombre": "Mascotas"
+  }
+},
+{
+  "pk": 176, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000N0001", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 177, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000N0002", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Alimento gato"
+  }
+},
+{
+  "pk": 178, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000N0003", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Alimento perro"
+  }
+},
+{
+  "pk": 179, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000O", 
+    "depth": 1, 
+    "numchild": 6, 
+    "nombre": "Panaderia"
+  }
+},
+{
+  "pk": 180, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000O0001", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Budines"
+  }
+},
+{
+  "pk": 181, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000O0002", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Facturas / donuts"
+  }
+},
+{
+  "pk": 182, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000O0003", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Otros"
+  }
+},
+{
+  "pk": 183, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000O0004", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Pan"
+  }
+},
+{
+  "pk": 184, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000O0005", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Sandwiches de miga"
+  }
+},
+{
+  "pk": 185, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000O0006", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Tortas"
+  }
+},
+{
+  "pk": 186, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000P", 
+    "depth": 1, 
+    "numchild": 2, 
+    "nombre": "Pastas y tapas"
+  }
+},
+{
+  "pk": 187, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000P0001", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Pastas"
+  }
+},
+{
+  "pk": 188, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000P0002", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Tapas"
+  }
+},
+{
+  "pk": 189, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q", 
+    "depth": 1, 
+    "numchild": 15, 
+    "nombre": "Perfumeria"
+  }
+},
+{
+  "pk": 190, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q0001", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Afeitado"
+  }
+},
+{
+  "pk": 191, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q0002", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Algodon/ hisopos"
+  }
+},
+{
+  "pk": 192, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q0003", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Cuidado de la piel"
+  }
+},
+{
+  "pk": 193, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q0004", 
+    "depth": 2, 
+    "numchild": 11, 
+    "nombre": "Cuidado del cabello"
+  }
+},
+{
+  "pk": 194, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q0005", 
+    "depth": 2, 
+    "numchild": 5, 
+    "nombre": "Cuidado facial"
+  }
+},
+{
+  "pk": 195, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q0006", 
+    "depth": 2, 
+    "numchild": 5, 
+    "nombre": "Cuidado oral"
+  }
+},
+{
+  "pk": 196, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q0007", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Desodorantes"
+  }
+},
+{
+  "pk": 197, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q0008", 
+    "depth": 2, 
+    "numchild": 8, 
+    "nombre": "Farmacia"
+  }
+},
+{
+  "pk": 198, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q0009", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Fragancias"
+  }
+},
+{
+  "pk": 199, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000A", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Jabones"
+  }
+},
+{
+  "pk": 200, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000B", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Manos y pies"
+  }
+},
+{
+  "pk": 201, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000C", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Pa\u00f1ales"
+  }
+},
+{
+  "pk": 202, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000D", 
+    "depth": 2, 
+    "numchild": 4, 
+    "nombre": "Proteccion femenina"
+  }
+},
+{
+  "pk": 203, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000E", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Sales, geles y espumas"
+  }
+},
+{
+  "pk": 204, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000F", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Talcos"
+  }
+},
+{
+  "pk": 205, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000R", 
+    "depth": 1, 
+    "numchild": 5, 
+    "nombre": "Tiempo libre"
+  }
+},
+{
+  "pk": 206, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000R0001", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Camping"
+  }
+},
+{
+  "pk": 207, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000R0002", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Deporte"
+  }
+},
+{
+  "pk": 208, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000R0003", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Juegos jardin"
+  }
+},
+{
+  "pk": 209, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000R0004", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Piletas"
+  }
+},
+{
+  "pk": 210, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000R0005", 
+    "depth": 2, 
+    "numchild": 2, 
+    "nombre": "Rodados"
+  }
+},
+{
+  "pk": 211, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A", 
+    "depth": 1, 
+    "numchild": 14, 
+    "nombre": "Electro y tecnologia"
+  }
+},
+{
+  "pk": 212, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A0001", 
+    "depth": 2, 
+    "numchild": 7, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 213, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A0002", 
+    "depth": 2, 
+    "numchild": 5, 
+    "nombre": "Audio"
+  }
+},
+{
+  "pk": 214, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A0003", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Celulares"
+  }
+},
+{
+  "pk": 215, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A0004", 
+    "depth": 2, 
+    "numchild": 9, 
+    "nombre": "Cuidado personal"
+  }
+},
+{
+  "pk": 216, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A0005", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Dvd y home theater"
+  }
+},
+{
+  "pk": 217, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A0006", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Fotografia"
+  }
+},
+{
+  "pk": 218, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A0007", 
+    "depth": 2, 
+    "numchild": 5, 
+    "nombre": "Frio- calor"
+  }
+},
+{
+  "pk": 219, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A0008", 
+    "depth": 2, 
+    "numchild": 1, 
+    "nombre": "Gps"
+  }
+},
+{
+  "pk": 220, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A0009", 
+    "depth": 2, 
+    "numchild": 7, 
+    "nombre": "Inform\u00e1tica"
+  }
+},
+{
+  "pk": 221, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000A", 
+    "depth": 2, 
+    "numchild": 6, 
+    "nombre": "Led y lcd"
+  }
+},
+{
+  "pk": 222, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000B", 
+    "depth": 2, 
+    "numchild": 5, 
+    "nombre": "Linea blanca"
+  }
+},
+{
+  "pk": 223, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000C", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Peque\u00f1os cocina"
+  }
+},
+{
+  "pk": 224, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000D", 
+    "depth": 2, 
+    "numchild": 0, 
+    "nombre": "Peque\u00f1os hogar"
+  }
+},
+{
+  "pk": 225, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000E", 
+    "depth": 2, 
+    "numchild": 3, 
+    "nombre": "Video juegos"
+  }
+},
+{
+  "pk": 226, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Aerosol"
+  }
+},
+{
+  "pk": 227, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200010002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Canola- otros"
+  }
+},
+{
+  "pk": 228, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200010003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Girasol"
+  }
+},
+{
+  "pk": 229, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200010004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Maiz"
+  }
+},
+{
+  "pk": 230, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200010005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Mezcla"
+  }
+},
+{
+  "pk": 231, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200010006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Oliva"
+  }
+},
+{
+  "pk": 232, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Aceitunas negras"
+  }
+},
+{
+  "pk": 233, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200020002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Aceitunas rellenas"
+  }
+},
+{
+  "pk": 234, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200020003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Aceitunas verdes"
+  }
+},
+{
+  "pk": 235, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200020004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Encurtidos"
+  }
+},
+{
+  "pk": 236, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Doble"
+  }
+},
+{
+  "pk": 237, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200030002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Especiales"
+  }
+},
+{
+  "pk": 238, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200030003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Grano largo"
+  }
+},
+{
+  "pk": 239, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200030004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Integral"
+  }
+},
+{
+  "pk": 240, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200030005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Parboil"
+  }
+},
+{
+  "pk": 241, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200030006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Preparados"
+  }
+},
+{
+  "pk": 242, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Azucar"
+  }
+},
+{
+  "pk": 243, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200040002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Edulcorante"
+  }
+},
+{
+  "pk": 244, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200050001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Avena"
+  }
+},
+{
+  "pk": 245, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200050002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Azucarados"
+  }
+},
+{
+  "pk": 246, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200050003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Barras"
+  }
+},
+{
+  "pk": 247, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200050004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Chocolate"
+  }
+},
+{
+  "pk": 248, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200050005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Frutal"
+  }
+},
+{
+  "pk": 249, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200050006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Maiz"
+  }
+},
+{
+  "pk": 250, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200050007", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Miel"
+  }
+},
+{
+  "pk": 251, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200050008", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Multicereal"
+  }
+},
+{
+  "pk": 252, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200060001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Aceto"
+  }
+},
+{
+  "pk": 253, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200060002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Especias"
+  }
+},
+{
+  "pk": 254, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200060003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Jugo de limon"
+  }
+},
+{
+  "pk": 255, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200060004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Mayonesa"
+  }
+},
+{
+  "pk": 256, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200060005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Mostaza"
+  }
+},
+{
+  "pk": 257, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200060006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Saborizadores"
+  }
+},
+{
+  "pk": 258, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200060007", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Sal"
+  }
+},
+{
+  "pk": 259, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200060008", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Salsa golf/ ketchup"
+  }
+},
+{
+  "pk": 260, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200060009", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Salsas"
+  }
+},
+{
+  "pk": 261, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "00020006000A", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Vinagre"
+  }
+},
+{
+  "pk": 262, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200070001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Carnes"
+  }
+},
+{
+  "pk": 263, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200070002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Frutas"
+  }
+},
+{
+  "pk": 264, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200070003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pescados"
+  }
+},
+{
+  "pk": 265, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200070004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tomates/ salsas"
+  }
+},
+{
+  "pk": 266, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200070005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Vegetales"
+  }
+},
+{
+  "pk": 267, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200080001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Diet- light"
+  }
+},
+{
+  "pk": 268, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200080002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Dulce de leche"
+  }
+},
+{
+  "pk": 269, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200080003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Jalea"
+  }
+},
+{
+  "pk": 270, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200080004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Mermelada"
+  }
+},
+{
+  "pk": 271, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200080005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Miel- otros"
+  }
+},
+{
+  "pk": 272, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000200090001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Frutas secas"
+  }
+},
+{
+  "pk": 273, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000A0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Maiz"
+  }
+},
+{
+  "pk": 274, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000A0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Premezcla"
+  }
+},
+{
+  "pk": 275, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000A0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Semola- otras"
+  }
+},
+{
+  "pk": 276, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000A0004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Trigo"
+  }
+},
+{
+  "pk": 277, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000B0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Huevos"
+  }
+},
+{
+  "pk": 278, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000C0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cacao"
+  }
+},
+{
+  "pk": 279, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000C0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cafe instantaneo"
+  }
+},
+{
+  "pk": 280, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000C0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cafe p/ filtro"
+  }
+},
+{
+  "pk": 281, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000C0004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Filtro cafe"
+  }
+},
+{
+  "pk": 282, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000C0005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Mate cocido"
+  }
+},
+{
+  "pk": 283, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000C0006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Te"
+  }
+},
+{
+  "pk": 284, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000C0007", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Yerba"
+  }
+},
+{
+  "pk": 285, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000D0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Condensada"
+  }
+},
+{
+  "pk": 286, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000D0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Descremada"
+  }
+},
+{
+  "pk": 287, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000D0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Entera"
+  }
+},
+{
+  "pk": 288, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000E0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Legumbres"
+  }
+},
+{
+  "pk": 289, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000F0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Arabe"
+  }
+},
+{
+  "pk": 290, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000F0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Budines/otros"
+  }
+},
+{
+  "pk": 291, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000F0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Hamb/ panchos"
+  }
+},
+{
+  "pk": 292, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000F0004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pan de molde"
+  }
+},
+{
+  "pk": 293, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000F0005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pan rallado"
+  }
+},
+{
+  "pk": 294, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000F0006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tostadas"
+  }
+},
+{
+  "pk": 295, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000G0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Guiseros"
+  }
+},
+{
+  "pk": 296, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000G0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Integrales- otros"
+  }
+},
+{
+  "pk": 297, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000G0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Largos"
+  }
+},
+{
+  "pk": 298, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000G0004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Rellenas- otras"
+  }
+},
+{
+  "pk": 299, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000G0005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Soperos"
+  }
+},
+{
+  "pk": 300, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000H0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Flanes"
+  }
+},
+{
+  "pk": 301, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000H0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Gelatinas"
+  }
+},
+{
+  "pk": 302, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000H0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Helados"
+  }
+},
+{
+  "pk": 303, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000H0004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Postres"
+  }
+},
+{
+  "pk": 304, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000I0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pure instantaneo"
+  }
+},
+{
+  "pk": 305, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000J0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Bizcochuelos"
+  }
+},
+{
+  "pk": 306, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000J0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Reposteria"
+  }
+},
+{
+  "pk": 307, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000K0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Semillas"
+  }
+},
+{
+  "pk": 308, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000L0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Frutas secas"
+  }
+},
+{
+  "pk": 309, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000L0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Mani"
+  }
+},
+{
+  "pk": 310, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000L0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Palitos"
+  }
+},
+{
+  "pk": 311, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000L0004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Papas"
+  }
+},
+{
+  "pk": 312, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000L0005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pochoclos- otros"
+  }
+},
+{
+  "pk": 313, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000M0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Caldos"
+  }
+},
+{
+  "pk": 314, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000M0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Saborizadores"
+  }
+},
+{
+  "pk": 315, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000M0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Sopas"
+  }
+},
+{
+  "pk": 316, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000N0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Salsas"
+  }
+},
+{
+  "pk": 317, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0002000N0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tomates"
+  }
+},
+{
+  "pk": 318, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000300010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios para autos"
+  }
+},
+{
+  "pk": 319, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000300020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Aromatizantes"
+  }
+},
+{
+  "pk": 320, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000300030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Automoviles"
+  }
+},
+{
+  "pk": 321, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000300030002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Camionetas"
+  }
+},
+{
+  "pk": 322, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000300040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Llantas 13\""
+  }
+},
+{
+  "pk": 323, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000300040002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Llantas 14\""
+  }
+},
+{
+  "pk": 324, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000300040003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Llantas 15\""
+  }
+},
+{
+  "pk": 325, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000400010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Aromatizadores"
+  }
+},
+{
+  "pk": 326, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000400040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Ollas / sartenes"
+  }
+},
+{
+  "pk": 327, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000400040002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pavas"
+  }
+},
+{
+  "pk": 328, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000400040003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pizzera"
+  }
+},
+{
+  "pk": 329, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000400050001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Almohadas"
+  }
+},
+{
+  "pk": 330, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000400050002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Blancos"
+  }
+},
+{
+  "pk": 331, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000400050003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Colchones y sommier"
+  }
+},
+{
+  "pk": 332, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000400060001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Copas"
+  }
+},
+{
+  "pk": 333, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000400060002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Vasos"
+  }
+},
+{
+  "pk": 334, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000400070001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Ba\u00f1o"
+  }
+},
+{
+  "pk": 335, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000400070002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Blancos"
+  }
+},
+{
+  "pk": 336, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000400070003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cocina"
+  }
+},
+{
+  "pk": 337, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000400070004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Muebles"
+  }
+},
+{
+  "pk": 338, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000400070005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Sillones"
+  }
+},
+{
+  "pk": 339, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000400080001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Hermeticos"
+  }
+},
+{
+  "pk": 340, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000400090001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Termos"
+  }
+},
+{
+  "pk": 341, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0004000C0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Organizadores"
+  }
+},
+{
+  "pk": 342, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0004000C0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tablas y fundas"
+  }
+},
+{
+  "pk": 343, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0004000C0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tender"
+  }
+},
+{
+  "pk": 344, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0004000D0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tablas de madera"
+  }
+},
+{
+  "pk": 345, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0004000E0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Bowls"
+  }
+},
+{
+  "pk": 346, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0004000E0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cubiertos"
+  }
+},
+{
+  "pk": 347, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0004000E0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Platos"
+  }
+},
+{
+  "pk": 348, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0004000F0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cotillon varios"
+  }
+},
+{
+  "pk": 349, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Americano"
+  }
+},
+{
+  "pk": 350, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500010002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Fernet"
+  }
+},
+{
+  "pk": 351, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500010003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Vermouth"
+  }
+},
+{
+  "pk": 352, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Blancas"
+  }
+},
+{
+  "pk": 353, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Artesanal"
+  }
+},
+{
+  "pk": 354, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500030002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Botella"
+  }
+},
+{
+  "pk": 355, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500030003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Lata"
+  }
+},
+{
+  "pk": 356, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Champagne"
+  }
+},
+{
+  "pk": 357, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500040002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Frizantes"
+  }
+},
+{
+  "pk": 358, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500050001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Estuches"
+  }
+},
+{
+  "pk": 359, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500060001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Licores"
+  }
+},
+{
+  "pk": 360, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500070001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Sidras- otros"
+  }
+},
+{
+  "pk": 361, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500080001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Chardonnay"
+  }
+},
+{
+  "pk": 362, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500080002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Otras cepas"
+  }
+},
+{
+  "pk": 363, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500080003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Sauvignon blanc"
+  }
+},
+{
+  "pk": 364, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500080004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tardio- dulce"
+  }
+},
+{
+  "pk": 365, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500080005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Torrontes"
+  }
+},
+{
+  "pk": 366, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500090001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Malbec"
+  }
+},
+{
+  "pk": 367, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500090002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Otras cepas"
+  }
+},
+{
+  "pk": 368, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000500090003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Syrah"
+  }
+},
+{
+  "pk": 369, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0005000A0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Bivarietal"
+  }
+},
+{
+  "pk": 370, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0005000A0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Borgo\u00f1a"
+  }
+},
+{
+  "pk": 371, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0005000A0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cabernet sauvignon"
+  }
+},
+{
+  "pk": 372, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0005000A0004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Malbec"
+  }
+},
+{
+  "pk": 373, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0005000A0005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Merlot"
+  }
+},
+{
+  "pk": 374, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0005000A0006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Otras cepas"
+  }
+},
+{
+  "pk": 375, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0005000A0007", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Syrah"
+  }
+},
+{
+  "pk": 376, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "0005000A0008", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tempranillo"
+  }
+},
+{
+  "pk": 377, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000600010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Gasificadas"
+  }
+},
+{
+  "pk": 378, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000600010002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Saborizadas"
+  }
+},
+{
+  "pk": 379, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000600010003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Sin gas"
+  }
+},
+{
+  "pk": 380, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000600020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Energizantes"
+  }
+},
+{
+  "pk": 381, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000600030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cola"
+  }
+},
+{
+  "pk": 382, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000600030002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Lima limon"
+  }
+},
+{
+  "pk": 383, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000600030003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Naranja"
+  }
+},
+{
+  "pk": 384, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000600030004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Otras"
+  }
+},
+{
+  "pk": 385, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000600030005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pomelo"
+  }
+},
+{
+  "pk": 386, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000600030006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tonica"
+  }
+},
+{
+  "pk": 387, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000600040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Hierbas"
+  }
+},
+{
+  "pk": 388, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000600050001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Isotonicas"
+  }
+},
+{
+  "pk": 389, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000600060001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Concentrados"
+  }
+},
+{
+  "pk": 390, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000600060002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "En polvo"
+  }
+},
+{
+  "pk": 391, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000600060003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Listos"
+  }
+},
+{
+  "pk": 392, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000600060004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Soja"
+  }
+},
+{
+  "pk": 393, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000700010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Alpargatas rueda"
+  }
+},
+{
+  "pk": 394, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000800010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Carbon"
+  }
+},
+{
+  "pk": 395, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000800020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cerdo"
+  }
+},
+{
+  "pk": 396, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000800030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Embutidos"
+  }
+},
+{
+  "pk": 397, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000800040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Huevos"
+  }
+},
+{
+  "pk": 398, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000800040002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pollo entero"
+  }
+},
+{
+  "pk": 399, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000800040003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pollo trozado"
+  }
+},
+{
+  "pk": 400, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000800050001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Al vacio"
+  }
+},
+{
+  "pk": 401, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000800050002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Novillo"
+  }
+},
+{
+  "pk": 402, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000800050003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Ternera"
+  }
+},
+{
+  "pk": 403, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000900010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Empanadas"
+  }
+},
+{
+  "pk": 404, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000900010002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Otros"
+  }
+},
+{
+  "pk": 405, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000900010003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pizzas"
+  }
+},
+{
+  "pk": 406, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000900020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Carne"
+  }
+},
+{
+  "pk": 407, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000900020002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Soja"
+  }
+},
+{
+  "pk": 408, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000900030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Palito"
+  }
+},
+{
+  "pk": 409, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000900030002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Postres"
+  }
+},
+{
+  "pk": 410, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000900030003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Potes y baldes"
+  }
+},
+{
+  "pk": 411, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000900040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Papas fritas"
+  }
+},
+{
+  "pk": 412, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000900050001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pescado"
+  }
+},
+{
+  "pk": 413, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000900050002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pollo"
+  }
+},
+{
+  "pk": 414, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000900050003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Soja"
+  }
+},
+{
+  "pk": 415, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000900050004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Verdura"
+  }
+},
+{
+  "pk": 416, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000900060001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Vegetales"
+  }
+},
+{
+  "pk": 417, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000B00010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Masajeadores"
+  }
+},
+{
+  "pk": 418, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000B00010002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Nebulizadores"
+  }
+},
+{
+  "pk": 419, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000B00010003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tensiometros"
+  }
+},
+{
+  "pk": 420, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000B00010004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Termometros"
+  }
+},
+{
+  "pk": 421, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000B00020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Complemento alimentario"
+  }
+},
+{
+  "pk": 422, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000B00020002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pastilleros"
+  }
+},
+{
+  "pk": 423, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000B00020003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Venta libre"
+  }
+},
+{
+  "pk": 424, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000B00030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Agua oxigenada"
+  }
+},
+{
+  "pk": 425, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000B00030002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Alcohol"
+  }
+},
+{
+  "pk": 426, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000B00030003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Gasas- vendas"
+  }
+},
+{
+  "pk": 427, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000B00030004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Otros botiquin"
+  }
+},
+{
+  "pk": 428, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C00010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Adhesivos"
+  }
+},
+{
+  "pk": 429, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C00020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Caja de herramientas"
+  }
+},
+{
+  "pk": 430, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C00020002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Escaleras"
+  }
+},
+{
+  "pk": 431, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C00020003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Herramientas"
+  }
+},
+{
+  "pk": 432, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C00020004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Herramientas manuales"
+  }
+},
+{
+  "pk": 433, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C00020005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Porta herramientas"
+  }
+},
+{
+  "pk": 434, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C00030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Lamparitas"
+  }
+},
+{
+  "pk": 435, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C00040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pilas"
+  }
+},
+{
+  "pk": 436, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C00050001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 437, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C00050002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pinceles y rodillos"
+  }
+},
+{
+  "pk": 438, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C00050003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pinturas"
+  }
+},
+{
+  "pk": 439, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000C00050004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tintas / masilla"
+  }
+},
+{
+  "pk": 440, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Aceitunas/ encurtidos"
+  }
+},
+{
+  "pk": 441, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Batata"
+  }
+},
+{
+  "pk": 442, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00020002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Membrillo"
+  }
+},
+{
+  "pk": 443, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00020003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Otros"
+  }
+},
+{
+  "pk": 444, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Salchichas"
+  }
+},
+{
+  "pk": 445, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Ahumados"
+  }
+},
+{
+  "pk": 446, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00040002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Especiales"
+  }
+},
+{
+  "pk": 447, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00040003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Jamon cocido"
+  }
+},
+{
+  "pk": 448, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00040004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Jamon crudo/ bondiola"
+  }
+},
+{
+  "pk": 449, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00040005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Mortadela/ salchichon"
+  }
+},
+{
+  "pk": 450, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00040006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pate"
+  }
+},
+{
+  "pk": 451, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00040007", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Salame y salamines"
+  }
+},
+{
+  "pk": 452, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00050001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Blandos"
+  }
+},
+{
+  "pk": 453, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00050002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Duros"
+  }
+},
+{
+  "pk": 454, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00050003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Especiales"
+  }
+},
+{
+  "pk": 455, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00050004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Light"
+  }
+},
+{
+  "pk": 456, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00050005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Quesos untables"
+  }
+},
+{
+  "pk": 457, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00050006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Rallados"
+  }
+},
+{
+  "pk": 458, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000D00050007", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Semiduros"
+  }
+},
+{
+  "pk": 459, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000E00010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Frutas"
+  }
+},
+{
+  "pk": 460, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000E00020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Bandejas"
+  }
+},
+{
+  "pk": 461, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000E00020002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "De hojas"
+  }
+},
+{
+  "pk": 462, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000E00020003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Hortalizas"
+  }
+},
+{
+  "pk": 463, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Barra de cereal"
+  }
+},
+{
+  "pk": 464, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Bizcochos"
+  }
+},
+{
+  "pk": 465, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Galletitas de arroz"
+  }
+},
+{
+  "pk": 466, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Chocolate"
+  }
+},
+{
+  "pk": 467, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00040002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Hojaldre"
+  }
+},
+{
+  "pk": 468, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00040003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Madalenas"
+  }
+},
+{
+  "pk": 469, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00040004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Rellenas"
+  }
+},
+{
+  "pk": 470, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00040005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Secas"
+  }
+},
+{
+  "pk": 471, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00050001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cereal"
+  }
+},
+{
+  "pk": 472, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00050002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Grisines- marineras"
+  }
+},
+{
+  "pk": 473, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00050003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Regulares"
+  }
+},
+{
+  "pk": 474, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00050004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Snacks"
+  }
+},
+{
+  "pk": 475, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00060001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Alfajores"
+  }
+},
+{
+  "pk": 476, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00060002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Bocaditos"
+  }
+},
+{
+  "pk": 477, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00060003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Carame/chupet y chicles"
+  }
+},
+{
+  "pk": 478, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00060004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Chocolates y tablet"
+  }
+},
+{
+  "pk": 479, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00060005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Confituras"
+  }
+},
+{
+  "pk": 480, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00060006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Gomitas"
+  }
+},
+{
+  "pk": 481, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000F00060007", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Turrones"
+  }
+},
+{
+  "pk": 482, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000G00010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 483, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000G00010002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Macetas"
+  }
+},
+{
+  "pk": 484, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000G00020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Gazebos"
+  }
+},
+{
+  "pk": 485, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000G00020002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Mesas"
+  }
+},
+{
+  "pk": 486, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000G00020003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Set de jardin"
+  }
+},
+{
+  "pk": 487, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000G00020004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Sillas/ reposeras"
+  }
+},
+{
+  "pk": 488, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000G00030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 489, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000G00030002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Juegos/inflables"
+  }
+},
+{
+  "pk": 490, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000G00030003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Piletas"
+  }
+},
+{
+  "pk": 491, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H00010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 492, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H00020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "De aventura"
+  }
+},
+{
+  "pk": 493, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H00020002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Educativos"
+  }
+},
+{
+  "pk": 494, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H00020003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Puzzles"
+  }
+},
+{
+  "pk": 495, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H00030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Bebes"
+  }
+},
+{
+  "pk": 496, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H00030002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Ni\u00f1as"
+  }
+},
+{
+  "pk": 497, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H00030003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Ni\u00f1os"
+  }
+},
+{
+  "pk": 498, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H00030004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Radio control"
+  }
+},
+{
+  "pk": 499, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H00060001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios rodados"
+  }
+},
+{
+  "pk": 500, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000H00060002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Rodados"
+  }
+},
+{
+  "pk": 501, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cremas"
+  }
+},
+{
+  "pk": 502, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Descremado"
+  }
+},
+{
+  "pk": 503, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00020002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Repostero"
+  }
+},
+{
+  "pk": 504, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00020003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tradicional"
+  }
+},
+{
+  "pk": 505, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Chocolatada"
+  }
+},
+{
+  "pk": 506, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00030002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Descremada"
+  }
+},
+{
+  "pk": 507, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00030003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Entera"
+  }
+},
+{
+  "pk": 508, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00030004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Infantil"
+  }
+},
+{
+  "pk": 509, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00030005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Polvo"
+  }
+},
+{
+  "pk": 510, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00030006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Saborizadas"
+  }
+},
+{
+  "pk": 511, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Levaduras y grasas"
+  }
+},
+{
+  "pk": 512, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00050001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Mantecas"
+  }
+},
+{
+  "pk": 513, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00050002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Margarinas"
+  }
+},
+{
+  "pk": 514, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00060001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Flanes"
+  }
+},
+{
+  "pk": 515, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00060002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Light"
+  }
+},
+{
+  "pk": 516, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00060003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Postres"
+  }
+},
+{
+  "pk": 517, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00070001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Quesos untables"
+  }
+},
+{
+  "pk": 518, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00080001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Ricota"
+  }
+},
+{
+  "pk": 519, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00090001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Leche fermentada"
+  }
+},
+{
+  "pk": 520, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I00090002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Salud activa"
+  }
+},
+{
+  "pk": 521, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I000A0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Bebible"
+  }
+},
+{
+  "pk": 522, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I000A0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cereal/ frutas"
+  }
+},
+{
+  "pk": 523, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I000A0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Firme/ batido"
+  }
+},
+{
+  "pk": 524, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I000B0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Bebible"
+  }
+},
+{
+  "pk": 525, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I000B0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cereal/ frutas"
+  }
+},
+{
+  "pk": 526, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000I000B0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Firme/ batido"
+  }
+},
+{
+  "pk": 527, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Carpeta dibujo"
+  }
+},
+{
+  "pk": 528, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00010002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Carpeta escolar"
+  }
+},
+{
+  "pk": 529, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00010003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Carpetas"
+  }
+},
+{
+  "pk": 530, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00010004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Separadores"
+  }
+},
+{
+  "pk": 531, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 532, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00020002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Biromes- boligrafos"
+  }
+},
+{
+  "pk": 533, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00020003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Corrector- borratinta"
+  }
+},
+{
+  "pk": 534, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00020004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Lapices colores- crayones"
+  }
+},
+{
+  "pk": 535, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00020005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Lapiz grafito"
+  }
+},
+{
+  "pk": 536, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00020006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Marcador escolar"
+  }
+},
+{
+  "pk": 537, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00020007", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Resaltador-marcador"
+  }
+},
+{
+  "pk": 538, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Adhesivos"
+  }
+},
+{
+  "pk": 539, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00030002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cartulina- forro"
+  }
+},
+{
+  "pk": 540, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00030003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Geometria"
+  }
+},
+{
+  "pk": 541, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00030004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Goma- sacapuntas"
+  }
+},
+{
+  "pk": 542, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00030005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Otros"
+  }
+},
+{
+  "pk": 543, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00030006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Plastilina- masa"
+  }
+},
+{
+  "pk": 544, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00030007", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tempera- acuarela"
+  }
+},
+{
+  "pk": 545, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00030008", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tijera"
+  }
+},
+{
+  "pk": 546, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cartuchera"
+  }
+},
+{
+  "pk": 547, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00040002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Luncheras"
+  }
+},
+{
+  "pk": 548, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00040003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Mochilas"
+  }
+},
+{
+  "pk": 549, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00050001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 550, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00050002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cintas/ dispensores"
+  }
+},
+{
+  "pk": 551, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00050003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Clips-alfileres-aros"
+  }
+},
+{
+  "pk": 552, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00050004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Etiquetas- ojalillos"
+  }
+},
+{
+  "pk": 553, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00050005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Notas autoadhesivas"
+  }
+},
+{
+  "pk": 554, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00050006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Resmas"
+  }
+},
+{
+  "pk": 555, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00060001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Block"
+  }
+},
+{
+  "pk": 556, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00060002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cuaderno escolar"
+  }
+},
+{
+  "pk": 557, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00060003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cuaderno universitario"
+  }
+},
+{
+  "pk": 558, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00060004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Diccionarios"
+  }
+},
+{
+  "pk": 559, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00060005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Mapas"
+  }
+},
+{
+  "pk": 560, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000J00060006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Repuesto escolar"
+  }
+},
+{
+  "pk": 561, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000K00010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Autoayuda"
+  }
+},
+{
+  "pk": 562, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000K00010002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Historia, politica, economia"
+  }
+},
+{
+  "pk": 563, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000K00010003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Infantiles"
+  }
+},
+{
+  "pk": 564, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000K00010004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Novelas"
+  }
+},
+{
+  "pk": 565, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000K00010005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pocket"
+  }
+},
+{
+  "pk": 566, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000K00010006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Practicos"
+  }
+},
+{
+  "pk": 567, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000K00020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cd musica"
+  }
+},
+{
+  "pk": 568, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000K00030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Dvd"
+  }
+},
+{
+  "pk": 569, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Baldes- palas"
+  }
+},
+{
+  "pk": 570, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cepillos"
+  }
+},
+{
+  "pk": 571, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00030002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Limpiadores/otros"
+  }
+},
+{
+  "pk": 572, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00030003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pomada"
+  }
+},
+{
+  "pk": 573, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Bolsa freezer"
+  }
+},
+{
+  "pk": 574, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00040002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Bolsa reutilizable"
+  }
+},
+{
+  "pk": 575, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00040003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Descartables"
+  }
+},
+{
+  "pk": 576, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00040004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Detergente- lavavajilla"
+  }
+},
+{
+  "pk": 577, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00040005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Films- papeles"
+  }
+},
+{
+  "pk": 578, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00040006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Fosforos / encendedores"
+  }
+},
+{
+  "pk": 579, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00040007", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Limpiadores- desengrasantes"
+  }
+},
+{
+  "pk": 580, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00040008", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Palillero"
+  }
+},
+{
+  "pk": 581, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00040009", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Palillos"
+  }
+},
+{
+  "pk": 582, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L0004000A", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Velas"
+  }
+},
+{
+  "pk": 583, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00050001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Lavandinas"
+  }
+},
+{
+  "pk": 584, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00060001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Aerosoles"
+  }
+},
+{
+  "pk": 585, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00060002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Antihumedad"
+  }
+},
+{
+  "pk": 586, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00060003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Aromatizadores"
+  }
+},
+{
+  "pk": 587, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00060004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Atomizador"
+  }
+},
+{
+  "pk": 588, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00070001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cabos"
+  }
+},
+{
+  "pk": 589, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00070002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Escobas- cepillos"
+  }
+},
+{
+  "pk": 590, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00070003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Escobillones"
+  }
+},
+{
+  "pk": 591, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00080001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Esponjas"
+  }
+},
+{
+  "pk": 592, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L00090001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Guantes"
+  }
+},
+{
+  "pk": 593, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000A0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cucarachas"
+  }
+},
+{
+  "pk": 594, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000A0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Hormigas"
+  }
+},
+{
+  "pk": 595, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000A0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Moscas y mosquitos"
+  }
+},
+{
+  "pk": 596, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000A0004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Polillas y pulgas"
+  }
+},
+{
+  "pk": 597, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000A0005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Repelentes"
+  }
+},
+{
+  "pk": 598, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000B0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Ba\u00f1o"
+  }
+},
+{
+  "pk": 599, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000B0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cocina"
+  }
+},
+{
+  "pk": 600, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000B0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pisos"
+  }
+},
+{
+  "pk": 601, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000B0004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Placard- muebles"
+  }
+},
+{
+  "pk": 602, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000B0005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Vidrios- multiuso"
+  }
+},
+{
+  "pk": 603, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000C0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Muebles"
+  }
+},
+{
+  "pk": 604, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000D0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Toallitas desinfectantes"
+  }
+},
+{
+  "pk": 605, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000D0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Vidrios- multiuso"
+  }
+},
+{
+  "pk": 606, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000E0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pa\u00f1uelos"
+  }
+},
+{
+  "pk": 607, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000E0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Papel higienico"
+  }
+},
+{
+  "pk": 608, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000E0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Rollo de cocina"
+  }
+},
+{
+  "pk": 609, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000E0004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Servilletas"
+  }
+},
+{
+  "pk": 610, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000G0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Limpiadores"
+  }
+},
+{
+  "pk": 611, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000G0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Secadores"
+  }
+},
+{
+  "pk": 612, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000G0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Trapos- mopas"
+  }
+},
+{
+  "pk": 613, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000H0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Plumeros- limpiavidrios"
+  }
+},
+{
+  "pk": 614, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000I0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Aprestos"
+  }
+},
+{
+  "pk": 615, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000I0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Blanqueador"
+  }
+},
+{
+  "pk": 616, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000I0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Fina"
+  }
+},
+{
+  "pk": 617, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000I0004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Jabon"
+  }
+},
+{
+  "pk": 618, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000I0005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Perfume"
+  }
+},
+{
+  "pk": 619, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000I0006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Quitamanchas"
+  }
+},
+{
+  "pk": 620, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000I0007", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Reavivador de color"
+  }
+},
+{
+  "pk": 621, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000I0008", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Suavizante"
+  }
+},
+{
+  "pk": 622, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000L000J0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Varios"
+  }
+},
+{
+  "pk": 623, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M00020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Aceites"
+  }
+},
+{
+  "pk": 624, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M00020002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cremas"
+  }
+},
+{
+  "pk": 625, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M00030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Leche - alimento"
+  }
+},
+{
+  "pk": 626, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M00030002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Papilla"
+  }
+},
+{
+  "pk": 627, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M00040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Chupetes/ mamaderas"
+  }
+},
+{
+  "pk": 628, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M00050001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cuidado mama"
+  }
+},
+{
+  "pk": 629, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M00060001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Bebes/ ni\u00f1os"
+  }
+},
+{
+  "pk": 630, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M00070001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Oleo calcareo"
+  }
+},
+{
+  "pk": 631, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M000A0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Butacas y sillas"
+  }
+},
+{
+  "pk": 632, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M000A0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cochecitos y cunas"
+  }
+},
+{
+  "pk": 633, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M000A0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Colchones para cuna"
+  }
+},
+{
+  "pk": 634, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M000B0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Seguridad"
+  }
+},
+{
+  "pk": 635, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M000C0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Talco/ fecula"
+  }
+},
+{
+  "pk": 636, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M000D0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Toallitas humedas"
+  }
+},
+{
+  "pk": 637, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000M000E0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 638, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000N00010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 639, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000N00020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Adulto"
+  }
+},
+{
+  "pk": 640, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000N00020002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cachorro"
+  }
+},
+{
+  "pk": 641, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000N00030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Adulto"
+  }
+},
+{
+  "pk": 642, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000N00030002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cachorro"
+  }
+},
+{
+  "pk": 643, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000O00030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Varios"
+  }
+},
+{
+  "pk": 644, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000O00040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Elaboracion propia"
+  }
+},
+{
+  "pk": 645, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000P00010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Fideos"
+  }
+},
+{
+  "pk": 646, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000P00010002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Noquis"
+  }
+},
+{
+  "pk": 647, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000P00010003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Rellenas"
+  }
+},
+{
+  "pk": 648, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000P00020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Empanadas"
+  }
+},
+{
+  "pk": 649, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000P00020002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Otras"
+  }
+},
+{
+  "pk": 650, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000P00020003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tartas"
+  }
+},
+{
+  "pk": 651, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cremas/ espumas"
+  }
+},
+{
+  "pk": 652, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00010002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Filos"
+  }
+},
+{
+  "pk": 653, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00010003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Locion/ after shave"
+  }
+},
+{
+  "pk": 654, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Algodon/ hisopos"
+  }
+},
+{
+  "pk": 655, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Body splash"
+  }
+},
+{
+  "pk": 656, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00030002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Bronceadores"
+  }
+},
+{
+  "pk": 657, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00030003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cremas"
+  }
+},
+{
+  "pk": 658, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00030004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Depilacion"
+  }
+},
+{
+  "pk": 659, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "2 en 1"
+  }
+},
+{
+  "pk": 660, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00040002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios cabello"
+  }
+},
+{
+  "pk": 661, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00040003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Acondicionador"
+  }
+},
+{
+  "pk": 662, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00040004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Coloracion"
+  }
+},
+{
+  "pk": 663, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00040005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Crema de peinar- trat"
+  }
+},
+{
+  "pk": 664, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00040006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Gel y fijacion"
+  }
+},
+{
+  "pk": 665, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00040007", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Infantil"
+  }
+},
+{
+  "pk": 666, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00040008", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Shampoo"
+  }
+},
+{
+  "pk": 667, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00040009", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tratamiento control caida"
+  }
+},
+{
+  "pk": 668, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q0004000A", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tratamiento pediculosis"
+  }
+},
+{
+  "pk": 669, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q0004000B", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tratamientos anti caspa"
+  }
+},
+{
+  "pk": 670, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00050001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Antiacne"
+  }
+},
+{
+  "pk": 671, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00050002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Antiarrugas"
+  }
+},
+{
+  "pk": 672, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00050003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Hidratacion"
+  }
+},
+{
+  "pk": 673, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00050004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Limpieza cutis"
+  }
+},
+{
+  "pk": 674, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00050005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pinceles y esponjas"
+  }
+},
+{
+  "pk": 675, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00060001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Adhesivos"
+  }
+},
+{
+  "pk": 676, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00060002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cepillos"
+  }
+},
+{
+  "pk": 677, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00060003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cremas"
+  }
+},
+{
+  "pk": 678, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00060004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Enjuagues"
+  }
+},
+{
+  "pk": 679, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00060005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Hilo"
+  }
+},
+{
+  "pk": 680, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00070001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Hombre"
+  }
+},
+{
+  "pk": 681, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00070002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Infantil"
+  }
+},
+{
+  "pk": 682, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00070003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Mujer"
+  }
+},
+{
+  "pk": 683, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00080001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Agua oxigenada"
+  }
+},
+{
+  "pk": 684, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00080002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Alcohol"
+  }
+},
+{
+  "pk": 685, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00080003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Apositos"
+  }
+},
+{
+  "pk": 686, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00080004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Gasas- vendas"
+  }
+},
+{
+  "pk": 687, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00080005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Otros botiquin"
+  }
+},
+{
+  "pk": 688, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00080006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Preservativos"
+  }
+},
+{
+  "pk": 689, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00080007", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Proteccion labial"
+  }
+},
+{
+  "pk": 690, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00080008", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Venta libre"
+  }
+},
+{
+  "pk": 691, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00090001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Bebes/ ni\u00f1os"
+  }
+},
+{
+  "pk": 692, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00090002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Body splash"
+  }
+},
+{
+  "pk": 693, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00090003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Hombre"
+  }
+},
+{
+  "pk": 694, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q00090004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Mujer"
+  }
+},
+{
+  "pk": 695, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000A0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Antiseptico"
+  }
+},
+{
+  "pk": 696, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000A0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Glicerina"
+  }
+},
+{
+  "pk": 697, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000A0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Liquidos"
+  }
+},
+{
+  "pk": 698, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000A0004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tocador"
+  }
+},
+{
+  "pk": 699, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000B0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 700, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000B0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cremas"
+  }
+},
+{
+  "pk": 701, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000B0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Esmaltes"
+  }
+},
+{
+  "pk": 702, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000B0004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Quitaesmalte"
+  }
+},
+{
+  "pk": 703, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000D0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Higiene femenina"
+  }
+},
+{
+  "pk": 704, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000D0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Prot diarios"
+  }
+},
+{
+  "pk": 705, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000D0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tampones"
+  }
+},
+{
+  "pk": 706, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000D0004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Toallitas"
+  }
+},
+{
+  "pk": 707, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000E0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Sales, geles y espumas"
+  }
+},
+{
+  "pk": 708, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000Q000F0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Talcos"
+  }
+},
+{
+  "pk": 709, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000R00010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Camping"
+  }
+},
+{
+  "pk": 710, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000R00020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 711, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000R00020002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Ejercitadores"
+  }
+},
+{
+  "pk": 712, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000R00040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Piletas"
+  }
+},
+{
+  "pk": 713, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000R00050001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios rodados"
+  }
+},
+{
+  "pk": 714, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000R00050002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Rodados"
+  }
+},
+{
+  "pk": 715, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00010001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 716, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00010002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Antenas"
+  }
+},
+{
+  "pk": 717, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00010003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Auriculares"
+  }
+},
+{
+  "pk": 718, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00010004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cables"
+  }
+},
+{
+  "pk": 719, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00010005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Controles remotos"
+  }
+},
+{
+  "pk": 720, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00010006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Soporte led y lcd"
+  }
+},
+{
+  "pk": 721, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00010007", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Varios"
+  }
+},
+{
+  "pk": 722, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00020001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Autoestereo"
+  }
+},
+{
+  "pk": 723, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00020002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cd musica"
+  }
+},
+{
+  "pk": 724, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00020003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Home theater"
+  }
+},
+{
+  "pk": 725, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00020004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Radio portatil"
+  }
+},
+{
+  "pk": 726, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00020005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Sistemas de audio"
+  }
+},
+{
+  "pk": 727, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00030001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 728, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00030002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Libres"
+  }
+},
+{
+  "pk": 729, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00030003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Prepagos"
+  }
+},
+{
+  "pk": 730, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00040001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Afeitadoras"
+  }
+},
+{
+  "pk": 731, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00040002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Balanzas"
+  }
+},
+{
+  "pk": 732, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00040003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Corta cabellos"
+  }
+},
+{
+  "pk": 733, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00040004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Depiladoras"
+  }
+},
+{
+  "pk": 734, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00040005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Masajeadores"
+  }
+},
+{
+  "pk": 735, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00040006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Nebulizadores"
+  }
+},
+{
+  "pk": 736, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00040007", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Planchitas"
+  }
+},
+{
+  "pk": 737, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00040008", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Secadores"
+  }
+},
+{
+  "pk": 738, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00040009", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tensiometros"
+  }
+},
+{
+  "pk": 739, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00050001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Dvd"
+  }
+},
+{
+  "pk": 740, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00050002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Dvd portable"
+  }
+},
+{
+  "pk": 741, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00050003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Home theater"
+  }
+},
+{
+  "pk": 742, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00060001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Camaras digitales"
+  }
+},
+{
+  "pk": 743, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00060002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Pilas y cargadores"
+  }
+},
+{
+  "pk": 744, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00060003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Videocamaras"
+  }
+},
+{
+  "pk": 745, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00070001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Aire acondicionado"
+  }
+},
+{
+  "pk": 746, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00070002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Calefaccion"
+  }
+},
+{
+  "pk": 747, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00070003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Calefaccion a gas"
+  }
+},
+{
+  "pk": 748, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00070004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Calefaccion electrica"
+  }
+},
+{
+  "pk": 749, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00070005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Ventiladores"
+  }
+},
+{
+  "pk": 750, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00080001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Gps"
+  }
+},
+{
+  "pk": 751, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00090001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios pc"
+  }
+},
+{
+  "pk": 752, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00090002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Cartuchos"
+  }
+},
+{
+  "pk": 753, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00090003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Computadoras"
+  }
+},
+{
+  "pk": 754, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00090004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Multifuncion"
+  }
+},
+{
+  "pk": 755, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00090005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Notebook"
+  }
+},
+{
+  "pk": 756, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00090006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Routers"
+  }
+},
+{
+  "pk": 757, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A00090007", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Tablet"
+  }
+},
+{
+  "pk": 758, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000A0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Led 24\""
+  }
+},
+{
+  "pk": 759, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000A0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Led 32\""
+  }
+},
+{
+  "pk": 760, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000A0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Led 40\" - 42\""
+  }
+},
+{
+  "pk": 761, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000A0004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Led 46\" - 47\""
+  }
+},
+{
+  "pk": 762, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000A0005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Prepago direct tv"
+  }
+},
+{
+  "pk": 763, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000A0006", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Soporte led y lcd"
+  }
+},
+{
+  "pk": 764, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000B0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Calefones y termotanques"
+  }
+},
+{
+  "pk": 765, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000B0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Campanas y purificadores"
+  }
+},
+{
+  "pk": 766, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000B0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Heladeras"
+  }
+},
+{
+  "pk": 767, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000B0004", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Lavarropas"
+  }
+},
+{
+  "pk": 768, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000B0005", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Secarropas"
+  }
+},
+{
+  "pk": 769, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000E0001", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Accesorios"
+  }
+},
+{
+  "pk": 770, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000E0002", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Consolas"
+  }
+},
+{
+  "pk": 771, 
+  "model": "precios.categoria", 
+  "fields": {
+    "path": "000A000E0003", 
+    "depth": 3, 
+    "numchild": 0, 
+    "nombre": "Juegos"
+  }
+}
+]

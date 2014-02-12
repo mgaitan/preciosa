@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load blocktrans trans from i18n %}
+{% load radpress_static_url from radpress_tags %}"
+{% load radpress_widget_latest_posts from radpress_tags %}
+
+
+
+
+{% block body %}
+
+
+      <div class="row">
+        <div class="col-lg-{% block body_wide %}12{% endblock body_wide %}">
+          {% block base_content %}
+            <div id="content">
+              {% block content %}{% endblock %}
+            </div>
+          {% endblock %}
+
+          {% block extra_content %}{% endblock %}
+        </div>
+
+        {% block blog_sidebar %}
+        {% endblock blog_sidebar %}
+
+    </div>
+
+{% endblock %}

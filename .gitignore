@@ -1,3 +1,7 @@
+# preciosa
+
+*.db
+
 *.py[cod]
 
 # C extensions

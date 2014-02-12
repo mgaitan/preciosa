@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block cat %}{{ active }}{% endblock cat %}
+
+{% block page-header %}{{ producto.descripcion }}{% endblock %}
+{% block body %}
+
+
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-2 col-md-2">
+                    <img alt="" src="{{ producto.foto.url }}"></div>
+                    <div class="col-xs-9 col-md-9">
+                        <div>
+                            <h2>
+                                {{ producto.descripcion }}
+                            </h2>
+
+                            <dl>
+                                <dt>Código UPC</dt>
+                                <dd> {{ producto.upc }}</dd>
+                            </dl>
+
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Cadena</th>
+                                        <th>Precio</th>
+                                    </tr>
+                                </thead>
+                                {% for precio in producto.precio_set.all %}
+                                <tr>
+                                <td>{{ precio.sucursal.cadena.nombre }}</td>
+                                <td>$ {{ precio.precio }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+
+                        </div>
+                        {% comment %}
+                        <div class="comment-text">
+                            Awesome design
+                        </div>
+                        <div class="action">
+                            <button title="Edit" class="btn btn-primary btn-xs" type="button">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                            <button title="Approved" class="btn btn-success btn-xs" type="button">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                            <button title="Delete" class="btn btn-danger btn-xs" type="button">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </div>
+                        {% endcomment %}
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+{% endblock %}

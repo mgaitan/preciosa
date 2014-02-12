@@ -1,0 +1,38 @@
+{% extends "newsletter/common.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Newsletter subscribe" %}{% endblock title %}
+
+{% block body %}
+    <h1>Newsletter de {{ newsletter.title }}</h1>
+
+    {% if error %}
+
+    <div class="alert alert-danger">
+        Hubo un problema para confirmar tu suscripción. ¿Seguro que tu email es válido¿
+    </div>
+
+        {% comment %} Replace the the following dummy with a valid email address and remove this comment.
+
+        <p>{% trans "If the error persists, please don't hesitate to contact us at the following email address:" %} <a href="mailto:info@foobar.com">info@foobar.com</a></p>
+
+        {% endcomment %}
+    {% else %}
+
+        <div class="alert alert-success">
+            <p>El proyecto Preciosa está en una activa etapa de desarrollo. Si querés ayudar <a href="https://groups.google.com/forum/?fromgroups#!forum/preciosa-devs">sumate a la lista de colaboradores</a>.
+            </p>
+            <p>
+                Para que te avisemos cuando Preciosa esté disponible para tu teléfono, suscribite al newsletter desde el siguiente formulario
+            </p>
+
+        </div>
+
+        <form enctype="multipart/form-data" method="post" action=".">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p><input id="id_submit" name="submit" value="Suscribirme" type="submit" /></p>
+        </form>
+    {% endif %}
+{% endblock body %}

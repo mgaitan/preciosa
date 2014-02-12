@@ -1,0 +1,205 @@
+{% load staticfiles %}
+{% load url from future %}
+{% load blocktrans trans from i18n %}
+{% load radpress_static_url from radpress_tags %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+
+    <meta charset="utf-8">
+    {% block viewport %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% endblock %}
+
+
+
+    <title>{% block head_title_base %}{% if SITE_NAME %}{{ SITE_NAME }} | {% endif %}{% block head_title %}{% endblock %}{% endblock %}</title>
+
+
+
+    <!-- Core CSS - Include with every page -->
+    {% block style_base %}
+        <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+        <link href="{% static "font-awesome/css/font-awesome.css" %}" rel="stylesheet">
+    {% endblock %}
+
+
+
+    <!-- SB Admin CSS - Include with every page -->
+    <link href="{% static "css/sb-admin.css" %}" rel="stylesheet">
+
+    <!-- Page-Level Plugin CSS-->
+    {% block extra_style %}{% endblock %}
+
+
+    {% block html5shim %}
+        <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+        <script src="{% static "pinax/js/html5shiv.js" %}"></script>
+        <![endif]-->
+    {% endblock %}
+
+    {% block extra_head_base %}
+        {% block extra_head %}{% endblock %}
+    {% endblock %}
+
+     <link href="{% url 'radpress-rss' %}" title="{{ RADPRESS_TITLE }} » {% trans "Feed" %}" type="application/rss+xml" rel="alternate" />
+</head>
+
+<body data-cat='{% block cat %}{% endblock cat %}'>
+
+    <div id="wrapper">
+
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+
+
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Preciosa</a>
+
+            <ul class="nav navbar-nav">
+                  <li>
+                    <a href="{% url 'radpress-article-list' %}">{% trans "Blog" %}</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'radpress-article-archive' %}">{% trans "Archivo" %}</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'radpress-rss' %}">{% trans "RSS" %}</a>
+                    </li>
+
+                <li>
+                    <a href="{% url 'newsletter_subscribe_request' 'preciosa' %}">Suscribite al newsletter</a>
+                </li>
+
+            </ul>
+
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuraciones</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+        </nav>
+        <!-- /.navbar-static-top -->
+
+        {% load cache %}
+        {% cache 3600 sidebar_menu %}
+
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="sidebar-search">
+                        <div class="input-group custom-search-form">
+
+                            <input id="buscar" type="text" class="form-control" placeholder="Buscar...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <!-- /input-group -->
+                    </li>
+
+                    {% for item in menu %}
+                    <li class="cat-{{ item.id }}">
+                        <a href="#"><i class="fa fa-plus fa-fw"></i>{{ item.nombre }}<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                            {% for subitem in item.get_children %}
+                            <li class="cat-{{ subitem.id }}">
+                                <a href="#">{{ subitem.nombre }}<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                {% for subitem in subitem.get_children %}
+                                <li class="cat-{{ subitem.id }}">
+                                    <a href="{{ subitem.get_absolute_url }} ">{{ subitem.nombre }}</a>
+                                </li>
+                                {% endfor %}
+                                </ul>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endfor %}
+
+
+                </ul>
+                <!-- /#side-menu -->
+            </div>
+            <!-- /.sidebar-collapse -->
+        </nav>
+        <!-- /.navbar-static-side -->
+        {% endcache %}
+
+        <div id="page-wrapper">
+            {% block page-wrapper %}
+            <div class="row">
+                <div class="col-lg-12">
+
+                    {% block body %}
+                        <h1 class="page-header"></h1>
+                    {% endblock %}
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            {% endblock %}
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Core Scripts - Include with every page -->
+
+    <script src="{% static "js/jquery-1.10.2.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/plugins/metisMenu/jquery.metisMenu.js" %}"></script>
+    {% include 'autocomplete_light/static.html' %}
+    <!-- Page-Level Plugin Scripts - Blank -->
+
+    <!-- SB Admin Scripts - Include with every page -->
+    <script src="{% static "js/sb-admin.js" %}"></script>
+
+    <script type="text/javascript">
+
+    $(function(){
+  // Make a javascript Autocomplete object and set it up
+    var autocomplete = $('#buscar').yourlabsAutocomplete({
+        url: '{% url "autocomplete" %}',
+    });
+
+    });
+
+    </script>
+
+</body>
+
+</html>
