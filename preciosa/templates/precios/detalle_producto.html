@@ -28,12 +28,14 @@
                                     <tr>
                                         <th>Cadena</th>
                                         <th>Precio</th>
+                                        <th>Relevado el</th>
                                     </tr>
                                 </thead>
                                 {% for precio in producto.precio_set.all %}
                                 <tr>
                                 <td>{{ precio.sucursal.cadena.nombre }}</td>
                                 <td>$ {{ precio.precio }}</td>
+                                <td>$ {{ precio.created|date:"d/M/Y" }}</td>
                                 </tr>
                                 {% endfor %}
                             </table>
