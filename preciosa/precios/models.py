@@ -47,7 +47,7 @@ class Producto(models.Model):
     UNIDADES_CHOICES = Choices(UM_GRAMO, UM_KILO, UM_ML, UM_L,
                                UM_UN, UM_SM, UM_MR)
 
-    descripcion = models.CharField(max_length=100)
+    descripcion = models.CharField(max_length=250)
     upc = models.CharField(verbose_name=u"Código de barras",
                            max_length=13, unique=True, null=True, blank=True)
     categoria = models.ForeignKey('Categoria')

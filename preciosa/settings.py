@@ -144,7 +144,8 @@ INSTALLED_APPS = [
     "easy_thumbnails",
     "rest_framework",
 
-    # deploy
+    # migrations/deploy
+    "south",
     "dbbackup",
 
     #blog
