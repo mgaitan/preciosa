@@ -242,7 +242,7 @@ NEWSLETTER_RICHTEXT_WIDGET = "imperavi.widget.ImperaviWidget"
 
 # django-db backups
 DBBACKUP_STORAGE = 'dbbackup.storage.filesystem_storage'
-DBBACKUP_FILESYSTEM_DIRECTORY = os.path.join(PROJECT_ROOT, '../backups')
+DBBACKUP_FILESYSTEM_DIRECTORY = os.path.join(PROJECT_ROOT, 'backups')
 
 
 try:
