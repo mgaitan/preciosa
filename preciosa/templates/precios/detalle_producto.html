@@ -26,14 +26,14 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Cadena</th>
+                                        <th>Sucursal</th>
                                         <th>Precio</th>
                                         <th>Relevado el</th>
                                     </tr>
                                 </thead>
                                 {% for precio in producto.precio_set.all %}
                                 <tr>
-                                <td>{{ precio.sucursal.cadena.nombre }}</td>
+                                <td>{{ precio.sucursal.nombre }}</td>
                                 <td>$ {{ precio.precio }}</td>
                                 <td>{{ precio.created|date:"d/m/Y" }}</td>
                                 </tr>
