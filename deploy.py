@@ -71,9 +71,10 @@ class Preciosa(Node):
             self.hosts.run('git fetch')
             self.hosts.run('git reset --hard origin/%s' % branch)
 
-    def deploy(self, branch='develop'):
+    def deploy(self, branch='develop', dbbackup=False):
         self.update(branch)
-        self.dbbackup()
+        if dbbackup:
+            self.dbbackup()
         self.pip_update()
         # self.django_command('migrate')
         self.restart()
