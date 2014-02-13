@@ -144,6 +144,9 @@ INSTALLED_APPS = [
     "easy_thumbnails",
     "rest_framework",
 
+    # deploy
+    "dbbackup",
+
     #blog
     "radpress",
 
@@ -236,6 +239,10 @@ AUTHENTICATION_BACKENDS = [
 # See http://django-newsletter.readthedocs.org/en/latest/installation.html
 NEWSLETTER_CONFIRM_EMAIL = False
 NEWSLETTER_RICHTEXT_WIDGET = "imperavi.widget.ImperaviWidget"
+
+# django-db backups
+DBBACKUP_STORAGE = 'dbbackup.storage.filesystem_storage'
+DBBACKUP_FILESYSTEM_DIRECTORY = os.path.join(PROJECT_ROOT, '../backups')
 
 
 try:

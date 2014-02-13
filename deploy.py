@@ -63,6 +63,9 @@ class Preciosa(Node):
         self.hosts.run('sudo service nginx start')
         self.hosts.run('sudo supervisorctl start preciosa')
 
+    def backup_db(self):
+        self.django_command('dbbackup -z')
+
     def update(self, branch='develop'):
         with self.hosts.cd(self.preciosa_project):
             self.hosts.run('git fetch')
@@ -70,6 +73,7 @@ class Preciosa(Node):
 
     def deploy(self, branch='develop'):
         self.update(branch)
+        self.backup_db()
         self.pip_update()
         # self.django_command('migrate')
         self.restart()
