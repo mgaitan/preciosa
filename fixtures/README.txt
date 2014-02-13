@@ -1,5 +1,6 @@
 Cargar en este orden::
 
+	$ python manage.py cities_light
     $ python manage.py fixtures/ciudades.json
     $ python manage.py fixtures/categorias.json
     $ python manage.py fixtures/sucursales.json
