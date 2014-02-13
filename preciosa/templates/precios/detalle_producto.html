@@ -35,7 +35,7 @@
                                 <tr>
                                 <td>{{ precio.sucursal.cadena.nombre }}</td>
                                 <td>$ {{ precio.precio }}</td>
-                                <td>$ {{ precio.created|date:"d/M/Y" }}</td>
+                                <td>{{ precio.created|date:"d/m/Y" }}</td>
                                 </tr>
                                 {% endfor %}
                             </table>
