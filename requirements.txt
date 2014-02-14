@@ -52,7 +52,7 @@ pyquery==1.2.4
 python-dateutil==2.2
 pytz==2012j
 pyzmq==14.0.1
-radpress==0.4.2
+radpress==0.4.1
 requests==2.2.1
 selenium==2.39.0
 setproctitle==1.1.8
