@@ -33,7 +33,7 @@ class MapaCategoria(TimeStampedModel):
     # notar que todas las CAT de origen son depth=2 entonces
     # no hay peligro de colision
     destino = models.ForeignKey(Categoria, limit_choices_to={'depth': 2})
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, editable=False)
 
     def __unicode__(self):
         return u'%s ---> %s' % (self.origen, self.destino)

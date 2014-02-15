@@ -37,7 +37,9 @@ urlpatterns = patterns("",
         view=ArticleListView.as_view(),
         name='home'),
 
-    (r'^', include('radpress.urls'))
+    url(r'^', include('radpress.urls')),
+    url(r"^voluntarios/", include("preciosa.voluntarios.urls")),
+
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
