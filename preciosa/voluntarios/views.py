@@ -37,6 +37,7 @@ def mapa_categorias(request):
 
     # necesitamos saber qué origines ya usó el User
     ya_hechas = [v.origen.id for v in MapaCategoria.objects.filter(user=request.user)]
+    percent = int(len(ya_hechas) * 100 / MapaCategoria.CAT_ORIGEN.count())
 
     try:
         origen = MapaCategoria.CAT_ORIGEN.exclude(id__in=ya_hechas).order_by('?')[0]
@@ -53,6 +54,7 @@ def mapa_categorias(request):
 
     return render(request, 'voluntarios/mapa_categorias.html',
                   {'form': form, 'origen': origen,
-                   'productos_ejemplo': productos_ejemplo})
+                   'productos_ejemplo': productos_ejemplo,
+                   'percent': percent})
 
 

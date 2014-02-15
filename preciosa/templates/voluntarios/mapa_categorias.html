@@ -5,7 +5,9 @@
 {% block messages %}{% endblock  %}
 {% block body %}
 
-    <h1 class="page-header">Asociar categorías</h1>
+
+        <h1 class="page-header">Asociar categorías</h1>
+
 
     <p class="lead">Desde esta sección podés ayudar a asociar algunas listas de productos que no estamos seguros en qué categoría poner</p>
 
@@ -13,6 +15,12 @@
         {% include "_messages.html" %}
 
 
+
+<div class="row">
+    <div class="col-lg-3 pull-right">
+        {% include "_progress.html" %}
+    </div>
+    </div>
 
     <dl>
         <dt>Origen</dt>
