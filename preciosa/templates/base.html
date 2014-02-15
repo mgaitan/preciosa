@@ -163,7 +163,12 @@
             <div class="row">
                 <div class="col-lg-12">
 
+                {% block messages %}
+                    {% include "_messages.html" %}
+                {% endblock messages %}
+
                     {% block body %}
+
                         <h1 class="page-header"></h1>
                     {% endblock %}
                 </div>
