@@ -159,6 +159,7 @@ INSTALLED_APPS = [
     # project
     "preciosa",
     "preciosa.precios",
+    "preciosa.voluntarios",
 ]
 
 
