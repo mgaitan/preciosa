@@ -76,7 +76,8 @@ class Preciosa(Node):
         if dbbackup:
             self.dbbackup()
         self.pip_update()
-        # self.django_command('migrate')
+        self.django_command('syncdb')
+        self.django_command('migrate')
         self.restart()
 
 if __name__ == '__main__':
