@@ -36,10 +36,9 @@ def mapa_categorias(request):
         return redirect('mapa_categorias')
 
     # necesitamos saber qué origines ya usó el User
-    ya_hechas = [v.origen.id for v in MapaCategoria.objects.filter(user=request.user)]
-
     try:
-        origen = MapaCategoria.CAT_ORIGEN.exclude(id__in=ya_hechas).order_by('?')[0]
+        origen = MapaCategoria.categorizables_por_voluntario(
+            request.user).order_by('?')[0]
     except MapaCategoria.DoesNotExist:
 
         messages.success(request, u"¡Categorizaste todo! "

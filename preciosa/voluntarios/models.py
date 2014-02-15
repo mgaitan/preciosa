@@ -51,3 +51,8 @@ class MapaCategoria(TimeStampedModel):
             mapa.append((origen, mejor_destino))
         return mapa
 
+    @classmethod
+    def categorizables_por_voluntario(cls, user):
+        ya_hechas = MapaCategoria.objects.filter(user=user).values_list(
+            'origen_id', flat=True)
+        return Categoria.por_clasificar().exclude(id__in=ya_hechas)
