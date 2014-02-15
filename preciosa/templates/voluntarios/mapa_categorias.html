@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{# pongo los mensajes más cerca del formulario #}
+{% block messages %}{% endblock  %}
+{% block body %}
+
+    <h1 class="page-header">Asociar categorías</h1>
+
+    <p class="lead">Desde esta sección podés ayudar a asociar algunas listas de productos que no estamos seguros en qué categoría poner</p>
+
+
+        {% include "_messages.html" %}
+
+
+
+    <dl>
+        <dt>Origen</dt>
+        <dd>La lista de origen tiene que ver con <strong>"{{ origen.nombre}}"</strong></dd>
+        <dt>Contiene</dt>
+        <dd>Algunos de los produtos que contiene son:
+
+            <ul>
+                {% for producto in productos_ejemplo %}
+                    <li>{{ producto.descripcion }}</li>
+                {% endfor %}
+            </ul>
+
+            </dd>
+    </>
+
+
+    <form action="" method="post">{% csrf_token %}
+        {{ form|bootstrap }}
+        <input class="btn btn-primary btn-lg" type="submit" value="Me parece que es la mejor opcion" />
+
+
+        <a class="btn btn-default" href="{% url 'mapa_categorias' %}">No tengo idea, paso</a>
+
+    </form>
+{% endblock body %}
+

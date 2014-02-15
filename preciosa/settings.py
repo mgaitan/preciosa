@@ -159,8 +159,14 @@ INSTALLED_APPS = [
     # project
     "preciosa",
     "preciosa.precios",
+    "preciosa.voluntarios",
 ]
 
+# compatibilidad con class="alert" de bootstrap 3
+from django.contrib.messages import constants as message_constants
+MESSAGE_TAGS = {
+    message_constants.ERROR: 'danger'
+}
 
 CACHES = {
     'default': {
