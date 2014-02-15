@@ -32,7 +32,9 @@ class MapaCategoria(TimeStampedModel):
                                limit_choices_to={'id__in': [c.id for c in CAT_ORIGEN]})
     # notar que todas las CAT de origen son depth=2 entonces
     # no hay peligro de colision
-    destino = models.ForeignKey(Categoria, limit_choices_to={'depth': 2})
+    destino = models.ForeignKey(Categoria,
+                                verbose_name=u"Yo la asociaría con...",
+                                limit_choices_to={'depth': 3})
     user = models.ForeignKey(User, editable=False)
 
     def __unicode__(self):
