@@ -47,7 +47,9 @@ def mapa_categorias(request):
         return redirect('voluntarios_dashboard')
 
     form.initial['origen'] = origen.id
-    productos_ejemplo = origen.producto_set.all()[:4]
+
+    # random asi no sesgamos los resultados
+    productos_ejemplo = origen.producto_set.all().order_by('?')[:4]
 
     return render(request, 'voluntarios/mapa_categorias.html',
                   {'form': form, 'origen': origen,
