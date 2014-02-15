@@ -9,10 +9,11 @@ from preciosa.voluntarios.forms import MapaCategoriaForm
 
 
 MSG_EXITO = [u'Buenísimo, Guardamos tu elección ¿Otra?',
-             u'¡Gracias! Era el dato que nos faltaba ¿seguís con una más?',
-             u'Muy buena elección, ya nos faltan menos ¿qué te parece esta?',
+             u'¡Gracias! Era el dato que nos faltaba ¿Seguís con una más?',
+             u'Muy buena elección, ya nos faltan menos ¿Qué te parece esta?',
+             u'¡Claro, cómo no se nos ocurrió! ¿Qué eligirías para este caso?',
              u'¡Sospechábamos eso! Gracias por confirmarlo. ¿Podés seguir con otra?',
-             u'¡Muy bien! Muchas manos en un plato no siempre hacen garabatos. ¿Seguís?']
+             u'¡Muy bien! ¿Ves? Muchas manos en un plato no siempre hacen garabatos. ¿Otra?']
 
 
 def dashboard(request):
@@ -22,7 +23,7 @@ def dashboard(request):
 
 @login_required
 def mapa_categorias(request):
-    """vista implementacion del ticket #64"""
+    """implementacion del ticket #64"""
 
     data = request.POST if request.method == 'POST' else None
     form = MapaCategoriaForm(data)
@@ -32,7 +33,7 @@ def mapa_categorias(request):
         voto.user = request.user
         voto.save()
         messages.success(request, random.choice(MSG_EXITO))
-        redirect('mapa_categorias')
+        return redirect('mapa_categorias')
 
     # necesitamos saber qué origines ya usó el User
     ya_hechas = [v.origen.id for v in MapaCategoria.objects.filter(user=request.user)]
@@ -43,7 +44,7 @@ def mapa_categorias(request):
 
         messages.success(request, u"¡Categorizaste todo! "
                                   u"Increíble tu ayuda, muchas gracias")
-        redirect('voluntarios_dashboard')
+        return redirect('voluntarios_dashboard')
 
     form.initial['origen'] = origen.id
     productos_ejemplo = origen.producto_set.all()[:4]
