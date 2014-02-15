@@ -71,7 +71,7 @@ class Preciosa(Node):
             self.hosts.run('git fetch')
             self.hosts.run('git reset --hard origin/%s' % branch)
 
-    def deploy(self, branch='develop', dbbackup=False):
+    def deploy(self, dbbackup=False, branch='develop'):
         self.update(branch)
         if dbbackup:
             self.dbbackup()
