@@ -30,6 +30,10 @@ class Categoria(MP_Node):
     def get_absolute_url(self):
         return ('lista_productos', (self.id, slugify(self.nombre)), {})
 
+    @classmethod
+    def por_clasificar(cls):
+        return cls.objects.get(nombre='A CLASIFICAR').get_children()
+
 
 class Producto(models.Model):
     UM_GRAMO = 'gr'
