@@ -1,5 +1,6 @@
 # preciosa
-
+site_media
+.wiki
 *.db
 
 *.py[cod]
