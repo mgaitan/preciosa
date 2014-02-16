@@ -1,11 +1,10 @@
 Cargar en este orden::
 
 	$ python manage.py cities_light
-    $ python manage.py fixtures/ciudades.json
-    $ python manage.py fixtures/categorias.json
-    $ python manage.py fixtures/sucursales.json
-    $ python manage.py fixtures/productos.json
-    $ python manage.py fixtures/precios.json
+
+El resto de fixtures se instalan con migrate:
+
+    $ python manage.py migrate
 
 
 Otros fixtures útiles pueden encontrarse en

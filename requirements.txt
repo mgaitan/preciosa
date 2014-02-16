@@ -1,6 +1,6 @@
 -f file:///home/tin/.pip_packages
 Django==1.6.2
-Pillow==2.0.0
+Pillow>=2.0.0
 Pygments==1.6
 South==0.8.4
 Twisted==13.2.0

@@ -50,7 +50,14 @@ Para crear el schema de la base de datos basta ejecutar el comando:
 python manage.py syncdb
 ```
 
-2. Cargar los `fixtures` siguiendo el orden especificado en `fixtures/README.txt`
+2. Correr los migrations
+
+```
+python manage.py migrate
+```
+
+
+3. Cargar los `fixtures` siguiendo el orden especificado en `fixtures/README.txt`
 
 Los fixtures cargan datos al schema creado en la etapa anterior.
 

@@ -25,14 +25,11 @@ class MapaCategoria(TimeStampedModel):
     eligiremos la combinación origen->destino mas repetida
     """
 
-    # no es la forma mas elegante pero si la más facil :)
-    CAT_ORIGEN = Categoria.objects.get(nombre='A CLASIFICAR').get_children()
-
-    origen = models.ForeignKey(Categoria,
-                               limit_choices_to={'id__in': [c.id for c in CAT_ORIGEN]})
+    origen = models.ForeignKey(Categoria, related_name='mapeo_origen')
     # notar que todas las CAT de origen son depth=2 entonces
     # no hay peligro de colision
     destino = models.ForeignKey(Categoria,
+                                related_name='mapeo_destino',
                                 verbose_name=u"Yo la asociaría con...",
                                 limit_choices_to={'depth': 3})
     user = models.ForeignKey(User, editable=False)
@@ -54,3 +51,8 @@ class MapaCategoria(TimeStampedModel):
             mapa.append((origen, mejor_destino))
         return mapa
 
+    @classmethod
+    def categorizables_por_voluntario(cls, user):
+        ya_hechas = MapaCategoria.objects.filter(user=user).values_list(
+            'origen_id', flat=True)
+        return Categoria.por_clasificar().exclude(id__in=ya_hechas)
