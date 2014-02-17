@@ -19,7 +19,7 @@ A modo de intro
 Preciosa en los medios
 -----------------------
 
-Durante febrero de 2014 (cuanto retomamos el proyecto) Preciosa, aun en desarrollo, tiene muchisima repercusion en los medios
+Durante febrero de 2014 (cuando retomamos el proyecto, iniciado originalmente en junio de 2013) Preciosa, aun en desarrollo, tiene muchisima repercusion en los medios
 
 - `Entrevista <http://radiocut.fm/audiocut/proyecto-preciosa/>`_ en Radio Nacional
 - `Entrevista <http://radiocut.fm/audiocut/entrevista-a-martin-gaitan-desarrollador-de-preciosa/>`_ en Radio Madres/Universidad de Córdoba
