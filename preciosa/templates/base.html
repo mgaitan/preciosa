@@ -108,9 +108,9 @@
                     </ul>
                 </li>
                 {% else %}
-                <li><a href="{% url "account_login" %}">{% trans "Login" %}</a></li>
+                <li><a href="{% url "account_login" %}"><i class="fa fa-user"></i> Ingresá</a></li>
                 {% if ACCOUNT_OPEN_SIGNUP %}
-                    <li><a href="{% url "account_signup" %}">{% trans "Registrate" %}</a></li>
+                    <li><a href="{% url "account_signup" %}"><i class="fa fa-sign-in"></i> Registráte</a></li>
                 {% endif %}
             {% endif %}
 
