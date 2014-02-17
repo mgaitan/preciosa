@@ -2,9 +2,15 @@
 u"""Importador de marcas desde archivos CSV
 El formato es el siguiente:
 
-    [fabricante,url_logo_fabricante]
+    fabricante,url_logo_fabricante
     marca1,url_logo_marca1
     marca2,url_logo_marca2
+
+o bien
+
+    fabricante
+    marca1
+    marca2
 
 La primer linea es el nombre del fabricante y su logo, y luego son marcas
 asociadas a ese fabricante. Una url de logo puede estár vacía.
@@ -37,7 +43,10 @@ class Command(BaseCommand):
         for path in args:
             for csv_file in glob.glob(path):
                 data = csv.reader(open(csv_file, 'r'))
-                empresa, url_logo_empresa = data.next()
+                fila = data.next()
+                if len(fila) == 1:
+                    fila = (fila[0], None)
+                empresa, url_logo_empresa = fila
                 empresa, _ = EmpresaFabricante.objects.get_or_create(nombre=empresa)
                 if _:
                     logger.debug(u'Empresa nueva: %s' % empresa)
@@ -45,9 +54,12 @@ class Command(BaseCommand):
                     logger.debug(u'Empresa existente: %s' % empresa)
                 self.set_thumb(empresa, url_logo_empresa)
 
-                for marca, url_logo in data:
-                    marca, crea = Marca.objects.get_or_create(nombre=marca)
-                    if crea:
+                for fila in data:
+                    if len(fila) == 1:
+                        fila = (fila[0], None)
+                    marca, url_logo = fila
+                    marca, creada = Marca.objects.get_or_create(nombre=marca)
+                    if creada:
                         logger.debug(u'Marca nueva: %s' % marca)
                     elif marca.fabricante and marca.fabricante != empresa:
                         logger.error(u'Marca asociada a otra empresa: %s' % marca)
