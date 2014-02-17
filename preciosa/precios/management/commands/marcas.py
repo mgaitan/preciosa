@@ -51,7 +51,8 @@ class Command(BaseCommand):
                     logger.debug(u'Empresa nueva: %s' % empresa)
                 else:
                     logger.debug(u'Empresa existente: %s' % empresa)
-                self.set_thumb(empresa, url_logo_empresa)
+                if url_logo_empresa:
+                    self.set_thumb(empresa, url_logo_empresa)
 
                 for fila in data:
                     if len(fila) == 1:
