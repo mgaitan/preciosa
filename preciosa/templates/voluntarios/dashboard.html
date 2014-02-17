@@ -1,9 +1,66 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <h1>Hola!</h1>
+    <h1 class="page-header">Panel de voluntarios</h1>
 
-    <a class="btn btn-primary btn-lg" href="{% url 'mapa_categorias' %}">Quiero asociar categorías</a>
+    <p class="lead">
+            ¡Buenísimo que estés acá! Estamos convencidos de que la mejor forma de hacer <strong>Preciosa</strong> es entre tod@s.
+
+            Este es el <strong>panel de voluntarios</strong>, desde donde podés colaborar en distintas tareas que tienen que ver con el <strong> mejoramiento de datos </strong>. </p>
+
+        <p class="lead">
+            No hace falta que hagas todo, ni de una sola vez. ¡Cualquier ratito que tengas nos viene bien!
+        </p>
+
+
+    {% if user.is_authenticated %}
+
+
+
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Asociar categorías</h3>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <p>
+                                Esta tarea se trata de encontrar la mejor categoría para grupos de productos que no sabemos dónde poner.
+                            </p>
+                        <a class="btn btn-primary btn-lg btn-block" href="{% url 'mapa_categorias' %}">Entrar a asociar categorías</a>
+
+                        </div>
+                        <!-- /.panel-body -->
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    {% else %}
+
+
+
+        {% url "account_login" as login_url %}
+        {% url "account_signup" as signup_url %}
+
+
+        <p class="lead">Para empezar tenés que <a href="{{ signup_url }}" class="btn btn-primary">registrarte</a> o <a href="{{ login_url }}?next={% url "voluntarios_dashboard" %}" class="btn btn-primary">iniciá tu sesión</a>.
+
+        </p>
+
+        <p class="lead">¡Gracias por colaborar con Preciosa! De esto se trata la inteligencia colectiva contra la inflación</p>
+
+
+    {% endif %}
+
+
+
+
 
 
 
