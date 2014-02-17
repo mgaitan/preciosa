@@ -16,7 +16,6 @@ La primer linea es el nombre del fabricante y su logo, y luego son marcas
 asociadas a ese fabricante. Una url de logo puede estár vacía.
 """
 import os
-import csv
 import glob
 import logging
 import urllib2
@@ -27,8 +26,8 @@ from django.core.files.images import ImageFile
 from django.core.files.temp import NamedTemporaryFile
 
 from preciosa.precios.models import EmpresaFabricante, Marca
-
-from django.core.management.base import BaseCommand, CommandError
+from tools.utils import UnicodeCsvReader
+from django.core.management.base import BaseCommand
 
 
 logger = logging.getLogger('imports')
@@ -42,7 +41,7 @@ class Command(BaseCommand):
 
         for path in args:
             for csv_file in glob.glob(path):
-                data = csv.reader(open(csv_file, 'r'))
+                data = UnicodeCsvReader(open(csv_file, 'r'))
                 fila = data.next()
                 if len(fila) == 1:
                     fila = (fila[0], None)
