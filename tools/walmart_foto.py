@@ -1,24 +1,12 @@
 import urllib2
-import logging
 from django.core.files.images import ImageFile
 from django.core.files.temp import NamedTemporaryFile
 from preciosa.precios.models import Producto
 
+from utils import get_logger
 
-def get_logger():
-    logFormatter = logging.Formatter("%(asctime)s [%(levelname)-5.5s]  %(message)s")
-    rootLogger = logging.getLogger()
 
-    fileHandler = logging.FileHandler("img_walmart.log")
-    fileHandler.setFormatter(logFormatter)
-    rootLogger.addHandler(fileHandler)
-
-    consoleHandler = logging.StreamHandler()
-    consoleHandler.setFormatter(logFormatter)
-    rootLogger.addHandler(consoleHandler)
-    return rootLogger
-
-logger = get_logger()
+logger = get_logger('walmart.log')
 
 
 def get_thumb(producto):
