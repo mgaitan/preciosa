@@ -19,7 +19,7 @@ A modo de intro
 Preciosa en los medios
 -----------------------
 
-Durante febrero de 2014 (cuando retomamos el proyecto, iniciado originalmente en junio de 2013) Preciosa, aun en desarrollo, tiene muchisima repercusion en los medios
+Durante febrero de 2014 (cuando retomamos el proyecto, iniciado originalmente en junio de 2013) Preciosa, aún en desarrollo, tuvo muchísima repercusión en los medios:
 
 - `Entrevista <http://radiocut.fm/audiocut/proyecto-preciosa/>`_ en Radio Nacional
 - `Entrevista <http://radiocut.fm/audiocut/entrevista-a-martin-gaitan-desarrollador-de-preciosa/>`_ en Radio Madres/Universidad de Córdoba
@@ -28,12 +28,10 @@ Durante febrero de 2014 (cuando retomamos el proyecto, iniciado originalmente en
 
 Y `miles de menciones <https://www.google.com/search?q=http://preciosdeargentina.com.ar/&ie=utf-8&oe=utf-8&gfe_rd=cr&ei=46X_UpKvOMzFgATk8IHICw#channel=fs&q=preciosdeargentina.com.ar>`_ en todo el mundo.
 
-
-
 ¿Qué hay aquí?
 ----------------
 
-Este es el el repositorio de código, la aplicación web que proveerá la API a las aplicaciones móviles para consumir y enviar información de precios. Si no sos programador o diseñador, problamente quieras ver el sitio público en `www.preciosdeargentina.com.ar <http://preciosdeargentina.com.ar>`_,
+Este es el repositorio de código, la aplicación web que proveerá la API a las aplicaciones móviles para consumir y enviar información de precios. Si no sos programador o diseñador, probablemente quieras ver el sitio público en `www.preciosdeargentina.com.ar <http://preciosdeargentina.com.ar>`_,
 
 Es un proyecto basado en el framework Django_ programado principalmente en lenguaje Python_
 
