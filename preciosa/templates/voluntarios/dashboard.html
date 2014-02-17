@@ -49,7 +49,7 @@
         {% url "account_signup" as signup_url %}
 
 
-        <p class="lead">Para empezar, es necesario que te <a href="{{ signup_url }}" class="btn btn-primary">registres</a> o <a href="{{ login_url }}" class="btn btn-default">inicies sesión</a>.
+        <p class="lead">Para empezar tenés que <a href="{{ signup_url }}" class="btn btn-primary">registrarte</a> o <a href="{{ login_url }}?next={% url "voluntarios_dashboard" %}" class="btn btn-primary">iniciá tu sesión</a>.
 
         </p>
 
