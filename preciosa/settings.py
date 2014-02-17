@@ -212,6 +212,11 @@ LOGGING = {
             'propagate': True,
             'level': 'DEBUG',
         },
+        'imports': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        }
     }
 }
 
@@ -256,6 +261,6 @@ DBBACKUP_FILESYSTEM_DIRECTORY = os.path.join(PROJECT_ROOT, 'backups')
 
 
 try:
-    from local_settings import *
+    from local_settings import *    # noqa
 except:
     pass
