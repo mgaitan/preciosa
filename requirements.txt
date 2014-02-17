@@ -28,7 +28,7 @@ django-jsonfield==0.8.12
 django-model-utils==1.4.0
 django-newsletter==0.5.1
 django-treebeard==2.0b2
-django-user-accounts==1.0b8
+django-user-accounts==1.0c4
 django-webtest==1.7.6
 djangorestframework==2.3.12
 docopt==0.6.1
@@ -50,7 +50,7 @@ progressbar==2.2
 pycrypto==2.6.1
 pyquery==1.2.4
 python-dateutil==2.2
-pytz==2012j
+pytz==2013.9
 pyzmq==14.0.1
 radpress==0.4.1
 requests==2.2.1
