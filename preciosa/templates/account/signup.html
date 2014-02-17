@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+{% load bootstrap %}
+
+{% block head_title %}{% trans "Sign up" %}{% endblock %}
+
+{% block body %}
+
+    <h1 class="page-head">Creá una cuenta en Preciosa</h1>
+
+    <p class="lead">Tu cuenta servirá para ser voluntario en la web y para enviar precios cuando las aplicaciones móviles estén disponibles</p>
+
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Creá tu cuenta</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" method="POST" action="{% url "account_signup" %}" autocapitalize="off" {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+
+                                 {% csrf_token %}
+                                {{ form|bootstrap }}
+
+                                {% if redirect_field_value %}
+                                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                {% endif %}
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Registrarme</button>
+                </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                <h4>¿Ya tenés una cuenta?</h4>
+                <a href="{% url "account_login" %}" class="btn btn-outline btn-primary btn-block" type="button">Ingresá</a>
+
+            </div>
+        </div>
+
+
+{% endblock %}
