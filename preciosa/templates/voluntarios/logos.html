@@ -14,16 +14,26 @@
         En <strong>Preciosa</strong> conocemos muchas marcas y empresas por sus nombres, pero no tuvimos tiempo de encontrar sus logos. </p>
 
     <p class="lead">
-        Para subir un logo, primero <a href="https://www.google.com.ar/search?q={{ marca.nombre|iriencode }}%20logo&source=lnms&tbm=isch">buscálo en internet</a> y subilo. En un segundo paso lo podés recortar para que quede bonito. <strong>¡Gracias por ayudar!</strong>
+        Para subir un logo, primero tenés que buscarlo en internet y subirlo. En un segundo paso lo podés recortar para que quede bonito. <strong>¡Gracias por ayudar!</strong>
     </p>
 
 
     {% include "_messages.html" %}
 
 
-    <h4>Tenés que buscar el logo para</h4>
 
-        <p class="lead">{{ instance.nombre }}</p>
+<div class="row"><div class="col-lg-5">
+
+    <div class="alert alert-warning">
+        <h4>Tenés que buscar el logo para la marca:</h4>
+            <p class="lead text-center">{{ instance.nombre }}</p>
+
+    </div>
+
+
+</div> </div>
+
+
 
 
     <form method="post" id="cropping_form" action="." enctype="multipart/form-data">
