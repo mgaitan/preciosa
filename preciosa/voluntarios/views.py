@@ -88,7 +88,6 @@ def logos(request, pk=None, paso=None):
                               instance=instance)
 
         if form.is_valid():
-            import ipdb; ipdb.set_trace()
             instance = form.save()
             if paso == '2':
                 # ya es es el segundo paso, vamos a otros
