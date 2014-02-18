@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import random
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 from preciosa.precios.models import Categoria, Marca
@@ -68,16 +68,15 @@ def mapa_categorias(request):
 
 
 @login_required
-def logos(request):
-    if request.method == 'POST':
-        instance = Marca.objects.get(id=request.POST['instance_id'])
-    else:
+def logos(request, pk=None):
+    if pk is None:
         try:
             instance = Marca.objects.filter(logo='')[0]
         except Marca.DoesNotExist:
             messages.success(request, u"¡No quedan marcas sin logo!")
             return redirect('voluntarios_dashboard')
-
+        return redirect('logos', instance.id)
+    instance = get_object_or_404(Marca, id=pk)
     form = MarcaModelForm(instance=instance)
     if request.method == "POST":
         form = MarcaModelForm(request.POST, request.FILES,
