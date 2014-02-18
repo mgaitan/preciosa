@@ -2,7 +2,7 @@
 import os.path
 from datetime import datetime, timedelta
 from django.conf import settings
-from django.db import models
+from django.contrib.gis.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.db.models import Min
@@ -129,6 +129,8 @@ class Sucursal(models.Model):
     cadena = models.ForeignKey('Cadena', related_name='sucursales',
                                null=True, blank=True,
                                help_text='Dejar en blanco si es un comercio único')
+
+    ubicacion = models.PointField(srid=4326)
 
     def clean(self):
         if not self.cadena and not self.nombre:
