@@ -37,7 +37,7 @@ Para desactivarlo basta ejecutar `deactivate` en cualquier path del terminal.
 pip install -r requirements.txt
 ```
 
-Atención porque para que ese comando funcione, tenés que ejecutarlo como desde `root` de `Preciosa` (Es decir, la carpeta que creaste cuando clonaste el repositorio).
+Atención porque para que ese comando funcione, tenés que ejecutarlo desde `root` de `Preciosa` (Es decir, la carpeta que creaste cuando clonaste el repositorio).
 
 Generación de base de datos
 ---------------------------
