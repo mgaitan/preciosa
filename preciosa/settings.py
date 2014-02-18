@@ -14,9 +14,13 @@ ADMINS = [
 MANAGERS = ADMINS
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "dev.db",
+    'default': {
+        'ENGINE':'django.contrib.gis.db.backends.postgis',
+        'NAME': 'preciosa',
+        'USER': 'dev',
+        'PASSWORD': 'dev',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -125,6 +129,7 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
+    "django.contrib.gis",
     "django.contrib.messages",
     "django.contrib.sessions",
     "django.contrib.sites",

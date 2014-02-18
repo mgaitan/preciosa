@@ -46,6 +46,7 @@ paramiko==1.12.1
 pexpect==3.0
 pinax-theme-bootstrap==5.0.3
 pinax-theme-bootstrap-account==1.0b2
+psycopg2==2.5.2
 progressbar==2.2
 pycrypto==2.6.1
 pyquery==1.2.4
