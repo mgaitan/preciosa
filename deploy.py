@@ -73,9 +73,9 @@ class Preciosa(Node):
 
     def deploy(self, dbbackup=False, branch='develop'):
         self.update(branch)
+        self.pip_update()
         if dbbackup:
             self.dbbackup()
-        self.pip_update()
         self.django_command('syncdb')
         self.django_command('migrate')
         self.restart()
