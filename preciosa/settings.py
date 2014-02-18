@@ -145,6 +145,7 @@ INSTALLED_APPS = [
     "cities_light",
     "autocomplete_light",
     "easy_thumbnails",
+    "image_cropping",
     "rest_framework",
 
     # migrations/deploy
@@ -170,6 +171,12 @@ from django.contrib.messages import constants as message_constants
 MESSAGE_TAGS = {
     message_constants.ERROR: 'danger'
 }
+
+from easy_thumbnails.conf import Settings as thumbnail_settings
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+) + thumbnail_settings.THUMBNAIL_PROCESSORS
+
 
 CACHES = {
     'default': {

@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import random
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
-from preciosa.precios.models import Categoria
+from preciosa.precios.models import Categoria, Marca
 from preciosa.voluntarios.models import MapaCategoria
-from preciosa.voluntarios.forms import MapaCategoriaForm
+from preciosa.voluntarios.forms import (MapaCategoriaForm,
+                                        MarcaModelForm)
 
 
 MSG_EXITO = [u'Buenísimo, Guardamos tu elección ¿Otra?',
@@ -55,9 +56,6 @@ def mapa_categorias(request):
     a_clasificar = Categoria.por_clasificar().count()
     percent = int((a_clasificar - categorizables.count()) * 100 /
                   a_clasificar)
-
-
-
     form.initial['origen'] = origen.id
 
     # random asi no sesgamos los resultados
@@ -67,3 +65,39 @@ def mapa_categorias(request):
                   {'form': form, 'origen': origen,
                    'productos_ejemplo': productos_ejemplo,
                    'percent': percent})
+
+
+@login_required
+def logos(request, pk=None, paso=None):
+    if pk is None:
+        # selecciono una marca al azar y
+        try:
+            instance = Marca.objects.filter(logo='')[0]
+        except Marca.DoesNotExist:
+            messages.success(request, u"¡No quedan marcas sin logo!")
+            return redirect('voluntarios_dashboard')
+        return redirect('logos_marca', pk=instance.id, paso=1)
+
+    instance = get_object_or_404(Marca, id=pk)
+
+    # paso 1 o 2. Si ya subimos, luego recortamos
+    form = MarcaModelForm(instance=instance)
+
+    if request.method == "POST":
+        form = MarcaModelForm(request.POST, request.FILES,
+                              instance=instance)
+
+        if form.is_valid():
+            import ipdb; ipdb.set_trace()
+            instance = form.save()
+            if paso == '2':
+                # ya es es el segundo paso, vamos a otros
+                messages.success(request, u"¡Gracias! Ahora %s tiene logo" % instance.nombre)
+                return redirect('logos')
+            else:
+                messages.info(request, u"Ahora recortá la imágen que subiste")
+                return redirect('logos_marca', pk=instance.id, paso=2)
+
+    return render(request, 'voluntarios/logos.html',
+                  {'form': form, 'instance': instance,
+                   'paso': paso })

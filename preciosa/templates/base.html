@@ -47,6 +47,10 @@
     {% endblock %}
 
      <link href="{% url 'radpress-rss' %}" title="{{ RADPRESS_TITLE }} » {% trans "Feed" %}" type="application/rss+xml" rel="alternate" />
+
+
+     {{ form.media }}
+
 </head>
 
 <body data-cat='{% block cat %}{% endblock cat %}'>
@@ -194,7 +198,9 @@
     <!-- /#wrapper -->
 
     <!-- Core Scripts - Include with every page -->
+{% comment %}
 
+{% endcomment %}
     <script src="{% static "js/jquery-1.10.2.js" %}"></script>
     <script src="{% static "js/bootstrap.min.js" %}"></script>
     <script src="{% static "js/plugins/metisMenu/jquery.metisMenu.js" %}"></script>
@@ -215,6 +221,8 @@
     });
 
     </script>
+
+    {% block extra_footer %}{% endblock %}
 
 </body>
 
