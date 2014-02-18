@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-import os.path
 from datetime import datetime, timedelta
-from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.db.models import Min
 
 from model_utils import Choices
+from model_utils.fields import MonitorField
 from model_utils.models import TimeStampedModel
+from image_cropping import ImageRatioField, ImageCropField
 from treebeard.mp_tree import MP_Node
 
 
@@ -74,8 +74,6 @@ class Producto(models.Model):
                 (self.categoria.id, slugify(self.categoria.nombre),
                  self.id, slugify(self.descripcion)), {})
 
-
-
     def mejor_precio(self):
         last_month = datetime.today() - timedelta(days=30)
         best = self.precio_set.filter(created__gte=last_month).aggregate(Min('precio'))
@@ -83,9 +81,17 @@ class Producto(models.Model):
 
 
 class Marca(models.Model):
+    """
+    Es el marca comercial de un producto.
+    Ejemplo: Rosamonte
+    """
     nombre = models.CharField(max_length=100, unique=True)
-    logo = models.ImageField(null=True, blank=True,
-                             upload_to='marcas')
+    logo = ImageCropField(null=True, blank=True,
+                          upload_to='marcas')
+
+    # size is "width x height" so a minimum size of 200px x 100px would look like this:
+    logo_cropped = ImageRatioField('logo', '150x100', free_crop=True)
+    logo_changed = MonitorField(monitor='logo')
     fabricante = models.ForeignKey('EmpresaFabricante', null=True, blank=True)
 
     def __unicode__(self):
@@ -97,8 +103,10 @@ class Marca(models.Model):
 
 class AbstractEmpresa(models.Model):
     nombre = models.CharField(max_length=100, unique=True)
-    logo = models.ImageField(null=True, blank=True,
-                             upload_to='empresas')
+    logo = ImageCropField(null=True, blank=True,
+                          upload_to='empresas')
+    logo_cropped = ImageRatioField('logo', '150x100', free_crop=True)
+    logo_changed = MonitorField(monitor='logo')
 
     def __unicode__(self):
         return self.nombre

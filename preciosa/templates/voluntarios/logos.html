@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% load cropping thumbnail %}
+
+{# pongo los mensajes más cerca del formulario #}
+{% block messages %}{% endblock  %}
+{% block body %}
+
+
+    <h1 class="page-header">Subir logos</h1>
+
+
+     <p class="lead">
+        En <strong>Preciosa</strong> conocemos muchas marcas y empresas por sus nombres, pero no tuvimos tiempo de encontrar sus logos. Si podés encontrarlos en internet y subirlos,
+        te estaremos muy agradecidos.
+     </p>
+
+
+    {% include "_messages.html" %}
+
+
+    {% if percent %}
+    <div class="row">
+        <div class="col-lg-3 pull-right">
+            {% include "_progress.html" %}
+        </div>
+    </div>
+    {% endif %}
+
+
+    <h4>Tenés que buscar el logo para</h4>
+
+        <p class="lead">{{ instance.nombre }}</p>
+
+
+    <form method="post" id="cropping_form" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <input type="hidden" name="instance_id" value="{{ instance.id}}" />
+        <input class="btn btn-primary btn-lg" type="submit" value="Subir este logo" />
+
+        <a class="btn btn-default" href="{% url 'logos' %}">No lo encontré, paso</a>
+
+    </form>
+{% endblock body %}
+

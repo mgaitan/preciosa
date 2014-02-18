@@ -1,7 +1,10 @@
 from django import forms
 
-from preciosa.precios.models import Categoria
+from preciosa.precios.models import (Categoria, Marca,
+                                     EmpresaFabricante, Cadena)
 from preciosa.voluntarios.models import MapaCategoria
+
+from image_cropping import ImageCropWidget
 
 
 class MapaCategoriaForm(forms.ModelForm):
@@ -16,3 +19,17 @@ class MapaCategoriaForm(forms.ModelForm):
             'origen': forms.HiddenInput(),
         }
 
+
+class MarcaModelForm(forms.ModelForm):
+    class Meta:
+        model = Marca
+
+
+class EmpresaFabricanteModelForm(forms.ModelForm):
+    class Meta:
+        model = EmpresaFabricante
+
+
+class CadenaModelForm(forms.ModelForm):
+    class Meta:
+        model = Cadena

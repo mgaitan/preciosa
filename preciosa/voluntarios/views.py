@@ -4,9 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-from preciosa.precios.models import Categoria
+from preciosa.precios.models import Categoria, Marca
 from preciosa.voluntarios.models import MapaCategoria
-from preciosa.voluntarios.forms import MapaCategoriaForm
+from preciosa.voluntarios.forms import (MapaCategoriaForm,
+                                        MarcaModelForm)
 
 
 MSG_EXITO = [u'Buenísimo, Guardamos tu elección ¿Otra?',
@@ -55,9 +56,6 @@ def mapa_categorias(request):
     a_clasificar = Categoria.por_clasificar().count()
     percent = int((a_clasificar - categorizables.count()) * 100 /
                   a_clasificar)
-
-
-
     form.initial['origen'] = origen.id
 
     # random asi no sesgamos los resultados
@@ -67,3 +65,27 @@ def mapa_categorias(request):
                   {'form': form, 'origen': origen,
                    'productos_ejemplo': productos_ejemplo,
                    'percent': percent})
+
+
+@login_required
+def logos(request):
+    if request.method == 'POST':
+        instance = Marca.objects.get(id=request.POST['instance_id'])
+    else:
+        try:
+            instance = Marca.objects.filter(logo='')[0]
+        except Marca.DoesNotExist:
+            messages.success(request, u"¡No quedan marcas sin logo!")
+            return redirect('voluntarios_dashboard')
+
+    form = MarcaModelForm(instance=instance)
+    if request.method == "POST":
+        form = MarcaModelForm(request.POST, request.FILES,
+                              instance=instance)
+        if form.is_valid():
+            instance = form.save()
+            messages.success(request, u"¡Gracias! Ahora %s tiene logo" % instance.nombre)
+            return redirect('logos')
+
+    return render(request, 'voluntarios/logos.html',
+                  {'form': form, 'instance': instance})
