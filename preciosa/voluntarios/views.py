@@ -72,7 +72,7 @@ def logos(request, pk=None, paso=None):
     if pk is None:
         # selecciono una marca al azar y
         try:
-            instance = Marca.objects.filter(logo='')[0]
+            instance = Marca.objects.filter(logo='').order_by('?')[0]
         except Marca.DoesNotExist:
             messages.success(request, u"¡No quedan marcas sin logo!")
             return redirect('voluntarios_dashboard')
