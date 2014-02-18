@@ -68,23 +68,36 @@ def mapa_categorias(request):
 
 
 @login_required
-def logos(request, pk=None):
+def logos(request, pk=None, paso=None):
     if pk is None:
+        # selecciono una marca al azar y
         try:
             instance = Marca.objects.filter(logo='')[0]
         except Marca.DoesNotExist:
             messages.success(request, u"¡No quedan marcas sin logo!")
             return redirect('voluntarios_dashboard')
-        return redirect('logos', instance.id)
+        return redirect('logos_marca', pk=instance.id, paso=1)
+
     instance = get_object_or_404(Marca, id=pk)
+
+    # paso 1 o 2. Si ya subimos, luego recortamos
     form = MarcaModelForm(instance=instance)
+
     if request.method == "POST":
         form = MarcaModelForm(request.POST, request.FILES,
                               instance=instance)
+
         if form.is_valid():
+            import ipdb; ipdb.set_trace()
             instance = form.save()
-            messages.success(request, u"¡Gracias! Ahora %s tiene logo" % instance.nombre)
-            return redirect('logos')
+            if paso == '2':
+                # ya es es el segundo paso, vamos a otros
+                messages.success(request, u"¡Gracias! Ahora %s tiene logo" % instance.nombre)
+                return redirect('logos')
+            else:
+                messages.info(request, u"Ahora recortá la imágen que subiste")
+                return redirect('logos_marca', pk=instance.id, paso=2)
 
     return render(request, 'voluntarios/logos.html',
-                  {'form': form, 'instance': instance})
+                  {'form': form, 'instance': instance,
+                   'paso': paso })

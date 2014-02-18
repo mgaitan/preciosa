@@ -89,8 +89,9 @@ class Marca(models.Model):
     logo = ImageCropField(null=True, blank=True,
                           upload_to='marcas')
 
-    # size is "width x height" so a minimum size of 200px x 100px would look like this:
-    logo_cropped = ImageRatioField('logo', '150x100', free_crop=True)
+    # size is "width x height"
+    logo_cropped = ImageRatioField('logo', '150x125',
+                                   verbose_name=u'Recortar logo')  # free_crop=True)
     logo_changed = MonitorField(monitor='logo')
     fabricante = models.ForeignKey('EmpresaFabricante', null=True, blank=True)
 
@@ -105,7 +106,8 @@ class AbstractEmpresa(models.Model):
     nombre = models.CharField(max_length=100, unique=True)
     logo = ImageCropField(null=True, blank=True,
                           upload_to='empresas')
-    logo_cropped = ImageRatioField('logo', '150x100', free_crop=True)
+    logo_cropped = ImageRatioField('logo', '150x125',
+                                   verbose_name=u'Recortar logo')  # free_crop=True)
     logo_changed = MonitorField(monitor='logo')
 
     def __unicode__(self):

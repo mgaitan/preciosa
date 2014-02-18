@@ -21,8 +21,10 @@ class MapaCategoriaForm(forms.ModelForm):
 
 
 class MarcaModelForm(forms.ModelForm):
+    """este es el primer form que se le muestra al user para que suba una imagen"""
     class Meta:
         model = Marca
+        fields = ['logo', 'logo_cropped']
 
 
 class EmpresaFabricanteModelForm(forms.ModelForm):

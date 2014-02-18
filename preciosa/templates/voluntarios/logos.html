@@ -37,10 +37,29 @@
         {% csrf_token %}
         {{ form|bootstrap }}
         <input type="hidden" name="instance_id" value="{{ instance.id}}" />
-        <input class="btn btn-primary btn-lg" type="submit" value="Subir este logo" />
+        <input class="btn btn-primary btn-lg" type="submit" value="{% if paso == '1' %}Subir este logo {% else %}Guardar este recorte{% endif %} " />
 
         <a class="btn btn-default" href="{% url 'logos' %}">No lo encontré, paso</a>
 
     </form>
 {% endblock body %}
+
+
+{% block extra_footer %}
+    {# esto es un hack porque  django-image-cropping necesita si o si
+       ambos fields para funcionar.
+       simplemente oculto dinámicamente el que no corresponda al "paso" #}
+    <script type="text/javascript">
+        $(function(){
+            var paso = {{ paso }};
+            if (paso === 1){
+                // ocultamos la interfaz de cropping
+                $('#id_logo_cropped').parents('.form-group').hide();
+            } else{
+                $('#id_logo').parents('.form-group').hide();
+            }
+        });
+    </script>
+
+{% endblock extra_footer %}
 
