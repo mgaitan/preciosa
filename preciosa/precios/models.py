@@ -30,6 +30,10 @@ class Categoria(MP_Node):
     def get_absolute_url(self):
         return ('lista_productos', (self.id, slugify(self.nombre)), {})
 
+    @classmethod
+    def por_clasificar(cls):
+        return cls.objects.get(nombre='A CLASIFICAR').get_children()
+
 
 class Producto(models.Model):
     UM_GRAMO = 'gr'
@@ -47,7 +51,7 @@ class Producto(models.Model):
     UNIDADES_CHOICES = Choices(UM_GRAMO, UM_KILO, UM_ML, UM_L,
                                UM_UN, UM_SM, UM_MR)
 
-    descripcion = models.CharField(max_length=100)
+    descripcion = models.CharField(max_length=250)
     upc = models.CharField(verbose_name=u"Código de barras",
                            max_length=13, unique=True, null=True, blank=True)
     categoria = models.ForeignKey('Categoria')

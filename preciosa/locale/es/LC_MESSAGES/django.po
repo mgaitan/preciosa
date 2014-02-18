@@ -1,0 +1,245 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-17 04:14-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/_account_bar.html:13
+msgid "Settings"
+msgstr ""
+
+#: templates/_account_bar.html:15
+msgid "Admin"
+msgstr ""
+
+#: templates/_account_bar.html:19 templates/base.html:106
+msgid "Log out"
+msgstr ""
+
+#: templates/_account_bar.html:24
+msgid "Log in"
+msgstr ""
+
+#: templates/_account_bar.html:26 templates/account/signup.html:7
+msgid "Sign up"
+msgstr ""
+
+#: templates/base.html:49
+msgid "Feed"
+msgstr ""
+
+#: templates/base.html:71
+msgid "Blog"
+msgstr ""
+
+#: templates/base.html:74
+msgid "Archivo"
+msgstr ""
+
+#: templates/base.html:77
+msgid "RSS"
+msgstr ""
+
+#: templates/homepage.html:7
+msgid "Bienvenido"
+msgstr ""
+
+#: templates/homepage.html:12
+msgid "Welcome to Pinax"
+msgstr ""
+
+#: templates/homepage.html:14
+msgid ""
+"\n"
+"        <b>Pinax</b> is a <a href=\"http://djangoproject.com/\">Django</a>\n"
+"        project intended to provide a starting point for websites. By\n"
+"        integrating numerous reusable Django apps to take care of the\n"
+"        things that many sites have in common, it lets you focus on what\n"
+"        makes your site different.\n"
+"        "
+msgstr ""
+
+#: templates/homepage.html:25
+msgid ""
+"\n"
+"        In addition to what is provided by the \"zero\" project, this "
+"project\n"
+"        provides thorough integration with django-user-accounts, adding\n"
+"        comprehensive account management functionality. It is a foundation\n"
+"        suitable for most sites that have user accounts.\n"
+"        "
+msgstr ""
+
+#: templates/homepage.html:35
+#, python-format
+msgid ""
+"Wondering <a href=\"%(what_next_url)s\" class=\"btn btn-primary large\">What "
+"Next</a>?"
+msgstr ""
+
+#: templates/homepage.html:39
+#, python-format
+msgid ""
+"You can <a href=\"%(login_url)s\" class=\"btn btn-default\">Log In</a> or <a "
+"href=\"%(signup_url)s\" class=\"btn btn-primary\">Sign Up</a> to try out the "
+"site."
+msgstr ""
+
+#: templates/newsletter/newsletter_detail.html:6
+msgid "Newsletter detail"
+msgstr ""
+
+#: templates/newsletter/newsletter_detail.html:11
+#: templates/newsletter/newsletter_list.html:15
+#: templates/newsletter/newsletter_list.html:33
+#: templates/newsletter/subscription_activate.html:5
+#: templates/newsletter/subscription_activate.html:8
+#: templates/newsletter/subscription_unsubscribe_activated.html:5
+#: templates/newsletter/subscription_unsubscribe_activated.html:8
+#: templates/newsletter/subscription_update_activated.html:5
+#: templates/newsletter/subscription_update_activated.html:8
+msgid "Newsletter"
+msgstr ""
+
+#: templates/newsletter/newsletter_list.html:6
+msgid "Newsletter list"
+msgstr ""
+
+#: templates/newsletter/newsletter_list.html:17
+#: templates/newsletter/subscription_subscribe_user.html:23
+msgid "Subscribe"
+msgstr ""
+
+#: templates/newsletter/newsletter_list.html:28
+msgid "Update subscriptions"
+msgstr ""
+
+#: templates/newsletter/submission_archive.html:5
+#: templates/newsletter/submission_archive.html:10
+msgid "Newsletter archive"
+msgstr ""
+
+#: templates/newsletter/subscription_activate.html:5
+#: templates/newsletter/subscription_activate.html:8
+#: templates/newsletter/subscription_unsubscribe_activated.html:5
+#: templates/newsletter/subscription_unsubscribe_activated.html:8
+#: templates/newsletter/subscription_update_activated.html:5
+#: templates/newsletter/subscription_update_activated.html:8
+msgid "activate"
+msgstr ""
+
+#: templates/newsletter/subscription_activate.html:13
+msgid "Activate"
+msgstr ""
+
+#: templates/newsletter/subscription_subscribe.html:5
+#: templates/newsletter/subscription_subscribe_email_sent.html:5
+#: templates/newsletter/subscription_subscribe_email_sent.html:8
+#: templates/newsletter/subscription_subscribe_user.html:6
+#: templates/newsletter/subscription_subscribe_user.html:9
+msgid "Newsletter subscribe"
+msgstr ""
+
+#: templates/newsletter/subscription_subscribe_email_sent.html:10
+msgid ""
+"Your subscription request was successfully received and an activation email "
+"has been sent to you. In that email you will find a link which you need to "
+"follow in order to activate your subscription."
+msgstr ""
+
+#: templates/newsletter/subscription_subscribe_user.html:20
+msgid "Do you want to subscribe to this newsletter?"
+msgstr ""
+
+#: templates/newsletter/subscription_unsubscribe.html:5
+#: templates/newsletter/subscription_unsubscribe.html:8
+#: templates/newsletter/subscription_unsubscribe_email_sent.html:5
+#: templates/newsletter/subscription_unsubscribe_email_sent.html:8
+#: templates/newsletter/subscription_unsubscribe_user.html:6
+#: templates/newsletter/subscription_unsubscribe_user.html:9
+msgid "Newsletter unsubscribe"
+msgstr ""
+
+#: templates/newsletter/subscription_unsubscribe.html:11
+#: templates/newsletter/subscription_update.html:11
+msgid ""
+"Due to a technical error we were not able to submit your confirmation email. "
+"This could be because your email address is invalid."
+msgstr ""
+
+#: templates/newsletter/subscription_unsubscribe.html:23
+#: templates/newsletter/subscription_unsubscribe_user.html:24
+msgid "Unsubscribe"
+msgstr ""
+
+#: templates/newsletter/subscription_unsubscribe_activated.html:10
+msgid "You have successfully been unsubscribed."
+msgstr ""
+
+#: templates/newsletter/subscription_unsubscribe_email_sent.html:10
+msgid ""
+"Your unsubscription request has successfully been received. An email has "
+"been sent to you with a link you need to follow in order to confirm your "
+"unsubscription."
+msgstr ""
+
+#: templates/newsletter/subscription_unsubscribe_user.html:21
+msgid "Do you want to unsubscribe from this newsletter?"
+msgstr ""
+
+#: templates/newsletter/subscription_update.html:5
+#: templates/newsletter/subscription_update.html:8
+#: templates/newsletter/subscription_update_email_sent.html:5
+#: templates/newsletter/subscription_update_email_sent.html:8
+msgid "Newsletter update"
+msgstr ""
+
+#: templates/newsletter/subscription_update.html:23
+msgid "Update subscription"
+msgstr ""
+
+#: templates/newsletter/subscription_update_activated.html:10
+msgid "Your subscription has successfully been updated."
+msgstr ""
+
+#: templates/newsletter/subscription_update_email_sent.html:10
+msgid ""
+"Your update request was successfully received and an activation email has "
+"been sent to you. In that email you will find a link which you need to "
+"follow in order to update your subscription."
+msgstr ""
+
+#: templates/radpress/article_list.html:7
+msgid "Mainpage"
+msgstr ""
+
+#: templates/radpress/article_list.html:13
+msgid "No se encontraron artículos"
+msgstr ""
+
+#: templates/radpress/partials/entry.html:19
+msgid "Edit"
+msgstr ""
+
+#: templates/radpress/partials/entry.html:33
+msgid "Read more"
+msgstr ""
+
+#: templates/radpress/partials/entry.html:47
+#, python-format
+msgid "View all posts in %(tag.name)s"
+msgstr ""

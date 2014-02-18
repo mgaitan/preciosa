@@ -1,0 +1,12 @@
+
+    {# snippet de django message para bootstrap 3 #}
+    {% if messages %}
+     <div class="row">
+        {% for message in messages %}
+            <div class="alert alert-dismissable alert-{{ message.tags }}">
+        <button aria-hidden="true" data-dismiss="alert" class="close"type="button">×</button>
+            {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+    {% endif %}

@@ -1,8 +1,8 @@
 from decimal import Decimal
 import factory
 from django.contrib.auth.models import User
-from preciosa.precios.models import (Empresa, Marca, Cadena, Producto, Precio,
-                                     PrecioEnAcuerdo, LocalComercial, Categoria)
+from preciosa.precios.models import (EmpresaFabricante, Marca, Cadena, Producto, Precio,
+                                     PrecioEnAcuerdo, Sucursal, Categoria)
 
 
 class UserFactory(factory.DjangoModelFactory):
@@ -19,7 +19,7 @@ class CategoriaFactory(factory.DjangoModelFactory):
 
 
 class EmpresaFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = Empresa
+    FACTORY_FOR = EmpresaFabricante
     nombre = factory.Sequence(lambda n: 'Empresa {0}'.format(n))
 
 
@@ -28,8 +28,8 @@ class CadenaFactory(factory.DjangoModelFactory):
     nombre = factory.Sequence(lambda n: 'Cadena {0}'.format(n))
 
 
-class LocalComercialFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = LocalComercial
+class SucursalFactory(factory.DjangoModelFactory):
+    FACTORY_FOR = Sucursal
     cadena = factory.SubFactory(CadenaFactory)
 
 
@@ -49,7 +49,7 @@ class ProductoFactory(factory.DjangoModelFactory):
 class PrecioFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Precio
     producto = factory.SubFactory(ProductoFactory)
-    local = factory.SubFactory(LocalComercialFactory)
+    local = factory.SubFactory(SucursalFactory)
     precio = Decimal('1.0')
 
 

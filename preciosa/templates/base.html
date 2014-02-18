@@ -2,6 +2,7 @@
 {% load url from future %}
 {% load blocktrans trans from i18n %}
 {% load radpress_static_url from radpress_tags %}
+{% load account_tags %}
 
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
@@ -87,22 +88,32 @@
 
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
+                {% if request.user.is_authenticated %}
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        {% user_display request.user %}
+                        <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuraciones</a>
-                        </li>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url "account_settings" %}"><i class="fa fa-user"></i> Configuraciones</a></li>
+                        <li><a href="{% url "voluntarios_dashboard" %}"><i class="fa fa-smile-o"></i> Quiero ayudar</a></li>
+
+                        {% if request.user.is_staff %}
+                            <li><a href="{% url THEME_ADMIN_URL|default:"admin:index" %}"><i class="fa fa-cog"></i> Panel de administración</a></li>
+                        {% endif %}
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
+                        <li>
+                            <a id="account_logout" href="{% url "account_logout" %}"><i class="fa fa-power-off"></i> {% trans "Log out" %}</a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-user -->
                 </li>
-                <!-- /.dropdown -->
+                {% else %}
+                <li><a href="{% url "account_login" %}"><i class="fa fa-user"></i> Ingresá</a></li>
+                {% if ACCOUNT_OPEN_SIGNUP %}
+                    <li><a href="{% url "account_signup" %}"><i class="fa fa-sign-in"></i> Registráte</a></li>
+                {% endif %}
+            {% endif %}
+
             </ul>
             <!-- /.navbar-top-links -->
 
@@ -163,7 +174,12 @@
             <div class="row">
                 <div class="col-lg-12">
 
+                {% block messages %}
+                    {% include "_messages.html" %}
+                {% endblock messages %}
+
                     {% block body %}
+
                         <h1 class="page-header"></h1>
                     {% endblock %}
                 </div>

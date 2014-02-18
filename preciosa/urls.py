@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from rest_framework import routers
 from precios import views
+from radpress.views import ArticleListView
 
 router = routers.DefaultRouter()
 router.register(r'cadenas', views.CadenaViewSet)
@@ -32,8 +33,13 @@ urlpatterns = patterns("",
 
     url(r'^autocomplete/', views.autocomplete, name='autocomplete'),
 
+    url(r'^$',
+        view=ArticleListView.as_view(),
+        name='home'),
 
-    (r'^', include('radpress.urls'))
+    url(r'^', include('radpress.urls')),
+    url(r"^voluntarios/", include("preciosa.voluntarios.urls")),
+
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -39,6 +39,9 @@ SITE_ID = int(os.environ.get("SITE_ID", 1))
 # to load the internationalization machinery.
 USE_I18N = True
 
+LOCALE_PATHS = (
+    os.path.join(PACKAGE_ROOT, 'locale'),
+)
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
 USE_L10N = True
@@ -144,6 +147,10 @@ INSTALLED_APPS = [
     "easy_thumbnails",
     "rest_framework",
 
+    # migrations/deploy
+    "south",
+    "dbbackup",
+
     #blog
     "radpress",
 
@@ -155,8 +162,14 @@ INSTALLED_APPS = [
     # project
     "preciosa",
     "preciosa.precios",
+    "preciosa.voluntarios",
 ]
 
+# compatibilidad con class="alert" de bootstrap 3
+from django.contrib.messages import constants as message_constants
+MESSAGE_TAGS = {
+    message_constants.ERROR: 'danger'
+}
 
 CACHES = {
     'default': {
@@ -199,6 +212,11 @@ LOGGING = {
             'propagate': True,
             'level': 'DEBUG',
         },
+        'imports': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        }
     }
 }
 
@@ -237,8 +255,12 @@ AUTHENTICATION_BACKENDS = [
 NEWSLETTER_CONFIRM_EMAIL = False
 NEWSLETTER_RICHTEXT_WIDGET = "imperavi.widget.ImperaviWidget"
 
+# django-db backups
+DBBACKUP_STORAGE = 'dbbackup.storage.filesystem_storage'
+DBBACKUP_FILESYSTEM_DIRECTORY = os.path.join(PROJECT_ROOT, 'backups')
+
 
 try:
-    from local_settings import *
+    from local_settings import *    # noqa
 except:
     pass
