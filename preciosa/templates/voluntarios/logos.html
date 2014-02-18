@@ -11,21 +11,14 @@
 
 
      <p class="lead">
-        En <strong>Preciosa</strong> conocemos muchas marcas y empresas por sus nombres, pero no tuvimos tiempo de encontrar sus logos. Si podés encontrarlos en internet y subirlos,
-        te estaremos muy agradecidos.
-     </p>
+        En <strong>Preciosa</strong> conocemos muchas marcas y empresas por sus nombres, pero no tuvimos tiempo de encontrar sus logos. </p>
+
+    <p class="lead">
+        Para subir un logo, primero <a href="https://www.google.com.ar/search?q={{ marca.nombre|iriencode }}%20logo&source=lnms&tbm=isch">buscálo en internet</a> y subilo. En un segundo paso lo podés recortar para que quede bonito. <strong>¡Gracias por ayudar!</strong>
+    </p>
 
 
     {% include "_messages.html" %}
-
-
-    {% if percent %}
-    <div class="row">
-        <div class="col-lg-3 pull-right">
-            {% include "_progress.html" %}
-        </div>
-    </div>
-    {% endif %}
 
 
     <h4>Tenés que buscar el logo para</h4>
@@ -37,9 +30,15 @@
         {% csrf_token %}
         {{ form|bootstrap }}
         <input type="hidden" name="instance_id" value="{{ instance.id}}" />
-        <input class="btn btn-primary btn-lg" type="submit" value="{% if paso == '1' %}Subir este logo {% else %}Guardar este recorte{% endif %} " />
 
-        <a class="btn btn-default" href="{% url 'logos' %}">No lo encontré, paso</a>
+        {% if paso == '1' %}
+
+            <input class="btn btn-primary btn-lg" type="submit" value="Subir este logo" />
+            <a class="btn btn-default" href="{% url 'logos' %}">No lo encontré, paso</a>
+
+        {% else %}
+            <input class="btn btn-primary btn-lg" type="submit" value="Recortar" />
+        {% endif %}
 
     </form>
 {% endblock body %}
