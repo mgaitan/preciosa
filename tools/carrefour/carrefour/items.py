@@ -9,3 +9,4 @@ class SucursalItem(Item):
     nombre = Field()
     direccion = Field()
     telefono = Field()
+    tipo = Field()

@@ -22,8 +22,8 @@ class SucursalSpider(Spider):
 
 	def parse(self, response):
 		reqs = []
-		for city in City.objects.all():
-			reqs.append( (city.search_names, ','.join([unicode(city.latitude), unicode(city.longitude)]) ) ) 
+		for city in City.objects.raw('select * from cities_light_city group by region_id'):
+			reqs.append( (city.display_name.split(',')[-2], ','.join([unicode(city.latitude), unicode(city.longitude)]) ) ) 
 		forms = []
 		for city,geocode in reqs:
 			forms.append(FormRequest.from_response(response, formdata={'search[address]': city, "search[type]":"address", "search[geocode]": geocode, "country":"AR"},
@@ -31,14 +31,13 @@ class SucursalSpider(Spider):
 		return forms
 
 	def after_submit(self, response):
-		print PROJECT_ROOT
 		pq = PyQuery(response.body_as_unicode())
 		items = []
 		for result in pq('div.storelocator_result'):
 			nodes = result.findall('div')
 			suc = SucursalItem()
 			suc['nombre'] = nodes[0].getchildren()[0].text
-			# suc.type = nodes[1].getchildren()[0].attrib['title']
+			suc['tipo'] = nodes[1].getchildren()[0].attrib['title']
 			suc['direccion'] = ', '.join([nodes[2].text, nodes[3].text])
 			suc['telefono'] = nodes[4].text.strip()
 			items.append(suc)
