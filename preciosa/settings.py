@@ -157,6 +157,10 @@ INSTALLED_APPS = [
     "south",
     "dbbackup",
 
+    # tests
+    "django_nose",
+
+
     #blog
     "radpress",
 
