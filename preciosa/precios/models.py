@@ -143,6 +143,16 @@ class Sucursal(models.Model):
 
     ubicacion = models.PointField(srid=4326)
 
+    def _latitud(self):
+        return self.ubicacion.x
+
+    def _longitud(self):
+        return self.ubicacion.y
+
+    lat = property(_latitud)
+    lon = property(_longitud)
+
+
     def clean(self):
         if not self.cadena and not self.nombre:
             raise models.ValidationError('Indique la cadena o el nombre del comercio')
