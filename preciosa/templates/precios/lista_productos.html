@@ -9,7 +9,10 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-xs-2 col-md-1">
-                        <img alt="" src="{% thumbnail item.foto 70x70 crop %}"></div>
+                        {% if item.foto %}
+                        <img alt="" src="{% thumbnail item.foto 70x70 crop %}">
+                        {% endif %}
+                    </div>
                     <div class="col-xs-10 col-md-11">
                         <div>
                             <a href="{{ item.get_absolute_url }}">
