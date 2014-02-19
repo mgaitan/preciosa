@@ -47,6 +47,13 @@ class TestMarcaModelForm(TestCase):
         self.assertFalse(f.is_valid())
         self.assertIn(u'no existe ya?', f.errors['nombre'][0])
 
+    def test_es_largo(self):
+        f = self._post('una marca que meten muchas cosas al pedo')
+        self.assertFalse(f.is_valid())
+        self.assertIn(u'nombre', f.errors['nombre'][0])
+
+
+
     def test_valido1(self):
         f = self._post('9 de oro')
         self.assertTrue(f.is_valid())

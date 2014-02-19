@@ -56,6 +56,13 @@ class CleanNombreMixin(object):
         nombre = data['nombre'].lower().strip()
         palabras = nombre.split()
 
+        # marca muy larga?
+        if len(nombre) > 20:
+            raise forms.ValidationError("¿No es un nombre de %s demasiado largo?"
+                                        "Envianos un mensaje si estamos equivocados" % kind)    # noqa
+
+
+
         # si tiene mas de 3 palabras, es sospechoso
         # '9 de Oro'
         if len(palabras) > 3:
