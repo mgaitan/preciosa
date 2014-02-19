@@ -7,7 +7,7 @@ from django.contrib import messages
 from preciosa.precios.models import Categoria, Marca
 from preciosa.voluntarios.models import MapaCategoria
 from preciosa.voluntarios.forms import (MapaCategoriaForm,
-                                        MarcaModelForm)
+                                        LogoMarcaModelForm)
 
 
 MSG_EXITO = [u'Buenísimo, Guardamos tu elección ¿Otra?',
@@ -81,17 +81,18 @@ def logos(request, pk=None, paso=None):
     instance = get_object_or_404(Marca, id=pk)
 
     # paso 1 o 2. Si ya subimos, luego recortamos
-    form = MarcaModelForm(instance=instance)
+    form = LogoMarcaModelForm(instance=instance)
 
     if request.method == "POST":
-        form = MarcaModelForm(request.POST, request.FILES,
-                              instance=instance)
+        form = LogoMarcaModelForm(request.POST, request.FILES,
+                                  instance=instance)
 
         if form.is_valid():
             instance = form.save()
             if paso == '2':
                 # ya es es el segundo paso, vamos a otros
-                messages.success(request, u"¡Gracias! Ahora %s tiene logo" % instance.nombre)
+                messages.success(request,
+                                 u"¡Gracias! Ahora %s tiene logo" % instance.nombre)
                 return redirect('logos')
             else:
                 messages.info(request, u"Ahora recortá la imágen que subiste")

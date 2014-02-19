@@ -20,7 +20,8 @@ class MapaCategoriaForm(forms.ModelForm):
         }
 
 
-class MarcaModelForm(forms.ModelForm):
+
+class LogoMarcaModelForm(forms.ModelForm):
     """este es el primer form que se le muestra al user para que suba una imagen"""
     class Meta:
         model = Marca
