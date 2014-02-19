@@ -141,7 +141,7 @@ class Sucursal(models.Model):
                                null=True, blank=True,
                                help_text='Dejar en blanco si es un comercio único')
 
-    ubicacion = models.PointField(srid=4326)
+    ubicacion = models.PointField(srid=4326, null=True, blank=True,)
 
     def _latitud(self):
         return self.ubicacion.x
