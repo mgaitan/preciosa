@@ -120,3 +120,13 @@ def alta_marca(request, pk=None, paso=None):
 
     return render(request, 'voluntarios/alta_marca.html',
                   {'form': form, 'instance': instance})
+
+
+def autocomplete_nombre_marca(request):
+    q = request.GET.get('q', '')
+    context = {'q': q}
+    queries = {}
+    queries['marcas'] = Marca.objects.filter(nombre__icontains=q)[:6]
+    context.update(queries)
+    return render(request, "voluntarios/autocomplete_nombre_marca.html",
+                  context)

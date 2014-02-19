@@ -11,10 +11,10 @@
 
 
      <p class="lead">
-        Saber exáctamente de qué marca es un producto nos va a permitir, en el futuro, poder hacer estadísticas que nos servirán para comprar mejor. Por ejemplo <strong> ¿Cuál es la empresa que más aumentó los precios en los últimos meses?</strong>.
+        Saber exáctamente de qué marca es un producto nos va a permitir, en el futuro, poder hacer estadísticas que nos servirán para comprar mejor. Por ejemplo <strong> ¿Cuál es la marca que más aumentó los precios en los últimos meses?</strong>.
     </p><p class="lead">
 
-        Para hacer esto, primero necesitamos conocer muchas marcas. Ya conocemos varias, pero seguro vos conocés más.
+        Para hacer esto, primero necesitamos conocer todas las marcas. Ya conocemos varias, pero seguro vos conocés más.
 
     </p>
 
@@ -34,3 +34,18 @@
 
     </form>
 {% endblock body %}
+
+
+{% block extra_footer %}
+    <script type="text/javascript">
+
+    $(function(){
+  // Make a javascript Autocomplete object and set it up
+    var autocomplete2 = $('#id_nombre').yourlabsAutocomplete({
+        url: '{% url "autocomplete_nombre_marca" %}',
+    });
+
+    });
+
+    </script>
+{% endblock extra_footer %}

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django import forms
 
 from preciosa.precios.models import (Categoria, Marca,
@@ -19,9 +20,18 @@ class MapaCategoriaForm(forms.ModelForm):
 
 
 class MarcaModelForm(forms.ModelForm):
+    qs = EmpresaFabricante.objects.all()
+    # en el form lo hacemos obligatorio
+    fabricante = forms.ModelChoiceField(queryset=qs)
+
     class Meta:
         model = Marca
         exclude = ['logo', 'logo_cropped']
+        help_texts = {
+            'nombre': 'Tiene que ser una marca nueva. '
+                      'Si la que querés agregar aparece en la lista, '
+                      'ya la conocemos.',
+        }
 
 
 class LogoMarcaModelForm(forms.ModelForm):
