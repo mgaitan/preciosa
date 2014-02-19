@@ -11,7 +11,13 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-xs-2 col-md-2">
-                    <img alt="" src="{{ producto.foto.url }}"></div>
+                    {% if producto.foto %}
+                        <img alt="" src="{{ producto.foto.url }}">
+                    {% else %}
+
+                       <p style="margin-top:30px" class="text-center">(todavía no tenemos una foto para este producto)</p>
+                    {% endif %}
+                    </div>
                     <div class="col-xs-9 col-md-9">
                         <div>
                             <h2>

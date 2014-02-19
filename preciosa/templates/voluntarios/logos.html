@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% load cropping thumbnail %}
+
+{# pongo los mensajes más cerca del formulario #}
+{% block messages %}{% endblock  %}
+{% block body %}
+
+
+    <h1 class="page-header">Subir logos</h1>
+
+
+     <p class="lead">
+        En <strong>Preciosa</strong> conocemos muchas marcas y empresas por sus nombres, pero no tuvimos tiempo de encontrar sus logos. </p>
+
+    <p class="lead">
+        Para subir un logo, primero tenés que buscarlo en internet (si podés, de más de 300px de ancho) y subirlo. En un segundo paso lo podés recortar para que quede bonito. <strong>¡Gracias por ayudar!</strong>
+    </p>
+
+
+    {% include "_messages.html" %}
+
+
+
+<div class="row"><div class="col-lg-5">
+
+    <div class="alert alert-warning">
+        <h4>Tenés que buscar el logo para la marca:</h4>
+            <p class="lead text-center">{{ instance.nombre }}</p>
+
+            <p class="text-center"><a href="https://www.google.com.ar/search?q={{ instance.nombre|iriencode }}%20logo&source=lnms&tbm=isch" target="_blank">buscar</a></p>
+    </div>
+
+
+</div> </div>
+
+
+
+
+    <form method="post" id="cropping_form" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <input type="hidden" name="instance_id" value="{{ instance.id}}" />
+
+        {% if paso == '1' %}
+
+            <input class="btn btn-primary btn-lg" type="submit" value="Subir este logo" />
+            <a class="btn btn-default" href="{% url 'logos' %}">No lo encontré, paso</a>
+
+        {% else %}
+            <input class="btn btn-primary btn-lg" type="submit" value="Recortar" />
+        {% endif %}
+
+    </form>
+{% endblock body %}
+
+
+{% block extra_footer %}
+    {# esto es un hack porque  django-image-cropping necesita si o si
+       ambos fields para funcionar.
+       simplemente oculto dinámicamente el que no corresponda al "paso" #}
+    <script type="text/javascript">
+        $(function(){
+            var paso = {{ paso }};
+            if (paso === 1){
+                // ocultamos la interfaz de cropping
+                $('#id_logo_cropped').parents('.form-group').hide();
+            } else{
+                $('#id_logo').parents('.form-group').hide();
+            }
+        });
+    </script>
+
+{% endblock extra_footer %}
+
