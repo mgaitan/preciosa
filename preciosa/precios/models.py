@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta
-from django.db import models
+from django.conf import settings
+from django.contrib.gis.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.db.models import Min
@@ -139,6 +140,18 @@ class Sucursal(models.Model):
     cadena = models.ForeignKey('Cadena', related_name='sucursales',
                                null=True, blank=True,
                                help_text='Dejar en blanco si es un comercio único')
+
+    ubicacion = models.PointField(srid=4326)
+
+    def _latitud(self):
+        return self.ubicacion.x
+
+    def _longitud(self):
+        return self.ubicacion.y
+
+    lat = property(_latitud)
+    lon = property(_longitud)
+
 
     def clean(self):
         if not self.cadena and not self.nombre:
