@@ -125,8 +125,9 @@ def alta_marca(request, pk=None, paso=None):
 
         if form.is_valid():
             instance = form.save()
+            import ipdb; ipdb.set_trace()
             messages.success(request,
-                             '¡Genial! Guardamos %s %s' % (txt, instance.nombre))
+                             u'¡Genial! Guardamos %s %s' % (txt, instance.nombre))
             return redirect('alta_marca')
 
     return render(request, 'voluntarios/alta_marca.html',
