@@ -10,7 +10,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'Sucursal.ubicacion'
         db.add_column(u'precios_sucursal', 'ubicacion',
-                      self.gf('django.contrib.gis.db.models.fields.PointField')(default=0),
+                      self.gf('django.contrib.gis.db.models.fields.PointField')(null=True, blank=True),
                       keep_default=False)
 
 
@@ -102,7 +102,9 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Cadena'},
             'cadena_madre': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['precios.Cadena']", 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'logo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'logo': (u'django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'logo_changed': ('model_utils.fields.MonitorField', [], {'default': 'datetime.datetime.now', u'monitor': "'logo'"}),
+            'logo_cropped': (u'django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'nombre': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'})
         },
         u'precios.categoria': {
@@ -116,14 +118,18 @@ class Migration(SchemaMigration):
         u'precios.empresafabricante': {
             'Meta': {'object_name': 'EmpresaFabricante'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'logo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'logo': (u'django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'logo_changed': ('model_utils.fields.MonitorField', [], {'default': 'datetime.datetime.now', u'monitor': "'logo'"}),
+            'logo_cropped': (u'django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'nombre': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'})
         },
         u'precios.marca': {
             'Meta': {'unique_together': "(('nombre', 'fabricante'),)", 'object_name': 'Marca'},
             'fabricante': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['precios.EmpresaFabricante']", 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'logo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'logo': (u'django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'logo_changed': ('model_utils.fields.MonitorField', [], {'default': 'datetime.datetime.now', u'monitor': "'logo'"}),
+            'logo_cropped': (u'django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'nombre': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'})
         },
         u'precios.precio': {
@@ -167,7 +173,7 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'nombre': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'telefono': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            'ubicacion': ('django.contrib.gis.db.models.fields.PointField', [], {})
+            'ubicacion': ('django.contrib.gis.db.models.fields.PointField', [], {'null': 'True', 'blank': 'True'})
         }
     }
 

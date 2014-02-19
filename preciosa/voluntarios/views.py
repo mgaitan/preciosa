@@ -3,11 +3,15 @@ import random
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from annoying.decorators import ajax_request
 
 from preciosa.precios.models import Categoria, Marca
-from preciosa.voluntarios.models import MapaCategoria
+from preciosa.voluntarios.models import (MapaCategoria, MarcaEmpresaCreada,
+                                         VotoMarcaEmpresaCreada)
 from preciosa.voluntarios.forms import (MapaCategoriaForm,
-                                        MarcaModelForm)
+                                        MarcaModelForm,
+                                        EmpresaFabricanteModelForm,
+                                        LogoMarcaModelForm)
 
 
 MSG_EXITO = [u'Buenísimo, Guardamos tu elección ¿Otra?',
@@ -81,17 +85,18 @@ def logos(request, pk=None, paso=None):
     instance = get_object_or_404(Marca, id=pk)
 
     # paso 1 o 2. Si ya subimos, luego recortamos
-    form = MarcaModelForm(instance=instance)
+    form = LogoMarcaModelForm(instance=instance)
 
     if request.method == "POST":
-        form = MarcaModelForm(request.POST, request.FILES,
-                              instance=instance)
+        form = LogoMarcaModelForm(request.POST, request.FILES,
+                                  instance=instance)
 
         if form.is_valid():
             instance = form.save()
             if paso == '2':
                 # ya es es el segundo paso, vamos a otros
-                messages.success(request, u"¡Gracias! Ahora %s tiene logo" % instance.nombre)
+                messages.success(request,
+                                 u"¡Gracias! Ahora %s tiene logo" % instance.nombre)
                 return redirect('logos')
             else:
                 messages.info(request, u"Ahora recortá la imágen que subiste")
@@ -99,4 +104,64 @@ def logos(request, pk=None, paso=None):
 
     return render(request, 'voluntarios/logos.html',
                   {'form': form, 'instance': instance,
-                   'paso': paso })
+                   'paso': paso})
+
+
+@login_required
+def alta_marca(request, pk=None, paso=None):
+
+    instance = get_object_or_404(Marca, id=pk) if pk else None
+
+    form_marca = MarcaModelForm()
+    form_empresa = EmpresaFabricanteModelForm()
+
+    if request.method == "POST":
+
+        es_empresa = request.POST.get('es_empresa')
+        if es_empresa:
+            form = form_empresa = EmpresaFabricanteModelForm(request.POST)
+            txt = 'el fabricante'
+            field = 'empresa'
+        else:
+            form = form_marca = MarcaModelForm(request.POST)
+            txt = 'la marca'
+            field = 'marca'
+
+        if form.is_valid():
+            instance = form.save()
+            d = {'user': request.user, field: instance}
+            MarcaEmpresaCreada.objects.create(**d)
+            messages.success(request,
+                             u'¡Genial! Guardamos %s %s' % (txt, instance.nombre))
+            return redirect('alta_marca')
+
+
+    creados = MarcaEmpresaCreada.objects.exclude(user=request.user).order_by('created')[:5]
+
+    return render(request, 'voluntarios/alta_marca.html', {'creados': creados,
+                  'form_marca': form_marca, 'form_empresa': form_empresa})
+
+@login_required
+@ajax_request
+def voto_item(request, pk):
+    import ipdb; ipdb.set_trace()
+    if request.method == 'POST':
+        item = get_object_or_404(MarcaEmpresaCreada, pk=pk)
+        if item.votos.filter(user=request.user).exists():
+            # el user ya votó este item
+            return {'result': False}
+        voto = 1 if request.POST.get('voto') == 'true' else -1
+        VotoMarcaEmpresaCreada.objects.create(user=request.user, item=item, voto=voto)
+        return {'result': True}
+    return {'result': False}
+
+
+def autocomplete_nombre_marca(request):
+    q = request.GET.get('q', '')
+    context = {'q': q}
+    queries = {}
+    queries['marcas'] = Marca.objects.filter(nombre__icontains=q)[:6]
+
+    context.update(queries)
+    return render(request, "voluntarios/autocomplete_nombre_marca.html",
+                  context)

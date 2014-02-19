@@ -18,7 +18,7 @@ class CategoriaFactory(factory.DjangoModelFactory):
     depth = 1
 
 
-class EmpresaFactory(factory.DjangoModelFactory):
+class EmpresaFabricanteFactory(factory.DjangoModelFactory):
     FACTORY_FOR = EmpresaFabricante
     nombre = factory.Sequence(lambda n: 'Empresa {0}'.format(n))
 
@@ -36,7 +36,7 @@ class SucursalFactory(factory.DjangoModelFactory):
 class MarcaFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Marca
     nombre = factory.Sequence(lambda n: 'Marca {0}'.format(n))
-    empresa = factory.SubFactory(EmpresaFactory)
+    fabricante = factory.SubFactory(EmpresaFabricanteFactory)
 
 
 class ProductoFactory(factory.DjangoModelFactory):

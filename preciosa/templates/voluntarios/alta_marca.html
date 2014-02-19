@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% load humanize %}
+{% load cropping thumbnail %}
+
+
+{# pongo los mensajes más cerca del formulario #}
+{% block messages %}{% endblock  %}
+{% block body %}
+
+
+    <h1 class="page-header">Agregar marca</h1>
+
+
+     <p class="lead">
+        Saber exáctamente de qué marca es un producto nos va a permitir, en el futuro, hacer estadísticas que nos servirán para comprar mejor. Por ejemplo, <strong> ¿Cuál será la marca que más aumentó los precios en los últimos meses?</strong>.
+    </p><p class="lead">
+
+        Para hacer esto, primero necesitamos conocer todas las marcas. Ya conocemos varias, pero seguro vos conocés más.
+
+    </p>
+
+
+    {% include "_messages.html" %}
+
+
+<div class="row">
+
+<div class="col-lg-5">
+    <h3>Agregar nueva marca</h3>
+
+    <form method="post" id="cropping_form" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form_marca|bootstrap }}
+
+            <input class="btn btn-primary btn-lg" type="submit" value="Agregar esta marca" name="es_marca" />
+
+    </form>
+
+</div>
+<div class="col-lg-3">
+    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            ¿No está el fabricante que buscás?
+                        </div>
+                        <div class="panel-body">
+                            <form method="post" action="." >
+                            {% csrf_token %}
+                            {{ form_empresa|bootstrap }}
+
+                    <input class="btn btn-primary" type="submit" value="Agregar" name="es_empresa" />
+
+                        </form>
+
+                        </div>
+                    </div>
+
+</div>
+<div class="col-lg-4">
+
+                <div class="chat-panel panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-comments fa-fw"></i>
+                            Votar actividad recientemente
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <ul class="chat">
+                            {% for item in creados %}
+                                <li class="left clearfix">
+                                    <span class="chat-img pull-left"><p>
+                                    <button title="Parece correcto" class="btn btn-success btn-circle vot_yes" data-pk="{{ item.id }}" type="button"><i class="fa fa-check"></i>
+                                    </button></p> <p>
+                                    <button title="Parece incorrecto" class="btn btn-danger btn-circle vot_no" data-pk="{{ item.id }}" type="button"><i class="fa fa-times"></i>
+                                     </button></p>
+                                    </span>
+
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <strong class="primary-font">{{ item.user.username }} </strong>
+                                            <small class="pull-right text-muted">
+                                            <i class="fa fa-clock-o fa-fw"></i> {{ item.created|naturaltime }}
+                                            </small>
+                                        </div>
+                                        <p>
+                                            {% if item.marca %}
+                                            creó la marca <strong>{{ item.marca.nombre }}</strong>
+                                            asociada a la empresa <strong>{{ item.marca.fabricante.nombre }}</strong>
+                                            {% else %}
+                                            creó el fabricante <strong>{{ item.empresa.nombre }}</strong>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+</div>
+</div>
+
+
+{% endblock body %}
+
+
+{% block extra_footer %}
+    <script type="text/javascript">
+
+    $(function(){
+  // Make a javascript Autocomplete object and set it up
+    var autocomplete2 = $('#id_nombre').yourlabsAutocomplete({
+        url: '{% url "autocomplete_nombre_marca" %}',
+    });
+
+    $('button.vot_yes').on('click', function(){
+        var $but = $(this);
+        var pk = $but.data('pk');
+        $.post('./voto/' + pk + '/', {'voto': true}, function(response){
+            if (response.result){
+                $but.parents('.left').fadeOut();
+            }
+        });
+    });
+
+    $('button.vot_no').on('click', function(){
+        var $but = $(this);
+        var pk = $but.data('pk');
+        $.post('./voto/' + pk + '/', {'voto': false}, function(response){
+            if (response.result){
+                $but.parents('.left').fadeOut();
+            }
+        });
+    });
+
+
+    });
+
+    </script>
+{% endblock extra_footer %}

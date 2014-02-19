@@ -86,15 +86,15 @@ class Marca(models.Model):
     Es el marca comercial de un producto.
     Ejemplo: Rosamonte
     """
-    nombre = models.CharField(max_length=100, unique=True)
+    fabricante = models.ForeignKey('EmpresaFabricante', null=True, blank=True)
+    nombre = models.CharField(max_length=100, unique=True, verbose_name=u"Nombre de la marca")
     logo = ImageCropField(null=True, blank=True,
                           upload_to='marcas')
 
     # size is "width x height"
     logo_cropped = ImageRatioField('logo', '150x125',
                                    verbose_name=u'Recortar logo')  # free_crop=True)
-    logo_changed = MonitorField(monitor='logo')
-    fabricante = models.ForeignKey('EmpresaFabricante', null=True, blank=True)
+    logo_changed = MonitorField(monitor='logo', editable=False)
 
     def __unicode__(self):
         return self.nombre
@@ -109,7 +109,7 @@ class AbstractEmpresa(models.Model):
                           upload_to='empresas')
     logo_cropped = ImageRatioField('logo', '150x125',
                                    verbose_name=u'Recortar logo')  # free_crop=True)
-    logo_changed = MonitorField(monitor='logo')
+    logo_changed = MonitorField(monitor='logo', editable=False)
 
     def __unicode__(self):
         return self.nombre
@@ -141,7 +141,7 @@ class Sucursal(models.Model):
                                null=True, blank=True,
                                help_text='Dejar en blanco si es un comercio único')
 
-    ubicacion = models.PointField(srid=4326)
+    ubicacion = models.PointField(srid=4326, null=True, blank=True,)
 
     def _latitud(self):
         return self.ubicacion.x

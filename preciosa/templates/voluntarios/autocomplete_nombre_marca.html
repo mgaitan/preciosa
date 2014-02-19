@@ -1,0 +1,7 @@
+{% load url from future %}
+
+{% for marca in marcas %}
+    <a class="div choice" href="#">{{ marca.nombre  }}  {% if marca.fabricante %}
+        ({{ marca.fabricante.nombre }})
+    {% endif %}</a>
+{% endfor %}

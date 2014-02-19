@@ -35,7 +35,7 @@ TIME_ZONE = "UTC"
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = "es"
+LANGUAGE_CODE = "es-ES"
 
 SITE_ID = int(os.environ.get("SITE_ID", 1))
 
@@ -134,6 +134,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.sites",
     "django.contrib.staticfiles",
+    'django.contrib.humanize',
 
     # theme
     "bootstrapform",
@@ -156,6 +157,10 @@ INSTALLED_APPS = [
     # migrations/deploy
     "south",
     "dbbackup",
+
+    # tests
+    "django_nose",
+
 
     #blog
     "radpress",
