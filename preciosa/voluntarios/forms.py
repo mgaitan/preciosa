@@ -22,7 +22,8 @@ class MapaCategoriaForm(forms.ModelForm):
 class MarcaModelForm(forms.ModelForm):
     qs = EmpresaFabricante.objects.all()
     # en el form lo hacemos obligatorio
-    fabricante = forms.ModelChoiceField(queryset=qs)
+    fabricante = forms.ModelChoiceField(queryset=qs,
+                                        help_text='Por favor, revisá bien este campo.')
 
     class Meta:
         model = Marca
@@ -30,8 +31,7 @@ class MarcaModelForm(forms.ModelForm):
         help_texts = {
             'nombre': 'Tiene que ser una marca nueva. '
                       'Si la que querés agregar aparece en la lista, '
-                      'ya la conocemos.',
-            'fabricante': 'Por favor, revisá bien este campo.'
+                      'quiere decir que ya la conocemos.',
         }
 
 
