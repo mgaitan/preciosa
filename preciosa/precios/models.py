@@ -86,6 +86,7 @@ class Marca(models.Model):
     Es el marca comercial de un producto.
     Ejemplo: Rosamonte
     """
+    fabricante = models.ForeignKey('EmpresaFabricante', null=True, blank=True)
     nombre = models.CharField(max_length=100, unique=True)
     logo = ImageCropField(null=True, blank=True,
                           upload_to='marcas')
@@ -93,8 +94,7 @@ class Marca(models.Model):
     # size is "width x height"
     logo_cropped = ImageRatioField('logo', '150x125',
                                    verbose_name=u'Recortar logo')  # free_crop=True)
-    logo_changed = MonitorField(monitor='logo')
-    fabricante = models.ForeignKey('EmpresaFabricante', null=True, blank=True)
+    logo_changed = MonitorField(monitor='logo', editable=False)
 
     def __unicode__(self):
         return self.nombre
@@ -109,7 +109,7 @@ class AbstractEmpresa(models.Model):
                           upload_to='empresas')
     logo_cropped = ImageRatioField('logo', '150x125',
                                    verbose_name=u'Recortar logo')  # free_crop=True)
-    logo_changed = MonitorField(monitor='logo')
+    logo_changed = MonitorField(monitor='logo', editable=False)
 
     def __unicode__(self):
         return self.nombre

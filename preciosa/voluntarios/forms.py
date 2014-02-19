@@ -4,8 +4,6 @@ from preciosa.precios.models import (Categoria, Marca,
                                      EmpresaFabricante, Cadena)
 from preciosa.voluntarios.models import MapaCategoria
 
-from image_cropping import ImageCropWidget
-
 
 class MapaCategoriaForm(forms.ModelForm):
 
@@ -20,9 +18,14 @@ class MapaCategoriaForm(forms.ModelForm):
         }
 
 
+class MarcaModelForm(forms.ModelForm):
+    class Meta:
+        model = Marca
+        exclude = ['logo', 'logo_cropped']
+
 
 class LogoMarcaModelForm(forms.ModelForm):
-    """este es el primer form que se le muestra al user para que suba una imagen"""
+    """form para subir/editar el logo de una marca"""
     class Meta:
         model = Marca
         fields = ['logo', 'logo_cropped']

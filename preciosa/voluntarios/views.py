@@ -7,6 +7,7 @@ from django.contrib import messages
 from preciosa.precios.models import Categoria, Marca
 from preciosa.voluntarios.models import MapaCategoria
 from preciosa.voluntarios.forms import (MapaCategoriaForm,
+                                        MarcaModelForm,
                                         LogoMarcaModelForm)
 
 
@@ -100,4 +101,22 @@ def logos(request, pk=None, paso=None):
 
     return render(request, 'voluntarios/logos.html',
                   {'form': form, 'instance': instance,
-                   'paso': paso })
+                   'paso': paso})
+
+
+@login_required
+def alta_marca(request, pk=None, paso=None):
+
+    instance = get_object_or_404(Marca, id=pk) if pk else None
+
+    form = MarcaModelForm()
+    if request.method == "POST":
+        form = MarcaModelForm(request.POST, request.FILES,
+                              instance=instance)
+        if form.is_valid():
+            marca = form.save()
+            messages.success(request, '¡Genial! Guardamos la marca %s' % marca.nombre)
+            return redirect('alta_marca')
+
+    return render(request, 'voluntarios/alta_marca.html',
+                  {'form': form, 'instance': instance})
