@@ -8,6 +8,7 @@ from preciosa.precios.models import Categoria, Marca
 from preciosa.voluntarios.models import MapaCategoria
 from preciosa.voluntarios.forms import (MapaCategoriaForm,
                                         MarcaModelForm,
+                                        EmpresaFabricanteModelForm,
                                         LogoMarcaModelForm)
 
 
@@ -109,17 +110,27 @@ def alta_marca(request, pk=None, paso=None):
 
     instance = get_object_or_404(Marca, id=pk) if pk else None
 
-    form = MarcaModelForm()
+    form_marca = MarcaModelForm()
+    form_empresa = EmpresaFabricanteModelForm()
+
     if request.method == "POST":
-        form = MarcaModelForm(request.POST, request.FILES,
-                              instance=instance)
+
+        es_empresa = request.POST.get('es_empresa')
+        if es_empresa:
+            form = form_empresa = EmpresaFabricanteModelForm(request.POST)
+            txt = 'el fabricante'
+        else:
+            form = form_marca = MarcaModelForm(request.POST)
+            txt = 'la marca'
+
         if form.is_valid():
-            marca = form.save()
-            messages.success(request, '¡Genial! Guardamos la marca %s' % marca.nombre)
+            instance = form.save()
+            messages.success(request,
+                             '¡Genial! Guardamos %s %s' % (txt, instance.nombre))
             return redirect('alta_marca')
 
     return render(request, 'voluntarios/alta_marca.html',
-                  {'form': form, 'instance': instance})
+                  {'form_marca': form_marca, 'form_empresa': form_empresa})
 
 
 def autocomplete_nombre_marca(request):
@@ -127,6 +138,7 @@ def autocomplete_nombre_marca(request):
     context = {'q': q}
     queries = {}
     queries['marcas'] = Marca.objects.filter(nombre__icontains=q)[:6]
+
     context.update(queries)
     return render(request, "voluntarios/autocomplete_nombre_marca.html",
                   context)

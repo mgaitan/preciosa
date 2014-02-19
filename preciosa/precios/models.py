@@ -87,7 +87,7 @@ class Marca(models.Model):
     Ejemplo: Rosamonte
     """
     fabricante = models.ForeignKey('EmpresaFabricante', null=True, blank=True)
-    nombre = models.CharField(max_length=100, unique=True)
+    nombre = models.CharField(max_length=100, unique=True, verbose_name=u"Nombre de la marca")
     logo = ImageCropField(null=True, blank=True,
                           upload_to='marcas')
 

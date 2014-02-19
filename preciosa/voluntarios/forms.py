@@ -31,6 +31,7 @@ class MarcaModelForm(forms.ModelForm):
             'nombre': 'Tiene que ser una marca nueva. '
                       'Si la que querés agregar aparece en la lista, '
                       'ya la conocemos.',
+            'fabricante': 'Por favor, revisá bien este campo.'
         }
 
 
@@ -44,6 +45,10 @@ class LogoMarcaModelForm(forms.ModelForm):
 class EmpresaFabricanteModelForm(forms.ModelForm):
     class Meta:
         model = EmpresaFabricante
+        fields = ['nombre']
+        help_texts = {
+            'nombre': 'Tiene que ser una empresa nueva.'
+        }
 
 
 class CadenaModelForm(forms.ModelForm):
