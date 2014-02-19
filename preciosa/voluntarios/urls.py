@@ -9,5 +9,5 @@ urlpatterns = patterns("preciosa.voluntarios.views",
     url(r"^marca/$", 'alta_marca', name='alta_marca'),
     url(r"^marca/autocomplete/nombre/$", 'autocomplete_nombre_marca',
         name='autocomplete_nombre_marca'),
-    url(r"^marca/(?P<pk>\d+)/", 'alta_marca', name='alta_marca_2'),
+    url(r"^marca/voto/(?P<pk>\d+)/$", 'voto_item', name='voto_item'),
 )

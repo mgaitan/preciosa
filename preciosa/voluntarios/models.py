@@ -69,5 +69,5 @@ class MarcaEmpresaCreada(TimeStampedModel):
 class VotoMarcaEmpresaCreada(TimeStampedModel):
     """un usuario vota el item que creó otro """
     user = models.ForeignKey(User, editable=False)
-    item = models.ForeignKey(MarcaEmpresaCreada)
+    item = models.ForeignKey(MarcaEmpresaCreada, related_name='votos')
     voto = models.IntegerField()

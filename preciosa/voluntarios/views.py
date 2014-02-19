@@ -3,9 +3,11 @@ import random
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from annoying.decorators import ajax_request
 
 from preciosa.precios.models import Categoria, Marca
-from preciosa.voluntarios.models import MapaCategoria, MarcaEmpresaCreada
+from preciosa.voluntarios.models import (MapaCategoria, MarcaEmpresaCreada,
+                                         VotoMarcaEmpresaCreada)
 from preciosa.voluntarios.forms import (MapaCategoriaForm,
                                         MarcaModelForm,
                                         EmpresaFabricanteModelForm,
@@ -138,6 +140,20 @@ def alta_marca(request, pk=None, paso=None):
 
     return render(request, 'voluntarios/alta_marca.html', {'creados': creados,
                   'form_marca': form_marca, 'form_empresa': form_empresa})
+
+@login_required
+@ajax_request
+def voto_item(request, pk):
+    import ipdb; ipdb.set_trace()
+    if request.method == 'POST':
+        item = get_object_or_404(MarcaEmpresaCreada, pk=pk)
+        if item.votos.filter(user=request.user).exists():
+            # el user ya votó este item
+            return {'result': False}
+        voto = 1 if request.POST.get('voto') == 'true' else -1
+        VotoMarcaEmpresaCreada.objects.create(user=request.user, item=item, voto=voto)
+        return {'result': True}
+    return {'result': False}
 
 
 def autocomplete_nombre_marca(request):

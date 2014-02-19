@@ -61,15 +61,18 @@
                 <div class="chat-panel panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-comments fa-fw"></i>
-                            Actividad recientemente
+                            Votar actividad recientemente
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <ul class="chat">
                             {% for item in creados %}
                                 <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img class="img-circle" alt="User Avatar" src="http://placehold.it/50/55C1E7/fff">
+                                    <span class="chat-img pull-left"><p>
+                                    <button title="Parece correcto" class="btn btn-success btn-circle vot_yes" data-pk="{{ item.id }}" type="button"><i class="fa fa-check"></i>
+                                    </button></p> <p>
+                                    <button title="Parece incorrecto" class="btn btn-danger btn-circle vot_no" data-pk="{{ item.id }}" type="button"><i class="fa fa-times"></i>
+                                     </button></p>
                                     </span>
 
                                     <div class="chat-body clearfix">
@@ -110,6 +113,27 @@
     var autocomplete2 = $('#id_nombre').yourlabsAutocomplete({
         url: '{% url "autocomplete_nombre_marca" %}',
     });
+
+    $('button.vot_yes').on('click', function(){
+        var $but = $(this);
+        var pk = $but.data('pk');
+        $.post('./voto/' + pk + '/', {'voto': true}, function(response){
+            if (response.result){
+                $but.parents('.left').fadeOut();
+            }
+        });
+    });
+
+    $('button.vot_no').on('click', function(){
+        var $but = $(this);
+        var pk = $but.data('pk');
+        $.post('./voto/' + pk + '/', {'voto': false}, function(response){
+            if (response.result){
+                $but.parents('.left').fadeOut();
+            }
+        });
+    });
+
 
     });
 
