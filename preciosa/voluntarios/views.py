@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 from preciosa.precios.models import Categoria, Marca
-from preciosa.voluntarios.models import MapaCategoria
+from preciosa.voluntarios.models import MapaCategoria, MarcaEmpresaCreada
 from preciosa.voluntarios.forms import (MapaCategoriaForm,
                                         MarcaModelForm,
                                         EmpresaFabricanteModelForm,
@@ -119,19 +119,25 @@ def alta_marca(request, pk=None, paso=None):
         if es_empresa:
             form = form_empresa = EmpresaFabricanteModelForm(request.POST)
             txt = 'el fabricante'
+            field = 'empresa'
         else:
             form = form_marca = MarcaModelForm(request.POST)
             txt = 'la marca'
+            field = 'marca'
 
         if form.is_valid():
             instance = form.save()
-            import ipdb; ipdb.set_trace()
+            d = {'user': request.user, field: instance}
+            MarcaEmpresaCreada.objects.create(**d)
             messages.success(request,
                              u'¡Genial! Guardamos %s %s' % (txt, instance.nombre))
             return redirect('alta_marca')
 
-    return render(request, 'voluntarios/alta_marca.html',
-                  {'form_marca': form_marca, 'form_empresa': form_empresa})
+
+    creados = MarcaEmpresaCreada.objects.exclude(user=request.user).order_by('created')[:5]
+
+    return render(request, 'voluntarios/alta_marca.html', {'creados': creados,
+                  'form_marca': form_marca, 'form_empresa': form_empresa})
 
 
 def autocomplete_nombre_marca(request):

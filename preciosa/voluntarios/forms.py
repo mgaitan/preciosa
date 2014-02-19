@@ -62,7 +62,6 @@ class CleanNombreMixin(object):
                                         "Envianos un mensaje si estamos equivocados" % kind)    # noqa
 
 
-
         # si tiene mas de 3 palabras, es sospechoso
         # '9 de Oro'
         if len(palabras) > 3:
@@ -90,7 +89,7 @@ class MarcaModelForm(forms.ModelForm, CleanNombreMixin):
 
     kind = 'marca'      # flag para que el mixin distinga que modelform es
 
-    qs = EmpresaFabricante.objects.all()
+    qs = EmpresaFabricante.objects.all().order_by('nombre')
     # en el form lo hacemos obligatorio
     fabricante = forms.ModelChoiceField(queryset=qs,
                                         help_text='Por favor, revisá bien este campo.')

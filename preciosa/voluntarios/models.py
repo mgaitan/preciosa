@@ -13,7 +13,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from model_utils.models import TimeStampedModel
 
-from preciosa.precios.models import Categoria
+from preciosa.precios.models import Categoria, Marca, EmpresaFabricante
 from collections import Counter
 
 
@@ -56,3 +56,18 @@ class MapaCategoria(TimeStampedModel):
         ya_hechas = MapaCategoria.objects.filter(user=user).values_list(
             'origen_id', flat=True)
         return Categoria.por_clasificar().exclude(id__in=ya_hechas)
+
+
+class MarcaEmpresaCreada(TimeStampedModel):
+    """un modelo para trackear la creacion de marcas
+    o empresas por voluntarios"""
+    user = models.ForeignKey(User, editable=False)
+    marca = models.ForeignKey(Marca, editable=False, null=True)
+    empresa = models.ForeignKey(EmpresaFabricante, editable=False, null=True)
+
+
+class VotoMarcaEmpresaCreada(TimeStampedModel):
+    """un usuario vota el item que creó otro """
+    user = models.ForeignKey(User, editable=False)
+    item = models.ForeignKey(MarcaEmpresaCreada)
+    voto = models.IntegerField()

@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load bootstrap %}
+{% load humanize %}
 {% load cropping thumbnail %}
+
 
 {# pongo los mensajes más cerca del formulario #}
 {% block messages %}{% endblock  %}
@@ -25,7 +27,7 @@
 <div class="row">
 
 <div class="col-lg-5">
-    <h4>Agregar nueva marca</h4>
+    <h3>Agregar nueva marca</h3>
 
     <form method="post" id="cropping_form" action="." enctype="multipart/form-data">
         {% csrf_token %}
@@ -54,8 +56,45 @@
                     </div>
 
 </div>
-<div class="col-lg-3">
+<div class="col-lg-4">
 
+                <div class="chat-panel panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-comments fa-fw"></i>
+                            Actividad recientemente
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <ul class="chat">
+                            {% for item in creados %}
+                                <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img class="img-circle" alt="User Avatar" src="http://placehold.it/50/55C1E7/fff">
+                                    </span>
+
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <strong class="primary-font">{{ item.user.username }} </strong>
+                                            <small class="pull-right text-muted">
+                                            <i class="fa fa-clock-o fa-fw"></i> {{ item.created|naturaltime }}
+                                            </small>
+                                        </div>
+                                        <p>
+                                            {% if item.marca %}
+                                            creó la marca <strong>{{ item.marca.nombre }}</strong>
+                                            asociada a la empresa <strong>{{ item.marca.fabricante.nombre }}</strong>
+                                            {% else %}
+                                            creó el fabricante <strong>{{ item.empresa.nombre }}</strong>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
 </div>
 </div>
 
