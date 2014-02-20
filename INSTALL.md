@@ -42,7 +42,7 @@ Atención porque para que ese comando funcione, tenés que ejecutarlo desde `roo
 Instalar Postgres y PostGIS
 ---------------------------
 
-Seguir [este documento](https://github.com/nachopro/preciosa/wiki/Puesta-a-punto-de-PostgreSQL-y-PostGis-en-Ubuntu-o-Debian)
+Seguir [este documento](https://github.com/nachopro/preciosa/wiki/Puesta-a-punto-de-PostgreSQL-y-PostGis-en-Ubuntu-o-Debian).
 
 
 Generación de base de datos
