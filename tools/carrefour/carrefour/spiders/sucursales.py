@@ -11,7 +11,7 @@ from carrefour.items import SucursalItem
 
 from django.db import IntegrityError
 from django.db.models import Q
-from cities_light.models import City
+from cities_light.models import City, Region
 from preciosa.precios.models import Cadena, Sucursal
 
 class SucursalSpider(Spider):
@@ -22,12 +22,12 @@ class SucursalSpider(Spider):
 
 	def parse(self, response):
 		reqs = []
-		for city in City.objects.raw('select * from cities_light_city group by region_id'):
-			reqs.append( (city.display_name.split(',')[-2], ','.join([unicode(city.latitude), unicode(city.longitude)]) ) ) 
 		forms = []
-		for city,geocode in reqs:
-			forms.append(FormRequest.from_response(response, formdata={'search[address]': city, "search[type]":"address", "search[geocode]": geocode, "country":"AR"},
-			callback=self.after_submit, formxpath="//form[@id='storelocator_search_form']"))
+		for region in Region.objects.filter(country__name='Argentina'):
+			for city in region.city_set.filter(population__gt=1000):
+				forms.append( FormRequest.from_response(response, formdata={'search[address]': city.display_name, "search[type]":"address",
+						"search[geocode]": ','.join([unicode(city.latitude), unicode(city.longitude)]), "country":"AR"},
+						callback=self.after_submit, formxpath="//form[@id='storelocator_search_form']") )
 		return forms
 
 	def after_submit(self, response):
