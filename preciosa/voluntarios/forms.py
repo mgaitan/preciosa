@@ -69,7 +69,7 @@ class CleanNombreMixin(object):
                                         "Envianos un mensaje si estamos equivocados" % kind)    # noqa
 
         # si las palabras no son palabras o numeros, también.
-        if not all(map(lambda a: re.match(r'^[a-z0-9]+$', a), palabras)):
+        if not all(map(lambda a: re.search(r'^[a-z0-9áéíóúüñ]+$', a.encode('utf8'), flags=re.UNICODE), palabras)):
             raise forms.ValidationError("No parece una %s ¿Estás usando algún caracter extraño?" # noqa
                                         "Envianos un mensaje si estamos equivocados" % kind)     # noqa
         #si hay más de una palabra que sea de numeros, also
