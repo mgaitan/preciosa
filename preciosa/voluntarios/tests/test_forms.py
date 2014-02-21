@@ -36,6 +36,10 @@ class TestMarcaModelForm(TestCase):
         self.assertFalse(f.is_valid())
         self.assertIn(u'caracter extraño', f.errors['nombre'][0])
 
+    def test_acentos(self):
+        f = self._post(u'Marca Ñandú')
+        self.assertTrue(f.is_valid())
+
     def test_muchas_palabras(self):
         f = self._post(u'una marca muy larga')
         self.assertFalse(f.is_valid())
