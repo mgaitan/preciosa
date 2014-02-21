@@ -93,7 +93,7 @@ class Marca(models.Model):
 
     # size is "width x height"
     logo_cropped = ImageRatioField('logo', '150x125',
-                                   verbose_name=u'Recortar logo')  # free_crop=True)
+                                   verbose_name=u'Recortar logo', free_crop=True)
     logo_changed = MonitorField(monitor='logo', editable=False)
 
     def __unicode__(self):
@@ -108,7 +108,7 @@ class AbstractEmpresa(models.Model):
     logo = ImageCropField(null=True, blank=True,
                           upload_to='empresas')
     logo_cropped = ImageRatioField('logo', '150x125',
-                                   verbose_name=u'Recortar logo')  # free_crop=True)
+                                   verbose_name=u'Recortar logo', free_crop=True)
     logo_changed = MonitorField(monitor='logo', editable=False)
 
     def __unicode__(self):
