@@ -9,12 +9,9 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-xs-2 col-md-1">
-                        {% if item.foto %}
-                    {% comment issue #68 %}
-                        <img alt="" src="{% thumbnail item.foto 70x70 crop %}">
-                    {% endcomment %}
-                    <img alt="" src="{{ item.foto.url }}">
-                        {% endif %}
+                    {% if item.foto %}
+                        <img alt="" src="{{ item.foto.70x70.url }}">
+                    {% endif %}
                     </div>
                     <div class="col-xs-10 col-md-11">
                         <div>
