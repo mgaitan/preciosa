@@ -30,7 +30,8 @@ django-nose==1.2
 django-model-utils==1.4.0
 django-newsletter==0.5.1
 django-treebeard==2.0b2
-django-user-accounts==1.0c4
+# django account con locale es completo
+https://github.com/mgaitan/django-user-accounts/archive/master.zip
 django-webtest==1.7.6
 djangorestframework==2.3.12
 docopt==0.6.1
@@ -48,7 +49,8 @@ nose==1.3.0
 paramiko==1.12.1
 pexpect==3.0
 pinax-theme-bootstrap==5.0.3
-pinax-theme-bootstrap-account==1.0b2
+# pinax-theme-bootstrap-account con locale es completo
+https://github.com/mgaitan/pinax-theme-bootstrap-account/archive/master.zip
 psycopg2==2.5.2
 progressbar==2.2
 pycrypto==2.6.1
