@@ -39,10 +39,10 @@ pip install -r requirements.txt
 
 Atención porque para que ese comando funcione, tenés que ejecutarlo desde `root` de `Preciosa` (Es decir, la carpeta que creaste cuando clonaste el repositorio).
 
-Instalar Postgres y PostGIS
----------------------------
+Instalar y configurar Postgres y PostGIS
+-----------------------------------------
 
-Seguir [este documento](https://github.com/nachopro/preciosa/wiki/Puesta-a-punto-de-PostgreSQL-y-PostGis-en-Ubuntu-o-Debian).
+Seguir [esta guia](https://github.com/mgaitan/preciosa/wiki/Puesta-a-punto-de-PostgreSQL-y-PostGis-en-Ubuntu-o-Debian) en la wiki de Preciosa. 
 
 
 Generación de base de datos
