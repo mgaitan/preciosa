@@ -276,8 +276,16 @@ NEWSLETTER_RICHTEXT_WIDGET = "imperavi.widget.ImperaviWidget"
 DBBACKUP_STORAGE = 'dbbackup.storage.filesystem_storage'
 DBBACKUP_FILESYSTEM_DIRECTORY = os.path.join(PROJECT_ROOT, 'backups')
 
+THUMBNAIL_ALIASES = {
+    '': {
+        '70x70': dict(size=(70, 70), quality=75, crop="center"),
+    }
+}
+
 
 try:
     from local_settings import *    # noqa
 except:
     pass
+
+

@@ -9,6 +9,7 @@ from django.db.models import Min
 from model_utils import Choices
 from model_utils.fields import MonitorField
 from model_utils.models import TimeStampedModel
+from easy_thumbnails.fields import ThumbnailerImageField
 from image_cropping import ImageRatioField, ImageCropField
 from treebeard.mp_tree import MP_Node
 
@@ -62,8 +63,7 @@ class Producto(models.Model):
     unidad_medida = models.CharField(max_length=10,
                                      choices=UNIDADES_CHOICES, null=True, blank=True)
     notas = models.TextField(null=True, blank=True)
-    foto = models.ImageField(null=True, blank=True,
-                             upload_to='productos')
+    foto = ThumbnailerImageField(null=True, blank=True, upload_to='productos')
     acuerdos = models.ManyToManyField('Cadena', through='PrecioEnAcuerdo')
 
     def __unicode__(self):
