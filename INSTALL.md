@@ -39,6 +39,12 @@ pip install -r requirements.txt
 
 Atención porque para que ese comando funcione, tenés que ejecutarlo desde `root` de `Preciosa` (Es decir, la carpeta que creaste cuando clonaste el repositorio).
 
+Instalar Postgres y PostGIS
+---------------------------
+
+Seguir [este documento](https://github.com/nachopro/preciosa/wiki/Puesta-a-punto-de-PostgreSQL-y-PostGis-en-Ubuntu-o-Debian).
+
+
 Generación de base de datos
 ---------------------------
 
@@ -53,7 +59,9 @@ python manage.py syncdb
 2. Correr las migraciones
 
 ```
+python manage.py cities_light
 python manage.py migrate
+python manage.py loaddata fixtures/blog.json fixtures/newsletter.json fixtures/ciudades.json  fixtures/sucursales.json  fixtures/categorias.json fixtures/marcas.json fixtures/productos.json fixtures/precios.json
 ```
 
 
