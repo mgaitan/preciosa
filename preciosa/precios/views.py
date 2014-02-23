@@ -3,27 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
 
-from preciosa.precios.models import Cadena, Sucursal, Producto, Categoria
-from cities_light.models import City
-
-from rest_framework import viewsets
-from preciosa.precios.serializers import (CadenaSerializer, SucursalSerializer,
-                                          CitySerializer)
-
-# API
-
-class CityViewSet(viewsets.ModelViewSet):
-    queryset = City.objects.all()
-    serializer_class = CitySerializer
-
-class CadenaViewSet(viewsets.ModelViewSet):
-    queryset = Cadena.objects.all()
-    serializer_class = CadenaSerializer
-
-
-class SucursalViewSet(viewsets.ModelViewSet):
-    queryset = Sucursal.objects.all()
-    serializer_class = SucursalSerializer   # Create your views here.
+from preciosa.precios.models import Producto, Categoria
 
 
 # Vistas web
@@ -41,7 +21,8 @@ class ProductosListView(ListView):
         context = super(ProductosListView, self).get_context_data(**kwargs)
         # Add in the publisher
         context['categoria'] = self.categoria
-        context['active'] = ','.join(['li.cat-%d a:first' % p.id for p in self.categoria.get_ancestors()])
+        context['active'] = ','.join(['li.cat-%d a:first' % p.id
+                                      for p in self.categoria.get_ancestors()])
         return context
 
 
@@ -52,17 +33,16 @@ class ProductoDetailView(DetailView):
     context_object_name = "producto"
     template_name = "precios/detalle_producto.html"
 
-
     def get_context_data(self, **kwargs):
 
         context = super(ProductoDetailView, self).get_context_data(**kwargs)
         # Add in the publisher
-        context['active'] = ','.join(['li.cat-%d a:first' % p.id for p in self.object.categoria.get_ancestors()])
+        context['active'] = ','.join(['li.cat-%d a:first' % p.id
+                                      for p in self.object.categoria.get_ancestors()])
         return context
 
 
-def autocomplete(request,
-        template_name='precios/autocomplete.html'):
+def autocomplete(request, template_name='precios/autocomplete.html'):
 
     q = request.GET.get('q', '')
     context = {'q': q}

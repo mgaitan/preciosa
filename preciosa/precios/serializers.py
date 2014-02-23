@@ -33,4 +33,4 @@ class CitySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = City
-        fields = ('name',)
+        fields = ('name','latitude','longitude','geoname_id','region')
