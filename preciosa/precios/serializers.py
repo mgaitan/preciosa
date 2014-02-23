@@ -11,9 +11,21 @@ class CadenaSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class SucursalSerializer(serializers.HyperlinkedModelSerializer):
+    lat = serializers.Field()
+    lon = serializers.Field()
+
     class Meta:
         model = Sucursal
-        fields = ('ciudad', 'cadena', 'ciudad', 'horarios', 'telefono')
+        fields = (
+            'cadena',
+            'nombre',
+            'lat',
+            'lon',
+            'ciudad',
+            'direccion',
+            'horarios',
+            'telefono'
+        )
 
 
 class CitySerializer(serializers.HyperlinkedModelSerializer):

@@ -174,6 +174,7 @@ INSTALLED_APPS = [
     "preciosa",
     "preciosa.precios",
     "preciosa.voluntarios",
+    "preciosa.api",
 ]
 
 # compatibilidad con class="alert" de bootstrap 3
