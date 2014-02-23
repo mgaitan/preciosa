@@ -39,7 +39,7 @@ def sucursales_list(request):
             point = Point(*point_str, srid=4326)
             distance = request.GET.get('d', 5)
             circulo = (point, D(km=distance))
-            sucursales = sucursales.filter(ubicacion__distance_lte=circulo)
+            sucursales = sucursales.filter(ubicacion__distance_lte=circulo).distance(point).order_by('distance')
 
         serializer = SucursalSerializer(sucursales, many=True)
         return Response(serializer.data)
