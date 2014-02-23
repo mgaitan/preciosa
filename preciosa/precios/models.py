@@ -143,11 +143,17 @@ class Sucursal(models.Model):
 
     ubicacion = models.PointField(srid=4326, null=True, blank=True,)
 
+    objects = models.GeoManager()
+
     def _latitud(self):
-        return self.ubicacion.x
+        if self.ubicacion:
+            return self.ubicacion.y
+        return None
 
     def _longitud(self):
-        return self.ubicacion.y
+        if self.ubicacion:
+            return self.ubicacion.x
+        return None
 
     lat = property(_latitud)
     lon = property(_longitud)
