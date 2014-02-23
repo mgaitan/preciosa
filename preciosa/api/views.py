@@ -11,11 +11,10 @@ from preciosa.precios.models import Sucursal, Cadena
 from preciosa.precios.serializers import (CadenaSerializer, SucursalSerializer,
                                           CitySerializer)
 
-# API
 
 
 class CityViewSet(viewsets.ModelViewSet):
-    queryset = City.objects.all()
+    queryset = City.objects.filter(country__name='Argentina')
     serializer_class = CitySerializer
 
 
