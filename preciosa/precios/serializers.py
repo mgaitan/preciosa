@@ -3,11 +3,10 @@ from cities_light.models import City
 from preciosa.precios.models import Cadena, Sucursal
 
 
-
 class CadenaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Cadena
-        fields = ('nombre',)
+        fields = ('id', 'nombre','cadena_madre',)
 
 
 class SucursalSerializer(serializers.HyperlinkedModelSerializer):
