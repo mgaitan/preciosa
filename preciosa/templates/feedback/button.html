@@ -1,0 +1,35 @@
+<div id="feedback_button" class="white right normal"><a href="/feedback/">comentarios</a></div>
+<div id="feedback_drop" class="hiding"></div>
+<div id="feedback_popup" style="min-height: 260px;" class="hiding">
+    <div class="row">
+    <form class="feedback" action="/feedback/ajax{{ request.path }}" method="POST">
+        <fieldset>
+        {% csrf_token %}
+        <div class="email error"> </div>
+        <label for="email">email</label>
+            <input class="input-block-level" type="email" name="email" value="{{ request.user.email }}" required />
+        <div class="subject error"> </div>
+        <label for="subject">Asunto (opcional)</label>
+            <input  class="input-block-level" name="subject"/>
+        <div class="text error"> </div>
+        <label for="text">Mensaje</label>
+            <textarea rows=4 class="input-block-level" name="text" required></textarea>
+        <div class="buttons">
+            <button class"btn btn-warning pull-right">Enviar</button>
+        </div>
+        </fieldset>
+    </form>
+    </div>
+    <div class="thanks hiding" style="padding: 10px;">¡Gracias por tu mensaje!</div>
+    <div class="close"></div>
+</div>
+
+<script>
+    $(function(){
+        feedback.init({
+            'button':$('#feedback_button'),
+            'drop':$('#feedback_drop'),
+            'popup':$('#feedback_popup')
+        });
+    });
+</script>

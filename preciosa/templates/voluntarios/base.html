@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'feedback/main.css' %}"/>
+{% endblock extra_head %}
+
+{% block extra_footer %}
+    <script src="{% static 'feedback/jquery.form.js' %}"></script>
+    <script src="{% static 'feedback/main.js' %}"></script>
+    {% include "feedback/button.html" %}
+{% endblock extra_footer %}

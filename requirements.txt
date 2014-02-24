@@ -22,6 +22,7 @@ django-bootstrap-form==3.1
 django-cities-light==2.1.11
 django-dbbackup==1.80.2
 django-extensions==1.1.1
+https://github.com/jaredly/django-feedback/archive/master.zip
 django-forms-bootstrap==3.0.0
 django-imperavi==0.2.3
 django-jsonfield==0.8.12

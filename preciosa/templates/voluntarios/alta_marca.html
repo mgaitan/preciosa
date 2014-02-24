@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "voluntarios/base.html" %}
 {% load bootstrap %}
 {% load humanize %}
 {% load cropping thumbnail %}
@@ -106,6 +106,8 @@
 
 
 {% block extra_footer %}
+    {{ block.super }}
+
     <script type="text/javascript">
 
     $(function(){
