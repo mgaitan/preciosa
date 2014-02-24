@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+
+
+
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'feedback/main.css' %}"/>
 {% endblock extra_head %}
+
+{% block body_top %}<a class="btn btn-min pull-right" style="margin-bottom:-40px" href="{% url "voluntarios_dashboard" %}"><i class="fa fa-chevron-left"></i> Volver al panel de voluntarios</a> {% endblock body_top %}
 
 {% block extra_footer %}
     <script src="{% static 'feedback/jquery.form.js' %}"></script>
