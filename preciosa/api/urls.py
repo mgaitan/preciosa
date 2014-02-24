@@ -28,6 +28,7 @@ class MyRouter(routers.DefaultRouter):
             def get(self, request, format=None):
                 ret = {
                     'sucursales': reverse('sucursales', request=request),
+                    'productos': reverse('productos', request=request),
                     # listar acá otras urls que queremos que aparezcan en
                     # la home de la API
                 }
@@ -45,6 +46,7 @@ router.register(r'ciudades', views.CityViewSet)
 
 urlpatterns = patterns("preciosa.api.views",
     url(r"^sucursales/$", views.SucursalesList.as_view(), name='sucursales'),
+    url(r"^productos/$", views.ProductosList.as_view(), name='productos'),
     url(r"^", include(router.urls))
 
 
