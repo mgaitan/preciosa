@@ -1,8 +1,7 @@
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 
-from rest_framework import generics
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -13,18 +12,31 @@ from preciosa.precios.serializers import (CadenaSerializer, SucursalSerializer,
                                           CitySerializer)
 
 
+class CreateListRetrieveViewSet(mixins.CreateModelMixin,
+                                mixins.ListModelMixin,
+                                mixins.RetrieveModelMixin,
+                                viewsets.GenericViewSet):
+    """
+    A viewset that provides `retrieve`, `create`, and `list` actions.
+
+    To use it, override the class and set the `.queryset` and
+    `.serializer_class` attributes.
+    """
+    pass
+
+
 
 class CityViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = City.objects.filter(country__name='Argentina')
     serializer_class = CitySerializer
 
 
-class CadenaViewSet(viewsets.ModelViewSet):
+class CadenaViewSet(CreateListRetrieveViewSet):
     queryset = Cadena.objects.all()
     serializer_class = CadenaSerializer
 
 
-class SucursalViewSet(viewsets.ModelViewSet):
+class SucursalViewSet(CreateListRetrieveViewSet):
     queryset = Sucursal.objects.all()
     serializer_class = SucursalSerializer   # Create your views here.
 
