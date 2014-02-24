@@ -2,6 +2,7 @@
 site_media
 .wiki
 *.db
+*.swp
 
 *.py[cod]
 
