@@ -78,6 +78,7 @@ class Preciosa(Node):
             self.dbbackup()
         self.django_command('syncdb')
         self.django_command('migrate')
+        self.django_command('collectstatic --noinput')
         self.restart()
 
 if __name__ == '__main__':
