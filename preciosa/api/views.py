@@ -1,13 +1,14 @@
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
+from django.db.models import Q
 
 from rest_framework import viewsets, mixins, generics
 
 from cities_light.models import City
-from preciosa.precios.models import Sucursal, Cadena
+from preciosa.precios.models import Sucursal, Cadena, Producto
 
 from preciosa.precios.serializers import (CadenaSerializer, SucursalSerializer,
-                                          CitySerializer)
+                                          CitySerializer, ProductoSerializer)
 
 
 class CreateListRetrieveViewSet(mixins.CreateModelMixin,
@@ -69,3 +70,31 @@ class SucursalesList(mixins.ListModelMixin,
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+
+
+class ProductosList(mixins.ListModelMixin,
+                     mixins.CreateModelMixin,
+                     generics.GenericAPIView):
+
+    queryset = Producto.objects.all()
+    serializer_class = ProductoSerializer
+
+    def get_queryset(self):
+        queryset = super(ProductosList, self).get_queryset()
+        barcode = self.request.QUERY_PARAMS.get('barcode', None)
+        string = self.request.QUERY_PARAMS.get('string', None)
+
+        if barcode:
+            queryset = queryset.filter(upc__icontains=barcode)
+
+        if string:
+            queryset = queryset.filter(
+                Q(descripcion__icontains=string)
+                #| Q(marca__nombre__icontains=string)
+                #| Q(marca__fabricante__nombre__icontains=string)
+            )
+
+        return queryset
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)

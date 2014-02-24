@@ -1,7 +1,7 @@
 from django.contrib.gis import admin
 from django.contrib.gis.geos import Point
 
-from preciosa.precios.models import Cadena, Sucursal, Marca, EmpresaFabricante
+from preciosa.precios.models import Cadena, Sucursal, Marca, EmpresaFabricante, Producto
 
 
 class SucursalAdmin(admin.OSMGeoAdmin):
@@ -16,4 +16,5 @@ class SucursalAdmin(admin.OSMGeoAdmin):
 admin.site.register(Marca)
 admin.site.register(EmpresaFabricante)
 admin.site.register(Cadena)
+admin.site.register(Producto)
 admin.site.register(Sucursal, SucursalAdmin)
