@@ -1,5 +1,6 @@
 {% extends "voluntarios/base.html" %}
 {% load bootstrap %}
+{% load staticfiles %}
 {% load cropping thumbnail %}
 
 {# pongo los mensajes más cerca del formulario #}
@@ -31,6 +32,9 @@
             <p class="text-center"><a href="https://www.google.com.ar/search?q={{ instance.nombre|iriencode }}%20logo&source=lnms&tbm=isch" target="_blank">buscar</a></p>
     </div>
 
+<p>
+<button type="button" id="ayuda" class="btn btn-outline btn-primary btn-sm pull-right" data-toggle="modal" data-target="#ayudaModal" ><i class="fa fa-info-circle"></i> ¿Necesitás ayuda?</button></p>
+
 
 </div> </div>
 
@@ -52,6 +56,29 @@
         {% endif %}
 
     </form>
+
+
+<div class="modal fade" id="ayudaModal" tabindex="-1" role="dialog" aria-labelledby="ayudaModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Cómo recortar un logo</h4>
+      </div>
+      <div class="modal-body">
+         <p>Tenés que ajustando elrectángulo de línea punteada, desde los puntos marcados, centrando el logo con un pequeño margen.</p>
+         <p><strong>   Por ejemplo:</strong></p>
+    <p><img src="{% static 'img/recorte-ejemplo.jpg' %}" /></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
 {% endblock body %}
 
 
@@ -70,8 +97,10 @@
             if (paso === 1){
                 // ocultamos la interfaz de cropping
                 $('#id_logo_cropped').parents('.form-group').hide();
+                $('#ayuda').hide();
             } else{
                 $('#id_logo').parents('.form-group').hide();
+                $('#ayuda').show();
             }
         });
     </script>
