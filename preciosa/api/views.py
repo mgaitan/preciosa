@@ -58,9 +58,9 @@ class SucursalesList(mixins.ListModelMixin,
             except ValueError:
                 pass
             else:
-                point = Point(lat, lon, srid=4326)
+                point = Point(lon, lat, srid=4326)
                 circulo = (point, D(km=radio))
-                queryset = queryset.filter(ubicacion__distance__lte=circulo)
+                queryset = queryset.filter(ubicacion__distance_lte=circulo)
                 queryset = queryset.distance(point).order_by('distance')
         return queryset
 
