@@ -2,12 +2,19 @@ language: python
 python:
   - "2.7"
 
+env:
+  - CFLAGS="-O0"
+
 # command to install dependencies
 install:
   - "pip install -r requirements.txt --use-mirrors"
 
+virtualenv:
+  system_site_packages: true
+
 # database creation
 before_script:
+  - sudo apt-get install -qq libxml2-dev libxslt-dev
   - psql -c 'create database preciosa;' -U postgres
   - psql -c 'CREATE EXTENSION postgis;' -U postgres -d preciosa
   - psql -c 'CREATE EXTENSION postgis_topology;' -U postgres -d preciosa
