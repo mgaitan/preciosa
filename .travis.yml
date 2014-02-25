@@ -22,4 +22,4 @@ before_script:
   - psql -c 'CREATE EXTENSION postgis_topology;' -U postgres -d preciosa
 
 # command to run tests
-script: python manage.py tests
+script: python manage.py test
