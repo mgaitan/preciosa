@@ -28,11 +28,7 @@ urlpatterns = patterns("",
 
     url(r'^autocomplete/', views.autocomplete, name='autocomplete'),
 
-    url(r'^$',
-        view=ArticleListView.as_view(),
-        name='home'),
-
-    url(r'^', include('radpress.urls')),
+    url(r'^blog/', include('radpress.urls')),
     url(r"^voluntarios/", include("preciosa.voluntarios.urls")),
 
 )

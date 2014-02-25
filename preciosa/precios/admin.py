@@ -3,6 +3,16 @@ from django.contrib.gis.geos import Point
 
 from preciosa.precios.models import Cadena, Sucursal, Marca, EmpresaFabricante, Producto
 
+from django.contrib.flatpages.models import FlatPage
+from imperavi.admin import ImperaviAdmin
+
+
+class CustomFlatPageAdmin(ImperaviAdmin):
+    pass
+
+admin.site.unregister(FlatPage)
+admin.site.register(FlatPage, CustomFlatPageAdmin)
+
 
 class SucursalAdmin(admin.OSMGeoAdmin):
     center = Point((-45, -55), srid=4326)
