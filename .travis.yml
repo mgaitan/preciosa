@@ -5,6 +5,9 @@ python:
 env:
   - CFLAGS="-O0"
 
+before_install:
+  - sudo apt-get install -qq libxml2-dev libxslt-dev
+
 # command to install dependencies
 install:
   - "pip install -r requirements.txt --use-mirrors"
@@ -14,7 +17,6 @@ virtualenv:
 
 # database creation
 before_script:
-  - sudo apt-get install -qq libxml2-dev libxslt-dev
   - psql -c 'create database preciosa;' -U postgres
   - psql -c 'CREATE EXTENSION postgis;' -U postgres -d preciosa
   - psql -c 'CREATE EXTENSION postgis_topology;' -U postgres -d preciosa
