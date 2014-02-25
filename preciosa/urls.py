@@ -19,6 +19,7 @@ urlpatterns = patterns("",
     url(r"^account/", include("account.urls")),
     url(r'^newsletter/', include('newsletter.urls')),
     url(r'^feedback/', include('feedback.urls')),
+    url(r'^imperavi/', include('imperavi.urls')),
     url(r'^(\d+)-([a-z0-9-]+)/$',
         views.ProductosListView.as_view(), name='lista_productos'),
     url(r'^(\d+)-([a-z0-9-]+)/(?P<pk>\d+)-([a-z0-9-]+)$',
@@ -27,11 +28,7 @@ urlpatterns = patterns("",
 
     url(r'^autocomplete/', views.autocomplete, name='autocomplete'),
 
-    url(r'^$',
-        view=ArticleListView.as_view(),
-        name='home'),
-
-    url(r'^', include('radpress.urls')),
+    url(r'^blog/', include('radpress.urls')),
     url(r"^voluntarios/", include("preciosa.voluntarios.urls")),
 
 )
