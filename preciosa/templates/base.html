@@ -3,6 +3,7 @@
 {% load blocktrans trans from i18n %}
 {% load radpress_static_url from radpress_tags %}
 {% load account_tags %}
+{% load google_analytics %}
 
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
@@ -50,7 +51,7 @@
 
 
      {{ form.media }}
-
+    {% google_analytics %}
 </head>
 
 <body data-cat='{% block cat %}{% endblock cat %}'>
