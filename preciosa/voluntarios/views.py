@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
 import random
+from django.db.models.loading import get_model
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.core.urlresolvers import reverse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import CreateView
 from annoying.decorators import ajax_request
 
-from preciosa.precios.models import Categoria, Marca
+from preciosa.precios.models import Categoria, Marca, Sucursal
+from preciosa.voluntarios.mixins import AuthenticatedViewMixin
 from preciosa.voluntarios.models import (MapaCategoria, MarcaEmpresaCreada,
-                                         VotoMarcaEmpresaCreada)
-from preciosa.voluntarios.forms import (MapaCategoriaForm,
-                                        MarcaModelForm,
-                                        EmpresaFabricanteModelForm,
-                                        LogoMarcaModelForm)
+                                         SucursalCadenaCreada)
+from preciosa.voluntarios.forms import (CadenaModelForm, EmpresaFabricanteModelForm,
+                                        MapaCategoriaForm, MarcaModelForm,
+                                        LogoMarcaModelForm, SucursalModelForm)
 
 
 MSG_EXITO = [u'Buenísimo, Guardamos tu elección ¿Otra?',
@@ -135,23 +138,28 @@ def alta_marca(request, pk=None, paso=None):
                              u'¡Genial! Guardamos %s %s' % (txt, instance.nombre))
             return redirect('alta_marca')
 
-
     creados = MarcaEmpresaCreada.objects.exclude(user=request.user).order_by('created')[:5]
 
     return render(request, 'voluntarios/alta_marca.html', {'creados': creados,
                   'form_marca': form_marca, 'form_empresa': form_empresa})
 
+
 @login_required
 @ajax_request
 def voto_item(request, pk):
-    import ipdb; ipdb.set_trace()
     if request.method == 'POST':
-        item = get_object_or_404(MarcaEmpresaCreada, pk=pk)
+        # Utilizo get_model para que este método sea común a varios modelos
+        app_label, model_name = request.POST.get('model', '.').split(".")
+        model = get_model(app_label, model_name)
+        item = get_object_or_404(model, pk=pk)
         if item.votos.filter(user=request.user).exists():
             # el user ya votó este item
             return {'result': False}
         voto = 1 if request.POST.get('voto') == 'true' else -1
-        VotoMarcaEmpresaCreada.objects.create(user=request.user, item=item, voto=voto)
+        # el trackeo de los votos, se debe hacer sobre un entidad llamada
+        # "Voto[nombre_entidad]. Ej: MarcaEmpresaCreada y
+        # VotoMarcaEmpresaCreada
+        get_model(app_label, u"Voto{}".format(model_name)).objects.create(user=request.user, item=item, voto=voto)
         return {'result': True}
     return {'result': False}
 
@@ -165,3 +173,61 @@ def autocomplete_nombre_marca(request):
     context.update(queries)
     return render(request, "voluntarios/autocomplete_nombre_marca.html",
                   context)
+
+
+def autocomplete_nombre_sucursal(request):
+    q = request.GET.get('q', '')
+    context = {'q': q}
+    queries = {}
+    queries['sucursales'] = Sucursal.objects.filter(nombre__icontains=q)[:6]
+
+    context.update(queries)
+    return render(request, "voluntarios/autocomplete_nombre_sucursal.html",
+                  context)
+
+
+class AltaCadenaSucursalesView(AuthenticatedViewMixin, CreateView):
+    template_name = "voluntarios/alta_cadena_sucursal.html"
+    form_class = SucursalModelForm
+    second_form_class = CadenaModelForm
+
+    def get_context_data(self, **kwargs):
+        context = super(AltaCadenaSucursalesView, self).get_context_data(**kwargs)
+        if 'form_sucursal' not in context:
+            context['form_sucursal'] = self.form_class()
+        if 'form_cadena' not in context:
+            context['form_cadena'] = self.second_form_class()
+        context["creados"] = SucursalCadenaCreada.objects.exclude(user=self.request.user).order_by('created')[:5]
+        return context
+
+    def form_invalid(self, **kwargs):
+        return self.render_to_response(self.get_context_data(**kwargs))
+
+    def post(self, request, *args, **kwargs):
+
+        if 'btn_form_sucursal' in request.POST:
+            form_class = self.get_form_class()
+            form_name = 'form_sucursal'
+        else:
+            form_class = self.second_form_class
+            form_name = 'form_cadena'
+
+        self.object = None
+        form = self.get_form(form_class)
+
+        if form.is_valid():
+            instance = form.save()
+            scCreada = {'user': request.user, form_name.split('_')[1]: instance}
+            SucursalCadenaCreada.objects.create(**scCreada)
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(**{form_name: form})
+
+    def get_success_url(self, **kwargs):
+        messages.add_message(self.request, messages.SUCCESS,
+                             u"¡Excelente! Guardamos la {} {}".format(
+                                 self.object._meta.verbose_name,
+                                 self.object))
+        return reverse('alta_cadena_sucursal')
+
+alta_cadena_sucursal = AltaCadenaSucursalesView.as_view()

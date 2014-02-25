@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% load humanize %}
+{% load cropping thumbnail %}
+
+{# pongo los mensajes más cerca del formulario #}
+{% block messages %}{% endblock  %}
+{% block body %}
+    <h1 class="page-header">Agregar sucursal</h1>
+     <p class="lead">
+        Conocer todas las sucursales de las diferentes cadenas de supermercados
+        nos permitirá, en un futuro, hacer estadisticas para comprar mejor.
+        Podremos saber, por ejemplo, <strong> ¿Cuál sucursal de mi zona a
+          remarcado en promedio más los precios?</strong>.
+    </p>
+    <p class="lead">
+        Para hacer esto, primero necesitamos conocer todas las sucursales. Ya conocemos varias, pero seguro vos conocés más.
+    </p>
+    {% include "_messages.html" %}
+
+<div class="row">
+    <div class="col-lg-5">
+        <h3>Agregar una nueva sucursal</h3>
+        <form method="post" action="." enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form_sucursal|bootstrap }}
+            <input class="btn btn-primary btn-lg" type="submit" name="btn_form_sucursal" value="Agregar esta sucursal" />
+        </form>
+    </div>
+    <div class="col-lg-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">¿No está la cadena de supermercados que buscás?</div>
+            <div class="panel-body">
+                 <form method="post" action="." enctype="multipart/form-data" >
+                     {% csrf_token %}
+                     {{ form_cadena|bootstrap }}
+                     <input class="btn btn-primary" type="submit" name="btn_form_cadena" value="Agregar" />
+                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="chat-panel panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-comments fa-fw"></i>Votar actividad recientemente
+            </div>
+            <div class="panel-body">
+                <ul class="chat">
+                    {% for item in creados %}
+                    <li class="left clearfix">
+                    <span class="chat-img pull-left">
+                        <p>
+                        <button title="Parece correcto" class="btn btn-success btn-circle vot_yes" data-pk="{{ item.id }}" type="button">
+                            <i class="fa fa-check"></i>
+                        </button>
+                        </p>
+                        <p>
+                        <button title="Parece incorrecto" class="btn btn-danger btn-circle vot_no" data-pk="{{ item.id }}" type="button">
+                            <i class="fa fa-times"></i>
+                        </button>
+                        </p>
+                    </span>
+                    <div class="chat-body clearfix">
+                        <div class="header">
+                            <strong class="primary-font">{{ item.user.username }} </strong>
+                            <small class="pull-right text-muted">
+                                <i class="fa fa-clock-o fa-fw"></i> {{ item.created|naturaltime }}
+                            </small>
+                        </div>
+                        <p>
+                        {% if item.sucursal %}
+                            creó la sucursal <strong>{{ item.sucursal.nombre }}</strong>
+                            perteneciente a <strong>{{ item.sucursal.cadena.nombre }}</strong>
+                        {% else %}
+                            creó la cadena de supermercados
+                            <strong>{{ item.cadena.nombre }}</strong>
+                        {% endif %}
+                        </p>
+                    </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+           </div><!-- /.panel-body -->
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
+{% block extra_footer %}
+    <script type="text/javascript">
+
+    $(function(){
+    // Make a javascript Autocomplete object and set it up
+    var autocomplete2 = $('#id_nombre').yourlabsAutocomplete({
+        url: '{% url "autocomplete_nombre_sucursal" %}',
+    });
+
+    $('button.vot_yes').on('click', function(){
+        var $but = $(this);
+        var pk = $but.data('pk');
+        $.post('./voto/' + pk + '/',
+               {'voto': true, 'model': 'voluntarios.SucursalCadenaCreada'},
+               function(response){
+                   if (response.result){
+                       $but.parents('.left').fadeOut();
+                   }
+               }
+        );
+    });
+
+    $('button.vot_no').on('click', function(){
+        var $but = $(this);
+        var pk = $but.data('pk');
+        $.post('./voto/' + pk + '/', {'voto': false, 'model':
+          'voluntarios.SucursalCadenaCreada'}, function(response){
+            if (response.result){
+                $but.parents('.left').fadeOut();
+            }
+        });
+    });
+
+
+    });
+
+    </script>
+{% endblock extra_footer %}
