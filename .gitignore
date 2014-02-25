@@ -1,5 +1,6 @@
 # preciosa
 site_media
+local_settings.py
 .wiki
 *.db
 *.swp
