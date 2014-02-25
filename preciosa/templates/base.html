@@ -72,19 +72,18 @@
                 <a class="navbar-brand" href="/">Preciosa</a>
 
             <ul class="nav navbar-nav">
+                {% for tab in tabs %}
+                  <li>
+                    <a href="{{ tab.get_absolute_url }}">{{ tab.title }}</a>
+                </li>
+                {% endfor %}
+
+                {% comment %}
                   <li>
                     <a href="{% url 'radpress-article-list' %}">{% trans "Blog" %}</a>
                   </li>
-                  <li>
-                    <a href="{% url 'radpress-article-archive' %}">{% trans "Archivo" %}</a>
-                  </li>
-                  <li>
-                    <a href="{% url 'radpress-rss' %}">{% trans "RSS" %}</a>
-                    </li>
+                {% endcomment %}
 
-                <li>
-                    <a href="{% url 'newsletter_subscribe_request' 'preciosa' %}">Newsletter</a>
-                </li>
                 <li>
                    <a href="{% url 'voluntarios_dashboard' %}"><i class="success fa fa-users"></i> Voluntarios</a>
                 </li>
