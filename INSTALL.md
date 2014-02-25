@@ -30,7 +30,7 @@ source preciosa_ve/bin/activate
 Para desactivarlo basta ejecutar `deactivate` en cualquier path del terminal.
 
 Si se trabaja en Windows, no se puede usar el comando `source`. Para activar el virtualenv luego de haber creado
-`preciosa_ve`, ejectuar:
+`preciosa_ve`, ejecutar:
 
 ```
 preciosa_ve\Scripts\activate
