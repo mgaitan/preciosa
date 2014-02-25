@@ -153,7 +153,10 @@ INSTALLED_APPS = [
     "easy_thumbnails",
     "image_cropping",
     "rest_framework",
+
+    # community and stats
     "feedback",
+    "analytical",
 
     # migrations/deploy
     "south",

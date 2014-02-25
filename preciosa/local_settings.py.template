@@ -1,0 +1,31 @@
+DEBUG = True
+# ALLOWED_HOSTS = ['preciosdeargentina.com.ar']
+
+SITE_ID = 2
+STATIC_URL = "/static/"
+STATIC_ROOT = "/projects/preciosa/static/"
+DATABASES = {
+    "default": {
+
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
+        "NAME": 'preciosa', #"preciosa",
+        "USER": "preciosa",
+        "PASSWORD": "",
+        "HOST": "localhost",
+        "PORT": ""
+    }
+}
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'XXX@gmail.com'
+EMAIL_HOST_PASSWORD = 'YYY'
+EMAIL_PORT = 587
+
+THUMBNAIL_DEBUG = True
+THUMBNAIL_BASEDIR = 'thumbs'
+
+
+GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-XXXXXX-X'
+
+
