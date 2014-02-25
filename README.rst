@@ -1,6 +1,8 @@
 Preciosa
 ========
 
+.. image:: https://api.travis-ci.org/mgaitan/preciosa.png
+
 Preciosa (Precios de Argentina) es una plataforma web con aplicaciones para teléfonos inteligentes que facilita el relevamiento de precios y ayuda a encontrar mejores ofertas.
 
 A diferencia de otras aplicaciones existentes, Preciosa no limita la información a precios de productos bajo acuerdo y enfatiza la participación de los usuarios para mantener la información actualizada.
