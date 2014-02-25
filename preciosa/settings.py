@@ -13,12 +13,14 @@ ADMINS = [
 
 MANAGERS = ADMINS
 
+# esta configuración es apta para Travis CI.
+# modificá tu local_settings.py para la configuración de tu entorno
 DATABASES = {
     'default': {
         'ENGINE':'django.contrib.gis.db.backends.postgis',
         'NAME': 'preciosa',
-        'USER': 'dev',
-        'PASSWORD': 'dev',
+        'USER': 'postgres',      # 'dev' si seguiste el tutorial textualmente
+        'PASSWORD': '',          # 'dev' si seguiste el tutorial textualmente
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -292,6 +294,9 @@ REST_FRAMEWORK = {
     'PAGINATE_BY_PARAM': 'page_size',
     'MAX_PAGINATE_BY': 100
 }
+
+
+
 
 
 try:
