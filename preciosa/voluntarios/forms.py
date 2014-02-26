@@ -12,6 +12,7 @@ class MapaCategoriaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(MapaCategoriaForm, self).__init__(*args, **kwargs)
         self.fields['origen'].queryset = Categoria.por_clasificar()
+        self.fields['comentario'].help_text = u'Por favor, indicá las categorías que usarías'
 
     class Meta:
         model = MapaCategoria

@@ -33,6 +33,10 @@ class MapaCategoria(TimeStampedModel):
                                 verbose_name=u"Yo la asociaría con...",
                                 limit_choices_to={'depth': 3})
     user = models.ForeignKey(User, editable=False)
+    separar = models.BooleanField(verbose_name=u'Esta lista debería separarse en '
+                                               u'varias categorías', default=False)
+    comentario = models.TextField(null=True, blank=True)
+
 
     def __unicode__(self):
         return u'%s ---> %s' % (self.origen, self.destino)

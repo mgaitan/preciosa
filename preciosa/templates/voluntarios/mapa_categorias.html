@@ -50,3 +50,14 @@
     </form>
 {% endblock body %}
 
+
+{% block extra_footer %}
+    {{ block.super }}
+
+    <script type="text/javascript">
+        var $comment =  $('#id_comentario').parents('.form-group');
+        $comment.hide();
+        $('#id_separar').on('change', function(){ $comment.toggle() });
+
+    </script>
+{% endblock extra_footer %}
