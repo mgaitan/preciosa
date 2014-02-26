@@ -309,7 +309,7 @@ except:
 if SITE_ID == 2:
     # APPS solo en produccion
 
-    INSTALLED_APPS = INSTALLED_APPS + (
+    INSTALLED_APPS = INSTALLED_APPS + [
         # ...
         'raven.contrib.django.raven_compat',
-    )
+    ]
