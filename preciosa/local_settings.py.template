@@ -15,6 +15,19 @@ DATABASES = {
         "PORT": ""
     }
 }
+
+# Set your DSN value. from http://getsentry.com
+RAVEN_CONFIG = {
+    'dsn': 'https://aa7c9716XXXXXXXXXXXXXXXXXXXXXXXXX:7e46f58d6d1b425d9dd7ea773d647ed6@app.getsentry.com/20054',
+}
+
+# Add raven to the list of installed apps
+INSTALLED_APPS = INSTALLED_APPS + (
+    # ...
+    'raven.contrib.django.raven_compat',
+)
+
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
