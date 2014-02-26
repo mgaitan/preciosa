@@ -1,17 +1,14 @@
 from django.contrib.gis import admin
 from django.contrib.gis.geos import Point
+from preciosa.precios.models import (Cadena, Sucursal, Marca,
+                                     EmpresaFabricante, Producto,
+                                     Categoria)
+from treebeard.admin import TreeAdmin
+from treebeard.forms import movenodeform_factory
 
-from preciosa.precios.models import Cadena, Sucursal, Marca, EmpresaFabricante, Producto
 
-from django.contrib.flatpages.models import FlatPage
-from imperavi.admin import ImperaviAdmin
-
-
-class CustomFlatPageAdmin(ImperaviAdmin):
-    pass
-
-admin.site.unregister(FlatPage)
-admin.site.register(FlatPage, CustomFlatPageAdmin)
+class CategoriaAdmin(TreeAdmin):
+    form = movenodeform_factory(Categoria)
 
 
 class SucursalAdmin(admin.OSMGeoAdmin):
@@ -28,3 +25,4 @@ admin.site.register(EmpresaFabricante)
 admin.site.register(Cadena)
 admin.site.register(Producto)
 admin.site.register(Sucursal, SucursalAdmin)
+admin.site.register(Categoria, CategoriaAdmin)
