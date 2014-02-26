@@ -301,11 +301,15 @@ REST_FRAMEWORK = {
 
 
 
-
-
 try:
     from local_settings import *    # noqa
 except:
     pass
 
+if SITE_ID == 2:
+    # APPS solo en produccion
 
+    INSTALLED_APPS = INSTALLED_APPS + (
+        # ...
+        'raven.contrib.django.raven_compat',
+    )
