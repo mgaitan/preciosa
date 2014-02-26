@@ -2,8 +2,8 @@ from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from precios import views
-from radpress.views import ArticleListView
 
+from django.views.generic.base import RedirectView
 
 import autocomplete_light
 autocomplete_light.autodiscover()
@@ -25,7 +25,7 @@ urlpatterns = patterns("",
     url(r'^(\d+)-([a-z0-9-]+)/(?P<pk>\d+)-([a-z0-9-]+)$',
         views.ProductoDetailView.as_view(),
         name='detalle_producto'),
-
+    url(r'^home/$', RedirectView.as_view(url='/'), name='home'),
     url(r'^autocomplete/', views.autocomplete, name='autocomplete'),
 
     url(r'^blog/', include('radpress.urls')),
