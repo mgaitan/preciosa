@@ -1,4 +1,6 @@
 from django.test import TestCase
+from datetime import timedelta
+from django.utils import timezone
 from decimal import Decimal
 from preciosa.precios.models import Precio
 from preciosa.precios.tests.factories import (SucursalFactory,
@@ -12,14 +14,16 @@ class TestPrecioHistorico(TestCase):
         self.sucursal = SucursalFactory()
         self.producto = ProductoFactory()
 
-    def qs(self):
+    def qs(self, dias=None):
         return Precio.objects.historico(sucursal=self.sucursal,
-                                        producto=self.producto)
+                                        producto=self.producto,
+                                        dias=dias)
 
-    def add(self, precio):
+    def add(self, precio, **kwargs):
         return PrecioFactory(sucursal=self.sucursal,
                              producto=self.producto,
-                             precio=precio)
+                             precio=precio,
+                             **kwargs)
 
     def test_sin_precios(self):
         self.assertEqual(list(self.qs()), [])
@@ -50,3 +54,28 @@ class TestPrecioHistorico(TestCase):
                            'created': p2.created},
                           {'precio': Decimal('10.56'),
                            'created': p.created}])
+
+    def test_mas_nuevos_que(self):
+        limite = timezone.now() - timedelta(10)
+        # registro de hace 10 dias
+        p = self.add('10.56', created=limite)
+        # registro de hoy
+        p2 = self.add('11.20')
+        self.assertEqual(list(self.qs()),
+                         [{'precio': Decimal('11.20'),
+                           'created': p2.created},
+                          {'precio': Decimal('10.56'),
+                           'created': p.created}])
+        self.assertEqual(list(self.qs(11)),
+                         [{'precio': Decimal('11.20'),
+                           'created': p2.created},
+                          {'precio': Decimal('10.56'),
+                           'created': p.created}])
+        # caso limite. seria mejor usar __range  ?
+        self.assertEqual(list(self.qs(10)),
+                         [{'precio': Decimal('11.20'),
+                           'created': p2.created}])
+        self.assertEqual(list(self.qs(9)),
+                         [{'precio': Decimal('11.20'),
+                           'created': p2.created}])
+

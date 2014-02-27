@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta
+from django.utils import timezone
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
@@ -171,9 +172,17 @@ class Sucursal(models.Model):
 
 class PrecioManager(models.Manager):
 
-    def historico(self, producto, sucursal):
+    def historico(self, producto, sucursal, dias=None):
+        """devuelve una lista de precios distintos y la fecha de su cambio
+        ordenados de la mas nueva a las más vieja.
+
+        dias filtra a registros mas nuevos a los X dias.
+        """
         qs = super(PrecioManager, self).get_queryset()
         qs = qs.filter(producto=producto, sucursal=sucursal)
+        if dias:
+            desde = timezone.now() - timedelta(days=dias)
+            qs = qs.filter(created__gte=desde)
         # se ordenará de más nuevo a más viejo, pero
         qs = qs.distinct('precio').values('created', 'precio')
         return sorted(qs, key=lambda i: i['created'], reverse=True)
