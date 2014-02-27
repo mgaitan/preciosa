@@ -27,4 +27,26 @@ class TestPrecioHistorico(TestCase):
     def test_unico(self):
         p = self.add('10.56')
         self.assertEqual(list(self.qs()), [{'precio': Decimal('10.56'),
-                                            'created': p.created }])
+                                            'created': p.created}])
+
+    def test_precio_mas_nuevo_primero(self):
+        p = self.add('10.56')
+        p2 = self.add('11.20')
+        self.assertEqual(list(self.qs()),
+                         [{'precio': Decimal('11.20'),
+                           'created': p2.created},
+                          {'precio': Decimal('10.56'),
+                           'created': p.created}])
+
+    def test_mismo_precio_queda_solo_el_mas_nuevo(self):
+        p = self.add('10.56')
+        p2 = self.add('11.20')
+        p3 = self.add('11.20')      # noqa
+        p4 = self.add('11.30')
+        self.assertEqual(list(self.qs()),
+                         [{'precio': Decimal('11.30'),
+                           'created': p4.created},
+                          {'precio': Decimal('11.20'),
+                           'created': p2.created},
+                          {'precio': Decimal('10.56'),
+                           'created': p.created}])

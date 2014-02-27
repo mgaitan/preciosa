@@ -174,8 +174,9 @@ class PrecioManager(models.Manager):
     def historico(self, producto, sucursal):
         qs = super(PrecioManager, self).get_queryset()
         qs = qs.filter(producto=producto, sucursal=sucursal)
-        qs = qs.order_by('created').distinct('created', 'precio').values('created', 'precio')
-        return qs
+        # se ordenará de más nuevo a más viejo, pero
+        qs = qs.distinct('precio').values('created', 'precio')
+        return sorted(qs, key=lambda i: i['created'], reverse=True)
 
 
 class Precio(TimeStampedModel):
