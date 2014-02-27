@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta
-from django.conf import settings
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
@@ -87,7 +86,8 @@ class Marca(models.Model):
     Ejemplo: Rosamonte
     """
     fabricante = models.ForeignKey('EmpresaFabricante', null=True, blank=True)
-    nombre = models.CharField(max_length=100, unique=True, verbose_name=u"Nombre de la marca")
+    nombre = models.CharField(max_length=100, unique=True,
+                              verbose_name=u"Nombre de la marca")
     logo = ImageCropField(null=True, blank=True,
                           upload_to='marcas')
 
@@ -158,7 +158,6 @@ class Sucursal(models.Model):
     lat = property(_latitud)
     lon = property(_longitud)
 
-
     def clean(self):
         if not self.cadena and not self.nombre:
             raise models.ValidationError('Indique la cadena o el nombre del comercio')
@@ -170,7 +169,18 @@ class Sucursal(models.Model):
         unique_together = (('direccion', 'ciudad'))
 
 
+class PrecioManager(models.Manager):
+
+    def historico(self, producto, sucursal):
+        qs = super(PrecioManager, self).get_queryset()
+        qs = qs.filter(producto=producto, sucursal=sucursal)
+        qs = qs.order_by('created').distinct('created', 'precio').values('created', 'precio')
+        return qs
+
+
 class Precio(TimeStampedModel):
+    objects = PrecioManager()
+
     producto = models.ForeignKey('Producto')
     sucursal = models.ForeignKey('Sucursal')
     precio = models.DecimalField(max_digits=8, decimal_places=2)
