@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta
-from django.conf import settings
+from django.utils import timezone
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
@@ -87,7 +87,8 @@ class Marca(models.Model):
     Ejemplo: Rosamonte
     """
     fabricante = models.ForeignKey('EmpresaFabricante', null=True, blank=True)
-    nombre = models.CharField(max_length=100, unique=True, verbose_name=u"Nombre de la marca")
+    nombre = models.CharField(max_length=100, unique=True,
+                              verbose_name=u"Nombre de la marca")
     logo = ImageCropField(null=True, blank=True,
                           upload_to='marcas')
 
@@ -158,7 +159,6 @@ class Sucursal(models.Model):
     lat = property(_latitud)
     lon = property(_longitud)
 
-
     def clean(self):
         if not self.cadena and not self.nombre:
             raise models.ValidationError('Indique la cadena o el nombre del comercio')
@@ -170,7 +170,27 @@ class Sucursal(models.Model):
         unique_together = (('direccion', 'ciudad'))
 
 
+class PrecioManager(models.Manager):
+
+    def historico(self, producto, sucursal, dias=None):
+        """devuelve una lista de precios distintos y la fecha de su cambio
+        ordenados de la mas nueva a las más vieja.
+
+        dias filtra a registros mas nuevos a los X dias.
+        """
+        qs = super(PrecioManager, self).get_queryset()
+        qs = qs.filter(producto=producto, sucursal=sucursal)
+        if dias:
+            desde = timezone.now() - timedelta(days=dias)
+            qs = qs.filter(created__gte=desde)
+        # se ordenará de más nuevo a más viejo, pero
+        qs = qs.distinct('precio').values('created', 'precio')
+        return sorted(qs, key=lambda i: i['created'], reverse=True)
+
+
 class Precio(TimeStampedModel):
+    objects = PrecioManager()
+
     producto = models.ForeignKey('Producto')
     sucursal = models.ForeignKey('Sucursal')
     precio = models.DecimalField(max_digits=8, decimal_places=2)
