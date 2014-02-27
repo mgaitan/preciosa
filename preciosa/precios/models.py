@@ -193,10 +193,15 @@ class Sucursal(models.Model):
 
 class PrecioManager(models.Manager):
 
-    def historico(self, producto, sucursal, dias=None):
+    def historico(self, producto, sucursal, dias=None, distintos=True):
         """
-        devuelve una lista de precios distintos y la fecha de su cambio
+        dado un producto y sucursal
+        devuelve una lista de precios y la fecha de su registro
         ordenados de la mas nueva a las más vieja.
+
+        por defecto solo muestra precios distintos.
+        Para un historial completo (ejemplo, para graficar
+        una curva de evolucion de precio), asigar ``distintos=False``
 
         dias filtra a registros mas nuevos a los X dias.
         """
@@ -206,7 +211,9 @@ class PrecioManager(models.Manager):
             desde = timezone.now() - timedelta(days=dias)
             qs = qs.filter(created__gte=desde)
         # se ordenará de más nuevo a más viejo, pero
-        qs = qs.distinct('precio').values('created', 'precio')
+        if distintos:
+            qs = qs.distinct('precio')
+        qs = qs.values('created', 'precio')
         return sorted(qs, key=lambda i: i['created'], reverse=True)
 
 

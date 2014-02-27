@@ -14,10 +14,10 @@ class TestPrecioHistorico(TestCase):
         self.sucursal = SucursalFactory()
         self.producto = ProductoFactory()
 
-    def qs(self, dias=None):
+    def qs(self,**kwargs):
         return Precio.objects.historico(sucursal=self.sucursal,
                                         producto=self.producto,
-                                        dias=dias)
+                                        **kwargs)
 
     def add(self, precio, **kwargs):
         return PrecioFactory(sucursal=self.sucursal,
@@ -66,16 +66,31 @@ class TestPrecioHistorico(TestCase):
                            'created': p2.created},
                           {'precio': Decimal('10.56'),
                            'created': p.created}])
-        self.assertEqual(list(self.qs(11)),
+        self.assertEqual(list(self.qs(dias=11)),
                          [{'precio': Decimal('11.20'),
                            'created': p2.created},
                           {'precio': Decimal('10.56'),
                            'created': p.created}])
         # caso limite. seria mejor usar __range  ?
-        self.assertEqual(list(self.qs(10)),
+        self.assertEqual(list(self.qs(dias=10)),
                          [{'precio': Decimal('11.20'),
                            'created': p2.created}])
-        self.assertEqual(list(self.qs(9)),
+        self.assertEqual(list(self.qs(dias=9)),
                          [{'precio': Decimal('11.20'),
                            'created': p2.created}])
+
+    def test_historial_completo(self):
+        p = self.add('10.56')
+        p2 = self.add('11.20')
+        p3 = self.add('11.20')      # noqa
+        p4 = self.add('11.30')
+        self.assertEqual(list(self.qs(distintos=False)),
+                         [{'precio': Decimal('11.30'),
+                           'created': p4.created},
+                          {'precio': Decimal('11.20'),
+                           'created': p3.created},
+                          {'precio': Decimal('11.20'),
+                           'created': p2.created},
+                          {'precio': Decimal('10.56'),
+                           'created': p.created}])
 
