@@ -145,9 +145,12 @@ class EmpresaFabricante(AbstractEmpresa):
 
 
 class Sucursal(models.Model):
+    objects = models.GeoManager()
+
     nombre = models.CharField(max_length=100, null=True, blank=True,
                               help_text="Denominación común. Ej: Jumbo de Alberdi")
-    direccion = models.CharField(max_length=120)
+    # direccion sólo puede ser nulo para sucursales online
+    direccion = models.CharField(max_length=200, null=True, blank=True)
     ciudad = models.ForeignKey('cities_light.City')
     cp = models.CharField(max_length=100, null=True, blank=True)
     telefono = models.CharField(max_length=100, null=True, blank=True)
@@ -157,8 +160,10 @@ class Sucursal(models.Model):
                                help_text='Dejar en blanco si es un comercio único')
 
     ubicacion = models.PointField(srid=4326, null=True, blank=True,)
+    online = models.BooleanField(default=False,
+                                 help_text='Es una sucursal online, no física')
+    url = models.URLField(max_length=200, null=True, blank=True)
 
-    objects = models.GeoManager()
 
     def _latitud(self):
         if self.ubicacion:
@@ -178,7 +183,7 @@ class Sucursal(models.Model):
             raise ValidationError('Indique la cadena o el nombre del comercio')
 
     def __unicode__(self):
-        return u"%s (%s)" % (self.cadena or self.nombre, self.direccion)
+        return u"%s (%s)" % (self.nombre or self.cadena, self.direccion or self.url)
 
     class Meta:
         unique_together = (('direccion', 'ciudad'))
@@ -189,7 +194,8 @@ class Sucursal(models.Model):
 class PrecioManager(models.Manager):
 
     def historico(self, producto, sucursal, dias=None):
-        """devuelve una lista de precios distintos y la fecha de su cambio
+        """
+        devuelve una lista de precios distintos y la fecha de su cambio
         ordenados de la mas nueva a las más vieja.
 
         dias filtra a registros mas nuevos a los X dias.
@@ -202,6 +208,24 @@ class PrecioManager(models.Manager):
         # se ordenará de más nuevo a más viejo, pero
         qs = qs.distinct('precio').values('created', 'precio')
         return sorted(qs, key=lambda i: i['created'], reverse=True)
+
+
+    def mas_probable(self, producto, sucursal, dias=None, ciudad=None, radio=None):
+        """
+        Cuando no hay datos especificos de un
+        producto para una sucursal (:meth:`historico`),
+        debe ofrecerse un precio más probable. Se calcula
+
+         - Precio con más coincidencias para el producto en otras sucursales de la misma cadena en la ciudad (o un radio de distancia)
+         - En su defecto, precio online de la cadena
+        """
+        qs = self.historico(producto, sucursal, dias)
+        if len(qs) > 0:
+            return qs
+
+
+
+
 
 
 class Precio(TimeStampedModel):
@@ -218,6 +242,8 @@ class Precio(TimeStampedModel):
     class Meta:
         verbose_name = u"precio"
         verbose_name_plural = u"precios"
+
+
 
 
 class PrecioEnAcuerdo(models.Model):
