@@ -136,7 +136,7 @@ class Cadena(AbstractEmpresa):
     """Cadena de supermercados. Por ejemplo Walmart"""
 
     cadena_madre = models.ForeignKey('self', null=True, blank=True,
-                                     help_text="Jumbo y Vea son de Cencosud")
+                                     help_text="Ej: Jumbo y Vea son de Cencosud")
 
     class Meta:
         verbose_name = u"cadena de supermercados"
@@ -218,6 +218,7 @@ class Sucursal(models.Model):
         return otras
 
     def clean(self):
+        # TO DO. agregar Tests
         if not one((self.cadena, self.nombre)):
             raise ValidationError(u'Indique la cadena o el nombre del comercio')
         if not one((self.direccion, self.online)):
@@ -236,7 +237,6 @@ class Sucursal(models.Model):
 
 
 class PrecioManager(models.Manager):
-
 
     def _registro_precio(self, qs, distintos=True):
         """dado un qs de Precio, devuelve una lista los precios y
@@ -270,7 +270,7 @@ class PrecioManager(models.Manager):
         # se ordenará de más nuevo a más viejo, pero
         return self._registro_precio(qs, distintos)
 
-    def mas_probable(self, producto, sucursal, dias=None, radio=None):
+    def mas_probables(self, producto, sucursal, dias=None, radio=None):
         """
         Cuando no hay datos especificos de un
         producto para una sucursal (:meth:`historico`),
@@ -286,7 +286,7 @@ class PrecioManager(models.Manager):
 
         qs = super(PrecioManager, self).get_queryset()
 
-        # precios para sucursales de la misma cadena cercana
+        # precios para sucursales de la misma cadena de la ciudad o cercana
         cercanas = sucursal.cercanas(radio=radio,
                                      misma_cadena=True).values_list('id', flat=True)
         qs = qs.filter(producto=producto, sucursal__id__in=cercanas).distinct('precio')
