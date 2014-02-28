@@ -50,12 +50,14 @@ class SucursalesList(mixins.ListModelMixin,
         queryset = super(SucursalesList, self).get_queryset()
 
         q = self.request.QUERY_PARAMS.get('q', None)
+        limit = self.request.QUERY_PARAMS.get('limit', None)
 
         lat = self.request.QUERY_PARAMS.get('lat', None)
         lon = self.request.QUERY_PARAMS.get('lon', None)
         radio = self.request.QUERY_PARAMS.get('radio', None)
 
         if q:
+            words = q.split(' ')
             queryset = queryset.filter(Q(cadena__nombre__icontains=q) | Q(nombre__icontains=q))
 
         if all((lat, lon, radio)):
@@ -72,6 +74,9 @@ class SucursalesList(mixins.ListModelMixin,
                 circulo = (point, D(km=radio))
                 queryset = queryset.filter(ubicacion__distance_lte=circulo)
                 queryset = queryset.distance(point).order_by('distance')
+
+        if limit:
+            queryset = queryset[:limit]
 
         return queryset
 
@@ -92,16 +97,16 @@ class ProductosList(mixins.ListModelMixin,
     def get_queryset(self):
         queryset = super(ProductosList, self).get_queryset()
         barcode = self.request.QUERY_PARAMS.get('barcode', None)
-        string = self.request.QUERY_PARAMS.get('string', None)
+        q = self.request.QUERY_PARAMS.get('q', None)
 
         if barcode:
             queryset = queryset.filter(upc__icontains=barcode)
 
-        if string:
+        if q:
             queryset = queryset.filter(
-                Q(descripcion__icontains=string)
-                #| Q(marca__nombre__icontains=string)
-                #| Q(marca__fabricante__nombre__icontains=string)
+                Q(descripcion__icontains=q)
+                #| Q(marca__nombre__icontains=q)
+                #| Q(marca__fabricante__nombre__icontains=q)
             )
 
         return queryset
