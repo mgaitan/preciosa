@@ -14,7 +14,7 @@ class TestPrecioHistorico(TestCase):
         self.sucursal = SucursalFactory()
         self.producto = ProductoFactory()
 
-    def qs(self,**kwargs):
+    def qs(self, **kwargs):
         return Precio.objects.historico(sucursal=self.sucursal,
                                         producto=self.producto,
                                         **kwargs)
@@ -35,7 +35,7 @@ class TestPrecioHistorico(TestCase):
 
     def test_precio_mas_nuevo_primero(self):
         p = self.add('10.56')
-        p2 = self.add('11.20')
+        p2 = self.add('11.20')      # mas nuevo
         self.assertEqual(list(self.qs()),
                          [{'precio': Decimal('11.20'),
                            'created': p2.created},
@@ -93,4 +93,49 @@ class TestPrecioHistorico(TestCase):
                            'created': p2.created},
                           {'precio': Decimal('10.56'),
                            'created': p.created}])
+
+
+class TestMasProbables(TestCase):
+
+    def setUp(self):
+        self.producto = ProductoFactory()
+        self.suc = SucursalFactory()
+        self.suc2 = SucursalFactory(ciudad=self.suc.ciudad,
+                                    cadena=self.suc.cadena)
+        self.suc3 = SucursalFactory(ciudad=self.suc.ciudad,
+                                    cadena=self.suc.cadena)
+        import ipdb; ipdb.set_trace()
+
+    def add(self, precio=10, sucursal=None, **kwargs):
+        if sucursal is None:
+            sucursal = self.suc2
+
+        return PrecioFactory(sucursal=sucursal,
+                             producto=self.producto,
+                             precio=precio,
+                             **kwargs)
+
+    def qs(self, **kwargs):
+        return Precio.objects.mas_probables(sucursal=self.suc,
+                                            producto=self.producto,
+                                            **kwargs)
+
+    def test_si_hay_precios_de_la_sucursal_devuelve_esos(self):
+        p1 = self.add(10, sucursal=self.suc)
+        p2 = self.add(20, sucursal=self.suc)
+        self.assertEqual(list(self.qs()),
+                         [{'precio': Decimal('20'),
+                           'created': p2.created},
+                          {'precio': Decimal('10'),
+                           'created': p1.created}])
+
+    def test_precios_misma_cadena_en_la_ciudad(self):
+        p1 = self.add(10, sucursal=self.suc2)
+        p2 = self.add(11, sucursal=self.suc3)
+        self.assertEqual(list(self.qs()),
+                         [{'precio': Decimal('11'),
+                           'created': p2.created},
+                          {'precio': Decimal('10'),
+                           'created': p1.created}])
+
 
