@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 from django.db.models import Min
+from django.contrib.gis.geos import Point
+from django.contrib.gis.measure import D
 from model_utils import Choices
 from model_utils.fields import MonitorField
 from model_utils.models import TimeStampedModel
@@ -177,6 +179,44 @@ class Sucursal(models.Model):
             return self.ubicacion.x
         return None
 
+    @property
+    def point(self):
+        """
+        devuelve una instancia Punto para la ubicacion de
+        la sucursal
+        """
+        if self.lat and self.lon:
+            return Point(self.lon, self.lat, srid=4326)
+
+    def cercanas(self, radio=None, misma_cadena=False):
+        """
+        Devuelve un listado de cadenas cercanas.
+        Si radio es None, se considera toda la ciudad. Si es un numero
+        es "a la redonda" a partir de la posicion de la sucursal actual.
+
+        El orden es por cercania, si puede calcularse.
+
+        misma_cadena condiciona a otras sucursales de la misma
+        cadena
+        """
+        otras = Sucursal.objects.all()
+        if self.id:
+            otras = otras.exclude(id=self.id)
+
+        if misma_cadena:
+            otras = otras.filter(cadena=self.cadena)
+
+        if radio and self.point:
+            circulo = (self.point, D(km=radio))
+            otras = otras.filter(ubicacion__distance_lte=circulo)
+        else:
+            otras = otras.filter(ciudad=self.ciudad)
+
+        if self.point:
+            otras = otras.distance(self.point).order_by('distance')
+
+        return otras
+
     def clean(self):
         if not one((self.cadena, self.nombre)):
             raise ValidationError(u'Indique la cadena o el nombre del comercio')
@@ -197,6 +237,19 @@ class Sucursal(models.Model):
 
 class PrecioManager(models.Manager):
 
+
+    def _registro_precio(self, qs, distintos=True):
+        """dado un qs de Precio, devuelve una lista los precios y
+        la fecha de registro, ordenados de más nuevo a más viejo.
+
+        Si distintos es True, sólo devuelve la primera fecha
+        en que un precio cambió
+        """
+        if distintos:
+            qs = qs.distinct('precio')
+        qs = qs.values('created', 'precio')
+        return sorted(qs, key=lambda i: i['created'], reverse=True)
+
     def historico(self, producto, sucursal, dias=None, distintos=True):
         """
         dado un producto y sucursal
@@ -215,23 +268,38 @@ class PrecioManager(models.Manager):
             desde = timezone.now() - timedelta(days=dias)
             qs = qs.filter(created__gte=desde)
         # se ordenará de más nuevo a más viejo, pero
-        if distintos:
-            qs = qs.distinct('precio')
-        qs = qs.values('created', 'precio')
-        return sorted(qs, key=lambda i: i['created'], reverse=True)
+        return self._registro_precio(qs, distintos)
 
-    def mas_probable(self, producto, sucursal, dias=None, ciudad=None, radio=None):
+    def mas_probable(self, producto, sucursal, dias=None, radio=None):
         """
         Cuando no hay datos especificos de un
         producto para una sucursal (:meth:`historico`),
         debe ofrecerse un precio más probable. Se calcula
 
-         - Precio con más coincidencias para el producto en otras sucursales de la misma cadena en la ciudad (o un radio de distancia)
+         - Precio con más coincidencias para el producto en otras sucursales
+           de la misma cadena en la ciudad o un radio de distancia
          - En su defecto, precio online de la cadena
         """
         qs = self.historico(producto, sucursal, dias)
         if len(qs) > 0:
             return qs
+
+        qs = super(PrecioManager, self).get_queryset()
+
+        # precios para sucursales de la misma cadena cercana
+        cercanas = sucursal.cercanas(radio=radio,
+                                     misma_cadena=True).values_list('id', flat=True)
+        qs = qs.filter(producto=producto, sucursal__id__in=cercanas).distinct('precio')
+        if qs.exists():
+            return self._registro_precio(qs)
+
+        qs = qs.filter(producto=producto,
+                       sucursal__cadena=sucursal.cadena,
+                       sucursal__online=True).distinct('precio')
+
+        # precios online
+        if qs.exists():
+            return self._registro_precio(qs)
 
 
 class Precio(TimeStampedModel):
@@ -248,8 +316,6 @@ class Precio(TimeStampedModel):
     class Meta:
         verbose_name = u"precio"
         verbose_name_plural = u"precios"
-
-
 
 
 class PrecioEnAcuerdo(models.Model):
