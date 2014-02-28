@@ -104,7 +104,6 @@ class TestMasProbables(TestCase):
                                     cadena=self.suc.cadena)
         self.suc3 = SucursalFactory(ciudad=self.suc.ciudad,
                                     cadena=self.suc.cadena)
-        import ipdb; ipdb.set_trace()
 
     def add(self, precio=10, sucursal=None, **kwargs):
         if sucursal is None:
