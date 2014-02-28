@@ -84,4 +84,4 @@ class SucursalModelForm(forms.ModelForm, CleanNombreMixin):
     class Meta:
         model = Sucursal
         fields = ('cadena', 'nombre', 'direccion', 'ciudad', 'cp', 'telefono',
-                  'horarios', 'ubicacion', )
+                  'horarios' )

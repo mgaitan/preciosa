@@ -157,7 +157,10 @@ class Sucursal(models.Model):
     ciudad = models.ForeignKey('cities_light.City')
     cp = models.CharField(max_length=100, null=True, blank=True)
     telefono = models.CharField(max_length=100, null=True, blank=True)
-    horarios = models.TextField(null=True, blank=True)
+
+    horarios = models.TextField(verbose_name='Notas',
+                                null=True, blank=True,
+                                help_text="Ej: Horarios de atención")
     cadena = models.ForeignKey('Cadena', related_name='sucursales',
                                null=True, blank=True,
                                help_text='Dejar en blanco si es un comercio único')
