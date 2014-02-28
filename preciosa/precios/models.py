@@ -3,9 +3,9 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 from django.db.models import Min
-
 from model_utils import Choices
 from model_utils.fields import MonitorField
 from model_utils.models import TimeStampedModel
@@ -175,7 +175,7 @@ class Sucursal(models.Model):
 
     def clean(self):
         if not self.cadena and not self.nombre:
-            raise models.ValidationError('Indique la cadena o el nombre del comercio')
+            raise ValidationError('Indique la cadena o el nombre del comercio')
 
     def __unicode__(self):
         return u"%s (%s)" % (self.cadena or self.nombre, self.direccion)

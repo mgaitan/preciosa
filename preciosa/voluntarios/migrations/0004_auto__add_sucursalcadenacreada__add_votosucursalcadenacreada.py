@@ -166,11 +166,13 @@ class Migration(SchemaMigration):
         },
         u'voluntarios.mapacategoria': {
             'Meta': {'unique_together': "(('user', 'origen'),)", 'object_name': 'MapaCategoria'},
+            'comentario': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
             'destino': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'mapeo_destino'", 'to': u"orm['precios.Categoria']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
             'origen': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'mapeo_origen'", 'to': u"orm['precios.Categoria']"}),
+            'separar': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         },
         u'voluntarios.marcaempresacreada': {
