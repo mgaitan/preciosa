@@ -3,9 +3,9 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 from django.db.models import Min
-
 from model_utils import Choices
 from model_utils.fields import MonitorField
 from model_utils.models import TimeStampedModel
@@ -27,6 +27,10 @@ class Categoria(MP_Node):
         if not self.is_root():
             return unicode(self.get_parent()) + " > " + self.nombre
         return self.nombre
+
+    class Meta:
+        verbose_name = u"categoria"
+        verbose_name_plural = u"categorias"
 
     @models.permalink
     def get_absolute_url(self):
@@ -69,6 +73,10 @@ class Producto(models.Model):
     def __unicode__(self):
         return self.descripcion
 
+    class Meta:
+        verbose_name = u"producto"
+        verbose_name_plural = u"productos"
+
     @models.permalink
     def get_absolute_url(self):
         return ('detalle_producto',
@@ -102,6 +110,8 @@ class Marca(models.Model):
 
     class Meta:
         unique_together = (('nombre', 'fabricante'))
+        verbose_name = u"marca"
+        verbose_name_plural = u"marcas"
 
 
 class AbstractEmpresa(models.Model):
@@ -124,6 +134,10 @@ class Cadena(AbstractEmpresa):
 
     cadena_madre = models.ForeignKey('self', null=True, blank=True,
                                      help_text="Jumbo y Vea son de Cencosud")
+
+    class Meta:
+        verbose_name = u"cadena de supermercados"
+        verbose_name_plural = u"cadenas de supermercados"
 
 
 class EmpresaFabricante(AbstractEmpresa):
@@ -161,13 +175,15 @@ class Sucursal(models.Model):
 
     def clean(self):
         if not self.cadena and not self.nombre:
-            raise models.ValidationError('Indique la cadena o el nombre del comercio')
+            raise ValidationError('Indique la cadena o el nombre del comercio')
 
     def __unicode__(self):
         return u"%s (%s)" % (self.cadena or self.nombre, self.direccion)
 
     class Meta:
         unique_together = (('direccion', 'ciudad'))
+        verbose_name = u"sucursal"
+        verbose_name_plural = u"sucursales"
 
 
 class PrecioManager(models.Manager):
@@ -199,6 +215,10 @@ class Precio(TimeStampedModel):
     def __unicode__(self):
         return u'%s: $ %s' % (self.producto, self.precio)
 
+    class Meta:
+        verbose_name = u"precio"
+        verbose_name_plural = u"precios"
+
 
 class PrecioEnAcuerdo(models.Model):
     producto = models.ForeignKey('Producto')
@@ -207,3 +227,7 @@ class PrecioEnAcuerdo(models.Model):
 
     precio_norte = models.DecimalField(max_digits=5, decimal_places=2)
     precio_sur = models.DecimalField(max_digits=5, decimal_places=2)
+
+    class Meta:
+        verbose_name = u"precio en acuerdo"
+        verbose_name_plural = u"precios en acuerdo"

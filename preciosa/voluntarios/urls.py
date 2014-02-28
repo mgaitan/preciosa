@@ -10,4 +10,8 @@ urlpatterns = patterns("preciosa.voluntarios.views",
     url(r"^marca/autocomplete/nombre/$", 'autocomplete_nombre_marca',
         name='autocomplete_nombre_marca'),
     url(r"^marca/voto/(?P<pk>\d+)/$", 'voto_item', name='voto_item'),
+    url(r"^sucursal/$", 'alta_cadena_sucursal', name='alta_cadena_sucursal'),
+    url(r"^sucursal/autocomplete/nombre/$", 'autocomplete_nombre_sucursal',
+        name='autocomplete_nombre_sucursal'),
+    url(r"^sucursal/voto/(?P<pk>\d+)/$", 'voto_item', name='voto_item'),
 )

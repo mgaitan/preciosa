@@ -13,7 +13,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from model_utils.models import TimeStampedModel
 
-from preciosa.precios.models import Categoria, Marca, EmpresaFabricante
+from preciosa.precios.models import (Cadena, Categoria, Marca,
+                                    EmpresaFabricante, Sucursal)
 from collections import Counter
 
 
@@ -62,16 +63,42 @@ class MapaCategoria(TimeStampedModel):
         return Categoria.por_clasificar().exclude(id__in=ya_hechas)
 
 
-class MarcaEmpresaCreada(TimeStampedModel):
+class EntidadCreadaVoluntario(TimeStampedModel):
+    user = models.ForeignKey(User, editable=False)
+
+    class Meta:
+        abstract = True
+
+
+class VotoVoluntario(TimeStampedModel):
+    user = models.ForeignKey(User, editable=False)
+    voto = models.IntegerField()
+
+    class Meta:
+        abstract = True
+
+
+class MarcaEmpresaCreada(EntidadCreadaVoluntario):
     """un modelo para trackear la creacion de marcas
     o empresas por voluntarios"""
-    user = models.ForeignKey(User, editable=False)
     marca = models.ForeignKey(Marca, editable=False, null=True)
     empresa = models.ForeignKey(EmpresaFabricante, editable=False, null=True)
 
 
-class VotoMarcaEmpresaCreada(TimeStampedModel):
-    """un usuario vota el item que creó otro """
-    user = models.ForeignKey(User, editable=False)
+class VotoMarcaEmpresaCreada(VotoVoluntario):
+    u"""un usuario vota el item que creó otro """
     item = models.ForeignKey(MarcaEmpresaCreada, related_name='votos')
-    voto = models.IntegerField()
+
+
+class SucursalCadenaCreada(EntidadCreadaVoluntario):
+    u"""un modelo para trackear la creación de sucursales o cadenas
+    de supermercados por voluntarios.
+
+    """
+    sucursal = models.ForeignKey(Sucursal, editable=False, null=True)
+    cadena = models.ForeignKey(Cadena, editable=False, null=True)
+
+
+class VotoSucursalCadenaCreada(VotoVoluntario):
+    u"""un usuario vota el item que creó otro """
+    item = models.ForeignKey(SucursalCadenaCreada, related_name='votos')

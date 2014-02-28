@@ -119,7 +119,8 @@
     $('button.vot_yes').on('click', function(){
         var $but = $(this);
         var pk = $but.data('pk');
-        $.post('./voto/' + pk + '/', {'voto': true}, function(response){
+        $.post('./voto/' + pk + '/', {'voto': true, 'model':
+          'voluntarios.MarcaEmpresaCreada'}, function(response){
             if (response.result){
                 $but.parents('.left').fadeOut();
             }
@@ -129,7 +130,8 @@
     $('button.vot_no').on('click', function(){
         var $but = $(this);
         var pk = $but.data('pk');
-        $.post('./voto/' + pk + '/', {'voto': false}, function(response){
+        $.post('./voto/' + pk + '/', {'voto': false, 'model':
+          'voluntarios.MarcaEmpresaCreada'}, function(response){
             if (response.result){
                 $but.parents('.left').fadeOut();
             }
