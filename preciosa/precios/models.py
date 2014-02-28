@@ -12,6 +12,7 @@ from model_utils.models import TimeStampedModel
 from easy_thumbnails.fields import ThumbnailerImageField
 from image_cropping import ImageRatioField, ImageCropField
 from treebeard.mp_tree import MP_Node
+from tools.utils import one
 
 
 class Categoria(MP_Node):
@@ -164,7 +165,6 @@ class Sucursal(models.Model):
                                  help_text='Es una sucursal online, no física')
     url = models.URLField(max_length=200, null=True, blank=True)
 
-
     def _latitud(self):
         if self.ubicacion:
             return self.ubicacion.y
@@ -179,8 +179,13 @@ class Sucursal(models.Model):
     lon = property(_longitud)
 
     def clean(self):
-        if not self.cadena and not self.nombre:
-            raise ValidationError('Indique la cadena o el nombre del comercio')
+        if not one((self.cadena, self.nombre)):
+            raise ValidationError(u'Indique la cadena o el nombre del comercio')
+        if not one((self.direccion, self.online)):
+            raise ValidationError(u'La sucursal debe ser online '
+                                  u'o tener direccion física, pero no ambas')
+        if self.online and not self.url:
+            raise ValidationError(u'La url es obligatoria para sucursales online')
 
     def __unicode__(self):
         return u"%s (%s)" % (self.nombre or self.cadena, self.direccion or self.url)
