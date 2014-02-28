@@ -16,6 +16,7 @@ class SucursalSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Sucursal
         fields = (
+            'id',
             'cadena',
             'nombre',
             'lat',
