@@ -48,21 +48,31 @@ class SucursalesList(mixins.ListModelMixin,
 
     def get_queryset(self):
         queryset = super(SucursalesList, self).get_queryset()
+
+        q = self.request.QUERY_PARAMS.get('q', None)
+
         lat = self.request.QUERY_PARAMS.get('lat', None)
         lon = self.request.QUERY_PARAMS.get('lon', None)
         radio = self.request.QUERY_PARAMS.get('radio', None)
+
+        if q:
+            queryset = queryset.filter(Q(cadena__nombre__icontains=q) | Q(nombre__icontains=q))
+
         if all((lat, lon, radio)):
             try:
                 lat = float(lat)
                 lon = float(lon)
                 radio = float(radio)
+
             except ValueError:
                 pass
+
             else:
                 point = Point(lon, lat, srid=4326)
                 circulo = (point, D(km=radio))
                 queryset = queryset.filter(ubicacion__distance_lte=circulo)
                 queryset = queryset.distance(point).order_by('distance')
+
         return queryset
 
     def get(self, request, *args, **kwargs):
