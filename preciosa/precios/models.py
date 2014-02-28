@@ -165,18 +165,17 @@ class Sucursal(models.Model):
                                  help_text='Es una sucursal online, no física')
     url = models.URLField(max_length=200, null=True, blank=True)
 
-    def _latitud(self):
+    @property
+    def lat(self):
         if self.ubicacion:
             return self.ubicacion.y
         return None
 
-    def _longitud(self):
+    @property
+    def lon(self):
         if self.ubicacion:
             return self.ubicacion.x
         return None
-
-    lat = property(_latitud)
-    lon = property(_longitud)
 
     def clean(self):
         if not one((self.cadena, self.nombre)):
@@ -221,7 +220,6 @@ class PrecioManager(models.Manager):
         qs = qs.values('created', 'precio')
         return sorted(qs, key=lambda i: i['created'], reverse=True)
 
-
     def mas_probable(self, producto, sucursal, dias=None, ciudad=None, radio=None):
         """
         Cuando no hay datos especificos de un
@@ -234,10 +232,6 @@ class PrecioManager(models.Manager):
         qs = self.historico(producto, sucursal, dias)
         if len(qs) > 0:
             return qs
-
-
-
-
 
 
 class Precio(TimeStampedModel):
