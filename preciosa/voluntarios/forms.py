@@ -75,8 +75,9 @@ class CadenaModelForm(forms.ModelForm, CleanNombreMixin):
 
 class SucursalModelForm(forms.ModelForm, CleanNombreMixin):
     model_related = Sucursal
-    max_cantidad_palabras = 5   # Por ej: La Anonima del Barrio Constitución
+    max_cantidad_palabras = 4
     max_largo = 30
+    puede_ser_vacio = True
 
     ciudad = forms.ModelChoiceField(
         City.objects.all(), widget=autocomplete_light.ChoiceWidget('CityAutocomplete'))
@@ -84,4 +85,4 @@ class SucursalModelForm(forms.ModelForm, CleanNombreMixin):
     class Meta:
         model = Sucursal
         fields = ('cadena', 'nombre', 'direccion', 'ciudad', 'cp', 'telefono',
-                  'horarios' )
+                  'horarios')

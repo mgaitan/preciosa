@@ -20,13 +20,22 @@ class CleanNombreMixin(object):
     max_largo = 20
     max_palabras_con_numeros = 1
     model_related = None
+    puede_ser_vacio = False
 
     def clean_nombre(self):
         """algunos controles sobre el input del usuario,
         para protegernos todo lo posible de info basura
 
         """
+
+
         kind = self.model_related._meta.verbose_name
+        data = self.cleaned_data
+        nombre = data['nombre'].lower().strip()
+        palabras = nombre.split()
+
+        if self.puede_ser_vacio and not nombre:
+            return nombre
 
         def count_int(palabras):
             # why the hell no a regex? because they sucks
@@ -51,10 +60,6 @@ class CleanNombreMixin(object):
                     result.append(palabra)
             return ' '.join(result)
 
-        data = self.cleaned_data
-        nombre = data['nombre'].lower().strip()
-        palabras = nombre.split()
-
         # marca muy larga?
         if len(nombre) > self.max_largo:
             raise forms.ValidationError(u"¿No es un nombre de %s demasiado largo? "
@@ -75,7 +80,7 @@ class CleanNombreMixin(object):
             raise forms.ValidationError(u"¿No demasiados números en esta %s? "
                                         u"Envianos un mensaje si estamos equivocados" % kind)     # noqa
         nombre = capitalizar(palabras)
-        # Model = Marca if kind == 'marca' else EmpresaFabricante
+
         if self.model_related.objects.filter(nombre__iexact=nombre).exists():
             raise forms.ValidationError(u"¿Seguro que esta %s no existe ya? "
                                         u"Envianos un mensaje si estamos equivocados" % kind)    # noqa
