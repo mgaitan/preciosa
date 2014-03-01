@@ -131,13 +131,12 @@
         var epsg900913 = new OpenLayers.Projection("EPSG:900913");
 
         var layer = map_ubicacion.map.layers[1];
-        /*
         // http://jsfiddle.net/_DR_/SMnUJ/
         drag = new OpenLayers.Control.DragFeature(layer, {
                autoActivate: true,
         });
         map_ubicacion.map.addControl(drag);
-        */
+
         $.get(url, function(data){
             if (data){
 
