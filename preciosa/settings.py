@@ -303,7 +303,8 @@ REST_FRAMEWORK = {
     )
 }
 
-
+# this code is a fake.
+GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-123456-1'
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ['-s', '--nologcapture', '--nocapture',
