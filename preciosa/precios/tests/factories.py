@@ -21,36 +21,36 @@ class FuzzyPoint(BaseFuzzyAttribute):
 
 class UserFactory(factory.DjangoModelFactory):
     FACTORY_FOR = User
-    username = factory.Sequence(lambda n: 'user{0}'.format(n))
+    username = factory.Sequence(lambda n: u'user{0}'.format(n))
     password = 'pass'
     email = factory.LazyAttribute(lambda o: '%s@example.org' % o.username)
 
 
 class CategoriaFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Categoria
-    nombre = factory.Sequence(lambda n: 'Categoria_{0}'.format(n))
+    nombre = factory.Sequence(lambda n: u'Categoria_{0}'.format(n))
     depth = 1
 
 
 class EmpresaFabricanteFactory(factory.DjangoModelFactory):
     FACTORY_FOR = EmpresaFabricante
-    nombre = factory.Sequence(lambda n: 'Empresa {0}'.format(n))
+    nombre = factory.Sequence(lambda n: u'Empresa {0}'.format(n))
 
 
 class CadenaFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Cadena
-    nombre = factory.Sequence(lambda n: 'Cadena {0}'.format(n))
+    nombre = factory.Sequence(lambda n: u'Cadena {0}'.format(n))
 
 
 class CountryFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Country
     FACTORY_DJANGO_GET_OR_CREATE = ('name',)
-    name = factory.Sequence(lambda n: 'Country {0}'.format(n))
+    name = factory.Sequence(lambda n: u'Country {0}'.format(n))
 
 
 class CityFactory(factory.DjangoModelFactory):
     FACTORY_FOR = City
-    name = factory.Sequence(lambda n: 'Ciudad {0}'.format(n))
+    name = factory.Sequence(lambda n: u'Ciudad {0}'.format(n))
     # entre Rio Turbio y CABA
     longitude = FuzzyDecimal(-72.3367, -58.37723, precision=4)
     # entre Ushuaia y La Quiaca
@@ -67,14 +67,14 @@ class SucursalFactory(factory.DjangoModelFactory):
 
 class MarcaFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Marca
-    nombre = factory.Sequence(lambda n: 'Marca {0}'.format(n))
+    nombre = factory.Sequence(lambda n: u'Marca {0}'.format(n))
     fabricante = factory.SubFactory(EmpresaFabricanteFactory)
 
 
 class ProductoFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Producto
     categoria = factory.SubFactory(CategoriaFactory)
-    descripcion = factory.Sequence(lambda n: 'Producto {0}'.format(n))
+    descripcion = factory.Sequence(lambda n: u'Producto {0}'.format(n))
     marca = factory.SubFactory(MarcaFactory)
 
 

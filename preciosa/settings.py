@@ -305,6 +305,13 @@ REST_FRAMEWORK = {
 
 
 
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = ['-s', '--nologcapture', '--nocapture',
+             '--with-id', '--logging-clear-handlers']
+SOUTH_TESTS_MIGRATE = False # To disable migrations and use syncdb instead
+SKIP_SOUTH_TESTS = True # To disable South's own unit tests
+
+
 try:
     from local_settings import *    # noqa
 except:
