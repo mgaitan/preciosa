@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta
-import requests
+
 from django.utils import timezone
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
@@ -17,9 +17,7 @@ from image_cropping import ImageRatioField, ImageCropField
 from treebeard.mp_tree import MP_Node
 
 from tools.utils import one
-
-
-GEOCODING_URL = 'http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false'
+from tools.gis import get_geocode_data
 
 
 class Categoria(MP_Node):
@@ -199,31 +197,8 @@ class Sucursal(models.Model):
         if self.lat and self.lon:
             return Point(self.lon, self.lat, srid=4326)
 
-    def get_geocode_data(self, direccion=None, ciudad=None):
-        """
-        usa google maps para obtener el
-        GeoCoding para ubicar sucursal en base a su direccion.
-
-        Si direccion o ciudad se pasa, sobreescribe la direccion de la instancia
-        """
-        direccion = direccion or self.direccion
-        ciudad = ciudad or self.ciudad
-        if direccion and ciudad:
-            q = u"%(direccion)s, %(ciudad)s" % {'direccion': direccion,
-                                                'ciudad': ciudad.name}
-            if ciudad.region:
-                q += u", %(region)s" % {'region': ciudad.region.name}
-            q += u", %(pais)s" % {'pais': ciudad.country.name}
-
-            res = requests.get(GEOCODING_URL % q)
-            json_data = res.json()
-            if json_data['results']:
-                fr = json_data['results'][0]
-                lat = fr['geometry']['location']['lat']
-                lon = fr['geometry']['location']['lng']
-                return {'lat': lat, 'lon': lon,
-                        'direccion': fr['formatted_address']}
-        return {}
+    def get_geocode_data(self):
+        return get_geocode_data(self.ciudad, self.direccion)
 
     def cercanas(self, radio=None, misma_cadena=False):
         """
@@ -256,7 +231,7 @@ class Sucursal(models.Model):
 
     def clean(self):
         # TO DO. agregar Tests
-        if not one((self.cadena, self.nombre)):
+        if not any((self.cadena, self.nombre)):
             raise ValidationError(
                 u'Indique la cadena o el nombre del comercio')
         if not one((self.direccion, self.online)):
