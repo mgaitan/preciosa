@@ -14,13 +14,6 @@ class PointWidget(forms.gis.PointWidget, forms.gis.BaseGMapWidget):
     map_width = 500
     map_height = 350
 
-    class Media:
-        js = (
-            'http://openlayers.org/dev/OpenLayers.js',
-            'floppyforms/js/MapWidget.js',
-            'http://maps.google.com/maps/api/js?sensor=false',
-        )
-
 
 class MapaCategoriaForm(forms.ModelForm):
 
@@ -100,5 +93,5 @@ class SucursalModelForm(forms.ModelForm, CleanNombreMixin):
 
     class Meta:
         model = Sucursal
-        fields = ('cadena', 'nombre', 'ciudad', 'direccion', 'ubicacion',
-                  'cp', 'telefono', 'horarios')
+        fields = ('cadena', 'nombre', 'ciudad', 'direccion', 'cp', 'telefono',
+                  'horarios', 'ubicacion')
