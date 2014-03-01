@@ -1,11 +1,18 @@
 # -*- coding: utf-8 -*-
 from django import forms
 import autocomplete_light
+import floppyforms as forms
+
 from cities_light.models import City
 from preciosa.precios.models import (Categoria, Cadena, EmpresaFabricante,
                                      Marca, Sucursal)
 from preciosa.voluntarios.models import MapaCategoria
 from preciosa.voluntarios.mixins import CleanNombreMixin
+
+
+class PointWidget(forms.gis.PointWidget, forms.gis.BaseGMapWidget):
+    map_width = 500
+    map_height = 350
 
 
 class MapaCategoriaForm(forms.ModelForm):
@@ -82,7 +89,9 @@ class SucursalModelForm(forms.ModelForm, CleanNombreMixin):
     ciudad = forms.ModelChoiceField(
         City.objects.all(), widget=autocomplete_light.ChoiceWidget('CityAutocomplete'))
 
+    ubicacion = forms.gis.PointField(widget=PointWidget)
+
     class Meta:
         model = Sucursal
-        fields = ('cadena', 'nombre', 'direccion', 'ciudad', 'cp', 'telefono',
-                  'horarios')
+        fields = ('cadena', 'nombre', 'ciudad', 'direccion', 'cp', 'telefono',
+                  'horarios', 'ubicacion')

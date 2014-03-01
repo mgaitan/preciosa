@@ -8,13 +8,12 @@
 {% block body %}
     <h1 class="page-header">Agregar sucursal</h1>
      <p class="lead">
-        Conocer todas las sucursales de las diferentes cadenas de supermercados
-        nos permitirá, en un futuro, hacer estadisticas para comprar mejor.
-        Podremos saber, por ejemplo, <strong> ¿Cuál sucursal de mi zona a
-          remarcado en promedio más los precios?</strong>.
+        Necesitamos conocer todas las sucursales del país, así podremos
+        recibir y enviar precios más precisos.
+        Además, nos servirá para hacer estadísticas. Por ejemplo <strong> ¿Cuál cadena de super aumentó más los precios en tu ciudad?</strong>.
     </p>
     <p class="lead">
-        Para hacer esto, primero necesitamos conocer todas las sucursales. Ya conocemos varias, pero seguro vos conocés más.
+        Tratá de poner la dirección con precisión y luego, si hacer falta, corregí la ubicación en el mapita.
     </p>
     {% include "_messages.html" %}
 
@@ -115,6 +114,42 @@
           'voluntarios.SucursalCadenaCreada'}, function(response){
             if (response.result){
                 $but.parents('.left').fadeOut();
+            }
+        });
+    });
+
+
+
+
+
+
+
+    $('input[name="direccion"], #id_ciudad').on('change', function(data){
+        var url = './geo_code/?ciudad=' + $('#id_ciudad').val() +  '&direccion=' + $('#id_direccion').val();
+
+        var epsg4326 = new OpenLayers.Projection("EPSG:4326");
+        var epsg900913 = new OpenLayers.Projection("EPSG:900913");
+
+        var layer = map_ubicacion.map.layers[1];
+        /*
+        // http://jsfiddle.net/_DR_/SMnUJ/
+        drag = new OpenLayers.Control.DragFeature(layer, {
+               autoActivate: true,
+        });
+        map_ubicacion.map.addControl(drag);
+        */
+        $.get(url, function(data){
+            if (data){
+
+            var center = new OpenLayers.LonLat(data.lon, data.lat).transform(epsg4326, epsg900913);
+            var point = new OpenLayers.Geometry.Point(center.lon,center.lat);
+            layer.addFeatures([new OpenLayers.Feature.Vector(point)]);
+            if (data.direccion){
+                var zoom = 16;
+            }else{
+                var zoom = 15;
+            }
+            map_ubicacion.map.setCenter(center, 15);
             }
         });
     });

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta
+
 from django.utils import timezone
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
@@ -14,7 +15,9 @@ from model_utils.models import TimeStampedModel
 from easy_thumbnails.fields import ThumbnailerImageField
 from image_cropping import ImageRatioField, ImageCropField
 from treebeard.mp_tree import MP_Node
+
 from tools.utils import one
+from tools.gis import get_geocode_data
 
 
 class Categoria(MP_Node):
@@ -88,11 +91,13 @@ class Producto(models.Model):
 
     def mejor_precio(self):
         last_month = datetime.today() - timedelta(days=30)
-        best = self.precio_set.filter(created__gte=last_month).aggregate(Min('precio'))
+        best = self.precio_set.filter(
+            created__gte=last_month).aggregate(Min('precio'))
         return best['precio__min']
 
 
 class Marca(models.Model):
+
     """
     Es el marca comercial de un producto.
     Ejemplo: Rosamonte
@@ -133,6 +138,7 @@ class AbstractEmpresa(models.Model):
 
 
 class Cadena(AbstractEmpresa):
+
     """Cadena de supermercados. Por ejemplo Walmart"""
 
     cadena_madre = models.ForeignKey('self', null=True, blank=True,
@@ -191,6 +197,9 @@ class Sucursal(models.Model):
         if self.lat and self.lon:
             return Point(self.lon, self.lat, srid=4326)
 
+    def get_geocode_data(self):
+        return get_geocode_data(self.ciudad, self.direccion)
+
     def cercanas(self, radio=None, misma_cadena=False):
         """
         Devuelve un listado de cadenas cercanas.
@@ -222,13 +231,15 @@ class Sucursal(models.Model):
 
     def clean(self):
         # TO DO. agregar Tests
-        if not one((self.cadena, self.nombre)):
-            raise ValidationError(u'Indique la cadena o el nombre del comercio')
+        if not any((self.cadena, self.nombre)):
+            raise ValidationError(
+                u'Indique la cadena o el nombre del comercio')
         if not one((self.direccion, self.online)):
             raise ValidationError(u'La sucursal debe ser online '
                                   u'o tener direccion física, pero no ambas')
         if self.online and not self.url:
-            raise ValidationError(u'La url es obligatoria para sucursales online')
+            raise ValidationError(
+                u'La url es obligatoria para sucursales online')
 
     def __unicode__(self):
         return u"%s (%s)" % (self.nombre or self.cadena, self.direccion or self.url)
@@ -292,7 +303,8 @@ class PrecioManager(models.Manager):
         # precios para sucursales de la misma cadena de la ciudad o cercana
         cercanas = sucursal.cercanas(radio=radio,
                                      misma_cadena=True).values_list('id', flat=True)
-        qs = qs.filter(producto=producto, sucursal__id__in=cercanas).distinct('precio')
+        qs = qs.filter(producto=producto,
+                       sucursal__id__in=cercanas).distinct('precio')
         if qs.exists():
             return self._registro_precio(qs)
 

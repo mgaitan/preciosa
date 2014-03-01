@@ -7,14 +7,17 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView
 from annoying.decorators import ajax_request
-
+from annoying.functions import get_object_or_None
+from cities_light.models import City
 from preciosa.precios.models import Categoria, Marca, Sucursal
 from preciosa.voluntarios.mixins import AuthenticatedViewMixin
 from preciosa.voluntarios.models import (MapaCategoria, MarcaEmpresaCreada,
                                          SucursalCadenaCreada)
-from preciosa.voluntarios.forms import (CadenaModelForm, EmpresaFabricanteModelForm,
-                                        MapaCategoriaForm, MarcaModelForm,
-                                        LogoMarcaModelForm, SucursalModelForm)
+from preciosa.voluntarios.forms import (
+    CadenaModelForm, EmpresaFabricanteModelForm,
+    MapaCategoriaForm, MarcaModelForm,
+    LogoMarcaModelForm, SucursalModelForm)
+from tools.gis import get_geocode_data
 
 
 MSG_EXITO = [u'Buenísimo, Guardamos tu elección ¿Otra?',
@@ -138,7 +141,8 @@ def alta_marca(request, pk=None, paso=None):
                              u'¡Genial! Guardamos %s %s' % (txt, instance.nombre))
             return redirect('alta_marca')
 
-    creados = MarcaEmpresaCreada.objects.exclude(user=request.user).order_by('created')[:5]
+    creados = MarcaEmpresaCreada.objects.exclude(
+        user=request.user).order_by('created')[:5]
 
     return render(request, 'voluntarios/alta_marca.html', {'creados': creados,
                   'form_marca': form_marca, 'form_empresa': form_empresa})
@@ -159,7 +163,8 @@ def voto_item(request, pk):
         # el trackeo de los votos, se debe hacer sobre un entidad llamada
         # "Voto[nombre_entidad]. Ej: MarcaEmpresaCreada y
         # VotoMarcaEmpresaCreada
-        get_model(app_label, u"Voto{}".format(model_name)).objects.create(user=request.user, item=item, voto=voto)
+        get_model(app_label, u"Voto{}".format(model_name)).objects.create(
+            user=request.user, item=item, voto=voto)
         return {'result': True}
     return {'result': False}
 
@@ -192,12 +197,14 @@ class AltaCadenaSucursalesView(AuthenticatedViewMixin, CreateView):
     second_form_class = CadenaModelForm
 
     def get_context_data(self, **kwargs):
-        context = super(AltaCadenaSucursalesView, self).get_context_data(**kwargs)
+        context = super(AltaCadenaSucursalesView,
+                        self).get_context_data(**kwargs)
         if 'form_sucursal' not in context:
             context['form_sucursal'] = self.form_class()
         if 'form_cadena' not in context:
             context['form_cadena'] = self.second_form_class()
-        context["creados"] = SucursalCadenaCreada.objects.exclude(user=self.request.user).order_by('created')[:5]
+        context["creados"] = SucursalCadenaCreada.objects.exclude(
+            user=self.request.user).order_by('created')[:5]
         return context
 
     def form_invalid(self, **kwargs):
@@ -217,7 +224,8 @@ class AltaCadenaSucursalesView(AuthenticatedViewMixin, CreateView):
 
         if form.is_valid():
             instance = form.save()
-            scCreada = {'user': request.user, form_name.split('_')[1]: instance}
+            scCreada = {'user': request.user,
+                        form_name.split('_')[1]: instance}
             SucursalCadenaCreada.objects.create(**scCreada)
             return self.form_valid(form)
         else:
@@ -231,3 +239,11 @@ class AltaCadenaSucursalesView(AuthenticatedViewMixin, CreateView):
         return reverse('alta_cadena_sucursal')
 
 alta_cadena_sucursal = AltaCadenaSucursalesView.as_view()
+
+
+@ajax_request
+def geo_code_data(request):
+    if request.method == 'GET':
+        ciudad = get_object_or_None(City, id=request.GET.get('ciudad', None))
+        direccion = request.GET.get('direccion', None)
+        return get_geocode_data(ciudad, direccion)
