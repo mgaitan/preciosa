@@ -5,10 +5,13 @@ from django.db.models import Q
 from rest_framework import viewsets, mixins, generics
 
 from cities_light.models import City
-from preciosa.precios.models import Sucursal, Cadena, Producto
+from preciosa.precios.models import (Sucursal, Cadena, Producto,
+                                     EmpresaFabricante, Marca, Categoria)
 
 from preciosa.precios.serializers import (CadenaSerializer, SucursalSerializer,
-                                          CitySerializer, ProductoSerializer)
+                                          CitySerializer, ProductoSerializer,
+                                          EmpresaFabricanteSerializer, MarcaSerializer,
+                                          CategoriaSerializer)
 
 
 class CreateListRetrieveViewSet(mixins.CreateModelMixin,
@@ -29,14 +32,24 @@ class CityViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CitySerializer
 
 
-class CadenaViewSet(CreateListRetrieveViewSet):
+class CadenaViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Cadena.objects.all()
     serializer_class = CadenaSerializer
 
 
-class SucursalViewSet(CreateListRetrieveViewSet):
-    queryset = Sucursal.objects.all()
-    serializer_class = SucursalSerializer
+class EmpresaFabricanteViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = EmpresaFabricante.objects.all()
+    serializer_class = EmpresaFabricanteSerializer
+
+
+class MarcaViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Marca.objects.all()
+    serializer_class = MarcaSerializer
+
+
+class CategoriaViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
 
 
 class SucursalesList(mixins.ListModelMixin,

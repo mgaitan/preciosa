@@ -1,6 +1,23 @@
 from rest_framework import serializers
 from cities_light.models import City
-from preciosa.precios.models import Cadena, Sucursal, Producto
+from preciosa.precios.models import (Cadena, Sucursal, Producto, Categoria,
+                                     EmpresaFabricante, Marca)
+
+
+class CategoriaSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Categoria
+
+
+class EmpresaFabricanteSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = EmpresaFabricante
+
+
+class MarcaSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Marca
+        fields = ('id', 'nombre',)
 
 
 class CadenaSerializer(serializers.HyperlinkedModelSerializer):
