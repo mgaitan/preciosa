@@ -20,7 +20,7 @@ django-appconf==0.6
 django-autocomplete-light==2.0.0a15
 django-autoslug==1.7.2
 django-bootstrap-form==3.1
-django-floppyforms==dev  # 1.1.1
+django-floppyforms==1.1.1
 django-cities-light==2.1.11
 django-dbbackup==1.80.2
 django-extensions==1.1.1
