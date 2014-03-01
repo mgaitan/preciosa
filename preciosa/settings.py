@@ -158,6 +158,7 @@ INSTALLED_APPS = [
     "easy_thumbnails",
     "image_cropping",
     "rest_framework",
+    "floppyforms",
 
     # community and stats
     "feedback",
