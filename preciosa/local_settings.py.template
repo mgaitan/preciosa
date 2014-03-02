@@ -1,7 +1,7 @@
 DEBUG = True
 # ALLOWED_HOSTS = ['preciosdeargentina.com.ar']
 
-SITE_ID = 2
+SITE_ID = 1
 STATIC_URL = "/static/"
 STATIC_ROOT = "/projects/preciosa/static/"
 DATABASES = {
