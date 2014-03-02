@@ -49,7 +49,6 @@ class Preciosa(Node):
     def pip_update(self):
         """update requirements.txt"""
         with self.hosts.cd(self.preciosa_project):
-            self.hosts.run('%s install -r requirements.txt' % self.pip)
             self.hosts.run('%s install -r requirements/production.txt' % self.pip)
 
     def edit_local_settings(self):
