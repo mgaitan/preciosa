@@ -62,6 +62,7 @@ class VoluntariosTests(TestCase):
             'cadena': cadena1.pk, 'nombre': u'', 'direccion': u'La calle #nn',
             'ciudad': self.ciudad1.pk, 'btn_form_sucursal': u'',
             'cp': u'', 'telefono': u'', 'horarios': u''})
+
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Sucursal.objects.filter(cadena=cadena1.pk).exists())
 

@@ -89,7 +89,7 @@ class SucursalModelForm(forms.ModelForm, CleanNombreMixin):
     ciudad = forms.ModelChoiceField(
         City.objects.all(), widget=autocomplete_light.ChoiceWidget('CityAutocomplete'))
 
-    ubicacion = forms.gis.PointField(widget=PointWidget)
+    ubicacion = forms.gis.PointField(widget=PointWidget, required=False)
 
     class Meta:
         model = Sucursal
