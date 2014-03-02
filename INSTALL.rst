@@ -56,14 +56,22 @@ proyecto actual.
 2. Instalación de los requerimientos
 
 ``Preciosa`` requiere muchos paquetes para que funcione correctamente.
-Para instalarlos en tu entorno basta ejecutar::
+Para instalar lo estrictamente necesario en tu entorno basta ejecutar::
 
     pip install -r requirements.txt
 
+Opcionalmente, si querés algunos otros paquetes útiles (como IPython), podés instalar los paquetes opcionales::
+
+    pip install -r requirements/optional.txt
+
+
 .. attemtion::
 
-    para que ese comando funcione, tenés que ejecutarlo
-    desde ``root`` de ``Preciosa``, es decir, la carpeta que creaste cuando clonaste el repositorio.
+    Para que estos comandos funcionen, tenés que ejecutarlo
+    desde ``root`` de ``Preciosa`` (es decir, la carpeta que creaste cuando clonaste el repositorio) con el virtualenv activado.
+
+
+
 
 
 Instalar y configurar Postgres y PostGIS
