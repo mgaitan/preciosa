@@ -12,18 +12,21 @@ class CategoriaSerializer(serializers.HyperlinkedModelSerializer):
 class EmpresaFabricanteSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = EmpresaFabricante
+        fields = ('id', 'url', 'nombre')
 
 
 class MarcaSerializer(serializers.HyperlinkedModelSerializer):
+    fabricante = EmpresaFabricanteSerializer()
+
     class Meta:
         model = Marca
-        fields = ('id', 'nombre',)
+        fields = ('id', 'url', 'nombre', 'fabricante')
 
 
 class CadenaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Cadena
-        fields = ('id', 'nombre','cadena_madre',)
+        fields = ('id', 'url', 'nombre','cadena_madre',)
 
 
 class SucursalSerializer(serializers.HyperlinkedModelSerializer):
