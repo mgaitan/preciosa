@@ -21,9 +21,9 @@ Para instalar y ejecutar Vagrant y VirtualBox en tu shell:
 
 .. attemtion::
 
-    Si la version de VirtualBox es menor a 4.3 podes instalar la version para tu sistema operativo `aca <https://www.virtualbox.org/wiki/Downloads>_` 
+    Si la versión de VirtualBox es menor a 4.3 podes instalar la versión para tu sistema operativo `aca <https://www.virtualbox.org/wiki/Downloads>_` 
 
-por ultimo instalamos un plugin de Vagrant que es necesario para que todo funcione bien:
+Por ultimo instalamos un plugin de Vagrant que es necesario para que todo funcione bien:
 
 ::
 
@@ -33,19 +33,19 @@ por ultimo instalamos un plugin de Vagrant que es necesario para que todo funcio
 Instalando el Entorno
 ---------------------
 
-Posicionados en la carpeta raiz del repositorio instalamos el entorno de desarrollo con un solo comando:
+Posicionados en la carpeta raíz del repositorio instalamos el entorno de desarrollo con un solo comando:
 
 ::
     
     vagrant up
 
-va a tomar un tiempo la instalación porque implica bajar una maquina virtual completa pero luego de eso accedemos via ssh a una maquina virtual completa:
+Va a tomar un tiempo la instalación porque implica bajar una maquina virtual completa pero luego de eso accedemos via ssh a una maquina virtual completa:
 
 ::
 
     vagrant ssh
 
-adentro del entorno nos posicionamos en la carpeta preciosa y creamos un superuser:
+Adentro del entorno nos posicionamos en la carpeta preciosa y creamos un superuser:
 
 ::
 
