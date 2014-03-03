@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from decimal import Decimal
 import factory
 from factory.fuzzy import FuzzyDecimal, BaseFuzzyAttribute
@@ -62,6 +63,7 @@ class SucursalFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Sucursal
     cadena = factory.SubFactory(CadenaFactory)
     ciudad = factory.SubFactory(CityFactory)
+    direccion = factory.Sequence(lambda n: u'San Martín {0}00'.format(n))
     ubicacion = FuzzyPoint()
 
 
