@@ -298,7 +298,7 @@ THUMBNAIL_ALIASES = {
 REST_FRAMEWORK = {
     'PAGINATE_BY': 50,
     'PAGINATE_BY_PARAM': 'page_size',
-    'MAX_PAGINATE_BY': 100,
+    'MAX_PAGINATE_BY': 5000,    # for @ajlopez, an his lovely annalisa
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.BrowsableAPIRenderer',
         'rest_framework.renderers.JSONRenderer',
