@@ -6,6 +6,7 @@ from preciosa.precios.models import Precio
 from preciosa.precios.tests.factories import (SucursalFactory,
                                               ProductoFactory,
                                               PrecioFactory)
+from tools.gis import punto_destino
 
 
 class TestPrecioHistorico(TestCase):
@@ -137,4 +138,23 @@ class TestMasProbables(TestCase):
                           {'precio': Decimal('10'),
                            'created': p1.created}])
 
+    def test_precios_a_radio_dado(self):
+        self.suc2.ubicacion = punto_destino(self.suc.point, 90, 4.5)
+        self.suc2.save()
+        self.suc3.ubicacion = punto_destino(self.suc.point, 180, 4.7)
+        self.suc3.save()
+        p1 = self.add(10, sucursal=self.suc2)
+        p2 = self.add(11, sucursal=self.suc3)
+        # no hay sucursales dentro de este radio
+        self.assertEqual(list(self.qs(radio=4.4)), [])
+        # una sucursal dentro de este radio
+        self.assertEqual(list(self.qs(radio=4.6)),
+                         [{'precio': Decimal('10'),
+                           'created': p1.created}])
+        # dos sucursales dentro de este radio
+        self.assertEqual(list(self.qs(radio=4.8)),
+                         [{'precio': Decimal('11'),
+                           'created': p2.created},
+                          {'precio': Decimal('10'),
+                           'created': p1.created}])
 

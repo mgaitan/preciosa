@@ -311,10 +311,11 @@ class PrecioManager(models.Manager):
         qs = qs.filter(producto=producto,
                        sucursal__cadena=sucursal.cadena,
                        sucursal__online=True).distinct('precio')
-
         # precios online
         if qs.exists():
             return self._registro_precio(qs)
+
+        return []
 
 
 class Precio(TimeStampedModel):
