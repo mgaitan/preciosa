@@ -308,6 +308,7 @@ class PrecioManager(models.Manager):
         if qs.exists():
             return self._registro_precio(qs)
 
+        qs = super(PrecioManager, self).get_queryset()
         qs = qs.filter(producto=producto,
                        sucursal__cadena=sucursal.cadena,
                        sucursal__online=True).distinct('precio')
