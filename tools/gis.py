@@ -43,9 +43,8 @@ def get_geocode_data(ciudad=None, direccion=None):
     return {}
 
 
-TIERRA_RADIO = 6371 # kilometros
-# circunferencia en el ecuador
-TIERRA_ECUADOR = TIERRA_RADIO  * 2 * math.pi;
+TIERRA_RADIO = 6371  # kilometros
+TIERRA_ECUADOR = TIERRA_RADIO * 2 * math.pi  # circunferencia en el ecuador
 
 
 def punto_destino(origen, angulo, distancia):
