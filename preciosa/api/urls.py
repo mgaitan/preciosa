@@ -42,6 +42,9 @@ class MyRouter(routers.DefaultRouter):
 router = MyRouter()
 router.register(r'cadenas', views.CadenaViewSet)
 router.register(r'ciudades', views.CityViewSet)
+router.register(r'marcas', views.MarcaViewSet)
+router.register(r'fabricantes', views.EmpresaFabricanteViewSet)
+router.register(r'categorias', views.CategoriaViewSet)
 
 
 urlpatterns = patterns("preciosa.api.views",

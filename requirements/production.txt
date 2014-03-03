@@ -1,1 +1,3 @@
+-r core.txt
 raven==4.0.4
+-r optional.txt

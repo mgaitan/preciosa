@@ -2,6 +2,7 @@
 site_media
 local_settings.py
 .wiki
+.noseids
 *.db
 *.swp
 

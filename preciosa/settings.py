@@ -158,6 +158,7 @@ INSTALLED_APPS = [
     "easy_thumbnails",
     "image_cropping",
     "rest_framework",
+    "floppyforms",
 
     # community and stats
     "feedback",
@@ -266,12 +267,13 @@ FIXTURE_DIRS = [
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+LOGIN_URL = 'account_login'
 ACCOUNT_OPEN_SIGNUP = True
 ACCOUNT_USE_OPENID = False
 ACCOUNT_REQUIRED_EMAIL = False
 ACCOUNT_EMAIL_UNIQUE = True
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = False
-ACCOUNT_LOGIN_REDIRECT_URL = "home"
+ACCOUNT_LOGIN_REDIRECT_URL = "voluntarios_dashboard"
 ACCOUNT_LOGOUT_REDIRECT_URL = "home"
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
 
@@ -294,14 +296,24 @@ THUMBNAIL_ALIASES = {
 }
 
 REST_FRAMEWORK = {
-    'PAGINATE_BY': 30,
+    'PAGINATE_BY': 50,
     'PAGINATE_BY_PARAM': 'page_size',
     'MAX_PAGINATE_BY': 100,
     'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.JSONPRenderer',
     )
 }
 
+# this code is a fake.
+GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-123456-1'
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = ['-s', '--nologcapture', '--nocapture',
+             '--with-id', '--logging-clear-handlers']
+SOUTH_TESTS_MIGRATE = False # To disable migrations and use syncdb instead
+SKIP_SOUTH_TESTS = True # To disable South's own unit tests
 
 
 try:
