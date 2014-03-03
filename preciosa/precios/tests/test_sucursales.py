@@ -4,22 +4,6 @@ from django.core.exceptions import ValidationError
 from preciosa.precios.tests.factories import (SucursalFactory,)
 from tools.gis import punto_destino
 
-"""
-if not any((self.cadena, self.nombre)):
-            raise ValidationError(
-                u'Indique la cadena o el nombre del comercio')
-        if not one((self.direccion, self.online)):
-            raise ValidationError(u'La sucursal debe ser online '
-                                  u'o tener direccion física, pero no ambas')
-        if self.online and not self.url:
-            raise ValidationError(
-                u'La url es obligatoria para sucursales online')
-
-        if self.cercanas(radio=0.05).filter(cadena=self.cadena).exists():
-            raise ValidationError(
-                u'Hay una sucursal de la misma cadena a menos de 50 metros')
-"""
-
 
 class TestSucursalClean(TestCase):
 
