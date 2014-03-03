@@ -230,16 +230,25 @@ class Sucursal(models.Model):
         return otras
 
     def clean(self):
-        # TO DO. agregar Tests
         if not any((self.cadena, self.nombre)):
             raise ValidationError(
                 u'Indique la cadena o el nombre del comercio')
-        if not one((self.direccion, self.online)):
-            raise ValidationError(u'La sucursal debe ser online '
-                                  u'o tener direccion física, pero no ambas')
+
+        if not self.online and not self.direccion:
+            raise ValidationError(
+                u'Una sucursal física debe tener dirección')
+
         if self.online and not self.url:
             raise ValidationError(
                 u'La url es obligatoria para sucursales online')
+
+        if not one((self.direccion, self.online)):
+            raise ValidationError(u'La sucursal debe ser online '
+                                  u'o tener direccion física, pero no ambas')
+
+        if self.ubicacion and self.cercanas(radio=0.05, misma_cadena=True).exists():
+            raise ValidationError(
+                u'Hay una sucursal de la misma cadena a menos de 50 metros')
 
     def __unicode__(self):
         return u"%s (%s)" % (self.nombre or self.cadena, self.direccion or self.url)
