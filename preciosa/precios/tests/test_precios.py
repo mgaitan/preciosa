@@ -158,3 +158,15 @@ class TestMasProbables(TestCase):
                           {'precio': Decimal('10'),
                            'created': p1.created}])
 
+    def test_fallback_online(self):
+        sucursal_online = SucursalFactory(cadena=self.suc.cadena,
+                                          online=True,
+                                          url='http://cadena.com')
+        p1 = self.add(10, sucursal=sucursal_online)
+        self.assertEqual(list(self.qs()),
+                         [{'precio': Decimal('10'),
+                           'created': p1.created}])
+        self.assertEqual(list(self.qs(radio=5)),
+                         [{'precio': Decimal('10'),
+                           'created': p1.created}])
+
