@@ -36,4 +36,4 @@ THUMBNAIL_BASEDIR = 'thumbs'
 GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-123456-1'
 
 NOSE_ARGS = ['-s', '--nologcapture', '--nocapture',
-             '--with-progressive', '--with-id', '--logging-clear-handlers']
+             '--with-id', '--logging-clear-handlers']
