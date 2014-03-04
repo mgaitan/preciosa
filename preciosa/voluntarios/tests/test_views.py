@@ -80,12 +80,16 @@ class VoluntariosTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertFormError(response, 'form_sucursal', '__all__',
                              u'Indique la cadena o el nombre del comercio')
+
+        # Se Crea una sucursal sin direccion
         response = self.client.post(url_form, data={
             'cadena': u'', 'nombre': 'nombre', 'direccion': u'',
             'ciudad': self.ciudad2.pk, 'btn_form_sucursal': u'Agregar'})
         self.assertEqual(response.status_code, 200)
         self.assertFormError(response, 'form_sucursal', '__all__',
-                             u'La sucursal debe ser online o tener direccion física, pero no ambas')
+                             u'Una sucursal física debe tener dirección')
+
+        #Se crea una sucursal sin ciudad
         response = self.client.post(url_form, data={
             'cadena': u'', 'nombre': u'nombre', 'direccion': u'Callecita',
             'btn_form_sucursal': u'Agregar'})
