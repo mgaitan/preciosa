@@ -22,12 +22,24 @@ from tools.gis import get_geocode_data
 
 class Categoria(MP_Node):
     nombre = models.CharField(max_length=100)
+    oculta = models.BooleanField(default=False)
+
     node_order_by = ['nombre']
 
     def reload(self):
+        """ treebeard usa muchas raw queries que no actualizan automáticamente
+        la instancia del modelo."""
         if self.id:
             return Categoria.objects.get(pk=self.id)
         return self
+
+    def set_oculta(self, oculta):
+        """cambia el estado de toda la rama a partir de la categoria actual"""
+        self.oculta = oculta
+        self.save()
+        for sub in self.get_descendants():
+            sub.oculta = oculta
+            sub.save()
 
     def __unicode__(self):
         if not self.is_root():

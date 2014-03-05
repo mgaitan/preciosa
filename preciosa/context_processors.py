@@ -7,5 +7,5 @@ def menu(request):
     tabs = tabs.exclude(url='/')
     tabs = tabs.order_by('posicion', 'modified')
     # hasta cerrar #64 excluyo la categoria A CLASIFICAR
-    return {'menu': Categoria.objects.filter(depth=1).exclude(id=772),
+    return {'menu': Categoria.objects.filter(depth=1).exclude(oculta=True),
             'tabs': tabs}

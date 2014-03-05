@@ -7,7 +7,7 @@ from preciosa.precios.models import Sucursal
 
 
 class Command(BaseCommand):
-    help = 'GeoCoding para ubicar Sucursales en base a su domicilio.'
+    help = 'Utiliza annalisa para inferir detalles a partir de la descripcion'
 
     def handle(self, *args, **options):
         for sucursal in Sucursal.objects.filter(ubicacion=None, online=False):
