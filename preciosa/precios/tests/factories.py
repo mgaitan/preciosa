@@ -6,8 +6,7 @@ from django.contrib.gis.geos import Point
 from django.contrib.auth.models import User
 from cities_light.models import City, Country
 from preciosa.precios.models import (EmpresaFabricante, Marca, Cadena, Producto, Precio,
-                                     PrecioEnAcuerdo, Sucursal, Categoria)
-
+                                     PrecioEnAcuerdo, Sucursal)
 
 class FuzzyPoint(BaseFuzzyAttribute):
 
@@ -25,13 +24,6 @@ class UserFactory(factory.DjangoModelFactory):
     username = factory.Sequence(lambda n: u'user{0}'.format(n))
     password = 'pass'
     email = factory.LazyAttribute(lambda o: '%s@example.org' % o.username)
-
-
-class CategoriaFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = Categoria
-    nombre = factory.Sequence(lambda n: u'Categoria_{0}'.format(n))
-    depth = 1
-
 
 class EmpresaFabricanteFactory(factory.DjangoModelFactory):
     FACTORY_FOR = EmpresaFabricante
