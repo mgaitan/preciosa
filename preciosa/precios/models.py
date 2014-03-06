@@ -15,7 +15,7 @@ from model_utils.models import TimeStampedModel
 from easy_thumbnails.fields import ThumbnailerImageField
 from image_cropping import ImageRatioField, ImageCropField
 from treebeard.mp_tree import MP_Node
-
+from djorm_pgtrgm import SimilarManager
 from tools.utils import one
 from tools.gis import get_geocode_data
 
@@ -60,6 +60,8 @@ class Categoria(MP_Node):
 
 
 class Producto(models.Model):
+    objects = SimilarManager()
+
     UM_GRAMO = 'gr'
     UM_KILO = 'kg'
     UM_ML = 'ml'
