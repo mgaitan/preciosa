@@ -108,6 +108,7 @@ class Producto(models.Model):
         return best['precio__min']
 
 
+
 class Marca(models.Model):
 
     """

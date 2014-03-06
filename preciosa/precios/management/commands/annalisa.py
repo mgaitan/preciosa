@@ -49,6 +49,8 @@ class Annalisa(object):
         if 'categoriaid' in data:
             result['categoria'] = get_object_or_None(
                 Categoria, id=data['categoriaid'])
+            if result['categoria'] and result['categoria'].depth != 3:
+                del result['categoria']
 
         return result
 
@@ -70,7 +72,7 @@ class Command(BaseCommand):
                     'aunque esté definida en la instancia'),
         make_option('--force-unidad',
                     action='store_true',
-                    dest='force_unidad',
+                    dest='force_unidad_medida',
                     default=False,
                     help='Fuerza la unidad encontrada por Annalisa, '
                     'aunque esté definida en la instancia'),
@@ -95,14 +97,12 @@ class Command(BaseCommand):
                 force = options.get('force_' + k, False)
                 nuevo = data[k] if force else actual or data[k]
                 setattr(producto, k, nuevo)
-                if k == 'unidad':
-                    import ipdb; ipdb.set_trace()
             producto.save(update_fields=data.keys())
             return producto
 
         for producto in Producto.objects.filter(Q(marca__isnull=True) |
                                                 Q(contenido__isnull=True) |
-                                                Q(categoria__oculta=False))[30:]:
+                                                Q(categoria__oculta=False)):
             self.stdout.write(u'%s' % producto)
             old = producto.__dict__
             old['categoria'] = producto.categoria
