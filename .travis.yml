@@ -6,7 +6,7 @@ env:
   - CFLAGS="-O0"
 
 before_install:
-  - sudo apt-get install -qq libxml2-dev libxslt-dev postgis-contrib
+  - sudo apt-get install -qq libxml2-dev libxslt-dev postgresql-contrib
 
 # command to install dependencies
 install:
