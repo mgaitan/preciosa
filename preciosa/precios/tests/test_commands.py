@@ -84,7 +84,7 @@ def _(obj):
 class TestAnnalisaCommand(AnnalisaTestMixin, TestCase):
 
     def call(self, **kwargs):
-        call_command('annalisa', **kwargs)
+        call_command('annalisa', verbosity=0, **kwargs)
 
     def test_producto_sin_marca_usa_annalisa(self):
         p = ProductoFactory(marca=None, unidad_medida=Producto.UM_L)

@@ -4,9 +4,11 @@ from django.core.management.base import BaseCommand
 from optparse import make_option
 from annoying.functions import get_object_or_None
 from django.db.models import Q
-
+import logging
 import requests
 from preciosa.precios.models import Producto, Marca, Categoria
+
+logger = logging.getLogger('main')
 
 
 class Annalisa(object):
@@ -90,6 +92,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
+        if int(options['verbosity']) == 0:
+            logger.removeHandler('console')
+
         def update(producto, data):
             for k in data:
                 actual = getattr(producto, k)
@@ -103,16 +108,17 @@ class Command(BaseCommand):
         for producto in Producto.objects.filter(Q(marca__isnull=True) |
                                                 Q(contenido__isnull=True) |
                                                 Q(categoria__oculta=False)):
-            self.stdout.write(u'%s' % producto)
+            logger.debug(u'%s' % producto)
             old = producto.__dict__
             old['categoria'] = producto.categoria
             old['marca'] = producto.marca
             data = self.anna.analyze(producto.descripcion)
             update(producto, data)
-            for k in data:
-                self.stdout.write(u'  %s: ' % k)
-                self.stdout.write(u'      original: %s' % old[k])
-                self.stdout.write(u'      annalisa: %s' % data[k])
-                self.stdout.write(u'      nuevo: %s' % getattr(producto, k))
+            if options['verbosity'] > 1:
+                for k in data:
+                    logger.debug(u'  %s: ' % k)
+                    logger.debug(u'      original: %s' % old[k])
+                    logger.debug(u'      annalisa: %s' % data[k])
+                    logger.debug(u'      nuevo: %s' % getattr(producto, k))
 
-        self.stdout.write(u'Fin!')
+        logger.debug(u'Fin!')
