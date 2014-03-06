@@ -22,7 +22,7 @@ class Annalisa(object):
                      'kilogramo': Producto.UM_KILO,
                      'litro': Producto.UM_L,
                      'centimetro cubico': Producto.UM_ML,
-                     'mililtro': Producto.UM_ML,
+                     'mililitro': Producto.UM_ML,
                      }
 
     def analyze(self, q):
