@@ -159,6 +159,7 @@ INSTALLED_APPS = [
     "image_cropping",
     "rest_framework",
     "floppyforms",
+    "djorm_pgtrgm",
 
     # community and stats
     "feedback",
