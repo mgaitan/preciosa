@@ -34,7 +34,6 @@ class Annalisa(object):
     def normalizar(self, data):
         """normaliza claves y unidades devueltas por Annalisa a lo que necesita el
            modelo Producto"""
-
         result = {}
         for k1, k2 in Annalisa.MAPA_CLAVES.iteritems():
             if k1 in data:
@@ -57,12 +56,30 @@ class Annalisa(object):
 class Command(BaseCommand):
     help = 'Utiliza Annalisa para inferir detalles a partir de la descripcion'
     option_list = BaseCommand.option_list + (
-        make_option('--force',
+        make_option('--force-marca',
                     action='store_true',
-                    dest='force',
+                    dest='force_marca',
                     default=False,
-                    help='Guarda todos los atributos detectados por Annalisa, '
-                    'aunque estén definidos en la instancia'),
+                    help='Fuerza la marca encontrada por Annalisa, '
+                    'aunque esté definida en la instancia'),
+        make_option('--force-categoria',
+                    action='store_true',
+                    dest='force_categoria',
+                    default=False,
+                    help='Fuerza la categoria encontrada por Annalisa, '
+                    'aunque esté definida en la instancia'),
+        make_option('--force-unidad',
+                    action='store_true',
+                    dest='force_unidad',
+                    default=False,
+                    help='Fuerza la unidad encontrada por Annalisa, '
+                    'aunque esté definida en la instancia'),
+        make_option('--force-cantidad',
+                    action='store_true',
+                    dest='force_cantidad',
+                    default=False,
+                    help='Fuerza la cantidad encontrada por Annalisa, '
+                    'aunque esté definida en la instancia'),
     )
 
     def __init__(self, *args, **kwargs):
@@ -70,20 +87,22 @@ class Command(BaseCommand):
         self.anna = Annalisa()
 
     def handle(self, *args, **options):
-        force = options['force']
 
         def update(producto, data):
             for k in data:
                 actual = getattr(producto, k)
                 # cambia por lo que encontro si Force o si no existe actual
+                force = options.get('force_' + k, False)
                 nuevo = data[k] if force else actual or data[k]
                 setattr(producto, k, nuevo)
+                if k == 'unidad':
+                    import ipdb; ipdb.set_trace()
             producto.save(update_fields=data.keys())
             return producto
 
         for producto in Producto.objects.filter(Q(marca__isnull=True) |
                                                 Q(contenido__isnull=True) |
-                                                Q(categoria__oculta=False)):
+                                                Q(categoria__oculta=False))[30:]:
             self.stdout.write(u'%s' % producto)
             old = producto.__dict__
             old['categoria'] = producto.categoria
