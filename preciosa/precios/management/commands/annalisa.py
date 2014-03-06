@@ -22,7 +22,7 @@ class Annalisa(object):
                      'kilogramo': Producto.UM_KILO,
                      'litro': Producto.UM_L,
                      'centimetro cubico': Producto.UM_ML,
-                     'mililtro': Producto.UM_ML,
+                     'mililitro': Producto.UM_ML,
                      }
 
     def analyze(self, q):
@@ -34,7 +34,6 @@ class Annalisa(object):
     def normalizar(self, data):
         """normaliza claves y unidades devueltas por Annalisa a lo que necesita el
            modelo Producto"""
-
         result = {}
         for k1, k2 in Annalisa.MAPA_CLAVES.iteritems():
             if k1 in data:
@@ -50,6 +49,8 @@ class Annalisa(object):
         if 'categoriaid' in data:
             result['categoria'] = get_object_or_None(
                 Categoria, id=data['categoriaid'])
+            if result['categoria'] and result['categoria'].depth != 3:
+                del result['categoria']
 
         return result
 
@@ -57,12 +58,30 @@ class Annalisa(object):
 class Command(BaseCommand):
     help = 'Utiliza Annalisa para inferir detalles a partir de la descripcion'
     option_list = BaseCommand.option_list + (
-        make_option('--force',
+        make_option('--force-marca',
                     action='store_true',
-                    dest='force',
+                    dest='force_marca',
                     default=False,
-                    help='Guarda todos los atributos detectados por Annalisa, '
-                    'aunque estén definidos en la instancia'),
+                    help='Fuerza la marca encontrada por Annalisa, '
+                    'aunque esté definida en la instancia'),
+        make_option('--force-categoria',
+                    action='store_true',
+                    dest='force_categoria',
+                    default=False,
+                    help='Fuerza la categoria encontrada por Annalisa, '
+                    'aunque esté definida en la instancia'),
+        make_option('--force-unidad',
+                    action='store_true',
+                    dest='force_unidad_medida',
+                    default=False,
+                    help='Fuerza la unidad encontrada por Annalisa, '
+                    'aunque esté definida en la instancia'),
+        make_option('--force-cantidad',
+                    action='store_true',
+                    dest='force_cantidad',
+                    default=False,
+                    help='Fuerza la cantidad encontrada por Annalisa, '
+                    'aunque esté definida en la instancia'),
     )
 
     def __init__(self, *args, **kwargs):
@@ -70,12 +89,12 @@ class Command(BaseCommand):
         self.anna = Annalisa()
 
     def handle(self, *args, **options):
-        force = options['force']
 
         def update(producto, data):
             for k in data:
                 actual = getattr(producto, k)
                 # cambia por lo que encontro si Force o si no existe actual
+                force = options.get('force_' + k, False)
                 nuevo = data[k] if force else actual or data[k]
                 setattr(producto, k, nuevo)
             producto.save(update_fields=data.keys())

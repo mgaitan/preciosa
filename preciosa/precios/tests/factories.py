@@ -31,6 +31,7 @@ class CategoriaFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Categoria
     nombre = factory.Sequence(lambda n: u'Categoria_{0}'.format(n))
     depth = 1
+    path = factory.Sequence(lambda n: u'000{0}'.format(chr(n + 65)))
 
 
 class EmpresaFabricanteFactory(factory.DjangoModelFactory):
@@ -75,9 +76,11 @@ class MarcaFactory(factory.DjangoModelFactory):
 
 class ProductoFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Producto
-    categoria = factory.SubFactory(CategoriaFactory)
+    categoria = factory.SubFactory(CategoriaFactory, depth=3)
     descripcion = factory.Sequence(lambda n: u'Producto {0}'.format(n))
     marca = factory.SubFactory(MarcaFactory)
+    unidad_medida = Producto.UM_L
+    contenido = 10
 
 
 class PrecioFactory(factory.DjangoModelFactory):
