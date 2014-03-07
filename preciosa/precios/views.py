@@ -2,11 +2,12 @@
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
-
+from django.http import HttpResponse
 from preciosa.precios.models import Producto, Categoria
-
+import operator
 
 # Vistas web
+
 
 class ProductosListView(ListView):
 
@@ -44,12 +45,30 @@ class ProductoDetailView(DetailView):
 
 def autocomplete_buscador(request):
     q = request.GET.get('q', '')
-    context = {'q': q}
-    queries = {}
-    queries['productos'] = Producto.objects.filter(
-        Q(descripcion__icontains=q) |
-        Q(upc__startswith=q)).distinct()[:6]
+    if len(q) < 3:
+        return HttpResponse('')
 
-    context.update(queries)
+    context = {'q': q}
+    try:
+        int(q)
+        es_num = True
+    except ValueError:
+        es_num = False
+
+    if es_num:
+        productos = Producto.objects.filter(upc__startswith=q)[0:8]
+    else:
+        words = q.split(' ')
+
+        palabras = Q(reduce(operator.and_,
+                            (Q(descripcion__icontains=w) for w in words if len(w) > 2)))
+        tiene_palabras = Producto.objects.filter(
+            palabras).values_list('id', flat=True)
+        similares = Producto.objects.filter_o(
+            descripcion__similar=q).values_list('id',
+                                                flat=True)
+        productos = Producto.objects.filter(Q(id__in=tiene_palabras) |
+                                            Q(id__in=similares)).distinct()[0:8]
+    context['productos'] = productos
 
     return render(request, "precios/autocomplete.html", context)
