@@ -29,9 +29,13 @@ class Preciosa(Node):
         with self.hosts.cd(self.project_logs):
             self.hosts.run('tail preciosa.log')
 
-    def restart(self):
-        self.hosts.run('sudo supervisorctl restart preciosa')
-        self.hosts.run('sudo service nginx restart')
+    def restart(self, que=None):
+        if que == 'pg' or que is None:
+            self.hosts.run('sudo service postgresql restart')
+        if que == 'app' or que is None:
+            self.hosts.run('sudo supervisorctl restart preciosa')
+        if que == 'nginx' or que is None:
+            self.hosts.run('sudo service nginx restart')
 
     def run_in_preciosa(self, command):
         with self.hosts.cd(self.preciosa_project):
@@ -59,9 +63,13 @@ class Preciosa(Node):
         self.restart()
 
     def debug(self, port='8000'):
+        self.run_in_preciosa('git tag checkpoint_debug')
+        self.update('debug')
         self.hosts.run('sudo supervisorctl stop preciosa')
         self.hosts.run('sudo service nginx stop')
         self.django_command('runserver %s:%s' % (self.ip, port))
+        self.run_in_preciosa('git checkout checkpoint_debug')
+        self.run_in_preciosa('git tag -d checkpoint_debug')
         self.hosts.run('sudo service nginx start')
         self.hosts.run('sudo supervisorctl start preciosa')
 
@@ -69,9 +77,8 @@ class Preciosa(Node):
         self.django_command('dbbackup -z')
 
     def update(self, branch='develop'):
-        with self.hosts.cd(self.preciosa_project):
-            self.hosts.run('git fetch')
-            self.hosts.run('git reset --hard origin/%s' % branch)
+        self.run_in_preciosa('git fetch')
+        self.run_in_preciosa('git reset --hard origin/%s' % branch)
 
     def deploy(self, dbbackup=False, branch='develop'):
         self.update(branch)
