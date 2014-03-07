@@ -1,6 +1,7 @@
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.db.models import Q
+import operator
 
 from rest_framework import viewsets, mixins, generics
 
@@ -116,8 +117,9 @@ class ProductosList(mixins.ListModelMixin,
             queryset = queryset.filter(upc__icontains=barcode)
 
         if q:
+            words = q.split(' ')
             queryset = queryset.filter(
-                Q(descripcion__icontains=q)
+                Q(reduce(operator.and_, (Q(descripcion__icontains=w) for w in words)))
                 #| Q(marca__nombre__icontains=q)
                 #| Q(marca__fabricante__nombre__icontains=q)
             )
