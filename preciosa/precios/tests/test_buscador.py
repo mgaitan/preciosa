@@ -37,7 +37,7 @@ class TestBuscador(TestCase):
         self.assertNotResult(response, mayo)
 
     def test_busca_por_palabras(self):
-        for q in ('salsa cica', 'cica', 'tomate cica'):
+        for q in ('salsa cica', 'cica', 'tomate cica', 'cica tomate'):
             prods = self.productos[:]
             response = self.client.get(self.url, {'q': q})
             cica = prods[1]
@@ -61,4 +61,5 @@ class TestBuscador(TestCase):
         self.assertResult(response, arcor)
         for p in self.productos[1:]:
             self.assertNotResult(response, p)
+
 
