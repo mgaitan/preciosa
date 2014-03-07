@@ -22,6 +22,8 @@ class Preciosa(Node):
     preciosa_project = '/projects/preciosa'
     project_logs = '/projects/preciosa/logs'
 
+    def apt(self, packages, command='install'):
+        self.hosts.run('sudo apt-get %s %s' % (command, packages))
 
     def get_log(self):
         with self.hosts.cd(self.project_logs):
