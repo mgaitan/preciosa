@@ -1,0 +1,10 @@
+{% load url from future %}
+    <script type="text/javascript">
+    $(function(){
+  // Make a javascript Autocomplete object and set it up
+    var autocomplete = $('#buscar').yourlabsAutocomplete({
+        url: '{% url "autocomplete_buscador" %}',
+    });
+
+    });
+    </script>

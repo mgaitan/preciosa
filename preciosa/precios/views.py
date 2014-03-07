@@ -42,11 +42,9 @@ class ProductoDetailView(DetailView):
         return context
 
 
-def autocomplete(request, template_name='precios/autocomplete.html'):
-
+def autocomplete_buscador(request):
     q = request.GET.get('q', '')
     context = {'q': q}
-
     queries = {}
     queries['productos'] = Producto.objects.filter(
         Q(descripcion__icontains=q) |
@@ -54,4 +52,4 @@ def autocomplete(request, template_name='precios/autocomplete.html'):
 
     context.update(queries)
 
-    return render(request, template_name, context)
+    return render(request, "precios/autocomplete.html", context)

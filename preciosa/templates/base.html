@@ -215,18 +215,7 @@
     <script src="{% static "js/sb-admin.js" %}"></script>
 
 
-
-    <script type="text/javascript">
-
-    $(function(){
-  // Make a javascript Autocomplete object and set it up
-    var autocomplete = $('#buscar').yourlabsAutocomplete({
-        url: '{% url "autocomplete" %}',
-    });
-
-    });
-
-    </script>
+    {% include "_buscador.html" %}
 
 
     {% block extra_footer %}{% endblock %}
