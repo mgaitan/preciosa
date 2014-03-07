@@ -52,6 +52,7 @@ class ProductoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Producto
         fields = (
+            'id',
             'descripcion',
             'marca',
             'upc',
