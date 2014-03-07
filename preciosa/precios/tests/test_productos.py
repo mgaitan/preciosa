@@ -67,3 +67,19 @@ class TestProductoSimilarity(TestCase):
         qs = self.f("cloro")
         self.assertEqual(qs.count(), 2)
 
+
+class TestSimilaresAProducto(TestCase):
+
+    def setUp(self):
+        self.p1 = ProductoFactory(descripcion="Salsa de Tomate Arcor 500ml")
+        self.p2 = ProductoFactory(descripcion="Salsa de Tomate Cica 500ml")
+        self.p3 = ProductoFactory(descripcion=u"Puré de Tomate Arcor 350ml")
+        self.p4 = ProductoFactory(descripcion="Mayonesa Hellmanns 350gr")
+
+    def test_similares(self):
+        ids = self.p1.similares().values_list('id', flat=True)
+        self.assertEqual(list(ids), [self.p2.id, self.p3.id])
+
+    def test_sin_resultado(self):
+        qs = self.p4.similares()
+        self.assertFalse(qs.exists())
