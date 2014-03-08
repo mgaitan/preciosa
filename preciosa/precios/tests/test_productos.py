@@ -80,6 +80,9 @@ class TestSimilaresAProducto(TestCase):
         ids = self.p1.similares().values_list('id', flat=True)
         self.assertEqual(list(ids), [self.p2.id, self.p3.id])
 
+        ids = self.p1.similares(1).values_list('id', flat=True)
+        self.assertEqual(list(ids), [self.p2.id])
+
     def test_sin_resultado(self):
         qs = self.p4.similares()
         self.assertFalse(qs.exists())
