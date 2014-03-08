@@ -117,6 +117,14 @@ class Producto(models.Model):
         return qs.filter_o(descripcion__similar=self.descripcion)
 
 
+class DescripcionAlternativa(models.Model):
+    producto = models.ForeignKey('Producto')
+    descripcion = models.CharField(max_length=250)
+
+    def __unicode__(self):
+        return self.descripcion
+    
+
 class Marca(models.Model):
 
     """
