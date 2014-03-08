@@ -18,5 +18,6 @@ cp preciosa/local_settings.py.template preciosa/local_settings.py
 python manage.py syncdb --noinput
 python manage.py createsuperuser --username=preciosa --email=preciosa@god.com --noinput
 python manage.py migrate
+python manage.py migrate radpress
 sudo python manage.py cities_light
 python manage.py loaddata fixtures/flatpages.json fixtures/blog.json fixtures/newsletter.json fixtures/ciudades.json fixtures/sucursales.json fixtures/categorias.json fixtures/marcas.json fixtures/productos.json fixtures/precios.json

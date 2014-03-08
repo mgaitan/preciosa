@@ -9,6 +9,11 @@ Dado que preciosa tiene una cantidad importante de dependencias y que depende de
 
 Esta guía está pensada principalmente para sistemas Linux Ubuntu/Debian, y esta probado para VirtualBox >= 4.3 y Vagrant >= 1.3.5
 
+.. tip::
+
+    Una forma alternativa para desarrolladores mas experimentados es `configurar tu maquina local para correr preciosa 
+    <https://github.com/mgaitan/preciosa/wiki/Como-instalar-y-configurar-Preciosa-de-manera-local>`_ .
+
 
 Instalación de ``Vagrant`` y ``VirtualBox``
 -------------------------------------------
