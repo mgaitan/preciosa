@@ -46,15 +46,14 @@ class Command(BaseCommand):
                 for prod in resp.json():
                     um = Producto.UM_TRANS.get(prod['WMNumber'],
                                                prod['WMNumber'])
-                    prod["upc"] = prod["upc"].lstrip("0")
                     try:
-                        producto = Producto.objects.get(upc=prod['upc'])
+                        producto = Producto.objects.get(upc=prod['upc'].lstrip("0"))
                     except Producto.DoesNotExist:
                         try:
                             proddata = self.parse(prod['upc'])
                             #print "Creando Productor %s" % str(prod)
                             producto = Producto.objects.create(descripcion=prod['Description'],
-                                                   upc=prod['upc'],
+                                                   upc=prod['upc'].lstrip("0"),
                                                    unidad_medida=um,
                                                    categoria=proddata["categoria"],
                                                    notas='PrecioGranel: %s' % prod["PrecioGranel"],
@@ -63,6 +62,10 @@ class Command(BaseCommand):
                         except ValueError:
                             print "**No se puede cargar el producto %s" % str(proddata)
                             continue
+                        except:
+                            print "FAIL"
+                            continue
+
                     Precio.objects.create(producto=producto,
                                           sucursal=WALMART_ONLINE,
                                           precio=self.clean_precio(prod['Precio']))
