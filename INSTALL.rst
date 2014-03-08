@@ -8,6 +8,9 @@ contribuir con código.
 Dado que preciosa tiene una cantidad importante de dependencias y que depende de PostGIS para funcionar, vamos a utilizar Vagrant+VirtualBox como entorno de instalación del sistema. 
 
 Esta guía está pensada principalmente para sistemas Linux Ubuntu/Debian, y esta probado para VirtualBox >= 4.3 y Vagrant >= 1.3.5
+.. tip::
+
+    Una forma alternativa para desarrolladores mas experimentados es`configurar tu maquina local para correr preciosa para eso tenes que seguir `este <https://github.com/mgaitan/preciosa/wiki/Como-instalar-y-configurar-Preciosa-de-manera-local>`_ tutorial.
 
 
 Instalación de ``Vagrant`` y ``VirtualBox``
