@@ -117,7 +117,7 @@ class ProductosList(mixins.ListModelMixin,
             queryset = queryset.filter(upc__icontains=barcode)
 
         if q:
-            words = q.split(' ')
+            words = q.split()
             queryset = queryset.filter(
                 Q(reduce(operator.and_, (Q(descripcion__icontains=w) for w in words)))
                 #| Q(marca__nombre__icontains=q)
