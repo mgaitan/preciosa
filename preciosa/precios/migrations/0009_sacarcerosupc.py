@@ -17,7 +17,7 @@ class Migration(DataMigration):
 
     def backwards(self, orm):
         "Write your backwards methods here."
-        raise RuntimeError("Mmmm, tal vez agregando adelante un 0 a los upc de longitud 12.")
+        raise RuntimeError("Mmmm, tal vez agregando adelante un 0 a los upc hasta alcanzar longitud 13.")
 
     models = {
         u'auth.group': {
