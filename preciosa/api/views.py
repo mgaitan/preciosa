@@ -33,7 +33,7 @@ class CityViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CitySerializer
 
 
-class CadenaViewSet(viewsets.ReadOnlyModelViewSet):
+class CadenaViewSet(CreateListRetrieveViewSet):
     queryset = Cadena.objects.all()
     serializer_class = CadenaSerializer
 
