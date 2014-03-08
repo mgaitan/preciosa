@@ -109,12 +109,13 @@ class Producto(models.Model):
             created__gte=last_month).aggregate(Min('precio'))
         return best['precio__min']
 
-    def similares(self):
+    def similares(self, maxnum=None):
         """devuelve un queryset de productos similares.
         (no incluye al producto en sí mismo)
         """
         qs = Producto.objects.exclude(id=self.id)
-        return qs.filter_o(descripcion__similar=self.descripcion)
+        qs = qs.filter_o(descripcion__similar=self.descripcion)
+        return qs[:maxnum] if maxnum else qs
 
 
 class Marca(models.Model):
