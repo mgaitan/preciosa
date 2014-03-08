@@ -1,5 +1,8 @@
+import re
+from django.contrib.gis.geos import Point
 from rest_framework import serializers
 from cities_light.models import City
+
 from preciosa.precios.models import (Cadena, Sucursal, Producto, Categoria,
                                      EmpresaFabricante, Marca)
 
@@ -29,9 +32,21 @@ class CadenaSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'url', 'nombre','cadena_madre',)
 
 
-class SucursalSerializer(serializers.HyperlinkedModelSerializer):
-    lat = serializers.Field()
-    lon = serializers.Field()
+class UbicacionField(serializers.WritableField):
+    def to_native(self, obj):
+        return "%s" % obj
+
+    def from_native(self, data):
+        try:
+            lon, lat = map(float, re.findall(r'(-?\d+\.\d*)', data))
+            return Point(lon, lat)
+        except ValueError:
+            pass
+
+
+
+class SucursalSerializer(serializers.ModelSerializer):
+    ubicacion = UbicacionField(required=False)
 
     class Meta:
         model = Sucursal
@@ -39,13 +54,13 @@ class SucursalSerializer(serializers.HyperlinkedModelSerializer):
             'id',
             'cadena',
             'nombre',
-            'lat',
-            'lon',
+            'ubicacion',
             'ciudad',
             'direccion',
             'horarios',
             'telefono'
         )
+
 
 
 class ProductoSerializer(serializers.HyperlinkedModelSerializer):
