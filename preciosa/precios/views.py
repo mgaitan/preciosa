@@ -40,6 +40,7 @@ class ProductoDetailView(DetailView):
         # Add in the publisher
         context['active'] = ','.join(['li.cat-%d a:first' % p.id
                                       for p in self.object.categoria.get_ancestors()])
+        context['prods_similares'] = self.object.similares(5)
         return context
 
 

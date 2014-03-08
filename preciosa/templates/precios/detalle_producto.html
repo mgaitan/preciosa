@@ -46,6 +46,16 @@
                                 {% endfor %}
                             </table>
 
+                            <br />
+                            <h4>Productos similares</h4>
+                            <ul class="list-group">
+                            {% for prod in prods_similares %}
+                            <li class="list-group-item">
+                                <img alt="" src="{{ prod.foto|thumbnail_url:'small' }}">
+                                <a href="{{ prod.get_absolute_url }}">{{ prod.descripcion }}</a>
+                            </li>
+                            {% endfor %}
+                            </ul>
                         </div>
                         {% comment %}
                         <div class="comment-text">
