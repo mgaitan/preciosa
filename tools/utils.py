@@ -46,6 +46,12 @@ class UnicodeCsvReader(object):
         return self.csv_reader.line_num
 
 
+class UnicodeDictReader(csv.DictReader):
+    def __init__(self, f, encoding="utf-8", fieldnames=None, **kwds):
+        csv.DictReader.__init__(self, f, fieldnames=fieldnames, **kwds)
+        self.reader = UnicodeCsvReader(f, encoding=encoding, **kwds)
+        
+
 class UnicodeCsvWriter(object):
 
     def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
