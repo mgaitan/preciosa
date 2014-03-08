@@ -1,10 +1,12 @@
 #!/bin/bash
 
 sudo apt-get -y install language-pack-es-base language-pack-en-base
-sudo apt-get -y install postgresql-9.1 libpq-dev postgresql-9.1-postgis gdal-bin
+sudo apt-get -y install postgresql-9.1 libpq-dev postgresql-9.1-postgis gdal-bin 
+sudo apt-get -y install postgresql-contrib
 sudo apt-get -y install git python-pip python-dev
 sudo apt-get -y install libxml2-dev libxslt1-dev
 sudo apt-get -y install libjpeg-dev zlib1g-dev libpng12-dev
+ 
 
 # enforce UTF8 encoding in all databases (instead of SQL_ASCII):
 sudo -u postgres pg_dropcluster --stop 9.1 main
