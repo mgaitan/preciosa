@@ -69,13 +69,15 @@ class Producto(models.Model):
     UM_UN = 'unidad'
     UM_SM = 'SM'
     UM_MR = 'MR'
+    UM_M = 'm'
+    UM_M2 = 'm2'
 
     UM_TRANS = {u'LT': 'l', u'UN': 'unidad'}
 
     UNIDADES_PESO = [UM_GRAMO, UM_KILO]
     UNIDADES_VOLUMEN = [UM_ML, UM_L]
     UNIDADES_CHOICES = Choices(UM_GRAMO, UM_KILO, UM_ML, UM_L,
-                               UM_UN, UM_SM, UM_MR)
+                               UM_UN, UM_SM, UM_MR, UM_M, UM_M2)
 
     descripcion = models.CharField(max_length=250)
     upc = models.CharField(verbose_name=u"Código de barras",
@@ -117,6 +119,14 @@ class Producto(models.Model):
         qs = qs.filter_o(descripcion__similar=self.descripcion)
         return qs[:maxnum] if maxnum else qs
 
+
+class DescripcionAlternativa(models.Model):
+    producto = models.ForeignKey('Producto')
+    descripcion = models.CharField(max_length=250)
+
+    def __unicode__(self):
+        return self.descripcion
+    
 
 class Marca(models.Model):
 

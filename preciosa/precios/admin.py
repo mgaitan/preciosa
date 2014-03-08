@@ -2,7 +2,7 @@ from django.contrib.gis import admin
 from django.contrib.gis.geos import Point
 from preciosa.precios.models import (Cadena, Sucursal, Marca,
                                      EmpresaFabricante, Producto,
-                                     Categoria)
+                                     DescripcionAlternativa, Categoria)
 from image_cropping import ImageCroppingMixin
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory
@@ -30,6 +30,10 @@ class ProductoAdmin(admin.ModelAdmin):
     search_fields = ['descripcion', 'marca__nombre', 'UPC']
 
 
+class DescripcionAlternativaAdmin(admin.ModelAdmin):
+    search_fields = ['descripcion', 'marca__nombre', 'UPC']
+
+
 class SucursalAdmin(admin.OSMGeoAdmin):
     center = Point((-45, -55), srid=4326)
     center.transform(900913)
@@ -45,5 +49,6 @@ admin.site.register(Marca, MarcaAdmin)
 admin.site.register(EmpresaFabricante, FabricanteAdmin)
 admin.site.register(Cadena, CadenaAdmin)
 admin.site.register(Producto, ProductoAdmin)
+admin.site.register(DescripcionAlternativa, DescripcionAlternativaAdmin)
 admin.site.register(Sucursal, SucursalAdmin)
 admin.site.register(Categoria, CategoriaAdmin)
