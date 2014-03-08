@@ -9,7 +9,10 @@ from preciosa.precios.models import Categoria
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        Categoria.objects.get(nombre='A CLASIFICAR').set_oculta(True)
+	try:
+            Categoria.objects.get(nombre='A CLASIFICAR').set_oculta(True)
+        except Categoria.DoesNotExist:
+            pass      
 
     def backwards(self, orm):
         "Write your backwards methods here."
