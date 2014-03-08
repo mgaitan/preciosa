@@ -12,13 +12,12 @@ class Migration(DataMigration):
         # Use orm.ModelName to refer to models in this application,
         # and orm['appname.ModelName'] for models in other applications.
         for producto in orm.Producto.objects.filter(upc__startswith='0'):
-            if len(producto.upc) > 12:
-                producto.upc = producto.upc[1:]
-                producto.save()
+            producto.upc = producto.upc.lstrip('0')
+            producto.save()
 
     def backwards(self, orm):
         "Write your backwards methods here."
-        raise RuntimeError("Mmmm, tal vez agregando adelante un 0 a los upc de longitud 12.")
+        raise RuntimeError("Mmmm, tal vez agregando adelante un 0 a los upc hasta alcanzar longitud 13.")
 
     models = {
         u'auth.group': {
