@@ -30,7 +30,8 @@ class Command(BaseCommand):
         RUBROS = "WebControls/hlMenuLeft.ashx"
         resp = browser.get(BASEURL + RUBROS)
         rubros = resp.json()
-        i = 0
+        precioscargados = 0
+        productosnuevos = 0
         for departamento in rubros["MenuPrincipal"][0]['Elements']:
             departamentoname = departamento["departmentName"]
             for familia in departamento["Elements"]:
@@ -45,26 +46,28 @@ class Command(BaseCommand):
                 for prod in resp.json():
                     um = Producto.UM_TRANS.get(prod['WMNumber'],
                                                prod['WMNumber'])
+                    prod["upc"] = prod["upc"].lstrip("0")
                     try:
                         producto = Producto.objects.get(upc=prod['upc'])
                     except Producto.DoesNotExist:
                         try:
                             proddata = self.parse(prod['upc'])
-                            print "Creando Productor %s" % str(prod)
+                            #print "Creando Productor %s" % str(prod)
                             producto = Producto.objects.create(descripcion=prod['Description'],
                                                    upc=prod['upc'],
                                                    unidad_medida=um,
                                                    categoria=proddata["categoria"],
                                                    notas='PrecioGranel: %s' % prod["PrecioGranel"],
                                                 )
+                            productosnuevos += 1
                         except ValueError:
                             print "**No se puede cargar el producto %s" % str(proddata)
                             continue
-                    i += 1
                     Precio.objects.create(producto=producto,
                                           sucursal=WALMART_ONLINE,
                                           precio=self.clean_precio(prod['Precio']))
-        print "Se cargaron preciosa para %d productos" % i
+                    precioscargados += 1
+        print "Se cargaron precios para %d productos, y se agregaron %d productos nuevos" % (precioscargados, productosnuevos)
 
     def parse(self, upc):
         """dado un UPC, devuelve un diccionario de datos scrappeados
