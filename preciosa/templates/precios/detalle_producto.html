@@ -51,7 +51,7 @@
                             <ul class="list-group">
                             {% for prod in prods_similares %}
                             <li class="list-group-item">
-                                {% if prod.foto %}<img alt="" src="{{ prod.foto|thumbnail_url:'small' }}">{% endif %}
+                                <img alt="" src="{{ prod.foto|thumbnail_url:'small' }}">
                                 <a href="{{ prod.get_absolute_url }}">{{ prod.descripcion }}</a>
                             </li>
                             {% endfor %}
