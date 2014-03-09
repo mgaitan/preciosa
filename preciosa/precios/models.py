@@ -121,12 +121,20 @@ class Producto(models.Model):
 
 
 class DescripcionAlternativa(models.Model):
-    producto = models.ForeignKey('Producto')
-    descripcion = models.CharField(max_length=250)
+    """Este modelo guarda otras denominaciones posibles de un mismo producto.
+    Es útil para ampliar la *tabla de verdad* para hacer matching
+    de productos provenientes de datasets sin UPC.
+
+    Por favor, asegurarse que el producto es el correcto antes de
+    crear una descripcion alternativa.
+    """
+
+    producto = models.ForeignKey('Producto', related_name='descripciones')
+    descripcion = models.CharField(max_length=250, unique=True)
 
     def __unicode__(self):
         return self.descripcion
-    
+
 
 class Marca(models.Model):
 
