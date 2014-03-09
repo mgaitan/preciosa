@@ -30,8 +30,9 @@ class Command(BaseCommand):
         RUBROS = "WebControls/hlMenuLeft.ashx"
         resp = browser.get(BASEURL + RUBROS)
         rubros = resp.json()
-        precioscargados = 0
-        productosnuevos = 0
+        cargados = 0
+        nuevos = 0
+        sincategoria = 0
         for departamento in rubros["MenuPrincipal"][0]['Elements']:
             departamentoname = departamento["departmentName"]
             for familia in departamento["Elements"]:
@@ -43,7 +44,8 @@ class Command(BaseCommand):
                           "range" : "undefined", "sid": (random()*3) }
                 browser.get(BASEURL + "WebControls/hlSearchResults.ashx", params=params )
                 resp = browser.get(BASEURL + "WebControls/hlSearchProducts.ashx", headers=headers)
-                for prod in resp.json():
+                productos = resp.json()
+                for prod in productos:
                     um = Producto.UM_TRANS.get(prod['WMNumber'],
                                                prod['WMNumber'])
                     try:
@@ -58,19 +60,17 @@ class Command(BaseCommand):
                                                    categoria=proddata["categoria"],
                                                    notas='PrecioGranel: %s' % prod["PrecioGranel"],
                                                 )
-                            productosnuevos += 1
+                            nuevos += 1
                         except ValueError:
+                            sincategoria += 1
                             print "**No se puede cargar el producto %s" % str(proddata)
-                            continue
-                        except:
-                            print "FAIL"
                             continue
 
                     Precio.objects.create(producto=producto,
                                           sucursal=WALMART_ONLINE,
                                           precio=self.clean_precio(prod['Precio']))
-                    precioscargados += 1
-        print "Se cargaron precios para %d productos, y se agregaron %d productos nuevos" % (precioscargados, productosnuevos)
+                    cargados += 1
+        print "Se cargaron precios para %d productos, %d productos no tienen categoria, y se agregaron %d productos nuevos" % (cargados, sincategoria, nuevos)
 
     def parse(self, upc):
         """dado un UPC, devuelve un diccionario de datos scrappeados
@@ -89,8 +89,10 @@ class Command(BaseCommand):
                         return m
 
         pq = PyQuery(BASEURL + "Detalle-de-articulo.aspx?upc=%s" % upc)
-        categoria = cat(pq)
-
+        try:
+            categoria = cat(pq)
+        except:
+            categoria = None
         descripcion = pq('span#lblTitle').text()
         precio = self.clean_precio(pq('span#lblPrice').text())
         um = pq('span#lblUnit').text()
