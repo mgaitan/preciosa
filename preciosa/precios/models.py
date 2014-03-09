@@ -79,7 +79,7 @@ class Producto(models.Model):
     UNIDADES_CHOICES = Choices(UM_GRAMO, UM_KILO, UM_ML, UM_L,
                                UM_UN, UM_SM, UM_MR, UM_M, UM_M2)
 
-    descripcion = models.CharField(max_length=250)
+    descripcion = models.CharField(max_length=250, unique=True)
     upc = models.CharField(verbose_name=u"Código de barras",
                            max_length=13, unique=True, null=True, blank=True)
     categoria = models.ForeignKey('Categoria')
@@ -121,12 +121,20 @@ class Producto(models.Model):
 
 
 class DescripcionAlternativa(models.Model):
-    producto = models.ForeignKey('Producto')
-    descripcion = models.CharField(max_length=250)
+    """Este modelo guarda otras denominaciones posibles de un mismo producto.
+    Es útil para ampliar la *tabla de verdad* para hacer matching
+    de productos provenientes de datasets sin UPC.
+
+    Por favor, asegurarse que el producto es el correcto antes de
+    crear una descripcion alternativa.
+    """
+
+    producto = models.ForeignKey('Producto', related_name='descripciones')
+    descripcion = models.CharField(max_length=250, unique=True)
 
     def __unicode__(self):
         return self.descripcion
-    
+
 
 class Marca(models.Model):
 
