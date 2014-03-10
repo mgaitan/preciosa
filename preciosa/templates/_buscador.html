@@ -6,5 +6,12 @@
         url: '{% url "autocomplete_buscador" %}',
     });
 
+
+    $('#buscar').on('keypress', function(e) {
+      if(e.which == 13) {
+         window.location.href = $('a.hilight').attr('href');
+      }
+    });
+
     });
     </script>
