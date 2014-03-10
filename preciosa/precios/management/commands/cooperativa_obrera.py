@@ -26,7 +26,6 @@ class ScraperCooperativaObrera(object):
         self.browser.get("https://www.cooperativaobrera.com.ar//servlet/Internet.ecoop.ServletEcoopLogin?invitado=S")
 
         self.niveles, self.digitos, self.categorias = self._get_category_tree()
-        print self.categorias[:10]
 
         # scrapeamos categorias que no contienen subcategorias (leaf)
         for c in ifilter(lambda c: c[1] == u'S', self.categorias):
