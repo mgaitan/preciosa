@@ -385,7 +385,7 @@ class PrecioManager(models.Manager):
             if isinstance(punto_o_sucursal, Sucursal):
                 punto = punto_o_sucursal.ubicacion
             else:
-                punto = punto_o_sucursal.ubicacion
+                punto = punto_o_sucursal
             cercanas = Sucursal.objects.filter(ubicacion__distance_lte=(punto, D(km=radio)))
             cercanas = cercanas.values_list('id', flat=True)
             qs = qs.filter(sucursal__id__in=cercanas).distinct('sucursal')[:limite]
