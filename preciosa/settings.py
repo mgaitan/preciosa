@@ -298,6 +298,7 @@ DBBACKUP_FILESYSTEM_DIRECTORY = os.path.join(PROJECT_ROOT, 'backups')
 THUMBNAIL_ALIASES = {
     '': {
         '70x70': dict(size=(70, 70), quality=75, crop="center"),
+        'small': dict(size=(60, 60), quality=75, crop="center"),
     }
 }
 

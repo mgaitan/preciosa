@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta
-
 from django.utils import timezone
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
@@ -102,6 +101,12 @@ class Producto(models.Model):
         return ('detalle_producto',
                 (self.categoria.id, slugify(self.categoria.nombre),
                  self.id, slugify(self.descripcion)), {})
+
+    @property
+    def foto_abs(self):
+        if self.foto:
+            return self.foto.url
+
 
     def mejor_precio(self):
         last_month = datetime.today() - timedelta(days=30)

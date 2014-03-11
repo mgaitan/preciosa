@@ -64,6 +64,9 @@ class SucursalSerializer(serializers.ModelSerializer):
 
 
 class ProductoSerializer(serializers.HyperlinkedModelSerializer):
+
+    foto = serializers.CharField(source='foto_abs', required=False)
+
     class Meta:
         model = Producto
         fields = (
@@ -71,6 +74,7 @@ class ProductoSerializer(serializers.HyperlinkedModelSerializer):
             'descripcion',
             'marca',
             'upc',
+            'foto',
         )
 
 
