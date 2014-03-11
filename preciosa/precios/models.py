@@ -6,8 +6,10 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 from django.db.models import Min
-from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
+from cities_light.models import City
+from django.db.models.signals import post_save
+from annoying.functions import get_object_or_None
 from model_utils import Choices
 from model_utils.fields import MonitorField
 from model_utils.models import TimeStampedModel
@@ -106,7 +108,6 @@ class Producto(models.Model):
     def foto_abs(self):
         if self.foto:
             return self.foto.url
-
 
     def mejor_precio(self):
         last_month = datetime.today() - timedelta(days=30)
@@ -231,15 +232,6 @@ class Sucursal(models.Model):
             return self.ubicacion.x
         return None
 
-    @property
-    def point(self):
-        """
-        devuelve una instancia Punto para la ubicacion de
-        la sucursal
-        """
-        if self.lat and self.lon:
-            return Point(self.lon, self.lat, srid=4326)
-
     def get_geocode_data(self):
         return get_geocode_data(self.ciudad, self.direccion)
 
@@ -261,14 +253,14 @@ class Sucursal(models.Model):
         if misma_cadena:
             otras = otras.filter(cadena=self.cadena)
 
-        if radio and self.point:
-            circulo = (self.point, D(km=radio))
+        if radio and self.ubicacion:
+            circulo = (self.ubicacion, D(km=radio))
             otras = otras.filter(ubicacion__distance_lte=circulo)
         else:
             otras = otras.filter(ciudad=self.ciudad)
 
-        if self.point:
-            otras = otras.distance(self.point).order_by('distance')
+        if self.ubicacion:
+            otras = otras.distance(self.ubicacion).order_by('distance')
 
         return otras
 
@@ -367,7 +359,45 @@ class PrecioManager(models.Manager):
         # precios online
         if qs.exists():
             return self._registro_precio(qs)
+        return []
 
+    def mejores_precios(self, producto, ciudad=None, punto_o_sucursal=None,
+                        radio=None, dias=None, limite=5):
+        """
+        devuelve una lista de de diccionarios ordenados por menor precio
+        (importe) para un determinado producto y un radio de
+        distancia o ciudad.
+
+        Sólo considerar el último precio en cada sucursal.
+        """
+        if not one((ciudad, radio)):
+            raise ValueError('Debe proveer una ciudad o un radio en kilometros')
+
+        if one((radio, punto_o_sucursal)):
+            raise ValueError('Si se especifica radio debe proveer el punto o sucursal')
+
+        qs = super(PrecioManager,
+                   self).get_queryset().filter(producto=producto, activo__isnull=False)
+
+        if dias:
+            desde = timezone.now() - timedelta(days=dias)
+            qs = qs.filter(created__gte=desde)
+
+        if radio:
+            if isinstance(punto_o_sucursal, Sucursal):
+                punto = punto_o_sucursal.ubicacion
+            else:
+                punto = punto_o_sucursal
+            cercanas = Sucursal.objects.filter(ubicacion__distance_lte=(punto, D(km=radio)))
+            cercanas = cercanas.values_list('id', flat=True)
+            qs = qs.filter(sucursal__id__in=cercanas).distinct('sucursal')[:limite]
+        elif ciudad:
+            if isinstance(ciudad, City):
+                ciudad = ciudad.id
+            qs = qs.filter(sucursal__ciudad__id=ciudad).distinct('sucursal')[:limite]
+        if qs.exists():
+            qs = qs.values('created', 'precio', 'sucursal')
+            return sorted(qs, key=lambda i: i['precio'])
         return []
 
 
@@ -379,12 +409,44 @@ class Precio(TimeStampedModel):
     precio = models.DecimalField(max_digits=8, decimal_places=2)
     usuario = models.ForeignKey(User, null=True, blank=True)
 
+    def save(self, *args, **kwargs):
+        super(Precio, self).save(*args, **kwargs)
+
     def __unicode__(self):
         return u'%s: $ %s' % (self.producto, self.precio)
 
     class Meta:
         verbose_name = u"precio"
         verbose_name_plural = u"precios"
+
+
+class PrecioActivo(models.Model):
+    """cada vez que se agrega un precio,
+    es el precio activo de ese producto para la sucursal"""
+
+    producto = models.ForeignKey('Producto')
+    sucursal = models.ForeignKey('Sucursal')
+    precio = models.ForeignKey(Precio, related_name='activo')
+
+    class Meta:
+        unique_together = ('producto', 'sucursal', 'precio')
+
+
+def actualizar_precio_activo(sender, **kwargs):
+    if kwargs['created']:
+        precio = kwargs['instance']
+        activo = get_object_or_None(PrecioActivo, producto=precio.producto,
+                                    sucursal=precio.sucursal)
+        if activo:
+            activo.precio = precio
+            activo.save(update_fields=['precio'])
+        else:
+            PrecioActivo.objects.create(producto=precio.producto,
+                                        sucursal=precio.sucursal,
+                                        precio=precio)
+
+
+post_save.connect(actualizar_precio_activo, sender=Precio)
 
 
 class PrecioEnAcuerdo(models.Model):
