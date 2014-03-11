@@ -19,6 +19,7 @@
 
 <div class="row">
     <div class="col-lg-5">
+        {{ form_sucursal.media }}
         <h3>Agregar una nueva sucursal</h3>
         <form method="post" action="." enctype="multipart/form-data">
             {% csrf_token %}
@@ -33,7 +34,7 @@
                  <form method="post" action="." enctype="multipart/form-data" >
                      {% csrf_token %}
                      {{ form_cadena|bootstrap }}
-                     <input class="btn btn-primary" type="submit" name="btn_form_cadena" value="Agregar" />
+                     <input class="btn btn-primary col-lg-12" type="submit" name="btn_form_cadena" value="Agregar" />
                  </form>
             </div>
         </div>
@@ -89,72 +90,65 @@
     <script type="text/javascript">
 
     $(function(){
-    // Make a javascript Autocomplete object and set it up
-    var autocomplete2 = $('#id_nombre').yourlabsAutocomplete({
-        url: '{% url "autocomplete_nombre_sucursal" %}',
-    });
+        $(document).ready(function(){
+            // Make a javascript Autocomplete object and set it up
+            var autocomplete2 = $('#id_nombre').yourlabsAutocomplete({
+                url: '{% url "autocomplete_nombre_sucursal" %}',
+            });
 
-    $('button.vot_yes').on('click', function(){
-        var $but = $(this);
-        var pk = $but.data('pk');
-        $.post('./voto/' + pk + '/',
-               {'voto': true, 'model': 'voluntarios.SucursalCadenaCreada'},
-               function(response){
-                   if (response.result){
-                       $but.parents('.left').fadeOut();
-                   }
-               }
-        );
-    });
+            $('button.vot_yes').on('click', function(){
+                var $but = $(this);
+                var pk = $but.data('pk');
+                $.post('./voto/' + pk + '/',
+                       {'voto': true, 'model': 'voluntarios.SucursalCadenaCreada'},
+                       function(response){
+                           if (response.result){
+                               $but.parents('.left').fadeOut();
+                           }
+                       }
+                );
+            });
 
-    $('button.vot_no').on('click', function(){
-        var $but = $(this);
-        var pk = $but.data('pk');
-        $.post('./voto/' + pk + '/', {'voto': false, 'model':
-          'voluntarios.SucursalCadenaCreada'}, function(response){
-            if (response.result){
-                $but.parents('.left').fadeOut();
-            }
+            $('button.vot_no').on('click', function(){
+                var $but = $(this);
+                var pk = $but.data('pk');
+                $.post('./voto/' + pk + '/', {'voto': false, 'model':
+                  'voluntarios.SucursalCadenaCreada'}, function(response){
+                    if (response.result){
+                        $but.parents('.left').fadeOut();
+                    }
+                });
+            });
+
+            $('input[name="direccion"], #id_ciudad').on('change', function(data){
+                var url = './geo_code/?ciudad=' + $('#id_ciudad').val() +  '&direccion=' + $('#id_direccion').val();
+
+                var epsg4326 = new OpenLayers.Projection("EPSG:4326");
+                var epsg900913 = new OpenLayers.Projection("EPSG:900913");
+
+                var layer = map_ubicacion.map.layers[1];
+                // http://jsfiddle.net/_DR_/SMnUJ/
+                drag = new OpenLayers.Control.DragFeature(layer, {
+                       autoActivate: true,
+                });
+                map_ubicacion.map.addControl(drag);
+
+                $.get(url, function(data){
+                    if (data){
+
+                    var center = new OpenLayers.LonLat(data.lon, data.lat).transform(epsg4326, epsg900913);
+                    var point = new OpenLayers.Geometry.Point(center.lon,center.lat);
+                    layer.addFeatures([new OpenLayers.Feature.Vector(point)]);
+                    if (data.direccion){
+                        var zoom = 16;
+                    }else{
+                        var zoom = 15;
+                    }
+                    map_ubicacion.map.setCenter(center, 15);
+                    }
+                });
+            });
         });
     });
-
-
-
-
-
-
-
-    $('input[name="direccion"], #id_ciudad').on('change', function(data){
-        var url = './geo_code/?ciudad=' + $('#id_ciudad').val() +  '&direccion=' + $('#id_direccion').val();
-
-        var epsg4326 = new OpenLayers.Projection("EPSG:4326");
-        var epsg900913 = new OpenLayers.Projection("EPSG:900913");
-
-        var layer = map_ubicacion.map.layers[1];
-        // http://jsfiddle.net/_DR_/SMnUJ/
-        drag = new OpenLayers.Control.DragFeature(layer, {
-               autoActivate: true,
-        });
-        map_ubicacion.map.addControl(drag);
-
-        $.get(url, function(data){
-            if (data){
-
-            var center = new OpenLayers.LonLat(data.lon, data.lat).transform(epsg4326, epsg900913);
-            var point = new OpenLayers.Geometry.Point(center.lon,center.lat);
-            layer.addFeatures([new OpenLayers.Feature.Vector(point)]);
-            if (data.direccion){
-                var zoom = 16;
-            }else{
-                var zoom = 15;
-            }
-            map_ubicacion.map.setCenter(center, 15);
-            }
-        });
-    });
-
-
-    });
-
     </script>
 {% endblock extra_footer %}
