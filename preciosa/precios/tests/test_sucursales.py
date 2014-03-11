@@ -32,7 +32,7 @@ class TestSucursalClean(TestCase):
 
     def test_ya_existe_en_radio_de_la_misma_cadena(self):
         suc = SucursalFactory()
-        otra_ubicacion = punto_destino(suc.point, 90, 0.03)
+        otra_ubicacion = punto_destino(suc.ubicacion, 90, 0.03)
         with self.assertRaisesRegexp(ValidationError, 'sucursal(.*)metros'):
             suc2 = SucursalFactory(ubicacion=otra_ubicacion, cadena=suc.cadena)
             suc2.clean()
@@ -44,15 +44,38 @@ class TestSucursalClean(TestCase):
 
     def test_sucursales_mas_de_50_no_afectan(self):
         suc = SucursalFactory()
-        otra_ubicacion = punto_destino(suc.point, 90, 0.06)
+        otra_ubicacion = punto_destino(suc.ubicacion, 90, 0.06)
         suc2 = SucursalFactory(ubicacion=otra_ubicacion, cadena=suc.cadena)
         self.assertIsNone(suc2.clean())
 
     def test_sucursales_otra_cadena_no_afectan_en_radio(self):
         suc = SucursalFactory()
-        otra_ubicacion = punto_destino(suc.point, 90, 0.03)
+        otra_ubicacion = punto_destino(suc.ubicacion, 90, 0.03)
         suc2 = SucursalFactory(ubicacion=otra_ubicacion)
         assert suc2.cadena != suc.cadena
         self.assertIsNone(suc2.clean())
 
 
+class TestSucursalCercanas(TestCase):
+
+    def setUp(self):
+        self.suc = SucursalFactory()
+
+    def test_radio(self):
+        suc2 = SucursalFactory(ubicacion=punto_destino(self.suc.ubicacion, 90, 0.1))
+        suc3 = SucursalFactory(ubicacion=punto_destino(self.suc.ubicacion, 90, 1))
+        suc4 = SucursalFactory(ubicacion=punto_destino(self.suc.ubicacion, 180, 1.2))
+        cercanas = self.suc.cercanas(radio=1.1)
+        self.assertIn(suc2, cercanas)
+        self.assertIn(suc3, cercanas)
+        self.assertNotIn(self.suc, cercanas)
+        self.assertNotIn(suc4, cercanas)
+
+    def test_misma_cadena(self):
+        suc2 = SucursalFactory(ubicacion=punto_destino(self.suc.ubicacion, 90, 0.1),
+                               cadena=self.suc.cadena)
+        suc3 = SucursalFactory(ubicacion=punto_destino(self.suc.ubicacion, 90, 1))
+        cercanas = self.suc.cercanas(radio=2, misma_cadena=True)
+        self.assertIn(suc2, cercanas)
+        self.assertNotIn(suc3, cercanas)
+        self.assertNotIn(self.suc, cercanas)

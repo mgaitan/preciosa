@@ -8,6 +8,7 @@ from django.utils.text import slugify
 from django.db.models import Min
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
+from cities_light.models import City
 from model_utils import Choices
 from model_utils.fields import MonitorField
 from model_utils.models import TimeStampedModel
@@ -231,15 +232,6 @@ class Sucursal(models.Model):
             return self.ubicacion.x
         return None
 
-    @property
-    def point(self):
-        """
-        devuelve una instancia Punto para la ubicacion de
-        la sucursal
-        """
-        if self.lat and self.lon:
-            return Point(self.lon, self.lat, srid=4326)
-
     def get_geocode_data(self):
         return get_geocode_data(self.ciudad, self.direccion)
 
@@ -261,14 +253,14 @@ class Sucursal(models.Model):
         if misma_cadena:
             otras = otras.filter(cadena=self.cadena)
 
-        if radio and self.point:
-            circulo = (self.point, D(km=radio))
+        if radio and self.ubicacion:
+            circulo = (self.ubicacion, D(km=radio))
             otras = otras.filter(ubicacion__distance_lte=circulo)
         else:
             otras = otras.filter(ciudad=self.ciudad)
 
-        if self.point:
-            otras = otras.distance(self.point).order_by('distance')
+        if self.ubicacion:
+            otras = otras.distance(self.ubicacion).order_by('distance')
 
         return otras
 
@@ -315,6 +307,7 @@ class PrecioManager(models.Manager):
             qs = qs.distinct('precio')
         qs = qs.values('created', 'precio')
         return sorted(qs, key=lambda i: i['created'], reverse=True)
+
 
     def historico(self, producto, sucursal, dias=None, distintos=True):
         """
@@ -367,7 +360,6 @@ class PrecioManager(models.Manager):
         # precios online
         if qs.exists():
             return self._registro_precio(qs)
-
         return []
 
 

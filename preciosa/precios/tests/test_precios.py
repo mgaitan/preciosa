@@ -139,9 +139,9 @@ class TestMasProbables(TestCase):
                            'created': p1.created}])
 
     def test_precios_a_radio_dado(self):
-        self.suc2.ubicacion = punto_destino(self.suc.point, 90, 4.5)
+        self.suc2.ubicacion = punto_destino(self.suc.ubicacion, 90, 4.5)
         self.suc2.save()
-        self.suc3.ubicacion = punto_destino(self.suc.point, 180, 4.7)
+        self.suc3.ubicacion = punto_destino(self.suc.ubicacion, 180, 4.7)
         self.suc3.save()
         p1 = self.add(10, sucursal=self.suc2)
         p2 = self.add(11, sucursal=self.suc3)
