@@ -22,6 +22,10 @@ def checksum(code):
     return str(check_digit)
 
 
+def es_valido(code):
+    return checksum(code[:-1]) == code[-1]
+
+
 def normalizar(code):
     """work in progress. """
     largo = len(code)
@@ -34,11 +38,8 @@ def normalizar(code):
         return None
     elif largo in (7, 12):
         return code + checksum(code)
-    elif largo in (8, 13) and checksum(code[:-1]) == code[-1]:
+    elif largo in (8, 13) and es_valido(code):
         return code
-
-
-
 
 
 
