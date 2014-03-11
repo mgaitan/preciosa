@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 from django.db.models import Min
-from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from cities_light.models import City
 from model_utils import Choices
@@ -107,7 +106,6 @@ class Producto(models.Model):
     def foto_abs(self):
         if self.foto:
             return self.foto.url
-
 
     def mejor_precio(self):
         last_month = datetime.today() - timedelta(days=30)
@@ -360,6 +358,44 @@ class PrecioManager(models.Manager):
         # precios online
         if qs.exists():
             return self._registro_precio(qs)
+        return []
+
+    def mejores_precios(self, producto, ciudad=None, punto_o_sucursal=None,
+                        radio=None, dias=None, limite=5):
+        """
+        devuelve una lista de de diccionarios ordenados por menor precio
+        (importe) para un determinado producto y un radio de
+        distancia o ciudad.
+
+        Sólo considerar el último precio en cada sucursal.
+        """
+        if not one((ciudad, radio)):
+            raise ValueError('Debe proveer una ciudad o un radio en kilometros')
+
+        if one((radio, punto_o_sucursal)):
+            raise ValueError('Si se especifica radio debe proveer el punto o sucursal')
+
+        qs = super(PrecioManager, self).get_queryset().filter(producto=producto)
+
+        if dias:
+            desde = timezone.now() - timedelta(days=dias)
+            qs = qs.filter(created__gte=desde)
+
+        if radio:
+            if isinstance(punto_o_sucursal, Sucursal):
+                punto = punto_o_sucursal.ubicacion
+            else:
+                punto = punto_o_sucursal.ubicacion
+            cercanas = Sucursal.objects.filter(ubicacion__distance_lte=(punto, D(km=radio)))
+            cercanas = cercanas.values_list('id', flat=True)
+            qs = qs.filter(sucursal__id__in=cercanas).distinct('sucursal')[:limite]
+        elif ciudad:
+            if isinstance(ciudad, City):
+                ciudad = ciudad.id
+            qs = qs.filter(sucursal__ciudad__id=ciudad).distinct('sucursal')[:limite]
+        if qs.exists():
+            qs = qs.values('created', 'precio', 'sucursal')
+            return sorted(qs, key=lambda i: i['precio'])
         return []
 
 

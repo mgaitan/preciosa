@@ -96,7 +96,7 @@ class TestPrecioHistorico(TestCase):
                            'created': p.created}])
 
 
-class TestMasProbables(TestCase):
+class BaseTestPrecio(TestCase):
 
     def setUp(self):
         self.producto = ProductoFactory()
@@ -114,6 +114,9 @@ class TestMasProbables(TestCase):
                              producto=self.producto,
                              precio=precio,
                              **kwargs)
+
+
+class TestMasProbables(BaseTestPrecio):
 
     def qs(self, **kwargs):
         return Precio.objects.mas_probables(sucursal=self.suc,
@@ -169,4 +172,69 @@ class TestMasProbables(TestCase):
         self.assertEqual(list(self.qs(radio=5)),
                          [{'precio': Decimal('10'),
                            'created': p1.created}])
+
+
+class TestMejoresPrecios(BaseTestPrecio):
+
+    """
+        # misma ciudad, distinta cadena
+        self.suc4 = SucursalFactory(ciudad=self.suc.ciudad)
+        # misma cadena, distinta ciudad
+        self.suc5 = SucursalFactory(cadena=self.suc.cadena)
+        # misma cadena, distinta ciudad
+        self.suc5 = SucursalFactory(cadena=self.suc.cadena)
+    """
+
+
+    def qs(self, **kwargs):
+        return Precio.objects.mejores_precios(producto=self.producto,
+                                              **kwargs)
+
+    def test_precios_en_la_ciudad(self):
+        self.add(precio=10, sucursal=self.suc)
+        self.add(precio=11, sucursal=self.suc2)
+        self.add(precio=8.4, sucursal=self.suc3)
+        r = self.qs(ciudad=self.suc.ciudad)
+        self.assertEqual(r[0]['precio'], Decimal('8.4'))
+        self.assertEqual(r[0]['sucursal'], self.suc3.id)
+        self.assertEqual(r[1]['precio'], Decimal('10'))
+        self.assertEqual(r[1]['sucursal'], self.suc.id)
+        self.assertEqual(r[2]['precio'], Decimal('11'))
+        self.assertEqual(r[2]['sucursal'], self.suc2.id)
+
+    def test_ciudad_o_radio_requerido(self):
+        with self.assertRaisesRegexp(ValueError, 'ciudad o un radio'):
+            self.qs()
+
+    def test_radio_y_punto(self):
+        with self.assertRaisesRegexp(ValueError, 'radio debe proveer el punto'):
+            self.qs(radio=10)
+
+    def test_precios_de_otra_ciudad_no_afectan(self):
+        otra = SucursalFactory()
+        assert self.suc.ciudad != otra.ciudad
+        self.add(precio=10, sucursal=self.suc)
+        self.add(precio=1, sucursal=otra)       # barato!
+        r = self.qs(ciudad=self.suc.ciudad)
+        self.assertEqual(len(r), 1)
+        self.assertEqual(r[0]['precio'], Decimal('10'))
+
+    def test_precios_limite(self):
+        # 3 precios posibles
+        self.add(precio=10, sucursal=self.suc)
+        self.add(precio=11, sucursal=self.suc2)
+        self.add(precio=8.4, sucursal=self.suc3)
+        r = self.qs(ciudad=self.suc.ciudad, limite=2)
+        self.assertEqual(len(r), 2)
+
+    def test_dias(self):
+        limite = timezone.now() - timedelta(10)
+        self.add('10.56', sucursal=self.suc)
+        # registro de hace 10 dias
+        self.add('9.20', sucursal=self.suc, created=limite)
+        r = self.qs(ciudad=self.suc.ciudad, dias=9)
+        self.assertEqual(len(r), 1)
+        self.assertEqual(r[0]['precio'], Decimal('10.56'))
+
+
 
