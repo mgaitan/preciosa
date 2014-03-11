@@ -228,9 +228,10 @@ class TestMejoresPrecios(BaseTestPrecio):
 
     def test_dias(self):
         limite = timezone.now() - timedelta(10)
-        self.add('10.56', sucursal=self.suc)
         # registro de hace 10 dias
         self.add('9.20', sucursal=self.suc, created=limite)
+        # registro de hoy
+        self.add('10.56', sucursal=self.suc)
         r = self.qs(ciudad=self.suc.ciudad, dias=9)
         self.assertEqual(len(r), 1)
         self.assertEqual(r[0]['precio'], Decimal('10.56'))
