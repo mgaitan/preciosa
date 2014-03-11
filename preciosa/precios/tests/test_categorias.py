@@ -2,7 +2,8 @@
 from django.test import TestCase
 from preciosa.precios.models import Categoria
 
-class TestCategoria(TestCase):
+
+class TestCategoriaOculta(TestCase):
 
     def setUp(self):
         self.root = Categoria.add_root(nombre='root')
@@ -46,3 +47,31 @@ class TestCategoria(TestCase):
         self.assertOcultoFalse(self.nieta2)
 
 
+class TestCategoriaBusqueda(TestCase):
+
+    def setUp(self):
+        self.root = Categoria.add_root(nombre=u'Raíz 1')
+        self.hija = self.root.add_child(nombre=u'Hija ñoña 2')
+        self.nieta = self.hija.add_child(nombre='Nieta')
+
+    def test_root(self):
+        self.assertEqual(self.root.busqueda, 'raiz 1')
+
+    def test_hija(self):
+        self.assertEqual(self.hija.busqueda, 'raiz 1 hija nona 2')
+
+    def test_nieta(self):
+        self.assertEqual(self.nieta.busqueda, 'raiz 1 hija nona 2 nieta')
+
+    def test_cambia_nieta(self):
+        self.nieta.nombre = u'Nieta Queridísima'
+        self.nieta.save()
+        self.assertEqual(self.nieta.busqueda, 'raiz 1 hija nona 2 nieta queridisima')
+        self.assertEqual(self.hija.busqueda, 'raiz 1 hija nona 2')
+
+    def test_cambia_root(self):
+        self.root.nombre = u'Raíz cuadrada'
+        self.root.save()
+        self.assertEqual(self.root.busqueda, 'raiz cuadrada')
+        self.assertEqual(self.hija.reload().busqueda, 'raiz cuadrada hija nona 2')
+        self.assertEqual(self.nieta.reload().busqueda, 'raiz cuadrada hija nona 2 nieta')

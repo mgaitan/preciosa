@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import unicodedata
 from datetime import datetime, timedelta
 from django.utils import timezone
 from django.contrib.gis.db import models
@@ -24,7 +25,7 @@ from tools.gis import get_geocode_data
 class Categoria(MP_Node):
     nombre = models.CharField(max_length=100)
     oculta = models.BooleanField(default=False)
-
+    busqueda = models.CharField(max_length=300, editable=False)
     node_order_by = ['nombre']
 
     def reload(self):
@@ -41,6 +42,19 @@ class Categoria(MP_Node):
         for sub in self.get_descendants():
             sub.oculta = oculta
             sub.save()
+
+    def _actualizar_busqueda(self):
+        busqueda = unicode(self).replace(' > ', ' ')
+        self.busqueda = unicodedata.normalize('NFKD',
+                                              busqueda).encode('ASCII',
+                                                               'ignore').lower()
+        super(Categoria, self).save(update_fields=['busqueda'])
+
+    def save(self, *args, **kwargs):
+        super(Categoria, self).save(*args, **kwargs)
+        self._actualizar_busqueda()
+        for sub in self.get_descendants():
+            sub._actualizar_busqueda()
 
     def __unicode__(self):
         if not self.is_root():
@@ -79,6 +93,8 @@ class Producto(models.Model):
                                UM_UN, UM_M, UM_M2)
 
     descripcion = models.CharField(max_length=250)
+    busqueda = models.CharField(max_length=250, editable=False)
+
     upc = models.CharField(verbose_name=u"Código de barras",
                            max_length=13, unique=True, null=True, blank=True)
     categoria = models.ForeignKey('Categoria')
@@ -97,6 +113,12 @@ class Producto(models.Model):
     class Meta:
         verbose_name = u"producto"
         verbose_name_plural = u"productos"
+
+    def save(self, *args, **kwargs):
+        self.busqueda = unicodedata.normalize('NFKD',
+                                              self.descripcion).encode('ASCII',
+                                                                       'ignore').lower()
+        super(Producto, self).save(*args, **kwargs)
 
     @models.permalink
     def get_absolute_url(self):
@@ -388,7 +410,8 @@ class PrecioManager(models.Manager):
                 punto = punto_o_sucursal.ubicacion
             else:
                 punto = punto_o_sucursal
-            cercanas = Sucursal.objects.filter(ubicacion__distance_lte=(punto, D(km=radio)))
+            cercanas = Sucursal.objects.filter(ubicacion__distance_lte=(punto,
+                                                                        D(km=radio)))
             cercanas = cercanas.values_list('id', flat=True)
             qs = qs.filter(sucursal__id__in=cercanas).distinct('sucursal')[:limite]
         elif ciudad:
