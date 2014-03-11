@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from django import forms
 import autocomplete_light
 import floppyforms as forms
 
@@ -93,5 +92,5 @@ class SucursalModelForm(forms.ModelForm, CleanNombreMixin):
 
     class Meta:
         model = Sucursal
-        fields = ('cadena', 'nombre', 'ciudad', 'direccion', 'cp', 'telefono',
-                  'horarios', 'ubicacion')
+        fields = ('cadena', 'nombre', 'ciudad', 'direccion', 'ubicacion', 'cp',
+                  'telefono', 'horarios')
