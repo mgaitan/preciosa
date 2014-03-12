@@ -185,6 +185,7 @@ INSTALLED_APPS = [
     "preciosa",
     "preciosa.precios",
     "preciosa.voluntarios",
+    "preciosa.datos",
     "preciosa.api",
     "preciosa.flatpagex"
 ]
@@ -270,6 +271,10 @@ CITIES_LIGHT_CITY_SOURCES = ['http://download.geonames.org/export/dump/AR.zip']
 FIXTURE_DIRS = [
     os.path.join(PROJECT_ROOT, "fixtures"),
 ]
+
+# los command managers de la app 'datos' crean archivos en esta carpeta
+DATASETS_ROOT = os.path.join(PROJECT_ROOT, "datasets")
+
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
