@@ -3,14 +3,14 @@ from django.test import TestCase
 from decimal import Decimal
 from mock import patch
 from preciosa.precios.models import Producto
-from preciosa.precios.management.commands.annalisa import Annalisa
-from factories import MarcaFactory, CategoriaFactory, ProductoFactory
+from preciosa.datos.management.commands.annalisa import Annalisa
+from preciosa.precios.tests.factories import MarcaFactory, CategoriaFactory, ProductoFactory
 
 
 class AnnalisaTestMixin(object):
 
     def setUp(self):
-        self.patcher = patch('preciosa.precios.management.commands.annalisa.requests')
+        self.patcher = patch('preciosa.datos.management.commands.annalisa.requests')
         self.api = Annalisa()
 
     def config(self, json_response):
