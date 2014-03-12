@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
-script basico para adquisicion de datos de
+u"""
+script basico para adquisición de datos de
 sucursales de supermercados desde Google Places.
 
 Genera un archivo CSV en /datasets/sucursales/google_places_<DATE>.csv
@@ -16,7 +16,7 @@ import unicodecsv
 try:
     from googleplaces import GooglePlaces, types, lang
 except ImportError:
-    print """Instalaste las dependecias extra?:
+    print """¿Instalaste las dependecias extra?:
     $ pip install -r requirements/extra.txt"""
     raise
 
@@ -90,9 +90,11 @@ class Command(BaseCommand):
         # Se deberia hacer un reverse lookup a partir de la localizacion
         # via la API de google maps.
         dire = place.formatted_address.split(',')
-        suc['direccion'] = dire[0].strip()
-        suc['ciudad'] = dire[1].strip()
-        suc['provincia'] = dire[2].strip()
+        hay = len(dire) == 4
+        suc['direccion'] = dire[0].strip() if hay else ''
+        suc['ciudad'] = dire[1].strip() if hay else dire[0].strip()
+        suc['provincia'] = dire[2].strip() if hay else dire[1].strip()
+        suc['provincia'] = suc['provincia'].strip(' Province')
         suc['nombre'] = place.name
         suc['lon'] = place.geo_location['lng']
         suc['lat'] = place.geo_location['lat']
