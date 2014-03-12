@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import unicodedata
-from datetime import datetime, timedelta
 from django.utils import timezone
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
@@ -140,8 +139,7 @@ class Producto(models.Model):
         (no incluye al producto en sí mismo)
         """
         qs = Producto.objects.exclude(id=self.id)
-        qs = qs.filter_o(descripcion__similar=self.descripcion)
-        return qs[:maxnum] if maxnum else qs
+        return qs.filter_o(busqueda__similar=self.descripcion)[:maxnum]
 
 
 class DescripcionAlternativa(models.Model):
