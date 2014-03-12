@@ -9,22 +9,40 @@ con los resultados, incluyendo cabeceras.
 import os
 import logging
 from datetime import datetime
+
 from django.conf import settings
 from django.core.management.base import BaseCommand
 import unicodecsv
-
 try:
     from googleplaces import GooglePlaces, types, lang
 except ImportError:
     print """¿Instalaste las dependecias extra?:
     $ pip install -r requirements/extra.txt"""
     raise
-
+from preciosa.precios.models import Cadena
 from cities_light.models import City
+from tools import texto
+
 
 logger = logging.getLogger(__name__)
 
 DESDE = 6990   # poblacion minima de ciudad donde buscar supermercados
+
+CADENAS = [(texto.normalizar(cadena), cadena, id)
+           for (cadena, id) in Cadena.objects.all().values_list('nombre', 'id')]
+
+
+def guess_cadena(nombre):
+    """si el nombre de una y sólo una cadena está en
+    el nombre de la sucursal devolvemos esa cadena y su id"""
+    result = None
+    for cadena_normal, cadena, id in CADENAS:
+        if cadena_normal in texto.normalizar(nombre):
+            if result is None:
+                result = cadena, id
+            else:
+                return None
+    return result
 
 
 class Command(BaseCommand):
@@ -34,6 +52,8 @@ class Command(BaseCommand):
         # setup del archivo de salida
 
         fieldnames = ['nombre',
+                      'cadena_nombre',
+                      'cadena_id',
                       'direccion',
                       'ciudad',
                       'provincia',
@@ -79,9 +99,10 @@ class Command(BaseCommand):
         """
         devuelve un diccionario con las siguientes claves::
 
-            nombre, direccion, lon, lat, ciudad_segun_google,
-            related_city_id, telefono, url
+            nombre, cadena, direccion, lon, lat, ciudad_segun_google,
+            related_city_id, telefono, url, cadena_nombre, cadena_id
         """
+
         place.get_details()
         suc = {}
 
@@ -96,6 +117,9 @@ class Command(BaseCommand):
         suc['provincia'] = dire[2].strip() if hay else dire[1].strip()
         suc['provincia'] = suc['provincia'].strip(' Province')
         suc['nombre'] = place.name
+        cadena = guess_cadena(place.name)
+        if cadena:
+            suc['cadena_nombre'], suc['cadena_id'] = cadena
         suc['lon'] = place.geo_location['lng']
         suc['lat'] = place.geo_location['lat']
         suc['telefono'] = place.local_phone_number
