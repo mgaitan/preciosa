@@ -139,7 +139,7 @@ class Producto(models.Model):
         (no incluye al producto en sí mismo)
         """
         qs = Producto.objects.exclude(id=self.id)
-        return qs.filter_o(busqueda__similar=self.descripcion)[:maxnum]
+        return qs.filter_o(busqueda__similar=self.busqueda)[:maxnum]
 
 
 class DescripcionAlternativa(models.Model):
