@@ -31,7 +31,7 @@ class CategoriaFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Categoria
     nombre = factory.Sequence(lambda n: u'Categoria_{0}'.format(n))
     depth = 1
-    path = factory.Sequence(lambda n: u'000{0}'.format(unicode(chr(n + 65))))
+    path = factory.Sequence(lambda n: u'00%d' % n)
 
 
 class EmpresaFabricanteFactory(factory.DjangoModelFactory):
