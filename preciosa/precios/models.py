@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import unicodedata
 from datetime import timedelta
 from django.utils import timezone
 from django.contrib.gis.db import models
@@ -20,6 +19,7 @@ from treebeard.mp_tree import MP_Node
 from djorm_pgtrgm import SimilarManager
 from tools.utils import one
 from tools.gis import get_geocode_data
+from tools import texto
 
 
 class Categoria(MP_Node):
@@ -45,9 +45,7 @@ class Categoria(MP_Node):
 
     def _actualizar_busqueda(self):
         busqueda = unicode(self).replace(' > ', ' ')
-        self.busqueda = unicodedata.normalize('NFKD',
-                                              busqueda).encode('ASCII',
-                                                               'ignore').lower()
+        self.busqueda = texto.normalizar(busqueda)
         super(Categoria, self).save(update_fields=['busqueda'])
 
     def save(self, *args, **kwargs):
@@ -115,9 +113,7 @@ class Producto(models.Model):
         verbose_name_plural = u"productos"
 
     def save(self, *args, **kwargs):
-        self.busqueda = unicodedata.normalize('NFKD',
-                                              self.descripcion).encode('ASCII',
-                                                                       'ignore').lower()
+        self.busqueda = texto.normalizar(self.descripcion)
         super(Producto, self).save(*args, **kwargs)
 
     @models.permalink

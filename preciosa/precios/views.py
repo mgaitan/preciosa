@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import operator
-import unicodedata
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from django.http import HttpResponse
 from preciosa.precios.models import Producto, Categoria
+from tools import texto
 
 # Vistas web
 
@@ -60,7 +60,7 @@ def autocomplete_buscador(request):
     if es_num:
         productos = Producto.objects.filter(upc__startswith=q)[0:8]
     else:
-        q = unicodedata.normalize('NFKD', q).encode('ASCII', 'ignore').lower()
+        q = texto.normalizar(q)
         words = q.split()
 
         palabras = Q(reduce(operator.and_,
@@ -68,7 +68,7 @@ def autocomplete_buscador(request):
         tiene_palabras = Producto.objects.filter(
             palabras).values_list('id', flat=True)
         similares = Producto.objects.filter_o(busqueda__similar=q).values_list('id',
-                                              flat=True)
+                                                                               flat=True)
         productos = Producto.objects.filter(Q(id__in=tiene_palabras) |
                                             Q(id__in=similares)).distinct()[0:8]
     context['productos'] = productos
