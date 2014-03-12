@@ -34,6 +34,7 @@ THUMBNAIL_BASEDIR = 'thumbs'
 
 
 GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-123456-1'
+GOOGLE_PLACES_API_KEY = 'AIzaSyCH3pf7V87-XXXXXXXXXX-YYYYY'
 
 NOSE_ARGS = ['-s', '--nologcapture', '--nocapture',
              '--with-id', '--logging-clear-handlers']

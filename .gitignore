@@ -1,5 +1,6 @@
 # preciosa
 site_media
+datasets
 local_settings.py
 .wiki
 .noseids

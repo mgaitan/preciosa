@@ -1,0 +1,15 @@
+# En este listado de dependencias poner todas aquellas que
+# no son obligatorias para el funcionamiento estándar.
+# Por ejemplo, aquellas requeridas para management commands de aquisicion de
+# datos.
+# Se puede importar así
+#
+#   try:
+#       import zaraza
+#   except ImportError:
+#       print """Instalaste las dependecias extra?:
+#           $ pip install -r requirements/extra.txt  """
+#       raise
+#
+
+python-google-places==0.10.1
