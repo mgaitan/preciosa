@@ -71,10 +71,10 @@ class TestProductoSimilarity(TestCase):
 class TestSimilaresAProducto(TestCase):
 
     def setUp(self):
-        self.p1 = ProductoFactory(descripcion="Salsa de Tomate Arcor 500ml")
-        self.p2 = ProductoFactory(descripcion="Salsa de Tomate Cica 500ml")
+        self.p1 = ProductoFactory(descripcion=u"Salsa de Tomate Arcor 500ml")
+        self.p2 = ProductoFactory(descripcion=u"Salsa de Tomate Cica 500ml")
         self.p3 = ProductoFactory(descripcion=u"Puré de Tomate Arcor 350ml")
-        self.p4 = ProductoFactory(descripcion="Mayonesa Hellmanns 350gr")
+        self.p4 = ProductoFactory(descripcion=u"Mayonesa Hellmanns 350gr")
 
     def test_similares(self):
         ids = self.p1.similares().values_list('id', flat=True)
@@ -86,3 +86,15 @@ class TestSimilaresAProducto(TestCase):
     def test_sin_resultado(self):
         qs = self.p4.similares()
         self.assertFalse(qs.exists())
+
+
+class TestProductoBusqueda(TestCase):
+
+    def test_acentos(self):
+        p1 = ProductoFactory(descripcion=u"ÁéíóÚ")
+        self.assertEqual(p1.busqueda, 'aeiou')
+
+    def test_mayus(self):
+        p1 = ProductoFactory(descripcion=u"UÑAS Y DIENTES")
+        self.assertEqual(p1.busqueda, 'unas y dientes')
+
