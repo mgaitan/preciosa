@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import unicodedata
+from datetime import timedelta
 from django.utils import timezone
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
