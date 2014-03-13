@@ -8,6 +8,9 @@ from django.utils.encoding import smart_str
 
 class TestBuscador(TestCase):
 
+    # TO DO: luego de #170 este testcase deberia comproboar los resultados
+    # del metodo ``ProductoManager.buscar`` y no de la vista buscador
+
     def setUp(self):
         self.client = Client()
         self.url = reverse('buscador')
