@@ -13,7 +13,6 @@ from datetime import datetime
 from django.conf import settings
 from django.core.management.base import BaseCommand
 import unicodecsv
-from annoying.functions import get_object_or_None
 try:
     from googleplaces import GooglePlaces, types, lang
 except ImportError:
@@ -50,13 +49,21 @@ def inferir_cadena(nombre):
 def inferir_ciudad(ciudad, provincia=None):
     nombreciudad = texto.normalizar(ciudad.replace(' ', ''))
     buscar = "%sargentina" % nombreciudad
-    ciudad = get_object_or_None(City, search_names__istartswith=buscar)
+    try:
+        ciudad = City.objects.get(search_names__istartswith=buscar)
+    except (City.DoesNotExist, City.MultipleObjectsReturned):
+        ciudad = None
+
     if ciudad:
         return ciudad.name, ciudad.region.name, ciudad.id
     elif provincia:
         nombreprov = texto.normalizar(provincia.replace(' ', ''))
         buscar = "%s%sargentina" % (nombreciudad, nombreprov)
-        ciudad = get_object_or_None(City, search_names__icontains=buscar)
+        try:
+            ciudad = City.objects.get(search_names__istartswith=buscar)
+        except (City.DoesNotExist, City.MultipleObjectsReturned):
+            ciudad = None
+
         if ciudad:
             return ciudad.name, ciudad.region.name, ciudad.id
 
