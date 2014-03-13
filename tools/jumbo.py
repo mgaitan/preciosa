@@ -75,14 +75,13 @@ for id, name in menu:
 
     logger.info('Downloading category: "%s"', name)
     r = browser.post(url('articulos'),
-                 headers=headers,
-                 data=json.dumps({'code': code.format(id)}))
+                     headers=headers,
+                     data=json.dumps({'code': code.format(id)}))
 
     soup = BeautifulSoup(json.loads(r.content)['d'])
     items = soup.findAll('items')
 
     category = soup.findAll('title')[-1].text
-
 
     # sometimes I get many items and some of them are empty
     # I choose only the first one that is not empty
@@ -115,7 +114,6 @@ for id, name in menu:
         except ValueError:
             logger.error('There was some error with '
                          'product "%s". Excluding this product.', p)
-            # import ipdb;ipdb.set_trace()
             continue
 
         description, price_unit, price_x, = info.split(u'\u25ca')[:3]
