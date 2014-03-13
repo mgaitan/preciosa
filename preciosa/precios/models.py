@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+import operator
 from datetime import timedelta
 from django.utils import timezone
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
+from django.db.models import Q
 from django.db.models import Min
 from django.contrib.gis.measure import D
 from cities_light.models import City
@@ -72,8 +74,32 @@ class Categoria(MP_Node):
         return cls.objects.get(nombre='A CLASIFICAR').get_children()
 
 
+class ProductoManager(SimilarManager):
+
+    def buscar(self, q, limite=8):
+        """Si q son digitos, busca por código de barra.
+           otras cadenas, busca por similaridad e inclusión de
+           palabras clave en la descripción"""
+
+        if q.isdigit():
+            productos = Producto.objects.filter(upc__startswith=q)[0:limite]
+        else:
+            q = texto.normalizar(q)
+            words = q.split()
+            palabras = Q(reduce(operator.and_,
+                                (Q(busqueda__icontains=w) for w in words if len(w) > 2)))
+            tiene_palabras = Producto.objects.filter(palabras).values_list('id',
+                                                                           flat=True)
+            similares = Producto.objects.filter_o(
+                busqueda__similar=q).values_list('id',
+                                                 flat=True)
+            productos = Producto.objects.filter(Q(id__in=tiene_palabras) |
+                                                Q(id__in=similares)).distinct()[0:limite]
+        return productos
+
+
 class Producto(models.Model):
-    objects = SimilarManager()
+    objects = ProductoManager()
 
     UM_GRAMO = 'gr'
     UM_KILO = 'kg'
@@ -140,6 +166,7 @@ class Producto(models.Model):
 
 
 class DescripcionAlternativa(models.Model):
+
     """Este modelo guarda otras denominaciones posibles de un mismo producto.
     Es útil para ampliar la *tabla de verdad* para hacer matching
     de productos provenientes de datasets sin UPC.
@@ -386,10 +413,12 @@ class PrecioManager(models.Manager):
         Sólo considerar el último precio en cada sucursal.
         """
         if not one((ciudad, radio)):
-            raise ValueError('Debe proveer una ciudad o un radio en kilometros')
+            raise ValueError(
+                'Debe proveer una ciudad o un radio en kilometros')
 
         if one((radio, punto_o_sucursal)):
-            raise ValueError('Si se especifica radio debe proveer el punto o sucursal')
+            raise ValueError(
+                'Si se especifica radio debe proveer el punto o sucursal')
 
         qs = super(PrecioManager,
                    self).get_queryset().filter(producto=producto, activo__isnull=False)
@@ -406,11 +435,13 @@ class PrecioManager(models.Manager):
             cercanas = Sucursal.objects.filter(ubicacion__distance_lte=(punto,
                                                                         D(km=radio)))
             cercanas = cercanas.values_list('id', flat=True)
-            qs = qs.filter(sucursal__id__in=cercanas).distinct('sucursal')[:limite]
+            qs = qs.filter(sucursal__id__in=cercanas).distinct(
+                'sucursal')[:limite]
         elif ciudad:
             if isinstance(ciudad, City):
                 ciudad = ciudad.id
-            qs = qs.filter(sucursal__ciudad__id=ciudad).distinct('sucursal')[:limite]
+            qs = qs.filter(sucursal__ciudad__id=ciudad).distinct(
+                'sucursal')[:limite]
         if qs.exists():
             qs = qs.values('created', 'precio', 'sucursal')
             return sorted(qs, key=lambda i: i['precio'])
@@ -437,6 +468,7 @@ class Precio(TimeStampedModel):
 
 
 class PrecioActivo(models.Model):
+
     """cada vez que se agrega un precio,
     es el precio activo de ese producto para la sucursal"""
 
