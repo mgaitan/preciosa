@@ -80,6 +80,7 @@ class ProductoManager(SimilarManager):
         """Si q son digitos, busca por código de barra.
            otras cadenas, busca por similaridad e inclusión de
            palabras clave en la descripción"""
+
         if q.isdigit():
             productos = Producto.objects.filter(upc__startswith=q)[0:limite]
         else:

@@ -2,7 +2,6 @@ from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-import operator
 
 from rest_framework import viewsets, mixins, generics
 
@@ -20,6 +19,7 @@ class CreateListRetrieveViewSet(mixins.CreateModelMixin,
                                 mixins.ListModelMixin,
                                 mixins.RetrieveModelMixin,
                                 viewsets.GenericViewSet):
+
     """
     A viewset that provides `retrieve`, `create`, and `list` actions.
 
@@ -72,8 +72,8 @@ class SucursalesList(mixins.ListModelMixin,
         radio = self.request.QUERY_PARAMS.get('radio', None)
 
         if q:
-            words = q.split(' ')
-            queryset = queryset.filter(Q(cadena__nombre__icontains=q) | Q(nombre__icontains=q))
+            queryset = queryset.filter(Q(cadena__nombre__icontains=q) |
+                                       Q(nombre__icontains=q))
 
         if all((lat, lon, radio)):
             try:
@@ -103,33 +103,23 @@ class SucursalesList(mixins.ListModelMixin,
 
 
 class ProductosList(mixins.ListModelMixin,
-                     mixins.CreateModelMixin,
-                     generics.GenericAPIView):
+                    mixins.CreateModelMixin,
+                    generics.GenericAPIView):
 
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
 
     def get_queryset(self):
-        queryset = super(ProductosList, self).get_queryset()
         pk = self.request.QUERY_PARAMS.get('pk', None)
         barcode = self.request.QUERY_PARAMS.get('barcode', None)
         q = self.request.QUERY_PARAMS.get('q', None)
-
+        limite = self.request.QUERY_PARAMS.get('limite', None)
         if pk:
-            queryset = queryset.filter(pk=pk)
-
-        else:
-            if barcode:
-                queryset = queryset.filter(upc__icontains=barcode)
-
-            if q:
-                words = q.split()
-                queryset = queryset.filter(
-                    Q(reduce(operator.and_, (Q(descripcion__icontains=w) for w in words)))
-                    #| Q(marca__nombre__icontains=q)
-                    #| Q(marca__fabricante__nombre__icontains=q)
-                )
-
+            queryset = super(ProductosList, self).get_queryset().filter(pk=pk)
+        elif barcode:
+            queryset = Producto.objects.buscar(barcode, limite)
+        elif q:
+            queryset = Producto.objects.buscar(q, limite)
         return queryset
 
     def get(self, request, *args, **kwargs):
@@ -137,8 +127,8 @@ class ProductosList(mixins.ListModelMixin,
 
 
 class PreciosList(mixins.ListModelMixin,
-                     mixins.CreateModelMixin,
-                     generics.GenericAPIView):
+                  mixins.CreateModelMixin,
+                  generics.GenericAPIView):
 
     queryset = Precio.objects.all()
     serializer_class = PrecioSerializer
