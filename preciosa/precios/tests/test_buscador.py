@@ -10,7 +10,7 @@ class TestBuscador(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.url = reverse('autocomplete_buscador')
+        self.url = reverse('buscador')
         self.productos = [ProductoFactory(descripcion=u"Salsa de Tomate Arcor 500ml"),
                           ProductoFactory(descripcion=u"Salsa de Tomate Cica 500ml"),
                           ProductoFactory(descripcion=u"Puré de Tomate Arcor 350ml"),
@@ -28,7 +28,7 @@ class TestBuscador(TestCase):
 
     def test_js_requerido(self):
         base = render_to_string('base.html', {})
-        buscador = render_to_string('_buscador.html', {})
+        buscador = render_to_string('_buscador_js.html', {})
         self.assertIn(buscador, base)
         self.assertIn("url: '%s'" % self.url, buscador)
 

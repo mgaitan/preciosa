@@ -45,7 +45,7 @@ class ProductoDetailView(DetailView):
         return context
 
 
-def autocomplete_buscador(request):
+def buscador(request):
     q = request.GET.get('q', '')
     if len(q) < 3:
         return HttpResponse('')
@@ -73,4 +73,4 @@ def autocomplete_buscador(request):
                                             Q(id__in=similares)).distinct()[0:8]
     context['productos'] = productos
 
-    return render(request, "precios/autocomplete.html", context)
+    return render(request, "precios/buscador.html", context)
