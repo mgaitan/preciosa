@@ -13,12 +13,14 @@ from datetime import datetime
 from django.conf import settings
 from django.core.management.base import BaseCommand
 import unicodecsv
+from annoying.functions import get_object_or_None
 try:
     from googleplaces import GooglePlaces, types, lang
 except ImportError:
     print """¿Instalaste las dependecias extra?:
     $ pip install -r requirements/extra.txt"""
     raise
+
 from preciosa.precios.models import Cadena
 from cities_light.models import City
 from tools import texto
@@ -32,7 +34,7 @@ CADENAS = [(texto.normalizar(cadena), cadena, id)
            for (cadena, id) in Cadena.objects.all().values_list('nombre', 'id')]
 
 
-def guess_cadena(nombre):
+def inferir_cadena(nombre):
     """si el nombre de una y sólo una cadena está en
     el nombre de la sucursal devolvemos esa cadena y su id"""
     result = None
@@ -43,6 +45,20 @@ def guess_cadena(nombre):
             else:
                 return None
     return result
+
+
+def inferir_ciudad(ciudad, provincia=None):
+    nombreciudad = texto.normalizar(ciudad.replace(' ', ''))
+    buscar = "%sargentina" % nombreciudad
+    ciudad = get_object_or_None(City, search_names__istartswith=buscar)
+    if ciudad:
+        return ciudad.name, ciudad.region.name, ciudad.id
+    elif provincia:
+        nombreprov = texto.normalizar(provincia.replace(' ', ''))
+        buscar = "%s%sargentina" % (nombreciudad, nombreprov)
+        ciudad = get_object_or_None(City, search_names__icontains=buscar)
+        if ciudad:
+            return ciudad.name, ciudad.region.name, ciudad.id
 
 
 class Command(BaseCommand):
@@ -56,10 +72,10 @@ class Command(BaseCommand):
                       'cadena_id',
                       'direccion',
                       'ciudad',
+                      'ciudad_relacionada_id',
                       'provincia',
                       'lon',
                       'lat',
-                      'ciudad_relacionada_id',
                       'telefono',
                       'url']
 
@@ -113,11 +129,23 @@ class Command(BaseCommand):
         dire = place.formatted_address.split(',')
         hay = len(dire) == 4
         suc['direccion'] = dire[0].strip() if hay else ''
+
         suc['ciudad'] = dire[1].strip() if hay else dire[0].strip()
         suc['provincia'] = dire[2].strip() if hay else dire[1].strip()
         suc['provincia'] = suc['provincia'].strip(' Province')
+
+        # como google place busca un radio a partir de una ciudad, no necesariamente
+        # el supermercado encontrado **es** de esa ciudad.
+        # La ciudad_relacionada debe tomarse sólo como referencia.
+        # porque la inferencia puede fallar.
+        suc['ciudad_relacionada_id'] = ciudad.id
+        ciudad_data = inferir_ciudad(suc['ciudad'], suc['provincia'])
+        if ciudad_data:
+            (suc['ciudad'],
+             suc['provincia'],
+             suc['ciudad_relacionada_id']) = ciudad_data
         suc['nombre'] = place.name
-        cadena = guess_cadena(place.name)
+        cadena = inferir_cadena(place.name)
         if cadena:
             suc['cadena_nombre'], suc['cadena_id'] = cadena
         suc['lon'] = place.geo_location['lng']
@@ -125,10 +153,4 @@ class Command(BaseCommand):
         suc['telefono'] = place.local_phone_number
         suc['url'] = place.website
 
-        # como google place busca un radio a partir de una ciudad, no necesariamente
-        # el supermercado encontrados **es** de la ciudad.
-        # La ciudad_relacionada debe tomarse sólo como referencia.
-        # lo mejor seria "normalizar" `ciudad` a la instancia
-        # correcta.
-        suc['ciudad_relacionada_id'] = ciudad.id
         return suc
