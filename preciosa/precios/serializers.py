@@ -44,8 +44,8 @@ class UbicacionField(serializers.WritableField):
             pass
 
 
-
 class SucursalSerializer(serializers.ModelSerializer):
+    cadena = CadenaSerializer(source='cadena')
     ubicacion = UbicacionField(required=False)
 
     class Meta:
