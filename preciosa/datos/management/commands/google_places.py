@@ -91,7 +91,7 @@ class Command(BaseCommand):
         if not os.path.exists(suc_dir):
             os.makedirs(suc_dir)
 
-        FILENAME = 'google_place_%s.csv' % datetime.now().strftime("%Y%m%d%H%M%S")
+        FILENAME = 'google_place_%s.csv' % datetime.now().strftime("%Y-%m-%d-%H%M%S")
         FILENAME = os.path.join(suc_dir, FILENAME)
 
         writer = unicodecsv.DictWriter(open(FILENAME, 'wb'), fieldnames)
