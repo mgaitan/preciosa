@@ -46,7 +46,7 @@ def inferir_cadena(nombre):
     return result
 
 
-def inferir_ciudad(ciudad, provincia=None):
+def inferir_ciudad(ciudad, provincia=None, estricto=False):
     nombreciudad = texto.normalizar(ciudad.replace(' ', ''))
     buscar = "%sargentina" % nombreciudad
     try:
@@ -54,7 +54,7 @@ def inferir_ciudad(ciudad, provincia=None):
     except (City.DoesNotExist, City.MultipleObjectsReturned):
         ciudad = None
 
-    if ciudad:
+    if ciudad and not estricto:
         return ciudad.name, ciudad.region.name, ciudad.id
     elif provincia:
         nombreprov = texto.normalizar(provincia.replace(' ', ''))
@@ -84,7 +84,8 @@ class Command(BaseCommand):
                       'lon',
                       'lat',
                       'telefono',
-                      'url']
+                      'url',
+                      'horarios']
 
         suc_dir = os.path.join(settings.DATASETS_ROOT, 'sucursales')
         if not os.path.exists(suc_dir):

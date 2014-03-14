@@ -5,8 +5,12 @@ import unicodedata
 def normalizar(cadena):
     """devuelve una version normalizada
 
-        >>> normalizar('Ñonos útiles')
+        >>> normalizar(u'Ñonos útiles')
         'nonos utiles'
     """
-    return unicodedata.normalize('NFKD', cadena).encode('ASCII',
-                                                        'ignore').lower()
+    try:
+        normal = unicodedata.normalize('NFKD', cadena)
+    except TypeError:
+        cadena = cadena.decode('iso-8859-1')
+        normal = unicodedata.normalize('NFKD', cadena)
+    return normal.encode('ASCII', 'ignore').lower()
