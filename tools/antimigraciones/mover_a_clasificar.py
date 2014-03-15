@@ -22,7 +22,8 @@ def _generar_codigo_de_destinos_para(cat_depth2):
         destinos.append(destino)
         lines.append(line % (destino, cat.id, cat.nombre))
 
-    return '\n    '.join(lines), ', '.join('%s=%s' % (s, s) for s in destinos)
+    mapa = ", ".join("(%s, %s)" % s for s in destinos)
+    return '\n    '.join(lines), mapa
 
 
 def metamagia():
@@ -69,7 +70,7 @@ def %(func)s():
     %(destinos_var)s
 
     mover(origen, intento_borrar=True,
-          %(destinos)s)
+          mapa=[%(mapa)s])
 """
     codigo = []
     funcs = []
@@ -84,7 +85,7 @@ def %(func)s():
             params['func'] = func
             params['id'] = cat.id
             (params['destinos_var'],
-             params['destinos']) = _generar_codigo_de_destinos_para(probable_level2)
+             params['mapa']) = _generar_codigo_de_destinos_para(probable_level2)
             codigo.append(pattern % params)
         else:
             print cat, cat.id
@@ -95,10 +96,11 @@ def %(func)s():
     return "\n".join(codigo)
 
 
-def mover(origen, intento_borrar=False, log=True, **kwargs):
+def mover(origen, intento_borrar=False, log=True, mapa=[]):
     """
     mueve los productos de la categoria origen
-    a las de destino, basadas en la kwarg keyword sobre el campo busqueda
+    a las de destino, basadas en las claves
+    de mapa.
 
     Ejemplo ::
 
@@ -108,7 +110,7 @@ def mover(origen, intento_borrar=False, log=True, **kwargs):
             # destinos
             negras = Categoria.objects.get(id=232)
             verdes = Categoria.objects.get(id=234)
-            mover(aceitunas, negras=negras, verdes=verdes)
+            mover(aceitunas, mapa=[('negras', negras), ('verdes', verdes)])
 
     Moverá todas los productos de ``aceitunas`` a ``verdes``
     las que tengan en su descripcion (campo ``busqueda``) la palabra
@@ -122,8 +124,8 @@ def mover(origen, intento_borrar=False, log=True, **kwargs):
     """
     try:
         with transaction.atomic():
-            for tipo, destino in kwargs.items():
-                for p in origen.productos.filter(busqueda__icontains=tipo):
+            for clave, destino in mapa.items():
+                for p in origen.productos.filter(busqueda__icontains=clave):
                     p.categoria = destino
                     p.save(update_fields=['categoria'])
                     if log:
@@ -147,7 +149,8 @@ def aceites():
     maiz = Categoria.objects.get(id=229)
 
     mover(aceites, intento_borrar=True,
-          girasol=girasol, oliva=oliva, maiz=maiz)
+          mapa=[('girasol', girasol), ('oliva', oliva),
+                ('maiz', maiz)])
 
 
 def aceitunas():
@@ -161,9 +164,10 @@ def aceitunas():
     encurtido = Categoria.objects.get(id=235)
 
     mover(aceitunas, intento_borrar=True,
-          rellena=rellena, negra=negra, verde=verde,
-          encurtido=encurtido)
+          mapa=[('rellena', rellena), ('negra', negra),
+                ('verde', verde), ('encurtido', encurtido)])
 
+    # extra
     # mover
     # <Categoria: Fiambreria > Aceitunas/ encurtidos > Aceitunas/ encurtidos>
     aceituna_en_fiambreria = Categoria.objects.get(id=440)
@@ -180,6 +184,15 @@ def vinagre_aceto():
     vinagre = Categoria.objects.get(id=261)
 
     mover(origen, intento_borrar=True,
-          aceto=aceto, vinagre=vinagre)
+          mapa=[('aceto', aceto), ('vinagre', vinagre)])
+
+
+#
+#  *********************************
+#  todas las funciones de abajo son resultado de
+#  metamagia()
+#
+#   con levels adaptaciones manuales.
+#
 
 
