@@ -90,7 +90,8 @@ def %(func)s():
 
         if cat.id in mapa and mapa[cat.id]:
             # el padre de la categoria que eligieron los usuarios
-            probable_level2 = Categoria.objects.get(id=mapa[cat.id]).get_parent()
+            probable_level2 = Categoria.objects.get(
+                id=mapa[cat.id]).get_parent()
             params = {}
             func = slugify(cat.nombre).replace('-', '_')
             funcs.append(func)
@@ -170,7 +171,7 @@ def aceites():
     oliva = Categoria.objects.get(id=231)
     maiz = Categoria.objects.get(id=229)
 
-    mover(aceites, intento_borrar=True,
+    mover(aceites, intento_borrar=True, default=girasol,
           mapa=[('girasol', girasol), ('oliva', oliva),
                 ('maiz', maiz)])
 
@@ -185,7 +186,7 @@ def aceitunas():
     rellena = Categoria.objects.get(id=233)
     encurtido = Categoria.objects.get(id=235)
 
-    mover(aceitunas, intento_borrar=True,
+    mover(aceitunas, intento_borrar=True, default=verde,
           mapa=[('rellena', rellena), ('negra', negra),
                 ('verde', verde), ('encurtido', encurtido)])
 
@@ -205,8 +206,8 @@ def vinagre_aceto():
     aceto = Categoria.objects.get(id=252)
     vinagre = Categoria.objects.get(id=261)
 
-    mover(origen, intento_borrar=True,
-          mapa=[('aceto', aceto), ('vinagre', vinagre)])
+    mover(origen, intento_borrar=True, default=vinagre,
+          mapa=[('aceto', aceto)])
 
 
 #
@@ -509,7 +510,8 @@ def bolsas_para_residuos():
     lavavajilla = Categoria.objects.get(id=576)   # Detergente- lavavajilla
     papele = Categoria.objects.get(id=577)   # Films- papeles
     encendedore = Categoria.objects.get(id=578)   # Fosforos / encendedores
-    desengrasante = Categoria.objects.get(id=579)   # Limpiadores- desengrasantes
+    # Limpiadores- desengrasantes
+    desengrasante = Categoria.objects.get(id=579)
     palillero = Categoria.objects.get(id=580)   # Palillero
     palillo = Categoria.objects.get(id=581)   # Palillos
     vela = Categoria.objects.get(id=582)   # Velas
@@ -652,7 +654,8 @@ def cocina():
     lavavajilla = Categoria.objects.get(id=576)   # Detergente- lavavajilla
     papele = Categoria.objects.get(id=577)   # Films- papeles
     encendedore = Categoria.objects.get(id=578)   # Fosforos / encendedores
-    desengrasante = Categoria.objects.get(id=579)   # Limpiadores- desengrasantes
+    # Limpiadores- desengrasantes
+    desengrasante = Categoria.objects.get(id=579)
     palillero = Categoria.objects.get(id=580)   # Palillero
     palillo = Categoria.objects.get(id=581)   # Palillos
     vela = Categoria.objects.get(id=582)   # Velas
@@ -744,7 +747,8 @@ def conservas():
     vegetale = Categoria.objects.get(id=266)   # Vegetales
 
     mover(origen, intento_borrar=True, default=vegetale,
-          mapa=[('carne', carne), ('fruta', fruta), ('pescado', pescado), ('salsa', salsa), ('vegetale', vegetale)])
+          mapa=[('carne', carne), ('fruta', fruta), ('pescado', pescado),
+                ('salsa', salsa), ('vegetale', vegetale)])
 
 
 def cremas():
@@ -768,7 +772,8 @@ def cremas_corporales():
     depilacion = Categoria.objects.get(id=658)   # Depilacion
 
     mover(origen, intento_borrar=True, default=crema,
-          mapa=[('splash', splash), ('bronceador', bronceadore), ('crema', crema), ('depilacion', depilacion)])
+          mapa=[('splash', splash), ('bronceador', bronceadore),
+                ('crema', crema), ('depilacion', depilacion)])
 
 
 def cremas_dentales():
@@ -783,7 +788,9 @@ def cremas_dentales():
     hilo = Categoria.objects.get(id=679)   # Hilo
 
     mover(origen, intento_borrar=True, default=crema,
-          mapa=[('adhesivo', adhesivo), ('cepillo', cepillo), ('crema', crema), ('enjuague', enjuague), ('hilo', hilo)])
+          mapa=[('adhesivo', adhesivo), ('cepillo', cepillo),
+                ('dentifrico', crema), ('crema', crema),
+                ('enjuague', enjuague), ('hilo', hilo)])
 
 
 def cremas_faciales():
@@ -798,7 +805,8 @@ def cremas_faciales():
     esponja = Categoria.objects.get(id=674)   # Pinceles y esponjas
 
     mover(origen, intento_borrar=True, default=hidratacion,
-          mapa=[('antiacne', antiacne), ('antiarruga', antiarruga), ('hidratacion', hidratacion), ('cuti', cuti), ('esponja', esponja)])
+          mapa=[('acne', antiacne), ('antiarruga', antiarruga),
+                ('hidratacion', hidratacion), ('cuti', cuti), ('esponja', esponja)])
 
 
 def cuidado_de_la_piel():
@@ -812,7 +820,8 @@ def cuidado_de_la_piel():
     depilacion = Categoria.objects.get(id=658)   # Depilacion
 
     mover(origen, intento_borrar=True, default=crema,
-          mapa=[('splash', splash), ('bronceadore', bronceadore), ('crema', crema), ('depilacion', depilacion)])
+          mapa=[('splash', splash), ('bronceadore', bronceadore),
+                ('crema', crema), ('depilacion', depilacion)])
 
 
 def cuidado_del_cabello():
@@ -844,7 +853,6 @@ def cuidado_del_cabello():
 def depilacion():
     # origen
     origen = Categoria.objects.get(id=796)
-
 
     depilacion = Categoria.objects.get(id=658)   # Depilacion
 
@@ -902,7 +910,8 @@ def dulces():
     otro = Categoria.objects.get(id=271)   # Miel- otros
 
     mover(origen, intento_borrar=True, default=otro,
-          mapa=[('light', light), ('leche', leche), ('jalea', jalea), ('mermelada', mermelada), ('otro', otro)])
+          mapa=[('light', light), ('leche', leche),
+                ('jalea', jalea), ('mermelada', mermelada), ('otro', otro)])
 
 
 def emulsiones_limpiadoras_para_bebes():
@@ -958,8 +967,9 @@ def farmacia():
     venda = Categoria.objects.get(id=426)   # Gasas- vendas
     botiquin = Categoria.objects.get(id=427)   # Otros botiquin
 
-    mover(origen, intento_borrar=True,
-          mapa=[('oxigenada', oxigenada), ('alcohol', alcohol), ('venda', venda), ('botiquin', botiquin)])
+    mover(origen, intento_borrar=True, default=botiquin,
+          mapa=[('oxigenada', oxigenada), ('alcohol', alcohol),
+                ('venda', venda), ('botiquin', botiquin)])
 
 
 def fiambres_y_embutidos():
@@ -975,8 +985,10 @@ def fiambres_y_embutidos():
     pate = Categoria.objects.get(id=450)   # Pate
     salamine = Categoria.objects.get(id=451)   # Salame y salamines
 
-    mover(origen, intento_borrar=True,
-          mapa=[('ahumado', ahumado), ('especiale', especiale), ('cocido', cocido), ('bondiola', bondiola), ('salchichon', salchichon), ('pate', pate), ('salamine', salamine)])
+    mover(origen, intento_borrar=True, default=especiale,
+          mapa=[('ahumado', ahumado), ('cocido', cocido),
+                ('bondiola', bondiola), ('salchichon', salchichon),
+                ('pate', pate), ('salamine', salamine)])
 
 
 def frutas():
@@ -986,8 +998,7 @@ def frutas():
     # destinos
     fruta = Categoria.objects.get(id=459)   # Frutas
 
-    mover(origen, intento_borrar=True,
-          mapa=[('fruta', fruta)])
+    mover(origen, intento_borrar=True, default=fruta)
 
 
 def galletas_y_galletitas():
@@ -1000,9 +1011,17 @@ def galletas_y_galletitas():
     madalena = Categoria.objects.get(id=468)   # Madalenas
     rellena = Categoria.objects.get(id=469)   # Rellenas
     seca = Categoria.objects.get(id=470)   # Secas
+    cereal = Categoria.objects.get(id=471)  # Cereal
+    marineras = Categoria.objects.get(id=472)  # Grisines- marineras
+    regulares = Categoria.objects.get(id=473)  # Regulares
+    snacks = Categoria.objects.get(id=474)  # Snacks
 
-    mover(origen, intento_borrar=True,
-          mapa=[('chocolate', chocolate), ('hojaldre', hojaldre), ('madalena', madalena), ('rellena', rellena), ('seca', seca)])
+    mover(origen, intento_borrar=True, default=regulares,
+          mapa=[('chocolate', chocolate), ('cereal', cereal),
+                ('marinera', marineras), ('cracker', regulares),
+                ('snack', snacks), ('rellena', rellena),
+                ('hojaldre', hojaldre), ('madalena', madalena),
+                ('seca', seca)])
 
 
 def gaseosas():
@@ -1018,7 +1037,8 @@ def gaseosas():
     tonica = Categoria.objects.get(id=386)   # Tonica
 
     mover(origen, intento_borrar=True,
-          mapa=[('cola', cola), ('limon', limon), ('naranja', naranja), ('otra', otra), ('pomelo', pomelo), ('tonica', tonica)])
+          mapa=[('cola', cola), ('limon', limon), ('naranja', naranja),
+                ('otra', otra), ('pomelo', pomelo), ('tonica', tonica)])
 
 
 def gel_de_ducha():
@@ -1026,13 +1046,8 @@ def gel_de_ducha():
     origen = Categoria.objects.get(id=874)
 
     # destinos
-    antiseptico = Categoria.objects.get(id=695)   # Antiseptico
-    glicerina = Categoria.objects.get(id=696)   # Glicerina
     liquido = Categoria.objects.get(id=697)   # Liquidos
-    tocador = Categoria.objects.get(id=698)   # Tocador
-
-    mover(origen, intento_borrar=True,
-          mapa=[('antiseptico', antiseptico), ('glicerina', glicerina), ('liquido', liquido), ('tocador', tocador)])
+    mover(origen, intento_borrar=True, default=liquido)
 
 
 def grisines():
@@ -1040,13 +1055,9 @@ def grisines():
     origen = Categoria.objects.get(id=892)
 
     # destinos
-    cereal = Categoria.objects.get(id=471)   # Cereal
     marinera = Categoria.objects.get(id=472)   # Grisines- marineras
-    regulare = Categoria.objects.get(id=473)   # Regulares
-    snack = Categoria.objects.get(id=474)   # Snacks
 
-    mover(origen, intento_borrar=True,
-          mapa=[('cereal', cereal), ('marinera', marinera), ('regulare', regulare), ('snack', snack)])
+    mover(origen, intento_borrar=True, default=marinera)
 
 
 def guantes_multiuso():
@@ -1056,8 +1067,7 @@ def guantes_multiuso():
     # destinos
     guante = Categoria.objects.get(id=592)   # Guantes
 
-    mover(origen, intento_borrar=True,
-          mapa=[('guante', guante)])
+    mover(origen, intento_borrar=True, default=guante)
 
 
 def hamburguesas():
@@ -1068,7 +1078,7 @@ def hamburguesas():
     carne = Categoria.objects.get(id=406)   # Carne
     soja = Categoria.objects.get(id=407)   # Soja
 
-    mover(origen, intento_borrar=True,
+    mover(origen, intento_borrar=True, default=carne,
           mapa=[('carne', carne), ('soja', soja)])
 
 
@@ -1082,8 +1092,9 @@ def harinas():
     otra = Categoria.objects.get(id=275)   # Semola- otras
     trigo = Categoria.objects.get(id=276)   # Trigo
 
-    mover(origen, intento_borrar=True,
-          mapa=[('maiz', maiz), ('premezcla', premezcla), ('otra', otra), ('trigo', trigo)])
+    mover(origen, intento_borrar=True, default=trigo,
+          mapa=[('maiz', maiz), ('premezcla', premezcla),
+                ('otra', otra), ('trigo', trigo)])
 
 
 def helados_y_postres():
@@ -1095,7 +1106,7 @@ def helados_y_postres():
     postre = Categoria.objects.get(id=409)   # Postres
     balde = Categoria.objects.get(id=410)   # Potes y baldes
 
-    mover(origen, intento_borrar=True,
+    mover(origen, intento_borrar=True, default=postre,
           mapa=[('palito', palito), ('postre', postre), ('balde', balde)])
 
 
@@ -1104,14 +1115,9 @@ def hilo_dental():
     origen = Categoria.objects.get(id=940)
 
     # destinos
-    adhesivo = Categoria.objects.get(id=675)   # Adhesivos
-    cepillo = Categoria.objects.get(id=676)   # Cepillos
-    crema = Categoria.objects.get(id=677)   # Cremas
-    enjuague = Categoria.objects.get(id=678)   # Enjuagues
     hilo = Categoria.objects.get(id=679)   # Hilo
 
-    mover(origen, intento_borrar=True,
-          mapa=[('adhesivo', adhesivo), ('cepillo', cepillo), ('crema', crema), ('enjuague', enjuague), ('hilo', hilo)])
+    mover(origen, intento_borrar=True, default=hilo)
 
 
 def hisopos():
@@ -1121,8 +1127,7 @@ def hisopos():
     # destinos
     hisopo = Categoria.objects.get(id=654)   # Algodon/ hisopos
 
-    mover(origen, intento_borrar=True,
-          mapa=[('hisopo', hisopo)])
+    mover(origen, intento_borrar=True, default=hisopo)
 
 
 def huevos():
@@ -1132,8 +1137,7 @@ def huevos():
     # destinos
     huevo = Categoria.objects.get(id=277)   # Huevos
 
-    mover(origen, intento_borrar=True,
-          mapa=[('huevo', huevo)])
+    mover(origen, intento_borrar=True, default=huevo)
 
 
 def infusiones():
@@ -1150,8 +1154,10 @@ def infusiones():
     te = Categoria.objects.get(id=283)   # Te
     yerba = Categoria.objects.get(id=284)   # Yerba
 
-    mover(origen, intento_borrar=True,
-          mapa=[('cacao', cacao), ('instantaneo', instantaneo), ('filtro', filtro), ('cafe', cafe), ('malta', malta), ('cocido', cocido), ('te', te), ('yerba', yerba)])
+    mover(origen, intento_borrar=True, default=te,
+          mapa=[('cacao', cacao), ('instantaneo', instantaneo),
+                ('filtro', filtro), ('cafe', cafe), ('malta', malta),
+                ('cocido', cocido), ('yerba', yerba), ('te', te)])
 
 
 def insecticidas_y_repelentes():
@@ -1165,8 +1171,9 @@ def insecticidas_y_repelentes():
     pulga = Categoria.objects.get(id=596)   # Polillas y pulgas
     repelente = Categoria.objects.get(id=597)   # Repelentes
 
-    mover(origen, intento_borrar=True,
-          mapa=[('cucaracha', cucaracha), ('hormiga', hormiga), ('mosquito', mosquito), ('pulga', pulga), ('repelente', repelente)])
+    mover(origen, intento_borrar=True, default=mosquito,
+          mapa=[('cucaracha', cucaracha), ('hormiga', hormiga),
+                ('mosquito', mosquito), ('pulga', pulga), ('repelente', repelente)])
 
 
 def jabones_y_banos_liquidos():
@@ -1179,8 +1186,9 @@ def jabones_y_banos_liquidos():
     liquido = Categoria.objects.get(id=697)   # Liquidos
     tocador = Categoria.objects.get(id=698)   # Tocador
 
-    mover(origen, intento_borrar=True,
-          mapa=[('antiseptico', antiseptico), ('glicerina', glicerina), ('liquido', liquido), ('tocador', tocador)])
+    mover(origen, intento_borrar=True, default=tocador,
+          mapa=[('antiseptico', antiseptico),
+                ('glicerina', glicerina), ('liquido', liquido), ('tocador', tocador)])
 
 
 def jabones_y_banos_liquidos_para_bebes():
@@ -1201,8 +1209,9 @@ def jugos():
     listo = Categoria.objects.get(id=391)   # Listos
     soja = Categoria.objects.get(id=392)   # Soja
 
-    mover(origen, intento_borrar=True,
-          mapa=[('concentrado', concentrado), ('polvo', polvo), ('listo', listo), ('soja', soja)])
+    mover(origen, intento_borrar=True, default=listo,
+          mapa=[('concentrado', concentrado), ('polvo', polvo),
+                ('listo', listo), ('soja', soja)])
 
 
 def jugos_en_polvo():
@@ -1210,13 +1219,9 @@ def jugos_en_polvo():
     origen = Categoria.objects.get(id=902)
 
     # destinos
-    concentrado = Categoria.objects.get(id=389)   # Concentrados
     polvo = Categoria.objects.get(id=390)   # En polvo
-    listo = Categoria.objects.get(id=391)   # Listos
-    soja = Categoria.objects.get(id=392)   # Soja
 
-    mover(origen, intento_borrar=True,
-          mapa=[('concentrado', concentrado), ('polvo', polvo), ('listo', listo), ('soja', soja)])
+    mover(origen, intento_borrar=True, default=polvo)
 
 
 def lavandinas():
@@ -1224,14 +1229,17 @@ def lavandinas():
     origen = Categoria.objects.get(id=790)
 
     # destinos
+    lavandina = Categoria.objects.get(id=583)   # lavandinas
+
     bano = Categoria.objects.get(id=598)   # Baño
     cocina = Categoria.objects.get(id=599)   # Cocina
     piso = Categoria.objects.get(id=600)   # Pisos
     mueble = Categoria.objects.get(id=601)   # Placard- muebles
     multiuso = Categoria.objects.get(id=602)   # Vidrios- multiuso
 
-    mover(origen, intento_borrar=True,
-          mapa=[('bano', bano), ('cocina', cocina), ('piso', piso), ('mueble', mueble), ('multiuso', multiuso)])
+    mover(origen, intento_borrar=True, default=lavandina,
+          mapa=[('bano', bano), ('cocina', cocina), ('piso', piso),
+                ('mueble', mueble), ('multiuso', multiuso)])
 
 
 def leche():
@@ -1246,8 +1254,11 @@ def leche():
     polvo = Categoria.objects.get(id=509)   # Polvo
     saborizada = Categoria.objects.get(id=510)   # Saborizadas
 
-    mover(origen, intento_borrar=True,
-          mapa=[('chocolatada', chocolatada), ('descremada', descremada), ('entera', entera), ('infantil', infantil), ('polvo', polvo), ('saborizada', saborizada)])
+    mover(origen, intento_borrar=True, default=entera,
+          mapa=[('chocolatada', chocolatada),
+                ('descremada', descremada), ('entera', entera),
+                ('infantil', infantil), ('polvo', polvo),
+                ('saborizada', saborizada)])
 
 
 def leche_en_polvo():
@@ -1259,8 +1270,9 @@ def leche_en_polvo():
     descremada = Categoria.objects.get(id=286)   # Descremada
     entera = Categoria.objects.get(id=287)   # Entera
 
-    mover(origen, intento_borrar=True,
-          mapa=[('condensada', condensada), ('descremada', descremada), ('entera', entera)])
+    mover(origen, intento_borrar=True, default=entera,
+          mapa=[('condensada', condensada),
+                ('descremada', descremada), ('entera', entera)])
 
 
 def leche_y_formulas_para_bebes():
@@ -1271,8 +1283,8 @@ def leche_y_formulas_para_bebes():
     alimento = Categoria.objects.get(id=625)   # Leche - alimento
     papilla = Categoria.objects.get(id=626)   # Papilla
 
-    mover(origen, intento_borrar=True,
-          mapa=[('alimento', alimento), ('papilla', papilla)])
+    mover(origen, intento_borrar=True, default=alimento,
+          mapa=[('alimento', alimento), ('papilla', papilla), ('nestum', papilla)])
 
 
 def levaduras():
@@ -1282,8 +1294,7 @@ def levaduras():
     # destinos
     grasa = Categoria.objects.get(id=511)   # Levaduras y grasas
 
-    mover(origen, intento_borrar=True,
-          mapa=[('grasa', grasa)])
+    mover(origen, intento_borrar=True, default=grasa)
 
 
 def libreria_y_oficinas():
@@ -1298,7 +1309,7 @@ def libreria_y_oficinas():
     autoadhesiva = Categoria.objects.get(id=553)   # Notas autoadhesivas
     resma = Categoria.objects.get(id=554)   # Resmas
 
-    mover(origen, intento_borrar=True,
+    mover(origen, intento_borrar=True, default=accesorio,
           mapa=[('accesorio', accesorio),
                 ('dispensore', dispensore),
                 ('clips',
@@ -1309,7 +1320,7 @@ def libreria_y_oficinas():
                  clips)
                 ('ojalillo', ojalillo),
                 ('autoadhesiva', autoadhesiva),
-                ('resma', resma)], default=accesorio)
+                ('resma', resma), ('papel', resma)])
 
 
 def licores():
@@ -1319,8 +1330,7 @@ def licores():
     # destinos
     licore = Categoria.objects.get(id=359)   # Licores
 
-    mover(origen, intento_borrar=True,
-          mapa=[('licore', licore)])
+    mover(origen, intento_borrar=True, default=licore)
 
 
 def limpiador_de_vidrios_y_multiusos():
@@ -1328,19 +1338,8 @@ def limpiador_de_vidrios_y_multiusos():
     origen = Categoria.objects.get(id=890)
 
     # destinos
-    freezer = Categoria.objects.get(id=573)   # Bolsa freezer
-    reutilizable = Categoria.objects.get(id=574)   # Bolsa reutilizable
-    descartable = Categoria.objects.get(id=575)   # Descartables
-    lavavajilla = Categoria.objects.get(id=576)   # Detergente- lavavajilla
-    papele = Categoria.objects.get(id=577)   # Films- papeles
-    encendedore = Categoria.objects.get(id=578)   # Fosforos / encendedores
-    desengrasante = Categoria.objects.get(id=579)   # Limpiadores- desengrasantes
-    palillero = Categoria.objects.get(id=580)   # Palillero
-    palillo = Categoria.objects.get(id=581)   # Palillos
-    vela = Categoria.objects.get(id=582)   # Velas
 
-    mover(origen, intento_borrar=True,
-          mapa=[('freezer', freezer), ('reutilizable', reutilizable), ('descartable', descartable), ('lavavajilla', lavavajilla), ('papele', papele), ('encendedore', encendedore), ('desengrasante', desengrasante), ('palillero', palillero), ('palillo', palillo), ('vela', vela)])
+    mover(origen, intento_borrar=True, default=Categoria.objects.get(id=602))
 
 
 def limpieza_facial():
@@ -1348,13 +1347,15 @@ def limpieza_facial():
     origen = Categoria.objects.get(id=832)
 
     # destinos
-    splash = Categoria.objects.get(id=655)   # Body splash
-    bronceadore = Categoria.objects.get(id=656)   # Bronceadores
-    crema = Categoria.objects.get(id=657)   # Cremas
-    depilacion = Categoria.objects.get(id=658)   # Depilacion
+    antiacne = Categoria.objects.get(id=670)   # Antiacne
+    antiarruga = Categoria.objects.get(id=671)   # Antiarrugas
+    hidratacion = Categoria.objects.get(id=672)   # Hidratacion
+    cuti = Categoria.objects.get(id=673)   # Limpieza cutis
+    esponja = Categoria.objects.get(id=674)   # Pinceles y esponjas
 
-    mover(origen, intento_borrar=True,
-          mapa=[('splash', splash), ('bronceadore', bronceadore), ('crema', crema), ('depilacion', depilacion)])
+    mover(origen, intento_borrar=True, default=cuti,
+          mapa=[('acne', antiacne), ('antiarruga', antiarruga),
+                ('hidratacion', hidratacion), ('cuti', cuti), ('esponja', esponja)])
 
 
 def limpieza_de_pisos():
@@ -1366,8 +1367,9 @@ def limpieza_de_pisos():
     secadore = Categoria.objects.get(id=611)   # Secadores
     mopa = Categoria.objects.get(id=612)   # Trapos- mopas
 
-    mover(origen, intento_borrar=True,
-          mapa=[('limpiadore', limpiadore), ('secadore', secadore), ('mopa', mopa)])
+    mover(origen, intento_borrar=True, default=limpiadore,
+          mapa=[('limpiador', limpiadore), ('secadore', secadore),
+                ('mopa', mopa), ('trapo', mopa)])
 
 
 def limpieza_de_la_cocina():
@@ -1381,13 +1383,19 @@ def limpieza_de_la_cocina():
     lavavajilla = Categoria.objects.get(id=576)   # Detergente- lavavajilla
     papele = Categoria.objects.get(id=577)   # Films- papeles
     encendedore = Categoria.objects.get(id=578)   # Fosforos / encendedores
-    desengrasante = Categoria.objects.get(id=579)   # Limpiadores- desengrasantes
+    # Limpiadores- desengrasantes
+    desengrasante = Categoria.objects.get(id=579)
     palillero = Categoria.objects.get(id=580)   # Palillero
     palillo = Categoria.objects.get(id=581)   # Palillos
     vela = Categoria.objects.get(id=582)   # Velas
 
-    mover(origen, intento_borrar=True,
-          mapa=[('freezer', freezer), ('reutilizable', reutilizable), ('descartable', descartable), ('lavavajilla', lavavajilla), ('papele', papele), ('encendedore', encendedore), ('desengrasante', desengrasante), ('palillero', palillero), ('palillo', palillo), ('vela', vela)])
+    mover(origen, intento_borrar=True, default=desengrasante,
+          mapa=[('freezer', freezer),
+                ('reutilizable', reutilizable),
+                ('descartable', descartable), ('detergente', lavavajilla),
+                ('lavavajilla', lavavajilla), ('papele', papele),
+                ('encendedor', encendedore), ('desengrasante', desengrasante),
+                ('palillero', palillero), ('palillo', palillo), ('vela', vela)])
 
 
 def limpieza_de_la_ropa():
@@ -1404,8 +1412,12 @@ def limpieza_de_la_ropa():
     color = Categoria.objects.get(id=620)   # Reavivador de color
     suavizante = Categoria.objects.get(id=621)   # Suavizante
 
-    mover(origen, intento_borrar=True,
-          mapa=[('apresto', apresto), ('blanqueador', blanqueador), ('fina', fina), ('jabon', jabon), ('perfume', perfume), ('quitamancha', quitamancha), ('color', color), ('suavizante', suavizante)])
+    mover(origen, intento_borrar=True, default=jabon,
+          mapa=[('apresto', apresto),
+                ('blanqueador', blanqueador), ('fina', fina),
+                ('jabon', jabon), ('perfume', perfume),
+                ('quitamancha', quitamancha), ('color', color),
+                ('suavizante', suavizante)])
 
 
 def limpieza_del_bano():
@@ -1414,13 +1426,8 @@ def limpieza_del_bano():
 
     # destinos
     bano = Categoria.objects.get(id=598)   # Baño
-    cocina = Categoria.objects.get(id=599)   # Cocina
-    piso = Categoria.objects.get(id=600)   # Pisos
-    mueble = Categoria.objects.get(id=601)   # Placard- muebles
-    multiuso = Categoria.objects.get(id=602)   # Vidrios- multiuso
 
-    mover(origen, intento_borrar=True,
-          mapa=[('bano', bano), ('cocina', cocina), ('piso', piso), ('mueble', mueble), ('multiuso', multiuso)])
+    mover(origen, intento_borrar=True, default=bano)
 
 
 def limpieza_del_calzado():
@@ -1444,7 +1451,9 @@ def limpieza_del_hogar():
     multiuso = Categoria.objects.get(id=602)   # Vidrios- multiuso
 
     mover(origen, intento_borrar=True, default=multiuso,
-          mapa=[('bano', bano), ('cocina', cocina), ('piso', piso), ('mueble', mueble), ('multiuso', multiuso)])
+          mapa=[('bano', bano), ('cocina', cocina),
+                ('piso', piso), ('mueble', mueble),
+                ('multiuso', multiuso)])
 
 
 def locion_antimosquito():
@@ -1458,8 +1467,10 @@ def locion_antimosquito():
     pulga = Categoria.objects.get(id=596)   # Polillas y pulgas
     repelente = Categoria.objects.get(id=597)   # Repelentes
 
-    mover(origen, intento_borrar=True,
-          mapa=[('cucaracha', cucaracha), ('hormiga', hormiga), ('mosquito', mosquito), ('pulga', pulga), ('repelente', repelente)])
+    mover(origen, intento_borrar=True, default=repelente,
+          mapa=[('cucaracha', cucaracha), ('hormiga', hormiga),
+                ('mosquito', mosquito), ('pulga', pulga),
+                ('repelente', repelente)])
 
 
 def lustra_metales():
@@ -1469,8 +1480,7 @@ def lustra_metales():
     # destinos
     vario = Categoria.objects.get(id=622)   # Varios
 
-    mover(origen, intento_borrar=True,
-          mapa=[('vario', vario)])
+    mover(origen, intento_borrar=True, default=vario)
 
 
 def lustra_muebles():
@@ -1478,12 +1488,7 @@ def lustra_muebles():
     origen = Categoria.objects.get(id=922)
 
     # destinos
-    limpiadore = Categoria.objects.get(id=610)   # Limpiadores
-    secadore = Categoria.objects.get(id=611)   # Secadores
-    mopa = Categoria.objects.get(id=612)   # Trapos- mopas
-
-    mover(origen, intento_borrar=True,
-          mapa=[('limpiadore', limpiadore), ('secadore', secadore), ('mopa', mopa)])
+    mover(origen, intento_borrar=True, default=Categoria.objects.get(id=603))
 
 
 def lamparas():
@@ -1492,9 +1497,10 @@ def lamparas():
 
     # destinos
     lamparita = Categoria.objects.get(id=434)   # Lamparitas
+    bajo = Categoria.objects.get(id=962)   # Bajo Consumo
 
-    mover(origen, intento_borrar=True,
-          mapa=[('lamparita', lamparita)])
+    mover(origen, intento_borrar=True, default=lamparita,
+          mapa=[('bajo', bajo)])
 
 
 def maltas():
@@ -1502,17 +1508,9 @@ def maltas():
     origen = Categoria.objects.get(id=823)
 
     # destinos
-    cacao = Categoria.objects.get(id=278)   # Cacao
-    instantaneo = Categoria.objects.get(id=279)   # Cafe instantaneo
-    filtro = Categoria.objects.get(id=280)   # Cafe p/ filtro
-    cafe = Categoria.objects.get(id=281)   # Filtro cafe
     malta = Categoria.objects.get(id=958)   # Maltas
-    cocido = Categoria.objects.get(id=282)   # Mate cocido
-    te = Categoria.objects.get(id=283)   # Te
-    yerba = Categoria.objects.get(id=284)   # Yerba
 
-    mover(origen, intento_borrar=True,
-          mapa=[('cacao', cacao), ('instantaneo', instantaneo), ('filtro', filtro), ('cafe', cafe), ('malta', malta), ('cocido', cocido), ('te', te), ('yerba', yerba)])
+    mover(origen, intento_borrar=True, default=malta)
 
 
 def manos_y_unas():
@@ -1525,8 +1523,9 @@ def manos_y_unas():
     esmalte = Categoria.objects.get(id=701)   # Esmaltes
     quitaesmalte = Categoria.objects.get(id=702)   # Quitaesmalte
 
-    mover(origen, intento_borrar=True,
-          mapa=[('accesorio', accesorio), ('crema', crema), ('esmalte', esmalte), ('quitaesmalte', quitaesmalte)])
+    mover(origen, intento_borrar=True, default=crema,
+          mapa=[('accesorio', accesorio), ('crema', crema),
+                ('esmalte', esmalte), ('quitaesmalte', quitaesmalte)])
 
 
 def mantecas_y_margarinas():
@@ -1537,7 +1536,7 @@ def mantecas_y_margarinas():
     manteca = Categoria.objects.get(id=512)   # Mantecas
     margarina = Categoria.objects.get(id=513)   # Margarinas
 
-    mover(origen, intento_borrar=True,
+    mover(origen, intento_borrar=True, default=manteca,
           mapa=[('manteca', manteca), ('margarina', margarina)])
 
 
@@ -1546,11 +1545,14 @@ def mascotas():
     origen = Categoria.objects.get(id=865)
 
     # destinos
-    adulto = Categoria.objects.get(id=639)   # Adulto
-    cachorro = Categoria.objects.get(id=640)   # Cachorro
+    gato_adulto = Categoria.objects.get(id=639)   # Adulto
+    gato_cachorro = Categoria.objects.get(id=640)   # Cachorro
+    perro_adulto = Categoria.objects.get(id=641)   # Adulto
+    cachorro = Categoria.objects.get(id=642)      # Cachorro
 
-    mover(origen, intento_borrar=True,
-          mapa=[('adulto', adulto), ('cachorro', cachorro)])
+    mover(origen, intento_borrar=True, default=perro_adulto,
+          mapa=[('gato', gato_adulto), ('gatito', gato_cachorro),
+                ('cachorro', cachorro)])
 
 
 def mate_cocido():
@@ -1558,17 +1560,8 @@ def mate_cocido():
     origen = Categoria.objects.get(id=778)
 
     # destinos
-    cacao = Categoria.objects.get(id=278)   # Cacao
-    instantaneo = Categoria.objects.get(id=279)   # Cafe instantaneo
-    filtro = Categoria.objects.get(id=280)   # Cafe p/ filtro
-    cafe = Categoria.objects.get(id=281)   # Filtro cafe
-    malta = Categoria.objects.get(id=958)   # Maltas
     cocido = Categoria.objects.get(id=282)   # Mate cocido
-    te = Categoria.objects.get(id=283)   # Te
-    yerba = Categoria.objects.get(id=284)   # Yerba
-
-    mover(origen, intento_borrar=True,
-          mapa=[('cacao', cacao), ('instantaneo', instantaneo), ('filtro', filtro), ('cafe', cafe), ('malta', malta), ('cocido', cocido), ('te', te), ('yerba', yerba)])
+    mover(origen, intento_borrar=True, default=cocido)
 
 
 def medallones_de_pollo():
@@ -1576,13 +1569,9 @@ def medallones_de_pollo():
     origen = Categoria.objects.get(id=785)
 
     # destinos
-    pescado = Categoria.objects.get(id=412)   # Pescado
     pollo = Categoria.objects.get(id=413)   # Pollo
-    soja = Categoria.objects.get(id=414)   # Soja
-    verdura = Categoria.objects.get(id=415)   # Verdura
 
-    mover(origen, intento_borrar=True,
-          mapa=[('pescado', pescado), ('pollo', pollo), ('soja', soja), ('verdura', verdura)])
+    mover(origen, intento_borrar=True, default=pollo)
 
 
 def milanesas_de_soja():
@@ -1590,13 +1579,8 @@ def milanesas_de_soja():
     origen = Categoria.objects.get(id=932)
 
     # destinos
-    pescado = Categoria.objects.get(id=412)   # Pescado
-    pollo = Categoria.objects.get(id=413)   # Pollo
     soja = Categoria.objects.get(id=414)   # Soja
-    verdura = Categoria.objects.get(id=415)   # Verdura
-
-    mover(origen, intento_borrar=True,
-          mapa=[('pescado', pescado), ('pollo', pollo), ('soja', soja), ('verdura', verdura)])
+    mover(origen, intento_borrar=True, default=soja)
 
 
 def otras_bebidas_con_alcohol():
@@ -1612,9 +1596,15 @@ def otras_bebidas_con_alcohol():
     cepa = Categoria.objects.get(id=374)   # Otras cepas
     syrah = Categoria.objects.get(id=375)   # Syrah
     tempranillo = Categoria.objects.get(id=376)   # Tempranillo
+    whisky = Categoria.objects.get(id=959)   # Blancas
 
-    mover(origen, intento_borrar=True,
-          mapa=[('bivarietal', bivarietal), ('borgona', borgona), ('sauvignon', sauvignon), ('malbec', malbec), ('merlot', merlot), ('cepa', cepa), ('syrah', syrah), ('tempranillo', tempranillo)])
+    blancas = Categoria.objects.get(id=352)   # Blancas
+
+    mover(origen, intento_borrar=True, default=blancas,
+          mapa=[('bivarietal', bivarietal), ('wisky', whisky), ('whisky', whisky),
+                ('borgona', borgona), ('sauvignon', sauvignon), ('malbec', malbec),
+                ('merlot', merlot), ('cepa', cepa), ('syrah', syrah),
+                ('tempranillo', tempranillo)])
 
 
 def otras_bebidas_sin_alcohol():
@@ -1637,9 +1627,11 @@ def otros_alimentos_congelados():
     pollo = Categoria.objects.get(id=413)   # Pollo
     soja = Categoria.objects.get(id=414)   # Soja
     verdura = Categoria.objects.get(id=415)   # Verdura
+    vegetales = Categoria.objects.get(id=416)   # Verdura
 
-    mover(origen, intento_borrar=True,
-          mapa=[('pescado', pescado), ('pollo', pollo), ('soja', soja), ('verdura', verdura)])
+    mover(origen, intento_borrar=True, default=vegetales,
+          mapa=[('pescado', pescado), ('pollo', pollo),
+                ('soja', soja), ('verdura', verdura)])
 
 
 def otros_limpiadores_desinfectantes():
@@ -1653,8 +1645,9 @@ def otros_limpiadores_desinfectantes():
     mueble = Categoria.objects.get(id=601)   # Placard- muebles
     multiuso = Categoria.objects.get(id=602)   # Vidrios- multiuso
 
-    mover(origen, intento_borrar=True,
-          mapa=[('bano', bano), ('cocina', cocina), ('piso', piso), ('mueble', mueble), ('multiuso', multiuso)])
+    mover(origen, intento_borrar=True, default=multiuso,
+          mapa=[('bano', bano), ('cocina', cocina),
+                ('piso', piso), ('mueble', mueble), ('multiuso', multiuso)])
 
 
 def otros_panes():
@@ -1664,8 +1657,7 @@ def otros_panes():
     # destinos
     vario = Categoria.objects.get(id=643)   # Varios
 
-    mover(origen, intento_borrar=True,
-          mapa=[('vario', vario)])
+    mover(origen, intento_borrar=True, default=vario)
 
 
 def otros_productos_frescos():
@@ -1681,18 +1673,17 @@ def otros_productos_frescos():
     oliva = Categoria.objects.get(id=231)   # Oliva
 
     mover(origen, intento_borrar=True,
-          mapa=[('aerosol', aerosol), ('otro', otro), ('girasol', girasol), ('maiz', maiz), ('mezcla', mezcla), ('oliva', oliva)])
+          mapa=[('aerosol', aerosol), ('otro', otro),
+                ('girasol', girasol), ('maiz', maiz), ('mezcla', mezcla),
+                ('oliva', oliva)])
 
 
 def otros_productos_de_limpieza():
     # origen
     origen = Categoria.objects.get(id=781)
 
-    # destinos
-    mama = Categoria.objects.get(id=628)   # Cuidado mama
-
-    mover(origen, intento_borrar=True,
-          mapa=[('mama', mama)])
+    escobillone = Categoria.objects.get(id=590)   # Escobillones
+    mover(origen, intento_borrar=True, default=escobillone)
 
 
 def otros_productos_para_bebes():
@@ -1723,15 +1714,9 @@ def pan_dulce():
     origen = Categoria.objects.get(id=909)
 
     # destinos
-    arabe = Categoria.objects.get(id=289)   # Arabe
     budines = Categoria.objects.get(id=290)   # Budines/otros
-    pancho = Categoria.objects.get(id=291)   # Hamb/ panchos
-    molde = Categoria.objects.get(id=292)   # Pan de molde
-    rallado = Categoria.objects.get(id=293)   # Pan rallado
-    tostada = Categoria.objects.get(id=294)   # Tostadas
 
-    mover(origen, intento_borrar=True, default=budines,
-          mapa=[('arabe', arabe), ('budines', budines), ('pancho', pancho), ('molde', molde), ('rallado', rallado), ('tostada', tostada)])
+    mover(origen, intento_borrar=True, default=budines)
 
 
 def pan_integral():
@@ -1874,7 +1859,8 @@ def pastas_secas():
     sopero = Categoria.objects.get(id=299)   # Soperos
 
     mover(origen, intento_borrar=True, default=otro,
-          mapa=[('guisero', guisero), ('otro', otro), ('largo', largo), ('otra', otra), ('sopero', sopero)])
+          mapa=[('guisero', guisero), ('otro', otro),
+                ('largo', largo), ('otra', otra), ('sopero', sopero)])
 
 
 def panales_descartables():
@@ -1926,7 +1912,9 @@ def panuelos_descartables():
     servilleta = Categoria.objects.get(id=609)   # Servilletas
 
     mover(origen, intento_borrar=True,
-          mapa=[('higienico', higienico), ('panuelo', panuelo), ('cocina', cocina), ('servilleta', servilleta)])
+          mapa=[('higienico', higienico),
+                ('panuelo', panuelo), ('cocina', cocina),
+                ('servilleta', servilleta)])
 
 
 def pegamentos():
@@ -2005,8 +1993,9 @@ def polvos_instantaneos():
     helado = Categoria.objects.get(id=302)   # Helados
     postre = Categoria.objects.get(id=303)   # Postres
 
-    mover(origen, intento_borrar=True,
-          mapa=[('flane', flane), ('gelatina', gelatina), ('helado', helado), ('postre', postre)])
+    mover(origen, intento_borrar=True, default=postre,
+          mapa=[('flan', flane), ('gelatina', gelatina),
+                ('helado', helado), ('postre', postre)])
 
 
 def postres_frios():
@@ -2019,8 +2008,9 @@ def postres_frios():
     helado = Categoria.objects.get(id=302)   # Helados
     postre = Categoria.objects.get(id=303)   # Postres
 
-    mover(origen, intento_borrar=True,
-          mapa=[('flane', flane), ('gelatina', gelatina), ('helado', helado), ('postre', postre)])
+    mover(origen, intento_borrar=True, default=helado,
+          mapa=[('flan', flane), ('gelatina', gelatina),
+                ('helado', helado), ('postre', postre)])
 
 
 def postres_instantaneos():
@@ -2033,8 +2023,9 @@ def postres_instantaneos():
     helado = Categoria.objects.get(id=302)   # Helados
     postre = Categoria.objects.get(id=303)   # Postres
 
-    mover(origen, intento_borrar=True,
-          mapa=[('flane', flane), ('gelatina', gelatina), ('helado', helado), ('postre', postre)])
+    mover(origen, intento_borrar=True, default=postre,
+          mapa=[('flane', flane), ('gelatina', gelatina),
+                ('helado', helado), ('postre', postre)])
 
 
 def prepizzas():
@@ -2044,8 +2035,7 @@ def prepizzas():
     # destinos
     vario = Categoria.objects.get(id=643)   # Varios
 
-    mover(origen, intento_borrar=True,
-          mapa=[('vario', vario)])
+    mover(origen, intento_borrar=True, default=vario)
 
 
 def preservativos():
@@ -2053,17 +2043,9 @@ def preservativos():
     origen = Categoria.objects.get(id=786)
 
     # destinos
-    oxigenada = Categoria.objects.get(id=683)   # Agua oxigenada
-    alcohol = Categoria.objects.get(id=684)   # Alcohol
-    aposito = Categoria.objects.get(id=685)   # Apositos
-    venda = Categoria.objects.get(id=686)   # Gasas- vendas
-    botiquin = Categoria.objects.get(id=687)   # Otros botiquin
     preservativo = Categoria.objects.get(id=688)   # Preservativos
-    labial = Categoria.objects.get(id=689)   # Proteccion labial
-    libre = Categoria.objects.get(id=690)   # Venta libre
 
-    mover(origen, intento_borrar=True,
-          mapa=[('oxigenada', oxigenada), ('alcohol', alcohol), ('aposito', aposito), ('venda', venda), ('botiquin', botiquin), ('preservativo', preservativo), ('labial', labial), ('libre', libre)])
+    mover(origen, intento_borrar=True, default=preservativo)
 
 
 def proteccion_femenina():
@@ -2076,23 +2058,17 @@ def proteccion_femenina():
     tampone = Categoria.objects.get(id=705)   # Tampones
     toallita = Categoria.objects.get(id=706)   # Toallitas
 
-    mover(origen, intento_borrar=True,
-          mapa=[('femenina', femenina), ('diario', diario), ('tampone', tampone), ('toallita', toallita)])
+    mover(origen, intento_borrar=True, default=femenina,
+          mapa=[('femenina', femenina), ('diario', diario), ('tampon', tampone),
+                ('toallita', toallita)])
 
 
 def protectores_mamarios():
     # origen
     origen = Categoria.objects.get(id=774)
-
     # destinos
-    guisero = Categoria.objects.get(id=295)   # Guiseros
-    otro = Categoria.objects.get(id=296)   # Integrales- otros
-    largo = Categoria.objects.get(id=297)   # Largos
-    otra = Categoria.objects.get(id=298)   # Rellenas- otras
-    sopero = Categoria.objects.get(id=299)   # Soperos
-
-    mover(origen, intento_borrar=True,
-          mapa=[('guisero', guisero), ('otro', otro), ('largo', largo), ('otra', otra), ('sopero', sopero)])
+    femenina = Categoria.objects.get(id=703)   # Higiene femenina
+    mover(origen, intento_borrar=True, default=femenina)
 
 
 def protesis_dentales():
@@ -2106,8 +2082,9 @@ def protesis_dentales():
     enjuague = Categoria.objects.get(id=678)   # Enjuagues
     hilo = Categoria.objects.get(id=679)   # Hilo
 
-    mover(origen, intento_borrar=True,
-          mapa=[('adhesivo', adhesivo), ('cepillo', cepillo), ('crema', crema), ('enjuague', enjuague), ('hilo', hilo)])
+    mover(origen, intento_borrar=True, default=adhesivo,
+          mapa=[('adhesivo', adhesivo), ('cepillo', cepillo),
+                ('crema', crema), ('enjuague', enjuague), ('hilo', hilo)])
 
 
 def pure_instantaneos():
@@ -2117,8 +2094,7 @@ def pure_instantaneos():
     # destinos
     instantaneo = Categoria.objects.get(id=304)   # Pure instantaneo
 
-    mover(origen, intento_borrar=True,
-          mapa=[('instantaneo', instantaneo)])
+    mover(origen, intento_borrar=True, default=instantaneo)
 
 
 def quesos():
@@ -2134,8 +2110,10 @@ def quesos():
     rallado = Categoria.objects.get(id=457)   # Rallados
     semiduro = Categoria.objects.get(id=458)   # Semiduros
 
-    mover(origen, intento_borrar=True,
-          mapa=[('blando', blando), ('duro', duro), ('especiale', especiale), ('light', light), ('untable', untable), ('rallado', rallado), ('semiduro', semiduro)])
+    mover(origen, intento_borrar=True, default=blando,
+          mapa=[('blando', blando), ('duro', duro),
+                ('especial', especiale), ('light', light),
+                ('untable', untable), ('rallado', rallado), ('semiduro', semiduro)])
 
 
 def quesos_rallados():
@@ -2143,16 +2121,9 @@ def quesos_rallados():
     origen = Categoria.objects.get(id=929)
 
     # destinos
-    blando = Categoria.objects.get(id=452)   # Blandos
-    duro = Categoria.objects.get(id=453)   # Duros
-    especiale = Categoria.objects.get(id=454)   # Especiales
-    light = Categoria.objects.get(id=455)   # Light
-    untable = Categoria.objects.get(id=456)   # Quesos untables
     rallado = Categoria.objects.get(id=457)   # Rallados
-    semiduro = Categoria.objects.get(id=458)   # Semiduros
 
-    mover(origen, intento_borrar=True,
-          mapa=[('blando', blando), ('duro', duro), ('especiale', especiale), ('light', light), ('untable', untable), ('rallado', rallado), ('semiduro', semiduro)])
+    mover(origen, intento_borrar=True, default=rallado)
 
 
 def quesos_untables():
@@ -2160,16 +2131,9 @@ def quesos_untables():
     origen = Categoria.objects.get(id=876)
 
     # destinos
-    blando = Categoria.objects.get(id=452)   # Blandos
-    duro = Categoria.objects.get(id=453)   # Duros
-    especiale = Categoria.objects.get(id=454)   # Especiales
-    light = Categoria.objects.get(id=455)   # Light
     untable = Categoria.objects.get(id=456)   # Quesos untables
-    rallado = Categoria.objects.get(id=457)   # Rallados
-    semiduro = Categoria.objects.get(id=458)   # Semiduros
 
-    mover(origen, intento_borrar=True,
-          mapa=[('blando', blando), ('duro', duro), ('especiale', especiale), ('light', light), ('untable', untable), ('rallado', rallado), ('semiduro', semiduro)])
+    mover(origen, intento_borrar=True, default=untable)
 
 
 def rebozadores():
@@ -2179,12 +2143,14 @@ def rebozadores():
     # destinos
     rallado = Categoria.objects.get(id=293)   # Pan rallado
 
-
     mover(origen, intento_borrar=True, default=rallado)
 
 
 def reposteria_y_golosinas():
     # origen
+    return
+    """
+
     origen = Categoria.objects.get(id=847)
 
     # destinos
@@ -2195,7 +2161,9 @@ def reposteria_y_golosinas():
     seca = Categoria.objects.get(id=470)   # Secas
 
     mover(origen, intento_borrar=True,
-          mapa=[('chocolate', chocolate), ('hojaldre', hojaldre), ('madalena', madalena), ('rellena', rellena), ('seca', seca)])
+          mapa=[('chocolate', chocolate), ('hojaldre', hojaldre),
+                ('madalena', madalena), ('rellena', rellena), ('seca', seca)])
+    """
 
 
 def salchichas():
@@ -2205,8 +2173,7 @@ def salchichas():
     # destinos
     salchicha = Categoria.objects.get(id=444)   # Salchichas
 
-    mover(origen, intento_borrar=True,
-          mapa=[('salchicha', salchicha)])
+    mover(origen, intento_borrar=True, defaut=salchicha)
 
 
 def salsas():
@@ -2217,8 +2184,8 @@ def salsas():
     salsa = Categoria.objects.get(id=316)   # Salsas
     tomate = Categoria.objects.get(id=317)   # Tomates
 
-    mover(origen, intento_borrar=True,
-          mapa=[('salsa', salsa), ('tomate', tomate)])
+    mover(origen, intento_borrar=True, default=salsa,
+          mapa=[('tomate', tomate)])
 
 
 def salteados():
@@ -2226,25 +2193,17 @@ def salteados():
     origen = Categoria.objects.get(id=822)
 
     # destinos
-    carne = Categoria.objects.get(id=262)   # Carnes
-    fruta = Categoria.objects.get(id=263)   # Frutas
-    pescado = Categoria.objects.get(id=264)   # Pescados
-    salsa = Categoria.objects.get(id=265)   # Tomates/ salsas
     vegetale = Categoria.objects.get(id=266)   # Vegetales
 
-    mover(origen, intento_borrar=True,
-          mapa=[('carne', carne), ('fruta', fruta), ('pescado', pescado), ('salsa', salsa), ('vegetale', vegetale)])
+    mover(origen, intento_borrar=True, default=vegetale)
 
 
 def seguridad_para_el_bebe():
     # origen
     origen = Categoria.objects.get(id=800)
-
     # destinos
     seguridad = Categoria.objects.get(id=634)   # Seguridad
-
-    mover(origen, intento_borrar=True,
-          mapa=[('seguridad', seguridad)])
+    mover(origen, intento_borrar=True, default=seguridad)
 
 
 def shampoo():
@@ -2264,21 +2223,19 @@ def shampoo():
     caspa = Categoria.objects.get(id=669)   # Tratamientos anti caspa
 
     mover(origen, intento_borrar=True, default=shampoo,
-          mapa=[('accesorio', cabello), ('acondicionador', acondicionador), ('coloracion', coloracion), ('trat', trat), ('fijacion', fijacion), ('infantil', infantil), ('shampoo', shampoo), ('caida', caida), ('pediculosi', pediculosi), ('caspa', caspa)])
+          mapa=[('accesorio', cabello), ('acondicionador', acondicionador),
+                ('coloracion', coloracion), ('trat', trat),
+                ('fijacion', fijacion), ('infantil', infantil),
+                ('shampoo', shampoo), ('caida', caida),
+                ('pediculosi', pediculosi), ('caspa', caspa)])
 
 
 def shampoo_y_crema_de_enjuague_para_bebes():
     # origen
     origen = Categoria.objects.get(id=843)
-
     # destinos
-    bebe = Categoria.objects.get(id=956)   # Crema de enjuague para bebés
-    bebe = Categoria.objects.get(id=957)   # Crema de enjuague para bebés
-    bebe = Categoria.objects.get(id=953)   # Jabón para bebés
     bebe = Categoria.objects.get(id=954)   # Shampoo para bebés
-
-    mover(origen, intento_borrar=True,
-          mapa=[('bebe', bebe), ('bebe', bebe), ('bebe', bebe), ('bebe', bebe)])
+    mover(origen, intento_borrar=True, default=bebe)
 
 
 def sidras():
@@ -2288,8 +2245,7 @@ def sidras():
     # destinos
     otro = Categoria.objects.get(id=360)   # Sidras- otros
 
-    mover(origen, intento_borrar=True,
-          mapa=[('otro', otro)])
+    mover(origen, intento_borrar=True, default=otro)
 
 
 def snacks():
@@ -2303,8 +2259,9 @@ def snacks():
     papa = Categoria.objects.get(id=311)   # Papas
     otro = Categoria.objects.get(id=312)   # Pochoclos- otros
 
-    mover(origen, intento_borrar=True,
-          mapa=[('seca', seca), ('mani', mani), ('palito', palito), ('papa', papa), ('otro', otro)])
+    mover(origen, intento_borrar=True, default=otro,
+          mapa=[('seca', seca), ('mani', mani), ('palito', palito),
+                ('papa', papa), ('otro', otro)])
 
 
 def sopas():
@@ -2316,7 +2273,7 @@ def sopas():
     saborizadore = Categoria.objects.get(id=314)   # Saborizadores
     sopa = Categoria.objects.get(id=315)   # Sopas
 
-    mover(origen, intento_borrar=True,
+    mover(origen, intento_borrar=True, default=sopa,
           mapa=[('caldo', caldo), ('saborizadore', saborizadore), ('sopa', sopa)])
 
 
@@ -2342,7 +2299,7 @@ def tartas():
     otro = Categoria.objects.get(id=404)   # Otros
     pizza = Categoria.objects.get(id=405)   # Pizzas
 
-    mover(origen, intento_borrar=True,
+    mover(origen, intento_borrar=True, default=otro,
           mapa=[('empanada', empanada), ('otro', otro), ('pizza', pizza)])
 
 
@@ -2353,8 +2310,7 @@ def toallitas_humedas():
     # destinos
     humeda = Categoria.objects.get(id=636)   # Toallitas humedas
 
-    mover(origen, intento_borrar=True,
-          mapa=[('humeda', humeda)])
+    mover(origen, intento_borrar=True, default=humeda)
 
 
 def tostadas():
@@ -2380,8 +2336,7 @@ def vajilla_para_bebes():
     # destinos
     accesorio = Categoria.objects.get(id=637)   # Accesorios
 
-    mover(origen, intento_borrar=True,
-          mapa=[('accesorio', accesorio)])
+    mover(origen, intento_borrar=True, default=accesorio)
 
 
 def vegetales():
@@ -2400,19 +2355,9 @@ def velas_aromatizadores():
     origen = Categoria.objects.get(id=833)
 
     # destinos
-    freezer = Categoria.objects.get(id=573)   # Bolsa freezer
-    reutilizable = Categoria.objects.get(id=574)   # Bolsa reutilizable
-    descartable = Categoria.objects.get(id=575)   # Descartables
-    lavavajilla = Categoria.objects.get(id=576)   # Detergente- lavavajilla
-    papele = Categoria.objects.get(id=577)   # Films- papeles
-    encendedore = Categoria.objects.get(id=578)   # Fosforos / encendedores
-    desengrasante = Categoria.objects.get(id=579)   # Limpiadores- desengrasantes
-    palillero = Categoria.objects.get(id=580)   # Palillero
-    palillo = Categoria.objects.get(id=581)   # Palillos
     vela = Categoria.objects.get(id=582)   # Velas
 
-    mover(origen, intento_borrar=True,
-          mapa=[('freezer', freezer), ('reutilizable', reutilizable), ('descartable', descartable), ('lavavajilla', lavavajilla), ('papele', papele), ('encendedore', encendedore), ('desengrasante', desengrasante), ('palillero', palillero), ('palillo', palillo), ('vela', vela)])
+    mover(origen, intento_borrar=True, default=vela)
 
 
 def vinos_blancos():
@@ -2427,7 +2372,8 @@ def vinos_blancos():
     torronte = Categoria.objects.get(id=365)   # Torrontes
 
     mover(origen, intento_borrar=True,
-          mapa=[('chardonnay', chardonnay), ('cepa', cepa), ('blanc', blanc), ('dulce', dulce), ('torronte', torronte)])
+          mapa=[('chardonnay', chardonnay), ('cepa', cepa), ('blanc', blanc),
+                ('dulce', dulce), ('torronte', torronte)])
 
 
 def vinos_espumantes():
@@ -2468,8 +2414,11 @@ def vinos_rosados():
     syrah = Categoria.objects.get(id=375)   # Syrah
     tempranillo = Categoria.objects.get(id=376)   # Tempranillo
 
-    mover(origen, intento_borrar=True,
-          mapa=[('bivarietal', bivarietal), ('borgona', borgona), ('sauvignon', sauvignon), ('malbec', malbec), ('merlot', merlot), ('cepa', cepa), ('syrah', syrah), ('tempranillo', tempranillo)])
+    mover(origen, intento_borrar=True, default=cepa,
+          mapa=[('bivarietal', bivarietal), ('borgona', borgona),
+                ('sauvignon', sauvignon), ('malbec', malbec), ('merlot', merlot),
+                ('cepa', cepa), ('syrah', syrah),
+                ('tempranillo', tempranillo)])
 
 
 def vinos_tintos():
@@ -2525,13 +2474,17 @@ def yogurts():
     fruta = Categoria.objects.get(id=522)   # Cereal/ frutas
     batido = Categoria.objects.get(id=523)   # Firme/ batido
 
-    mover(origen, intento_borrar=True,
+    mover(origen, intento_borrar=True, default=batido,
           mapa=[('bebible', bebible),
-                ('fruta', fruta),  ('cereal', fruta)
+                ('fruta', fruta),
+                ('cereal', fruta),
                 ('batido', batido)])
 
 
 def main():
+    aceites()
+    vinagre_aceto()
+    aceitunas()
     aceite_para_bebes()
     acondicionador()
     aderezos()
@@ -2703,3 +2656,6 @@ def main():
     yerba_mate()
     yogurts()
 
+
+if __name__ == '__main__':
+    main()
