@@ -69,7 +69,7 @@ def mapa_categorias(request):
     form.initial['origen'] = origen.id
 
     # random asi no sesgamos los resultados
-    productos_ejemplo = origen.producto_set.all().order_by('?')[:4]
+    productos_ejemplo = origen.productos.all().order_by('?')[:4]
 
     return render(request, 'voluntarios/mapa_categorias.html',
                   {'form': form, 'origen': origen,
