@@ -38,7 +38,6 @@ class MapaCategoria(TimeStampedModel):
                                                u'varias categorías', default=False)
     comentario = models.TextField(null=True, blank=True)
 
-
     def __unicode__(self):
         return u'%s ---> %s' % (self.origen, self.destino)
 
@@ -49,7 +48,7 @@ class MapaCategoria(TimeStampedModel):
     @classmethod
     def resultados(cls):
         mapa = []
-        for origen in cls.CAT_ORIGEN:
+        for origen in Categoria.por_clasificar():
             counter = Counter([voto.destino for voto in
                                cls.objects.filter(origen=origen)])
             mejor_destino = counter.most_common(1)
