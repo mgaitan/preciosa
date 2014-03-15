@@ -1,5 +1,7 @@
 """
 script para el ticket #199
+
+Se unifican productos repetidos a "upc" de 13 digitos.
 """
 
 from preciosa.precios.models import Producto
