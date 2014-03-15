@@ -6,6 +6,7 @@ from django.contrib.gis.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
+from django.db import transaction, IntegrityError
 from django.db.models import Q
 from django.db.models import Min
 from django.contrib.gis.measure import D
@@ -142,6 +143,15 @@ class Producto(models.Model):
         self.busqueda = texto.normalizar(self.descripcion)
         super(Producto, self).save(*args, **kwargs)
 
+    def agregar_descripcion(self, descripcion, ignorar=False):
+        try:
+            with transaction.atomic():
+                DescripcionAlternativa.objects.create(producto=self,
+                                                      descripcion=descripcion)
+        except IntegrityError:
+            if not ignorar:
+                raise
+
     @models.permalink
     def get_absolute_url(self):
         return ('detalle_producto',
@@ -177,6 +187,11 @@ class DescripcionAlternativa(models.Model):
 
     producto = models.ForeignKey('Producto', related_name='descripciones')
     descripcion = models.CharField(max_length=250, unique=True)
+    busqueda = models.CharField(max_length=250)
+
+    def save(self, *args, **kwargs):
+        self.busqueda = texto.normalizar(self.descripcion)
+        super(DescripcionAlternativa, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.descripcion
@@ -451,7 +466,7 @@ class PrecioManager(models.Manager):
 class Precio(TimeStampedModel):
     objects = PrecioManager()
 
-    producto = models.ForeignKey('Producto')
+    producto = models.ForeignKey('Producto', related_name='precios')
     sucursal = models.ForeignKey('Sucursal')
     precio = models.DecimalField(max_digits=8, decimal_places=2)
     usuario = models.ForeignKey(User, null=True, blank=True)
@@ -472,7 +487,7 @@ class PrecioActivo(models.Model):
     """cada vez que se agrega un precio,
     es el precio activo de ese producto para la sucursal"""
 
-    producto = models.ForeignKey('Producto')
+    producto = models.ForeignKey('Producto', related_name='precios_activos')
     sucursal = models.ForeignKey('Sucursal')
     precio = models.ForeignKey(Precio, related_name='activo')
 

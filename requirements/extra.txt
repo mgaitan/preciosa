@@ -12,4 +12,5 @@
 #       raise
 #
 
+progress
 python-google-places==0.10.1

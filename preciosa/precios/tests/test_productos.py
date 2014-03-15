@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
-from preciosa.precios.models import Producto
+from django.db import IntegrityError
+from preciosa.precios.models import Producto, DescripcionAlternativa
 from preciosa.precios.tests.factories import ProductoFactory, CategoriaFactory
-
+from tools.texto import normalizar
 
 # taken from https://github.com/jazzido/producto-similaridades
 PRODUCTOS = u"""Milanesas de soja MONDO FRIZZATTA ceb/que cja 380 grm
@@ -97,4 +98,35 @@ class TestProductoBusqueda(TestCase):
     def test_mayus(self):
         p1 = ProductoFactory(descripcion=u"UÑAS Y DIENTES")
         self.assertEqual(p1.busqueda, 'unas y dientes')
+
+
+class TestDescripcionAlternativa(TestCase):
+
+    def setUp(self):
+        self.p1 = ProductoFactory(descripcion=u"Salsa de Tomate Arcor 500ml")
+
+    def test_alternativa_guarda_instancia(self):
+        assert DescripcionAlternativa.objects.count() == 0
+        descripcion = "La misma salsa descripta distinto ;-)"
+        self.p1.agregar_descripcion(descripcion)
+
+        self.assertEqual(DescripcionAlternativa.objects.count(), 1)
+        alternativa = DescripcionAlternativa.objects.all()[0]
+        self.assertEqual(alternativa.producto, self.p1)
+        self.assertEqual(alternativa.descripcion, descripcion)
+        self.assertEqual(alternativa.busqueda, normalizar(descripcion))
+
+    def test_excepcion_si_existe(self):
+        descripcion = "La misma salsa descripta distinto ;-)"
+        self.p1.agregar_descripcion(descripcion)
+        with self.assertRaises(IntegrityError):
+            self.p1.agregar_descripcion(descripcion)
+
+    def test_ignorar_excepcion(self):
+        descripcion = "La misma salsa descripta distinto ;-)"
+        self.p1.agregar_descripcion(descripcion)
+        # sin excepcion
+        self.p1.agregar_descripcion(descripcion, True)
+        self.assertEqual(DescripcionAlternativa.objects.count(), 1)
+
 
