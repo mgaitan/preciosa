@@ -122,7 +122,7 @@ class Producto(models.Model):
 
     upc = models.CharField(verbose_name=u"Código de barras",
                            max_length=13, unique=True, null=True, blank=True)
-    categoria = models.ForeignKey('Categoria')
+    categoria = models.ForeignKey('Categoria', related_name='productos')
     marca = models.ForeignKey('Marca', null=True, blank=True)
     contenido = models.DecimalField(max_digits=5, decimal_places=1,
                                     null=True, blank=True)
