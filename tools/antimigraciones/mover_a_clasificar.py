@@ -140,7 +140,7 @@ def mover(origen, intento_borrar=False, log=True, mapa=[], default=None):
     """
     try:
         with transaction.atomic():
-            for clave, destino in mapa.items():
+            for clave, destino in mapa:
                 for p in origen.productos.filter(busqueda__icontains=clave):
                     p.categoria = destino
                     p.save(update_fields=['categoria'])
@@ -2482,9 +2482,9 @@ def yogurts():
 
 
 def main():
-    aceites()
-    vinagre_aceto()
-    aceitunas()
+    # aceites()
+    # vinagre_aceto()
+    # aceitunas()
     aceite_para_bebes()
     acondicionador()
     aderezos()
