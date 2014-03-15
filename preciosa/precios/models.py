@@ -142,6 +142,10 @@ class Producto(models.Model):
         self.busqueda = texto.normalizar(self.descripcion)
         super(Producto, self).save(*args, **kwargs)
 
+    def agregar_descripcion(self, descripcion):
+        DescripcionAlternativa.objects.create(producto=self,
+                                              descripcion=descripcion)
+
     @models.permalink
     def get_absolute_url(self):
         return ('detalle_producto',
@@ -177,6 +181,11 @@ class DescripcionAlternativa(models.Model):
 
     producto = models.ForeignKey('Producto', related_name='descripciones')
     descripcion = models.CharField(max_length=250, unique=True)
+    busqueda = models.CharField(max_length=250)
+
+    def save(self, *args, **kwargs):
+        self.busqueda = texto.normalizar(self.descripcion)
+        super(DescripcionAlternativa, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.descripcion

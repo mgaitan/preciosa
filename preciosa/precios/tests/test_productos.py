@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
-from preciosa.precios.models import Producto
+from preciosa.precios.models import Producto, DescripcionAlternativa
 from preciosa.precios.tests.factories import ProductoFactory, CategoriaFactory
-
+from tools.texto import normalizar
 
 # taken from https://github.com/jazzido/producto-similaridades
 PRODUCTOS = u"""Milanesas de soja MONDO FRIZZATTA ceb/que cja 380 grm
@@ -98,3 +98,19 @@ class TestProductoBusqueda(TestCase):
         p1 = ProductoFactory(descripcion=u"UÑAS Y DIENTES")
         self.assertEqual(p1.busqueda, 'unas y dientes')
 
+
+class TestDescripcionAlternativa(TestCase):
+
+    def setUp(self):
+        self.p1 = ProductoFactory(descripcion=u"Salsa de Tomate Arcor 500ml")
+
+    def test_alternativa_guarda_instancia(self):
+        assert DescripcionAlternativa.objects.count() == 0
+        descripcion = "La misma salsa descripta distinto ;-)"
+        self.p1.agregar_descripcion(descripcion)
+
+        self.assertEqual(DescripcionAlternativa.objects.count(), 1)
+        alternativa = DescripcionAlternativa.objects.all()[0]
+        self.assertEqual(alternativa.producto, self.p1)
+        self.assertEqual(alternativa.descripcion, descripcion)
+        self.assertEqual(alternativa.busqueda, normalizar(descripcion))
