@@ -114,8 +114,9 @@ class ProductosList(mixins.ListModelMixin,
         barcode = self.request.QUERY_PARAMS.get('barcode', None)
         q = self.request.QUERY_PARAMS.get('q', None)
         limite = self.request.QUERY_PARAMS.get('limite', None)
+        queryset = super(ProductosList, self).get_queryset()
         if pk:
-            queryset = super(ProductosList, self).get_queryset().filter(pk=pk)
+            queryset = queryset.filter(pk=pk)
         elif barcode:
             queryset = Producto.objects.buscar(barcode, limite)
         elif q:
