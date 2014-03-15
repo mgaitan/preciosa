@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
+from django.db import IntegrityError
 from preciosa.precios.models import Producto, DescripcionAlternativa
 from preciosa.precios.tests.factories import ProductoFactory, CategoriaFactory
 from tools.texto import normalizar
@@ -114,3 +115,18 @@ class TestDescripcionAlternativa(TestCase):
         self.assertEqual(alternativa.producto, self.p1)
         self.assertEqual(alternativa.descripcion, descripcion)
         self.assertEqual(alternativa.busqueda, normalizar(descripcion))
+
+    def test_excepcion_si_existe(self):
+        descripcion = "La misma salsa descripta distinto ;-)"
+        self.p1.agregar_descripcion(descripcion)
+        with self.assertRaises(IntegrityError):
+            self.p1.agregar_descripcion(descripcion)
+
+    def test_ignorar_excepcion(self):
+        descripcion = "La misma salsa descripta distinto ;-)"
+        self.p1.agregar_descripcion(descripcion)
+        # sin excepcion
+        self.p1.agregar_descripcion(descripcion, True)
+        self.assertEqual(DescripcionAlternativa.objects.count(), 1)
+
+
