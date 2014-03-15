@@ -152,7 +152,7 @@ def mover(origen, intento_borrar=False, log=True, mapa=[], default=None):
                     p.categoria = default
                     p.save(update_fields=['categoria'])
                     if log:
-                        print p, "=>", destino
+                        print p, "=>", default
 
             if intento_borrar and origen.productos.count() == 0:
                 print u"%s quedó vacia y se eliminará" % origen
@@ -398,7 +398,7 @@ def arroz():
     mover(origen, intento_borrar=True, default=largo,
           mapa=[('doble', doble), ('especiale', especiale),
                 ('parboil', parboil),
-                ('preparado', preparado), ('list', preparado)
+                ('preparado', preparado), ('list', preparado),
                 ('largo', largo),
                 ('integral', integral)])
 
@@ -1315,9 +1315,9 @@ def libreria_y_oficinas():
                 ('clips',
                  clips),
                 ('alfiler',
-                 clips)
+                 clips),
                 ('aros',
-                 clips)
+                 clips),
                 ('ojalillo', ojalillo),
                 ('autoadhesiva', autoadhesiva),
                 ('resma', resma), ('papel', resma)])
@@ -2173,7 +2173,7 @@ def salchichas():
     # destinos
     salchicha = Categoria.objects.get(id=444)   # Salchichas
 
-    mover(origen, intento_borrar=True, defaut=salchicha)
+    mover(origen, intento_borrar=True, default=salchicha)
 
 
 def salsas():
@@ -2482,9 +2482,9 @@ def yogurts():
 
 
 def main():
-    # aceites()
-    # vinagre_aceto()
-    # aceitunas()
+    aceites()
+    vinagre_aceto()
+    aceitunas()
     aceite_para_bebes()
     acondicionador()
     aderezos()
