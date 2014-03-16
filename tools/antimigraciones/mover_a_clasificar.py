@@ -109,6 +109,10 @@ def %(func)s():
     return "\n".join(codigo)
 
 
+pr = lambda c: c.productos.all()
+b = lambda q: Categoria.objects.filter(busqueda__icontains=q)
+
+
 def mover(origen, intento_borrar=False, log=True, mapa=[], default=None):
     """
     mueve los productos de la categoria origen
