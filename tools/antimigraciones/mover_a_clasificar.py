@@ -143,6 +143,9 @@ def mover(origen, intento_borrar=False, log=True, mapa=[], default=None):
     try:
         if isinstance(origen, Categoria):
             origen = origen.productos.all()
+        else:
+            # si no es categoria no se puede borrar.
+            intento_borrar = False
 
         with transaction.atomic():
             for clave, destino in mapa:
