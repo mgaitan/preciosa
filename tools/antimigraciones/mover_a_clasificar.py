@@ -142,27 +142,28 @@ def mover(origen, intento_borrar=False, log=True, mapa=[], default=None):
     """
     try:
         if isinstance(origen, Categoria):
-            origen = origen.productos.all()
+            qs = origen.productos.all()
         else:
             # si no es categoria no se puede borrar.
-            intento_borrar = False
+            qs = origen
 
         with transaction.atomic():
             for clave, destino in mapa:
-                for p in origen.filter(busqueda__icontains=clave):
+                for p in qs.filter(busqueda__icontains=clave):
                     p.categoria = destino
                     p.save(update_fields=['categoria'])
                     if log:
                         print p, "=>", destino
 
             if default:
-                for p in origen:
+                for p in qs:
                     p.categoria = default
                     p.save(update_fields=['categoria'])
                     if log:
                         print p, "=>", default
 
-            if intento_borrar and origen.count() == 0:
+            if all((intento_borrar, isinstance(origen, Categoria),
+                    not origen.productos.count())):
                 print u"     ****  %s quedó vacia y se eliminará" % origen
                 origen.delete()
     except Exception as e:
