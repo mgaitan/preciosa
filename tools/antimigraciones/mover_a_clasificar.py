@@ -164,6 +164,8 @@ def mover(origen, intento_borrar=False, log=True, mapa=[], default=None):
 
 def aceites():
     # categoria origen
+    return
+
     aceites = Categoria.objects.get(id=937)
 
     # destinos
@@ -194,12 +196,13 @@ def aceitunas():
     # mover
     # <Categoria: Fiambreria > Aceitunas/ encurtidos > Aceitunas/ encurtidos>
     aceituna_en_fiambreria = Categoria.objects.get(id=440)
-    mover(aceituna_en_fiambreria, escabeche=encurtido)
+    mover(aceituna_en_fiambreria, default=encurtido)
     aceituna_en_fiambreria.get_parent().delete()
 
 
 def vinagre_aceto():
     # origen
+    return
     origen = Categoria.objects.get(id=885)
 
     # destinos
