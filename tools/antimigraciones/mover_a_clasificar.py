@@ -162,7 +162,7 @@ def mover(origen, intento_borrar=False, log=True, mapa=[], default=None):
                     if log:
                         print p, "=>", default
 
-            if intento_borrar and origen.productos.count() == 0:
+            if intento_borrar and origen.count() == 0:
                 print u"     ****  %s quedó vacia y se eliminará" % origen
                 origen.delete()
     except Exception as e:
