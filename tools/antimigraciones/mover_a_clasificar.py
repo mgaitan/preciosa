@@ -364,10 +364,9 @@ def amargos():
     origen = Categoria.objects.get(id=859)
 
     # destinos
-    hierba = Categoria.objects.get(id=387)   # Amargos / Hierbas
+    hierba = Categoria.objects.get(id=859)   # Amargos / Hierbas
 
-    mover(origen, intento_borrar=True,
-          mapa=[('hierba', hierba)])
+    mover(origen, intento_borrar=True, default=hierba)
 
 
 def aperitivos():
@@ -379,8 +378,8 @@ def aperitivos():
     fernet = Categoria.objects.get(id=350)   # Fernet
     vermouth = Categoria.objects.get(id=351)   # Vermouth
 
-    mover(origen, intento_borrar=True,
-          mapa=[('americano', americano), ('fernet', fernet), ('vermouth', vermouth)])
+    mover(origen, intento_borrar=True, default=vermouth,
+          mapa=[('americano', americano), ('fernet', fernet), ('verm', vermouth)])
 
 
 def arroz():
@@ -555,7 +554,7 @@ def cafe():
     instantaneo = Categoria.objects.get(id=279)   # Cafe instantaneo
     torrado = Categoria.objects.get(id=280)   # Cafe p/ filtro
     filtro = Categoria.objects.get(id=281)   # Filtro cafe
-    malta = Categoria.objects.get(id=958)   # Maltas
+    malta = Categoria.objects.get(id=961)   # Maltas
 
     mover(origen, intento_borrar=True, default=torrado,
           mapa=[('instantaneo', instantaneo),
@@ -1149,7 +1148,7 @@ def infusiones():
     instantaneo = Categoria.objects.get(id=279)   # Cafe instantaneo
     filtro = Categoria.objects.get(id=280)   # Cafe p/ filtro
     cafe = Categoria.objects.get(id=281)   # Filtro cafe
-    malta = Categoria.objects.get(id=958)   # Maltas
+    malta = Categoria.objects.get(id=961)   # Maltas
     cocido = Categoria.objects.get(id=282)   # Mate cocido
     te = Categoria.objects.get(id=283)   # Te
     yerba = Categoria.objects.get(id=284)   # Yerba
@@ -1195,7 +1194,7 @@ def jabones_y_banos_liquidos_para_bebes():
     # origen
     origen = Categoria.objects.get(id=917)
 
-    dest = Categoria.objects.get(id=953)
+    dest = Categoria.objects.get(id=950)
     mover(origen, intento_borrar=True, default=dest)
 
 
@@ -1497,7 +1496,7 @@ def lamparas():
 
     # destinos
     lamparita = Categoria.objects.get(id=434)   # Lamparitas
-    bajo = Categoria.objects.get(id=962)   # Bajo Consumo
+    bajo = Categoria.objects.get(id=963)   # Bajo Consumo
 
     mover(origen, intento_borrar=True, default=lamparita,
           mapa=[('bajo', bajo)])
@@ -1508,7 +1507,7 @@ def maltas():
     origen = Categoria.objects.get(id=823)
 
     # destinos
-    malta = Categoria.objects.get(id=958)   # Maltas
+    malta = Categoria.objects.get(id=961)   # Maltas
 
     mover(origen, intento_borrar=True, default=malta)
 
@@ -1596,7 +1595,7 @@ def otras_bebidas_con_alcohol():
     cepa = Categoria.objects.get(id=374)   # Otras cepas
     syrah = Categoria.objects.get(id=375)   # Syrah
     tempranillo = Categoria.objects.get(id=376)   # Tempranillo
-    whisky = Categoria.objects.get(id=959)   # Blancas
+    whisky = Categoria.objects.get(id=958)   # Blancas
 
     blancas = Categoria.objects.get(id=352)   # Blancas
 
@@ -1691,7 +1690,7 @@ def otros_productos_para_bebes():
     origen = Categoria.objects.get(id=807)
 
     # destinos
-    mamadera = Categoria.objects.get(id=627)   # Chupetes/ mamaderas
+    mamadera = Categoria.objects.get(id=960)   # Chupetes/ mamaderas
 
     mover(origen, intento_borrar=True,
           mapa=[('mamadera', mamadera)])
@@ -1723,7 +1722,7 @@ def pan_integral():
     # origen
     origen = Categoria.objects.get(id=867)
     # destinos
-    default = Categoria.objects.get(id=960)   # integral
+    default = Categoria.objects.get(id=959)   # integral
     mover(origen, intento_borrar=True, default=default)
 
 
@@ -1732,7 +1731,7 @@ def pan_lacteado():
     origen = Categoria.objects.get(id=837)
 
     # destinos
-    default = Categoria.objects.get(id=961)   # lactal/lacteado
+    default = Categoria.objects.get(id=962)   # lactal/lacteado
     mover(origen, intento_borrar=True, default=default)
 
 
@@ -1868,10 +1867,10 @@ def panales_descartables():
     origen = Categoria.objects.get(id=944)
 
     # destinos
-    g = Categoria.objects.get(id=948)   # Medida G
-    m = Categoria.objects.get(id=947)   # Medida M
-    p = Categoria.objects.get(id=950)   # Medida P
-    xg = Categoria.objects.get(id=949)   # Medida XG
+    g = Categoria.objects.get(id=954)   # Medida G
+    m = Categoria.objects.get(id=955)   # Medida M
+    p = Categoria.objects.get(id=957)   # Medida P
+    xg = Categoria.objects.get(id=943)   # Medida XG
 
     mover(origen, intento_borrar=True, default=m,
           mapa=[(' G ', g), (' M ', m), (' P ', p), (' XG ', xg)])
@@ -1882,10 +1881,9 @@ def panales_para_adultos():
     origen = Categoria.objects.get(id=789)
 
     # destinos
-    accesorio = Categoria.objects.get(id=637)   # Accesorios
+    destino = Categoria.objects.get(id=964)   # Adultos
 
-    mover(origen, intento_borrar=True,
-          mapa=[('accesorio', accesorio)])
+    mover(origen, intento_borrar=True, default=destino)
 
 
 def panos_multiuso_y_trapos_de_piso():
@@ -2234,8 +2232,10 @@ def shampoo_y_crema_de_enjuague_para_bebes():
     # origen
     origen = Categoria.objects.get(id=843)
     # destinos
-    bebe = Categoria.objects.get(id=954)   # Shampoo para bebés
-    mover(origen, intento_borrar=True, default=bebe)
+    shampoo = Categoria.objects.get(id=952)   # Shampoo para bebés
+    enjuague = Categoria.objects.get(id=951)   #
+    mover(origen, intento_borrar=True, default=shampoo,
+          mapa=[('enjuague', enjuague)])
 
 
 def sidras():
@@ -2450,7 +2450,7 @@ def whiskys():
     origen = Categoria.objects.get(id=810)
 
     # destinos
-    whisky = Categoria.objects.get(id=959)   # Blancas
+    whisky = Categoria.objects.get(id=958)   # Blancas
 
     mover(origen, intento_borrar=True, default=whisky)
 
