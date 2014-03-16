@@ -130,6 +130,8 @@ def mover(origen, intento_borrar=False, log=True, mapa=[], default=None):
     clave ``verdes`` y a ``negras``  las que tengan la palabra clave
     ``negras``.
 
+    alternativamente, origen puede ser un queryset de productos
+
     Si ``intento_borrar`` es True, se elimina la categoria origen
     cuando no quedan productos.
 
@@ -139,16 +141,19 @@ def mover(origen, intento_borrar=False, log=True, mapa=[], default=None):
     Si ``log`` es True imprime el movimiento
     """
     try:
+        if isinstance(origen, Categoria):
+            origen = origen.productos.all()
+
         with transaction.atomic():
             for clave, destino in mapa:
-                for p in origen.productos.filter(busqueda__icontains=clave):
+                for p in origen.filter(busqueda__icontains=clave):
                     p.categoria = destino
                     p.save(update_fields=['categoria'])
                     if log:
                         print p, "=>", destino
 
             if default:
-                for p in origen.productos.all():
+                for p in origen:
                     p.categoria = default
                     p.save(update_fields=['categoria'])
                     if log:
@@ -280,7 +285,7 @@ def aderezos():
     salsa = Categoria.objects.get(id=260)   # Salsas
     vinagre = Categoria.objects.get(id=261)   # Vinagre
 
-    mover(origen, intento_borrar=True,
+    mover(origen, intento_borrar=True, default=salsa,
           mapa=[('aceto', aceto), ('especia', especia),
                 ('limon', limon), ('mayonesa', mayonesa),
                 ('mostaza', mostaza), ('saboriza', saborizadore),
@@ -299,7 +304,7 @@ def afeitado():
     shave = Categoria.objects.get(id=653)   # Locion/ after shave
 
     mover(origen, intento_borrar=True,
-          mapa=[('espuma', espuma), ('filo', filo), ('shave', shave)])
+          mapa=[('crema', espuma), ('maquina', filo), ('cartucho', filo)])
 
 
 def aguas():
@@ -312,7 +317,8 @@ def aguas():
     ga = Categoria.objects.get(id=379)   # Sin gas
 
     mover(origen, intento_borrar=True,
-          mapa=[('gasificada', gasificada), ('saborizada', saborizada), ('ga', ga)])
+          mapa=[('gasificada', gasificada), ('saborizada', saborizada),
+                ('sin ', ga)])
 
 
 def aguas_saborizadas():
