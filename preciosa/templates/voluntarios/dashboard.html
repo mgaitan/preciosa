@@ -21,20 +21,20 @@
         <div class="row">
 
             <div class="col-lg-6">
-                <div class="panel panel-success">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-folder-o"></i> Asociar categorías</h3>
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <p>
-                                Esta tarea se trata de encontrar la mejor categoría para grupos de productos que no sabemos dónde poner.
-                            </p>
-                        <a class="btn btn-primary btn-lg btn-success btn-block" href="{% url 'mapa_categorias' %}">Entrar a asociar categorías</a>
-
-                        </div>
-                        <!-- /.panel-body -->
-                </div>
+               <div class="panel panel-success">
+                   <div class="panel-heading">
+                       <h3 class="panel-title"><i class="fa fa-plus-square"></i> Agregar sucursales  <button class="btn btn-success btn-xs disabled" type="button">¡Nuevo!</button></h3>
+                   </div>
+                   <!-- /.panel-heading -->
+                   <div class="panel-body">
+                       <p>
+                           También es necesario conocer todas las sucursales
+                           de las diferentes cadenas de supermercados que hay
+                           en el país.
+                       </p>
+                       <a class="btn btn-primary btn-lg btn-block btn-success" href="{% url 'alta_cadena_sucursal' %}">Agregar nuevas sucursales</a>
+                   </div>    <!-- /.panel-body -->
+               </div>
 
             </div>
             <div class="col-lg-6">
