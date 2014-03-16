@@ -155,7 +155,7 @@ def mover(origen, intento_borrar=False, log=True, mapa=[], default=None):
                         print p, "=>", default
 
             if intento_borrar and origen.productos.count() == 0:
-                print u"%s quedó vacia y se eliminará" % origen
+                print u"     ****  %s quedó vacia y se eliminará" % origen
                 origen.delete()
     except Exception as e:
         print u"Hubo un error **no se migró nada**"
@@ -2484,7 +2484,7 @@ def yogurts():
                 ('batido', batido)])
 
 
-def main():
+def main(paso):
     aceites()
     vinagre_aceto()
     aceitunas()
