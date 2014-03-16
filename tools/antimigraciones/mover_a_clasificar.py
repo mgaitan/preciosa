@@ -111,7 +111,7 @@ def %(func)s():
 
 pr = lambda c: c.productos.all()
 b = lambda q: Categoria.objects.filter(busqueda__icontains=q)
-
+s = lambda q: {p.categoria for p in Producto.objects.buscar(q)}
 
 def mover(origen, intento_borrar=False, log=True, mapa=[], default=None):
     """
@@ -450,52 +450,39 @@ def bebidas_blancas():
     # destinos
     blanca = Categoria.objects.get(id=352)   # Blancas
 
-    mover(origen, intento_borrar=True,
-          mapa=[('blanca', blanca)])
+    mover(origen, intento_borrar=True, default=blanca)
 
 
 def bebidas_energizantes():
     # origen
     origen = Categoria.objects.get(id=797)
-
     # destinos
     energizante = Categoria.objects.get(id=380)   # Energizantes
-
-    mover(origen, intento_borrar=True,
-          mapa=[('energizante', energizante)])
+    mover(origen, intento_borrar=True, default=energizante)
 
 
 def bebidas_fizz():
     # origen
     origen = Categoria.objects.get(id=784)
-
     # destinos
     otro = Categoria.objects.get(id=360)   # Sidras- otros
-
-    mover(origen, intento_borrar=True,
-          mapa=[('otro', otro)])
+    mover(origen, intento_borrar=True, default=otro)
 
 
 def bebidas_isotonicas():
     # origen
     origen = Categoria.objects.get(id=918)
-
     # destinos
     isotonica = Categoria.objects.get(id=388)   # Isotonicas
-
-    mover(origen, intento_borrar=True,
-          mapa=[('isotonica', isotonica)])
+    mover(origen, intento_borrar=True, default=isotonica)
 
 
 def bizcochos():
     # origen
     origen = Categoria.objects.get(id=846)
-
     # destinos
     bizcocho = Categoria.objects.get(id=464)   # Bizcochos
-
-    mover(origen, intento_borrar=True,
-          mapa=[('bizcocho', bizcocho)])
+    mover(origen, intento_borrar=True, default=bizcocho)
 
 
 def bocaditos():
@@ -518,30 +505,7 @@ def bocaditos():
 def bolsas_para_residuos():
     # origen
     origen = Categoria.objects.get(id=893)
-
-    # destinos
-    freezer = Categoria.objects.get(id=573)   # Bolsa freezer
-    reutilizable = Categoria.objects.get(id=574)   # Bolsa reutilizable
-    descartable = Categoria.objects.get(id=575)   # Descartables
-    lavavajilla = Categoria.objects.get(id=576)   # Detergente- lavavajilla
-    papele = Categoria.objects.get(id=577)   # Films- papeles
-    encendedore = Categoria.objects.get(id=578)   # Fosforos / encendedores
-    # Limpiadores- desengrasantes
-    desengrasante = Categoria.objects.get(id=579)
-    palillero = Categoria.objects.get(id=580)   # Palillero
-    palillo = Categoria.objects.get(id=581)   # Palillos
-    vela = Categoria.objects.get(id=582)   # Velas
-
-    mover(origen, intento_borrar=True,
-          mapa=[('freezer', freezer),
-                ('reutilizable', reutilizable),
-                ('descartable', descartable),
-                ('lavavajilla', lavavajilla),
-                ('papel', papele),
-                ('encendedor', encendedore),
-                ('desengrasante', desengrasante),
-                ('palillero', palillero),
-                ('palillo', palillo), ('vela', vela)])
+    mover(origen, intento_borrar=True, Categoria.objects.get(id=968))
 
 
 def brownies_y_budines():
@@ -568,17 +532,17 @@ def cafe():
     origen = Categoria.objects.get(id=934)
 
     # destinos
-    instantaneo = Categoria.objects.get(id=279)   # Cafe instantaneo
-    torrado = Categoria.objects.get(id=280)   # Cafe p/ filtro
-    filtro = Categoria.objects.get(id=281)   # Filtro cafe
-    malta = Categoria.objects.get(id=961)   # Maltas
+instantaneo = Categoria.objects.get(id=279)   # Cafe instantaneo
+torrado = Categoria.objects.get(id=280)   # Cafe p/ filtro
+filtro = Categoria.objects.get(id=281)   # Filtro cafe
+malta = Categoria.objects.get(id=961)   # Maltas
 
-    mover(origen, intento_borrar=True, default=torrado,
-          mapa=[('instantaneo', instantaneo),
-                ('filtro', filtro),
-                ('torrado', cafe),
-                ('tostado', cafe),
-                ('malta', malta)])
+mover(origen, intento_borrar=True,  #default=torrado,
+      mapa=[('instantaneo', instantaneo),
+            ('filtro', filtro),
+            ('torrado', torrado),
+            ('tostado', torrado),
+            ('malta', malta)])
 
 
 def caldos_y_saborizadores():
@@ -590,8 +554,8 @@ def caldos_y_saborizadores():
     saborizadore = Categoria.objects.get(id=314)   # Saborizadores
     sopa = Categoria.objects.get(id=315)   # Sopas
 
-    mover(origen, intento_borrar=True,
-          mapa=[('caldo', caldo), ('saborizadore', saborizadore), ('sopa', sopa)])
+    mover(origen, intento_borrar=True, default=saborizadore,
+          mapa=[('caldo', caldo), ('sabor', saborizadore), ('sopa', sopa)])
 
 
 def cepillos_dentales():
