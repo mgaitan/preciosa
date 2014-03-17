@@ -51,7 +51,7 @@ router.register(r'categorias', views.CategoriaViewSet)
 urlpatterns = patterns("preciosa.api.views",
     url(r"^sucursales/$", views.SucursalesList.as_view(), name='sucursales'),
     url(r"^productos/$", views.ProductosList.as_view(), name='productos'),
-    url(r"^productos/(?P<id_producto>\d+)/sucursal/(?P<id_sucursal>\d+)$",
+    url(r"^sucursal/(?P<id_sucursal>\d+)/productos/(?P<id_producto>\d+)$",
         views.producto_sucursal_detalle,
         name='producto_detalle'),
     url(r"^productos/(?P<pk>\d+)$", views.ProductosList.as_view(), name='productos'),
