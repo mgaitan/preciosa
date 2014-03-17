@@ -171,7 +171,7 @@ INSTALLED_APPS = [
 
     # tests / debug
     "django_nose",
-    "django_pdb",
+    # "django_pdb",
 
 
     #blog
@@ -190,6 +190,11 @@ INSTALLED_APPS = [
     "preciosa.api",
     "preciosa.flatpagex"
 ]
+
+import sys
+if not 'test' in sys.argv:
+    INSTALLED_APPS += ["django_pdb"]
+
 
 # compatibilidad con class="alert" de bootstrap 3
 from django.contrib.messages import constants as message_constants

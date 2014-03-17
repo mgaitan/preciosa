@@ -376,6 +376,7 @@ class PrecioManager(models.Manager):
         una curva de evolucion de precio), asigar ``distintos=False``
 
         dias filtra a registros mas nuevos a los X dias.
+
         """
         qs = super(PrecioManager, self).get_queryset()
         qs = qs.filter(producto=producto, sucursal=sucursal)
@@ -421,11 +422,11 @@ class PrecioManager(models.Manager):
     def mejores_precios(self, producto, ciudad=None, punto_o_sucursal=None,
                         radio=None, dias=None, limite=5):
         """
-        devuelve una lista de de diccionarios ordenados por menor precio
-        (importe) para un determinado producto y un radio de
-        distancia o ciudad.
+        devuelve una lista de instancias Precio para el producto,
+        ordenados por menor precio (importe) para
+        un determinado producto y un radio de distancia o ciudad.
 
-        Sólo considerar el último precio en cada sucursal.
+        Sólo considera el último precio en cada sucursal.
         """
         if not one((ciudad, radio)):
             raise ValueError(
@@ -458,8 +459,7 @@ class PrecioManager(models.Manager):
             qs = qs.filter(sucursal__ciudad__id=ciudad).distinct(
                 'sucursal')[:limite]
         if qs.exists():
-            qs = qs.values('created', 'precio', 'sucursal')
-            return sorted(qs, key=lambda i: i['precio'])
+            return sorted(qs, key=lambda i: i.precio)
         return []
 
 

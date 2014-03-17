@@ -195,12 +195,12 @@ class TestMejoresPrecios(BaseTestPrecio):
         self.add(precio=11, sucursal=self.suc2)
         self.add(precio=8.4, sucursal=self.suc3)
         r = self.qs(ciudad=self.suc.ciudad)
-        self.assertEqual(r[0]['precio'], Decimal('8.4'))
-        self.assertEqual(r[0]['sucursal'], self.suc3.id)
-        self.assertEqual(r[1]['precio'], Decimal('10'))
-        self.assertEqual(r[1]['sucursal'], self.suc.id)
-        self.assertEqual(r[2]['precio'], Decimal('11'))
-        self.assertEqual(r[2]['sucursal'], self.suc2.id)
+        self.assertEqual(r[0].precio, Decimal('8.4'))
+        self.assertEqual(r[0].sucursal, self.suc3)
+        self.assertEqual(r[1].precio, Decimal('10'))
+        self.assertEqual(r[1].sucursal, self.suc)
+        self.assertEqual(r[2].precio, Decimal('11'))
+        self.assertEqual(r[2].sucursal, self.suc2)
 
     def test_ciudad_o_radio_requerido(self):
         with self.assertRaisesRegexp(ValueError, 'ciudad o un radio'):
@@ -217,7 +217,7 @@ class TestMejoresPrecios(BaseTestPrecio):
         self.add(precio=1, sucursal=otra)       # barato!
         r = self.qs(ciudad=self.suc.ciudad)
         self.assertEqual(len(r), 1)
-        self.assertEqual(r[0]['precio'], Decimal('10'))
+        self.assertEqual(r[0].precio, Decimal('10'))
 
     def test_precios_limite(self):
         # 3 precios posibles
@@ -232,10 +232,10 @@ class TestMejoresPrecios(BaseTestPrecio):
         # registro de hace 10 dias
         self.add('9.20', sucursal=self.suc, created=limite)
         # registro de hoy
-        self.add('10.56', sucursal=self.suc)
+        p2 = self.add('10.56', sucursal=self.suc)
         r = self.qs(ciudad=self.suc.ciudad, dias=9)
         self.assertEqual(len(r), 1)
-        self.assertEqual(r[0]['precio'], Decimal('10.56'))
+        self.assertEqual(r[0], p2)
 
     def test_por_radio(self):
         self.suc2.ubicacion = punto_destino(self.suc.ubicacion, 90, 4.5)
@@ -249,40 +249,23 @@ class TestMejoresPrecios(BaseTestPrecio):
         # por punto o ubicacion
         for p in (self.suc, self.suc.ubicacion):
             self.assertEqual(list(self.qs(radio=4.4, punto_o_sucursal=p)),
-                             [{'precio': Decimal('10'),
-                               'sucursal': self.suc.id,
-                               'created': p1.created}])
+                             [p1])
             # una sucursal dentro de este radio
             self.assertEqual(list(self.qs(radio=4.6, punto_o_sucursal=p)),
-                             [{'precio': Decimal('8.4'),
-                               'created': p2.created,
-                               'sucursal': self.suc2.id},
-                              {'precio': Decimal('10'),
-                               'created': p1.created,
-                               'sucursal': self.suc.id}])
+                             [p2, p1])
 
             # dos sucursales dentro de este radio
             self.assertEqual(list(self.qs(radio=4.8, punto_o_sucursal=p)),
-                             [{'precio': Decimal('8.4'),
-                               'created': p2.created,
-                               'sucursal': self.suc2.id},
-                              {'precio': Decimal('10'),
-                               'created': p1.created,
-                               'sucursal': self.suc.id},
-                              {'precio': Decimal('11'),
-                               'created': p3.created,
-                               'sucursal': self.suc3.id}])
+                             [p2, p1, p3])
 
     def test_solo_ultimo_precio_de_una_sucursal(self):
-        self.add(precio=10, sucursal=self.suc)
+        p1 = self.add(precio=10, sucursal=self.suc)
         self.add(precio=11, sucursal=self.suc2)
-        self.add(precio='9.5', sucursal=self.suc2)
+        p3 = self.add(precio='9.5', sucursal=self.suc2)
         r = self.qs(ciudad=self.suc.ciudad)
         self.assertEqual(len(r), 2)
-        self.assertEqual(r[0]['precio'], Decimal('9.5'))
-        self.assertEqual(r[0]['sucursal'], self.suc2.id)
-        self.assertEqual(r[1]['precio'], Decimal('10'))
-        self.assertEqual(r[1]['sucursal'], self.suc.id)
+        self.assertEqual(r[0], p3)
+        self.assertEqual(r[1], p1)
 
     def test_vacio_si_no_hay_resultados(self):
         r = self.qs(ciudad=self.suc.ciudad)
