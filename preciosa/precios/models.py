@@ -362,8 +362,7 @@ class PrecioManager(models.Manager):
         """
         if distintos:
             qs = qs.distinct('precio')
-        qs = qs.values('created', 'precio')
-        return sorted(qs, key=lambda i: i['created'], reverse=True)
+        return sorted(qs, key=lambda i: i.created, reverse=True)
 
     def historico(self, producto, sucursal, dias=None, distintos=True):
         """

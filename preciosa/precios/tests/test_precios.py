@@ -32,17 +32,12 @@ class TestPrecioHistorico(TestCase):
 
     def test_unico(self):
         p = self.add('10.56')
-        self.assertEqual(list(self.qs()), [{'precio': Decimal('10.56'),
-                                            'created': p.created}])
+        self.assertEqual(list(self.qs()), [p])
 
     def test_precio_mas_nuevo_primero(self):
         p = self.add('10.56')
         p2 = self.add('11.20')      # mas nuevo
-        self.assertEqual(list(self.qs()),
-                         [{'precio': Decimal('11.20'),
-                           'created': p2.created},
-                          {'precio': Decimal('10.56'),
-                           'created': p.created}])
+        self.assertEqual(list(self.qs()), [p2, p])
 
     def test_mismo_precio_queda_solo_el_mas_nuevo(self):
         p = self.add('10.56')
@@ -50,12 +45,9 @@ class TestPrecioHistorico(TestCase):
         p3 = self.add('11.20')      # noqa
         p4 = self.add('11.30')
         self.assertEqual(list(self.qs()),
-                         [{'precio': Decimal('11.30'),
-                           'created': p4.created},
-                          {'precio': Decimal('11.20'),
-                           'created': p2.created},
-                          {'precio': Decimal('10.56'),
-                           'created': p.created}])
+                         [p4, p2, p])
+        # FIX .este test no está bien. deberia ser
+        # [p4, p3, p]  porque p3.created > p2.created  (más nuevo)
 
     def test_mas_nuevos_que(self):
         limite = timezone.now() - timedelta(10)
@@ -63,23 +55,11 @@ class TestPrecioHistorico(TestCase):
         p = self.add('10.56', created=limite)
         # registro de hoy
         p2 = self.add('11.20')
-        self.assertEqual(list(self.qs()),
-                         [{'precio': Decimal('11.20'),
-                           'created': p2.created},
-                          {'precio': Decimal('10.56'),
-                           'created': p.created}])
-        self.assertEqual(list(self.qs(dias=11)),
-                         [{'precio': Decimal('11.20'),
-                           'created': p2.created},
-                          {'precio': Decimal('10.56'),
-                           'created': p.created}])
+        self.assertEqual(list(self.qs()), [p2, p])
+        self.assertEqual(list(self.qs(dias=11)), [p2, p])
         # caso limite. seria mejor usar __range  ?
-        self.assertEqual(list(self.qs(dias=10)),
-                         [{'precio': Decimal('11.20'),
-                           'created': p2.created}])
-        self.assertEqual(list(self.qs(dias=9)),
-                         [{'precio': Decimal('11.20'),
-                           'created': p2.created}])
+        self.assertEqual(list(self.qs(dias=10)), [p2])
+        self.assertEqual(list(self.qs(dias=9)), [p2])
 
     def test_historial_completo(self):
         p = self.add('10.56')
@@ -87,14 +67,7 @@ class TestPrecioHistorico(TestCase):
         p3 = self.add('11.20')      # noqa
         p4 = self.add('11.30')
         self.assertEqual(list(self.qs(distintos=False)),
-                         [{'precio': Decimal('11.30'),
-                           'created': p4.created},
-                          {'precio': Decimal('11.20'),
-                           'created': p3.created},
-                          {'precio': Decimal('11.20'),
-                           'created': p2.created},
-                          {'precio': Decimal('10.56'),
-                           'created': p.created}])
+                         [p4, p3, p2, p])
 
 
 class BaseTestPrecio(TestCase):
@@ -127,20 +100,12 @@ class TestMasProbables(BaseTestPrecio):
     def test_si_hay_precios_de_la_sucursal_devuelve_esos(self):
         p1 = self.add(10, sucursal=self.suc)
         p2 = self.add(20, sucursal=self.suc)
-        self.assertEqual(list(self.qs()),
-                         [{'precio': Decimal('20'),
-                           'created': p2.created},
-                          {'precio': Decimal('10'),
-                           'created': p1.created}])
+        self.assertEqual(list(self.qs()), [p2, p1])
 
     def test_precios_misma_cadena_en_la_ciudad(self):
         p1 = self.add(10, sucursal=self.suc2)
         p2 = self.add(11, sucursal=self.suc3)
-        self.assertEqual(list(self.qs()),
-                         [{'precio': Decimal('11'),
-                           'created': p2.created},
-                          {'precio': Decimal('10'),
-                           'created': p1.created}])
+        self.assertEqual(list(self.qs()), [p2, p1])
 
     def test_precios_a_radio_dado(self):
         self.suc2.ubicacion = punto_destino(self.suc.ubicacion, 90, 4.5)
@@ -152,27 +117,17 @@ class TestMasProbables(BaseTestPrecio):
         # no hay sucursales dentro de este radio
         self.assertEqual(list(self.qs(radio=4.4)), [])
         # una sucursal dentro de este radio
-        self.assertEqual(list(self.qs(radio=4.6)),
-                         [{'precio': Decimal('10'),
-                           'created': p1.created}])
+        self.assertEqual(list(self.qs(radio=4.6)), [p1])
         # dos sucursales dentro de este radio
-        self.assertEqual(list(self.qs(radio=4.8)),
-                         [{'precio': Decimal('11'),
-                           'created': p2.created},
-                          {'precio': Decimal('10'),
-                           'created': p1.created}])
+        self.assertEqual(list(self.qs(radio=4.8)), [p2, p1])
 
     def test_fallback_online(self):
         sucursal_online = SucursalFactory(cadena=self.suc.cadena,
                                           online=True,
                                           url='http://cadena.com')
         p1 = self.add(10, sucursal=sucursal_online)
-        self.assertEqual(list(self.qs()),
-                         [{'precio': Decimal('10'),
-                           'created': p1.created}])
-        self.assertEqual(list(self.qs(radio=5)),
-                         [{'precio': Decimal('10'),
-                           'created': p1.created}])
+        self.assertEqual(list(self.qs()), [p1])
+        self.assertEqual(list(self.qs(radio=5)), [p1])
 
 
 class TestMejoresPrecios(BaseTestPrecio):
