@@ -169,8 +169,9 @@ INSTALLED_APPS = [
     "south",
     "dbbackup",
 
-    # tests
+    # tests / debug
     "django_nose",
+    "django_pdb",
 
 
     #blog
