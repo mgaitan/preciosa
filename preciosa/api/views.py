@@ -62,6 +62,7 @@ class CategoriaViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class SucursalesList(mixins.ListModelMixin,
+                     mixins.RetrieveModelMixin,
                      mixins.CreateModelMixin,
                      generics.GenericAPIView):
 
@@ -83,6 +84,9 @@ class SucursalesList(mixins.ListModelMixin,
                                        Q(nombre__icontains=q))
 
         if all((lat, lon, radio)):
+
+            # TODO: refactor para generalizar esto con el codigo
+            # de Sucursal.cercanas()
             try:
                 lat = float(lat)
                 lon = float(lon)
@@ -103,6 +107,10 @@ class SucursalesList(mixins.ListModelMixin,
         return queryset
 
     def get(self, request, *args, **kwargs):
+        if 'pk' in kwargs:
+            sucursal = self.get_object()
+            serializer = SucursalSerializer(sucursal)
+            return Response(serializer.data)
         return self.list(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
@@ -117,20 +125,28 @@ class ProductosList(mixins.ListModelMixin,
     serializer_class = ProductoSerializer
 
     def get_queryset(self):
-        pk = self.request.QUERY_PARAMS.get('pk', None)
+        pk = self.request.QUERY_PARAMS.get('pk', None)  # pk para producto
         barcode = self.request.QUERY_PARAMS.get('barcode', None)
         q = self.request.QUERY_PARAMS.get('q', None)
         limite = self.request.QUERY_PARAMS.get('limite', None)
+
         queryset = super(ProductosList, self).get_queryset()
+
         if pk:
             queryset = queryset.filter(pk=pk)
         elif barcode:
             queryset = Producto.objects.buscar(barcode, limite)
         elif q:
             queryset = Producto.objects.buscar(q, limite)
+
+        if hasattr(self, '_pk_sucursal'):
+            queryset = queryset.filter(precios__sucursal__id=self._pk_sucursal).distinct()
+
         return queryset
 
     def get(self, request, *args, **kwargs):
+        if 'pk' in kwargs:
+            self._pk_sucursal = kwargs['pk']
         return self.list(request, *args, **kwargs)
 
 
@@ -189,11 +205,13 @@ class Detalle(object):
 
 
 @api_view(['GET', 'POST'])
-def producto_sucursal_detalle(request, id_producto, id_sucursal):
-    producto = get_object_or_404(Producto, id=id_producto)
-    sucursal = get_object_or_404(Sucursal, id=id_sucursal)
+def producto_sucursal_detalle(request, pk_sucursal, pk_producto):
+    producto = get_object_or_404(Producto, id=pk_producto)
+    sucursal = get_object_or_404(Sucursal, id=pk_sucursal)
     detalle = Detalle(producto, sucursal)
 
     if request.method == 'GET':
         serializer = ProductoDetalleSerializer(detalle)
         return Response(serializer.data)
+    elif request.method == 'POST':
+        pass
