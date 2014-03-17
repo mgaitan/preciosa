@@ -73,7 +73,7 @@ class SucursalesList(mixins.ListModelMixin,
         queryset = super(SucursalesList, self).get_queryset()
 
         q = self.request.QUERY_PARAMS.get('q', None)
-        limit = self.request.QUERY_PARAMS.get('limit', None)
+        limite = self.request.QUERY_PARAMS.get('limite', None)
 
         lat = self.request.QUERY_PARAMS.get('lat', None)
         lon = self.request.QUERY_PARAMS.get('lon', None)
@@ -101,8 +101,8 @@ class SucursalesList(mixins.ListModelMixin,
                 queryset = queryset.filter(ubicacion__distance_lte=circulo)
                 queryset = queryset.distance(point).order_by('distance')
 
-        if limit:
-            queryset = queryset[:limit]
+        if limite:
+            queryset = queryset[:limite]
 
         return queryset
 
@@ -126,7 +126,6 @@ class ProductosList(mixins.ListModelMixin,
 
     def get_queryset(self):
         pk = self.request.QUERY_PARAMS.get('pk', None)  # pk para producto
-        barcode = self.request.QUERY_PARAMS.get('barcode', None)
         q = self.request.QUERY_PARAMS.get('q', None)
         limite = self.request.QUERY_PARAMS.get('limite', None)
 
@@ -134,8 +133,6 @@ class ProductosList(mixins.ListModelMixin,
 
         if pk:
             queryset = queryset.filter(pk=pk)
-        elif barcode:
-            queryset = Producto.objects.buscar(barcode, limite)
         elif q:
             queryset = Producto.objects.buscar(q, limite)
 

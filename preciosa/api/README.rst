@@ -3,8 +3,8 @@ Preciosa API v1
 
 .. attention::
 
-    la API está en plena fase de diseño e implementación. Puede cambiar
-    sin previo aviso
+    La API está en plena fase de diseño e implementación.
+    Puede cambiar sin previo aviso
 
 Breve intro a Django Rest Framework
 -------------------------------------
@@ -28,13 +28,13 @@ listar, mostrar, crear, etc.  objetos/instancias de modelos)
 o una abstracciín aún más general denominada ``ViewSet``, que puede pensarse como una *factory* de Class Based Views: un Viewset para un modelo,
 ya sabe hacer *todos* los casos comunes y, como yapa, mediante un ``Router``, nos genera **automáticamente** una estructura de urls tipicas.
 Por último, puede definirse una vista tipica como función, decorada con
-el decorador de DRF ``@api_view
+el decorador de DRF ``@api_view``
 
 Las urls son iguales a las de cualquier aplicación Django, salvo
-por la utilización opcional de un ``router``, que puede considerarse
-una *factory* de URLs.
+por la utilización opcional de un ``router`` (una *factory* de URLs).
 
-Preciosa utiliza un mix de todas las posilidades de que brinda DRF.
+Preciosa utiliza una mezcla de todas las posilidades de que brinda DRF.
+
 Por ejemplo, los *endpoints* para modelos simples como ``Cadena`` (Walmart, Disco, etc), utilizan ``ViewSets``, algunos listados/detalles como el del modelo ``Producto`` (que puede accederse en general o para una sucursal en particular) usa ``CBVs`` y la vista de detalle para productos (en una sucursal) usa una vista basada implenentada como función decorada.
 
 .. warning::
@@ -57,28 +57,30 @@ Otros recursos
 --------------
 
 Detalle de una sucursal
-
-   http://preciosdeargentina.com.ar/api/v1/sucursales/<pk>
+   ``http://preciosdeargentina.com.ar/api/v1/sucursales/<pk>``
 
 Listado de productos con precios conocidos en una sucursal
+   ``http://preciosdeargentina.com.ar/api/v1/sucursales/<pk>/productos``
 
-   http://preciosdeargentina.com.ar/api/v1/sucursales/<pk>/productos
+   Es igual que ``http://preciosdeargentina.com.ar/api/v1/productos``,
+   pero filtra aquellos productos en los que para esa sucursal
+   hay precios conocidos.
 
 Detalle de producto para una sucursal en particular
-
-   http://preciosdeargentina.com.ar/api/v1/sucursales/<pk>/productos
+   ``http://preciosdeargentina.com.ar/api/v1/sucursales/<pk>/productos``
 
    Este recurso devuelve un **detalle exhaustivo** de los precios probables y los mejores para una zona, incluyendo sucursales asociadas a esos mejores precios.
 
 
 Filtros
-+++++++
+-------
 
-El listado de de productos (http://preciosdeargentina.com.ar/api/v1/productos) puede recibir los siguientes parámetros via ``GET``
+El listado de productos (http://preciosdeargentina.com.ar/api/v1/productos) puede recibir los siguientes parámetros opcionales via ``GET``
 
 ``q``
     cadena a buscar. Usa el criterio definido en ``Producto.objects.buscar``
-    Por ejemplo, puede ser un conjunto de palabras claves o un código de barras.
+    (es decir, dará los mismos resultados que el buscador de la web).
+    Por ejemplo, puede ser un conjunto de palabras claves o un código de barras (completo o los primeros números desde la izquierda).
 
 ``limite``
     cuantos resultados mostrar para el criterio
@@ -91,15 +93,22 @@ El listado de sucursales (http://preciosdeargentina.com.ar/api/v1/sucursales) pu
 
 
 ``q``
-
     cadena a buscar en nombre de sucursal o cadena
 
 ``lat``, ``lon`` y ``radio``:
-
    una posición y el radio que determina las zona donde se buscan sucursales.
    Estos parámetros son interdependientes.
 
 
+Formatos
+---------
+
+DRF sabe interpretar el ``content-type`` preferido en el encabezado de la petición ``HTTP``. Alternativamente puede definirse mediante el parámetro
+``format``  en la URL del recurso. Por ejemplo
+
+    http://preciosdeargentina.com.ar/api/v1/cadenas/?format=json
+
+Forzará el serializado de la lista de cadenas en formato JSON, aun desde un navegador web que acepta HTML.
 
 
 
