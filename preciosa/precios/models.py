@@ -418,7 +418,7 @@ class PrecioManager(models.Manager):
             return self._registro_precio(qs)
         return []
 
-    def mejores_precios(self, producto, ciudad=None, punto_o_sucursal=None,
+    def mejores(self, producto, ciudad=None, punto_o_sucursal=None,
                         radio=None, dias=None, limite=5):
         """
         devuelve una lista de instancias Precio para el producto,

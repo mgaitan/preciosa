@@ -167,18 +167,22 @@ class Detalle(object):
         return self._producto
 
     @property
+    def sucursal(self):
+        return self._sucursal
+
+    @property
     def mas_probables(self):
         return Precio.objects.mas_probables(self._producto,
                                             self._sucursal, dias=30)
 
     @property
-    def mejores_precios(self):
+    def mejores(self):
         if self._sucursal.ubicacion:
-            mejores = Precio.objects.mejores_precios(self._producto,
+            mejores = Precio.objects.mejores(self._producto,
                                                      punto_o_sucursal=self._sucursal,
                                                      radio=20, dias=30)
         else:
-            mejores = Precio.objects.mejores_precios(self._producto,
+            mejores = Precio.objects.mejores(self._producto,
                                                      ciudad=self._sucursal.ciudad,
                                                      dias=30)
         return mejores

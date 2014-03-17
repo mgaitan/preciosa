@@ -142,7 +142,7 @@ class TestMejoresPrecios(BaseTestPrecio):
     """
 
     def qs(self, **kwargs):
-        return Precio.objects.mejores_precios(producto=self.producto,
+        return Precio.objects.mejores(producto=self.producto,
                                               **kwargs)
 
     def test_precios_en_la_ciudad(self):

@@ -47,6 +47,7 @@ class UbicacionField(serializers.WritableField):
 class SucursalSerializer(serializers.ModelSerializer):
     cadena = CadenaSerializer(source='cadena')
     ubicacion = UbicacionField(required=False)
+    ciudad = serializers.CharField()
 
     class Meta:
         model = Sucursal
@@ -77,13 +78,9 @@ class ProductoSerializer(serializers.HyperlinkedModelSerializer):
         )
 
 
-class SimplePrecioSerializer(serializers.Serializer):
-    created = serializers.DateTimeField()
-    # sucursal = SucursalSerializer(serializers.ModelSerializer)
-    precio = serializers.DecimalField()
-
-
 class PrecioSerializer(serializers.ModelSerializer):
+    sucursal = SucursalSerializer()
+
     class Meta:
         model = Precio
         fields = (
@@ -96,9 +93,9 @@ class PrecioSerializer(serializers.ModelSerializer):
 
 class ProductoDetalleSerializer(serializers.Serializer):
     producto = ProductoSerializer()
-    # sucursal = SucursalSerializer()
-    mas_probables = SimplePrecioSerializer(many=True, partial=True)
-    mejores_precios = SimplePrecioSerializer(many=True, partial=True)
+    sucursal = SucursalSerializer()
+    mas_probables = PrecioSerializer(many=True, partial=True)
+    mejores = PrecioSerializer(many=True, partial=True)
 
 
 class CitySerializer(serializers.HyperlinkedModelSerializer):
