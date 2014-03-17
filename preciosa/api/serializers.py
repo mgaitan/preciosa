@@ -29,7 +29,7 @@ class MarcaSerializer(serializers.HyperlinkedModelSerializer):
 class CadenaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Cadena
-        fields = ('id', 'url', 'nombre','cadena_madre',)
+        fields = ('id', 'url', 'nombre', 'cadena_madre',)
 
 
 class UbicacionField(serializers.WritableField):
@@ -62,7 +62,6 @@ class SucursalSerializer(serializers.ModelSerializer):
         )
 
 
-
 class ProductoSerializer(serializers.HyperlinkedModelSerializer):
 
     foto = serializers.CharField(source='foto_abs', required=False)
@@ -78,12 +77,10 @@ class ProductoSerializer(serializers.HyperlinkedModelSerializer):
         )
 
 
-class CitySerializer(serializers.HyperlinkedModelSerializer):
-    region = serializers.Field(source='region.name')
-
-    class Meta:
-        model = City
-        fields = ('name','latitude','longitude','geoname_id','region')
+class SimplePrecioSerializer(serializers.Serializer):
+    created = serializers.DateTimeField()
+    # sucursal = SucursalSerializer(serializers.ModelSerializer)
+    precio = serializers.DecimalField()
 
 
 class PrecioSerializer(serializers.ModelSerializer):
@@ -92,5 +89,22 @@ class PrecioSerializer(serializers.ModelSerializer):
         fields = (
             'producto',
             'sucursal',
+            'created',
             'precio'
         )
+
+
+class ProductoDetalleSerializer(serializers.Serializer):
+    producto = ProductoSerializer()
+    # sucursal = SucursalSerializer()
+    mas_probables = SimplePrecioSerializer(many=True, partial=True)
+    mejores_precios = SimplePrecioSerializer(many=True, partial=True)
+
+
+class CitySerializer(serializers.HyperlinkedModelSerializer):
+    region = serializers.Field(source='region.name')
+
+    class Meta:
+        model = City
+        fields = ('name', 'latitude', 'longitude', 'geoname_id', 'region')
+

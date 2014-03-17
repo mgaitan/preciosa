@@ -1,18 +1,25 @@
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.db.models import Q
-from django.shortcuts import get_object_or_404
-
-from rest_framework import viewsets, mixins, generics
-
+from rest_framework import viewsets, mixins, generics, status
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from cities_light.models import City
 from preciosa.precios.models import (Sucursal, Cadena, Producto,
                                      EmpresaFabricante, Marca, Categoria, Precio)
 
-from preciosa.precios.serializers import (CadenaSerializer, SucursalSerializer,
-                                          CitySerializer, ProductoSerializer,
-                                          EmpresaFabricanteSerializer, MarcaSerializer,
-                                          CategoriaSerializer, PrecioSerializer)
+from preciosa.api.serializers import (CadenaSerializer, SucursalSerializer,
+                                      CitySerializer, ProductoSerializer,
+                                      EmpresaFabricanteSerializer, MarcaSerializer,
+                                      CategoriaSerializer, PrecioSerializer,
+                                      ProductoDetalleSerializer)
+
+
+def get_object_or_404(model, **kwargs):
+    try:
+        return model.objects.get(**kwargs)
+    except model.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class CreateListRetrieveViewSet(mixins.CreateModelMixin,
@@ -148,3 +155,41 @@ class PreciosList(mixins.ListModelMixin,
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
+
+class Detalle(object):
+    def __init__(self, producto, sucursal):
+        self._producto = producto
+        self._sucursal = sucursal
+
+    @property
+    def producto(self):
+        return self._producto
+
+    @property
+    def mas_probables(self):
+        return Precio.objects.mas_probables(self._producto,
+                                            self._sucursal, dias=30)
+
+    @property
+    def mejores_precios(self):
+        if self._sucursal.ubicacion:
+            mejores = Precio.objects.mejores_precios(self._producto,
+                                                     punto_o_sucursal=self._sucursal,
+                                                     radio=20, dias=30)
+        else:
+            mejores = Precio.objects.mejores_precios(self._producto,
+                                                     ciudad=self._sucursal.ciudad,
+                                                     dias=30)
+        return mejores
+
+
+@api_view(['GET', 'POST'])
+def producto_sucursal_detalle(request, id_producto, id_sucursal):
+    producto = get_object_or_404(Producto, id=id_producto)
+    sucursal = get_object_or_404(Sucursal, id=id_sucursal)
+    detalle = Detalle(producto, sucursal)
+
+    if request.method == 'GET':
+        serializer = ProductoDetalleSerializer(detalle)
+        return Response(serializer.data)
