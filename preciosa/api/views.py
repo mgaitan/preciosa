@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.db.models import Q
@@ -207,6 +208,21 @@ def producto_sucursal_detalle(request, pk_sucursal, pk_producto):
         serializer = ProductoDetalleSerializer(detalle)
         return Response(serializer.data)
     elif request.method == 'POST':
-        token = request.QUERY_PARAMS.get('token', None)
+        # a futuro el POST requirá un token según issue #201
+        # para encontrar el user
+        # token = request.QUERY_PARAMS.get('token', None)
+        # user = get_or_None(User, usertokens__token=token)
+        precio = request.DATA.get('precio', None)
+        created = request.DATA.get('created', None)
+        if precio:
+            kwargs = {}
+            if created:
+                kwargs['created'] = created
+            Precio.objects.create(sucursal=sucursal, producto=producto,
+                                  precio=precio, **kwargs)
+        return Response({'detail': '¡gracias!'})
+
+
+
 
 
