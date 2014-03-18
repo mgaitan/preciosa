@@ -181,13 +181,11 @@ class Detalle(object):
     def mas_probables(self):
         probables =  Precio.objects.mas_probables(self._producto,
                                             self._sucursal, dias=30)
-        import ipdb; ipdb.set_trace()
         return probables
 
 
     @property
     def mejores(self):
-        import ipdb; ipdb.set_trace()
         if self._sucursal.ubicacion:
             mejores = Precio.objects.mejores(self._producto,
                                                      punto_o_sucursal=self._sucursal,
