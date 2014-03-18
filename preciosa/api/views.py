@@ -1,7 +1,8 @@
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.db.models import Q
-from rest_framework import viewsets, mixins, generics, status
+from django.shortcuts import get_object_or_404
+from rest_framework import viewsets, mixins, generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from cities_light.models import City
@@ -13,13 +14,6 @@ from preciosa.api.serializers import (CadenaSerializer, SucursalSerializer,
                                       EmpresaFabricanteSerializer, MarcaSerializer,
                                       CategoriaSerializer, PrecioSerializer,
                                       ProductoDetalleSerializer)
-
-
-def get_object_or_404(model, **kwargs):
-    try:
-        return model.objects.get(**kwargs)
-    except model.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class CreateListRetrieveViewSet(mixins.CreateModelMixin,
@@ -185,11 +179,15 @@ class Detalle(object):
 
     @property
     def mas_probables(self):
-        return Precio.objects.mas_probables(self._producto,
+        probables =  Precio.objects.mas_probables(self._producto,
                                             self._sucursal, dias=30)
+        import ipdb; ipdb.set_trace()
+        return probables
+
 
     @property
     def mejores(self):
+        import ipdb; ipdb.set_trace()
         if self._sucursal.ubicacion:
             mejores = Precio.objects.mejores(self._producto,
                                                      punto_o_sucursal=self._sucursal,
@@ -211,4 +209,6 @@ def producto_sucursal_detalle(request, pk_sucursal, pk_producto):
         serializer = ProductoDetalleSerializer(detalle)
         return Response(serializer.data)
     elif request.method == 'POST':
-        pass
+        token = request.QUERY_PARAMS.get('token', None)
+
+
