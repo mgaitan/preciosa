@@ -132,6 +132,16 @@ class Producto(models.Model):
     foto = ThumbnailerImageField(null=True, blank=True, upload_to='productos')
     acuerdos = models.ManyToManyField('Cadena', through='PrecioEnAcuerdo')
 
+    # TO DO: un queryset for defecto debe excluir los productos oculto=True
+    # hacer una manager especial `objects_con_ocultos` que no los excluya
+    # El buscador por codigo de barra (``if q.isdigit()``) deberá usar este ultimo
+    oculto = models.BooleanField(default=False,
+                                 help_text=u"Por ejemplo: productos discontinuados."
+                                           u"Sólo se encuentran por código de barra")
+    unidades_por_lote = models.IntegerField(null=True, blank=True,
+                                            help_text=u"Cuántas unidades vienen en un pack mayorista."
+                                                      u"Por ejemplo 12 (latas de tomate).")
+
     def __unicode__(self):
         return self.descripcion
 
