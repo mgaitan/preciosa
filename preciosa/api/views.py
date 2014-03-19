@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
-from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, mixins, generics
 from rest_framework.response import Response
@@ -65,7 +64,6 @@ class SucursalesList(mixins.ListModelMixin,
     serializer_class = SucursalSerializer
 
     def get_queryset(self):
-        queryset = super(SucursalesList, self).get_queryset()
 
         q = self.request.QUERY_PARAMS.get('q', None)
         limite = self.request.QUERY_PARAMS.get('limite', None)
@@ -75,8 +73,9 @@ class SucursalesList(mixins.ListModelMixin,
         radio = self.request.QUERY_PARAMS.get('radio', None)
 
         if q:
-            queryset = queryset.filter(Q(cadena__nombre__icontains=q) |
-                                       Q(nombre__icontains=q))
+            queryset = Sucursal.objects.buscar(q)
+        else:
+            queryset = super(SucursalesList, self).get_queryset()
 
         if all((lat, lon, radio)):
 
@@ -180,21 +179,20 @@ class Detalle(object):
 
     @property
     def mas_probables(self):
-        probables =  Precio.objects.mas_probables(self._producto,
-                                            self._sucursal, dias=30)
+        probables = Precio.objects.mas_probables(self._producto,
+                                                 self._sucursal, dias=30)
         return probables
-
 
     @property
     def mejores(self):
         if self._sucursal.ubicacion:
             mejores = Precio.objects.mejores(self._producto,
-                                                     punto_o_sucursal=self._sucursal,
-                                                     radio=20, dias=30)
+                                             punto_o_sucursal=self._sucursal,
+                                             radio=20, dias=30)
         else:
             mejores = Precio.objects.mejores(self._producto,
-                                                     ciudad=self._sucursal.ciudad,
-                                                     dias=30)
+                                             ciudad=self._sucursal.ciudad,
+                                             dias=30)
         return mejores
 
 
@@ -221,8 +219,3 @@ def producto_sucursal_detalle(request, pk_sucursal, pk_producto):
             Precio.objects.create(sucursal=sucursal, producto=producto,
                                   precio=precio, **kwargs)
     return Response({'detail': '¡gracias!'})
-
-
-
-
-

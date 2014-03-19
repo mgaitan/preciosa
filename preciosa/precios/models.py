@@ -264,8 +264,22 @@ class EmpresaFabricante(AbstractEmpresa):
     pass
 
 
+class SucursalManager(models.GeoManager):
+
+    def buscar(self, q, limite=8):
+        """
+        Busca sucursales por palabras claves en ``q``.
+        por ejemplo: ciudad, calle, cadena, etc.
+        """
+        q = texto.normalizar(q)
+        words = q.split()
+        palabras = Q(reduce(operator.and_,
+                            (Q(busqueda__icontains=w) for w in words if len(w) > 2)))
+        return Sucursal.objects.filter(palabras)
+
+
 class Sucursal(models.Model):
-    objects = models.GeoManager()
+    objects = SucursalManager()
 
     nombre = models.CharField(max_length=100, null=True, blank=True,
                               help_text="Denominación común. Ej: Jumbo de Alberdi")

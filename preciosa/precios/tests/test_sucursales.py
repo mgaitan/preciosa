@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
 from django.core.exceptions import ValidationError
+from preciosa.precios.models import Sucursal
 from preciosa.precios.tests.factories import (SucursalFactory,
                                               CadenaFactory,
                                               CityFactory)
@@ -90,30 +91,45 @@ class TestSucursalBusqueda(TestCase):
         self.suc = SucursalFactory(direccion=calle)
 
         self.assertIn(texto.normalizar(calle), self.suc.busqueda)
+        self.assertIn(self.suc, Sucursal.objects.buscar('san martin'))
 
     def test_incluye_nombre(self):
         self.suc = SucursalFactory(nombre=u'Sucursal Plaza Once')
         self.assertIn('plaza once', self.suc.busqueda)
         # no incluye palabras demasiado comunes
         self.assertNotIn('sucursal', self.suc.busqueda)
+        self.assertIn(self.suc, Sucursal.objects.buscar('once'))
 
     def test_incluye_nombre_cadena(self):
         cadena = CadenaFactory(nombre='Jumbo')
         self.suc = SucursalFactory(cadena=cadena)
         self.assertIn('jumbo', self.suc.busqueda)
+        self.assertIn(self.suc, Sucursal.objects.buscar('jumbo'))
 
     def test_incluye_ciudad(self):
         ciudad = CityFactory(name='La Cumbre')
         self.suc = SucursalFactory(ciudad=ciudad)
         self.assertIn('la cumbre', self.suc.busqueda)
+        self.assertIn(self.suc, Sucursal.objects.buscar('la cumbre'))
 
     def test_incluye_provincia_nombre(self):
         ciudad = CityFactory(name=u'Malargüe', region__name=u'Mendoza')
         self.suc = SucursalFactory(ciudad=ciudad)
         self.assertIn('malargue', self.suc.busqueda)
         self.assertIn('mendoza', self.suc.busqueda)
+        self.assertIn(self.suc, Sucursal.objects.buscar('mendoza'))
 
-
+    def test_tienen_que_estar_todas_las_claves(self):
+        dir1 = u'Av San Martín 243'
+        dir2 = u'Plaza Shopping'
+        cadena = CadenaFactory(nombre='Jumbo')
+        ciudad = CityFactory(name=u'Mendoza')
+        self.suc = SucursalFactory(ciudad=ciudad, cadena=cadena,
+                                   direccion=dir1)
+        self.suc2 = SucursalFactory(ciudad=ciudad, cadena=cadena,
+                                   direccion=dir2)
+        self.assertIn(self.suc2, Sucursal.objects.buscar('shopping mendoza'))
+        self.assertNotIn(self.suc, Sucursal.objects.buscar('shopping mendoza'))
 
 
 
