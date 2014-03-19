@@ -220,7 +220,7 @@ def producto_sucursal_detalle(request, pk_sucursal, pk_producto):
                 kwargs['created'] = created
             Precio.objects.create(sucursal=sucursal, producto=producto,
                                   precio=precio, **kwargs)
-        return Response({'detail': '¡gracias!'})
+    return Response({'detail': '¡gracias!'})
 
 
 
