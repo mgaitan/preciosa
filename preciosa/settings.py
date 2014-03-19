@@ -118,6 +118,7 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware"
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "preciosa.urls"
@@ -161,6 +162,7 @@ INSTALLED_APPS = [
     "floppyforms",
     "djorm_pgtrgm",
 
+
     # community and stats
     "feedback",
     "analytical",
@@ -170,6 +172,7 @@ INSTALLED_APPS = [
     "dbbackup",
 
     # tests / debug
+    "corsheaders",
     "django_nose",
     # "django_pdb",
 
@@ -323,6 +326,9 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONPRenderer',
     )
 }
+
+# enable cross-site requests from any host
+CORS_ORIGIN_ALLOW_ALL = True
 
 # this code is a fake.
 GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-123456-1'

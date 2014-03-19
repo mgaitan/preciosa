@@ -15,6 +15,7 @@ django-autocomplete-light==2.0.0a15
 django-autoslug==1.7.2
 django-bootstrap-form==3.1
 django-cities-light==2.1.11
+django-cors-headers==0.12
 django-dbbackup==1.80.2
 django-extensions==1.1.1
 https://github.com/jaredly/django-feedback/archive/master.zip
