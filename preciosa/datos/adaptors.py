@@ -36,8 +36,15 @@ PRODUCTO_COLS = ['id',           # opcional
                                 # de un thumbnail del producto
                  ]
 
+PRECIO_COLS = PRODUCTO_COLS + ['id_sucursal',                # requerido
+                               'precio',                     # requerido
+                               'fecha_relevamiento',         # opcional.
+                                                             # sobre escribe el created
+                               ]
 
-LineError = namedtuple('LineError', field_names=['line_number', 'line', 'error'])
+
+LineError = namedtuple('LineError',
+                       field_names=['line_number', 'line', 'error'])
 
 
 class Adaptor(object):
