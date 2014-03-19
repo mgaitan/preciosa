@@ -1,0 +1,4 @@
+nombre,cadena_nombre,cadena_id,direccion,ciudad,ciudad_relacionada_id,provincia,lon,lat,telefono,url,horarios
+Supermercado Disco,Disco,6,Velez Sarsfield 1302,Córdoba,4546,Córdoba,-64.182231,-31.413881,,,
+Supermercado Jumbo,Jumbo,4,,Córdoba,4546,Córdoba,-64.183668,-31.397696,,,
+Supermercado Mas,,,Gral Pistarini 260,Embalse,4118,Córdoba,-64.182129,-31.39893,03571 48-5369,,
