@@ -20,6 +20,7 @@ except ImportError:
     $ pip install -r requirements/extra.txt"""
     raise
 
+from preciosa.datos.adaptors import SUCURSAL_COLS
 from preciosa.precios.models import Cadena
 from cities_light.models import City
 from tools import texto
@@ -74,18 +75,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # setup del archivo de salida
 
-        fieldnames = ['nombre',
-                      'cadena_nombre',
-                      'cadena_id',
-                      'direccion',
-                      'ciudad',
-                      'ciudad_relacionada_id',
-                      'provincia',
-                      'lon',
-                      'lat',
-                      'telefono',
-                      'url',
-                      'horarios']
+
 
         suc_dir = os.path.join(settings.DATASETS_ROOT, 'sucursales')
         if not os.path.exists(suc_dir):
@@ -94,7 +84,7 @@ class Command(BaseCommand):
         FILENAME = 'google_place_%s.csv' % datetime.now().strftime("%Y-%m-%d-%H%M%S")
         FILENAME = os.path.join(suc_dir, FILENAME)
 
-        writer = unicodecsv.DictWriter(open(FILENAME, 'wb'), fieldnames)
+        writer = unicodecsv.DictWriter(open(FILENAME, 'wb'), SUCURSAL_COLS)
         writer.writeheader()
 
         # crear manager de la api
