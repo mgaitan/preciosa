@@ -139,7 +139,7 @@ class Producto(models.Model):
                                  help_text=u"Por ejemplo: productos discontinuados."
                                            u"Sólo se encuentran por código de barra")
     unidades_por_lote = models.IntegerField(null=True, blank=True,
-                                            help_text=u"Cuántas unidades vienen en un pack mayorista."
+                                            help_text=u"Cuántas unidades vienen en un pack mayorista."  # NOQA
                                                       u"Por ejemplo 12 (latas de tomate).")
 
     def __unicode__(self):
@@ -286,6 +286,38 @@ class Sucursal(models.Model):
     online = models.BooleanField(default=False,
                                  help_text='Es una sucursal online, no física')
     url = models.URLField(max_length=200, null=True, blank=True)
+    busqueda = models.CharField(max_length=300, editable=False)
+
+
+    def _actualizar_busqueda(self, commit=True):
+        """denormalizacion de varios atributos relacionados para
+        agilizar una busqueda de sucursales por palabras claves"""
+
+        claves = []
+        if self.nombre:
+            nombre = texto.normalizar(self.nombre)
+            # quitamos palabras comunes
+            nombre = nombre.replace('sucursal', '').replace('supermercado', '')
+            claves.append(nombre)
+
+        if self.cadena:
+            claves.append(texto.normalizar(self.cadena.nombre))
+
+        if self.ciudad:
+            claves.append(texto.normalizar(self.ciudad.name))
+            if self.ciudad.region:
+                claves.append(texto.normalizar(self.ciudad.region.name))
+
+        if self.direccion:
+            claves.append(texto.normalizar(self.direccion))
+
+        self.busqueda = " ".join(claves)
+        if commit:
+            super(Sucursal, self).save(update_fields=['busqueda'])
+
+    def save(self, *args, **kwargs):
+        self._actualizar_busqueda(False)
+        super(Sucursal, self).save(*args, **kwargs)
 
     @property
     def lat(self):

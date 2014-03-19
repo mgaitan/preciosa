@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
 from django.core.exceptions import ValidationError
-from preciosa.precios.tests.factories import (SucursalFactory,)
+from preciosa.precios.tests.factories import (SucursalFactory,
+                                              CadenaFactory,
+                                              CityFactory)
 from tools.gis import punto_destino
-
+from tools import texto
 
 class TestSucursalClean(TestCase):
 
@@ -79,3 +81,39 @@ class TestSucursalCercanas(TestCase):
         self.assertIn(suc2, cercanas)
         self.assertNotIn(suc3, cercanas)
         self.assertNotIn(self.suc, cercanas)
+
+
+class TestSucursalBusqueda(TestCase):
+
+    def test_incluye_direccion(self):
+        calle = u'Av San Martín'
+        self.suc = SucursalFactory(direccion=calle)
+
+        self.assertIn(texto.normalizar(calle), self.suc.busqueda)
+
+    def test_incluye_nombre(self):
+        self.suc = SucursalFactory(nombre=u'Sucursal Plaza Once')
+        self.assertIn('plaza once', self.suc.busqueda)
+        # no incluye palabras demasiado comunes
+        self.assertNotIn('sucursal', self.suc.busqueda)
+
+    def test_incluye_nombre_cadena(self):
+        cadena = CadenaFactory(nombre='Jumbo')
+        self.suc = SucursalFactory(cadena=cadena)
+        self.assertIn('jumbo', self.suc.busqueda)
+
+    def test_incluye_ciudad(self):
+        ciudad = CityFactory(name='La Cumbre')
+        self.suc = SucursalFactory(ciudad=ciudad)
+        self.assertIn('la cumbre', self.suc.busqueda)
+
+    def test_incluye_provincia_nombre(self):
+        ciudad = CityFactory(name=u'Malargüe', region__name=u'Mendoza')
+        self.suc = SucursalFactory(ciudad=ciudad)
+        self.assertIn('malargue', self.suc.busqueda)
+        self.assertIn('mendoza', self.suc.busqueda)
+
+
+
+
+

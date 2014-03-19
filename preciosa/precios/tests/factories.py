@@ -4,7 +4,7 @@ import factory
 from factory.fuzzy import FuzzyDecimal, BaseFuzzyAttribute
 from django.contrib.gis.geos import Point
 from django.contrib.auth.models import User
-from cities_light.models import City, Country
+from cities_light.models import City, Country, Region
 from preciosa.precios.models import (EmpresaFabricante, Marca, Cadena, Producto, Precio,
                                      PrecioEnAcuerdo, Sucursal, Categoria)
 
@@ -50,6 +50,13 @@ class CountryFactory(factory.DjangoModelFactory):
     name = factory.Sequence(lambda n: u'Country {0}'.format(n))
 
 
+class RegionFactory(factory.DjangoModelFactory):
+    FACTORY_FOR = Region
+    FACTORY_DJANGO_GET_OR_CREATE = ('name',)
+    country = factory.SubFactory(CountryFactory, name=u'Argentina')
+    name = factory.Sequence(lambda n: u'Region {0}'.format(n))
+
+
 class CityFactory(factory.DjangoModelFactory):
     FACTORY_FOR = City
     name = factory.Sequence(lambda n: u'Ciudad {0}'.format(n))
@@ -57,7 +64,8 @@ class CityFactory(factory.DjangoModelFactory):
     longitude = FuzzyDecimal(-72.3367, -58.37723, precision=4)
     # entre Ushuaia y La Quiaca
     latitude = FuzzyDecimal(-54.8, -22.1023, precision=4)
-    country = CountryFactory(name='Argentina')
+    region = factory.SubFactory(RegionFactory, name=u'Córdoba')
+    country = factory.SubFactory(CountryFactory, name=u'Argentina')
 
 
 class SucursalFactory(factory.DjangoModelFactory):
