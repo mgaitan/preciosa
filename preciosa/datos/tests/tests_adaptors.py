@@ -39,7 +39,7 @@ class TestAdaptorSucursal(TestCase):
         self.assertAlmostEqual(suc_disco.lat, -31.413881)
         suc_cualca = sucs[1]
         self.assertIsNone(suc_cualca.cadena)
-        self.assertIsEqual(suc_cualca.nombre, 'Supermercado Mas')
+        self.assertEqual(suc_cualca.nombre, 'Supermercado Mas')
         self.assertEqual(suc_cualca.direccion, 'Gral Pistarini 260')
         self.assertEqual(suc_cualca.ciudad, self.embalse)
         self.assertAlmostEqual(suc_cualca.lon, -64.182129)
