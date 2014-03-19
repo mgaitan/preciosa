@@ -19,6 +19,24 @@ SUCURSAL_COLS = ['nombre',
                  'url',
                  'horarios']
 
+
+PRODUCTO_COLS = ['id',           # opcional
+                 'upc',          # req
+                 'descripcion',  # req
+                 'marca',        # opcional. La marca "probable" como nombre
+                 'marca_id',     # opcional. si es conocida, el id de la marca
+                 'categoria',    # opcional. La categoria "probable" como nombre
+                 'categoria_id',    # opcional. si es conocida, el id de la marca
+                 'contenido',    # opcional, numero
+                 'unidad_medida',   # opcional. Producto.UNIDADES_CHOICES
+                 'unidades_por_lote',   # opcional: cuantos productos
+                                        #vienen en un pack mayorista
+                 'oculto',      # opcional.default: false
+                 'foto',        # opcional  path relativo, relativo al csv o url
+                                # de un thumbnail del producto
+                 ]
+
+
 LineError = namedtuple('LineError', field_names=['line_number', 'line', 'error'])
 
 
