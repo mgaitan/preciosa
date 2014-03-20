@@ -21,7 +21,7 @@ from image_cropping import ImageRatioField, ImageCropField
 from treebeard.mp_tree import MP_Node
 from djorm_pgtrgm import SimilarManager
 from tools.utils import one
-from tools.gis import get_geocode_data
+from tools.gis import geocode
 from tools import texto
 
 
@@ -346,7 +346,7 @@ class Sucursal(models.Model):
         return None
 
     def get_geocode_data(self):
-        return get_geocode_data(self.ciudad, self.direccion)
+        return geocode(self.ciudad, self.direccion)
 
     def cercanas(self, radio=None, misma_cadena=False):
         """

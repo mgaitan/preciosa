@@ -17,7 +17,7 @@ from preciosa.voluntarios.forms import (
     CadenaModelForm, EmpresaFabricanteModelForm,
     MapaCategoriaForm, MarcaModelForm,
     LogoMarcaModelForm, SucursalModelForm)
-from tools.gis import get_geocode_data
+from tools.gis import geocode
 
 
 MSG_EXITO = [u'Buenísimo, Guardamos tu elección ¿Otra?',
@@ -246,4 +246,4 @@ def geo_code_data(request):
     if request.method == 'GET':
         ciudad = get_object_or_None(City, id=request.GET.get('ciudad', None))
         direccion = request.GET.get('direccion', None)
-        return get_geocode_data(ciudad, direccion)
+        return geocode(ciudad, direccion)

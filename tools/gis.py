@@ -8,10 +8,12 @@ import requests
 from django.contrib.gis.geos import Point
 
 
-GEOCODING_URL = 'http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false'
+BASE_URL = 'http://maps.googleapis.com/maps/api/geocode/json?sensor=false'
+GEOCODING_URL = BASE_URL + '&address=%s'
+REVERSE_GEOCODING_URL = BASE_URL + '&latlng=%(lat)s,%(lon)s'
 
 
-def get_geocode_data(ciudad=None, direccion=None):
+def geocode(ciudad=None, direccion=None):
     """
     usa google maps para obtener el
     GeoCoding para ubicar geolocalizamente una direccion
@@ -41,6 +43,16 @@ def get_geocode_data(ciudad=None, direccion=None):
         return {'lat': lat, 'lon': lon,
                 'direccion': fr['formatted_address']}
     return {}
+
+
+def reverse_geocode(lat, lon):
+    """usa google map para intentar devolver una
+     dirección a partir de coordenada"""
+
+    r = requests.get(REVERSE_GEOCODING_URL % locals()).json()
+    if r['status'] != 'OK':
+        return ''
+    return r['results'][0]['formatted_address']
 
 
 TIERRA_RADIO = 6371  # kilometros

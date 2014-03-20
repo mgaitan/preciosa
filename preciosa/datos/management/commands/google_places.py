@@ -24,11 +24,12 @@ from preciosa.datos.adaptors import SUCURSAL_COLS
 from preciosa.precios.models import Cadena
 from cities_light.models import City
 from tools import texto
+from tools.gis import reverse_geocode
 
 
 logger = logging.getLogger(__name__)
 
-DESDE = 6990   # poblacion minima de ciudad donde buscar supermercados
+DESDE = 3990   # poblacion minima de ciudad donde buscar supermercados
 
 CADENAS = [(texto.normalizar(cadena), cadena, id)
            for (cadena, id) in Cadena.objects.all().values_list('nombre', 'id')]
@@ -75,8 +76,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # setup del archivo de salida
 
-
-
         suc_dir = os.path.join(settings.DATASETS_ROOT, 'sucursales')
         if not os.path.exists(suc_dir):
             os.makedirs(suc_dir)
@@ -122,8 +121,6 @@ class Command(BaseCommand):
 
         # Place a veces no trae la direccion
         # y quedará (ciudad, provincia), en vez de (direccion, ciudad)
-        # Se deberia hacer un reverse lookup a partir de la localizacion
-        # via la API de google maps.
         dire = place.formatted_address.split(',')
         hay = len(dire) == 4
         suc['direccion'] = dire[0].strip() if hay else ''
@@ -148,6 +145,14 @@ class Command(BaseCommand):
             suc['cadena_nombre'], suc['cadena_id'] = cadena
         suc['lon'] = place.geo_location['lng']
         suc['lat'] = place.geo_location['lat']
+        if suc['direccion'] == '':
+            # Se deberia hacer un reverse lookup a partir de la localizacion
+            # via la API de google maps.
+            dire = reverse_geocode(suc['lat'], suc['lon'])
+            if dire:
+
+                suc['direccion'] = dire.split(',')[0]
+
         suc['telefono'] = place.local_phone_number
         suc['url'] = place.website
 
