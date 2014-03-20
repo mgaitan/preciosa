@@ -3,7 +3,7 @@ import os.path
 from django.test import TestCase
 from preciosa.precios.models import Sucursal
 from preciosa.precios.tests.factories import CadenaFactory, CityFactory
-from preciosa.datos.adaptors import SucursalCSVModel
+from preciosa.datos.adaptors import Sucursal as SucursalCSVModel
 
 DATASETS_PATH = os.path.join(os.path.dirname(__file__), 'datasets')
 
@@ -30,14 +30,14 @@ class TestAdaptorSucursal(TestCase):
 
     def test_importa_bien(self):
         sucs, _ = SucursalCSVModel.import_data(data=_csv('sucursales.csv'))
-        self.assertEqual(sucs[0], Sucursal.objects.all()[0])
-        suc_disco = sucs[0]
+        self.assertEqual(sucs[0].instance, Sucursal.objects.all()[0])
+        suc_disco = sucs[0].instance
         self.assertEqual(suc_disco.cadena, self.disco)
         self.assertEqual(suc_disco.direccion, 'Velez Sarsfield 1302')
         self.assertEqual(suc_disco.ciudad, self.cba)
         self.assertAlmostEqual(suc_disco.lon, -64.182231)
         self.assertAlmostEqual(suc_disco.lat, -31.413881)
-        suc_cualca = sucs[1]
+        suc_cualca = sucs[1].instance
         self.assertIsNone(suc_cualca.cadena)
         self.assertEqual(suc_cualca.nombre, 'Supermercado Mas')
         self.assertEqual(suc_cualca.direccion, 'Gral Pistarini 260')
