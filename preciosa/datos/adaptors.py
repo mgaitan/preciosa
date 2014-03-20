@@ -92,8 +92,8 @@ class Adaptor(object):
             reader.next()
         for i, line in enumerate(reader):
             line_number = i + 1 if self.HAS_HEADERS else i
-            data = self.process_line(line)
             try:
+                data = self.process_line(line)
                 instance = self.create_instance(**data)
             except ValidationError as e:
                 le = LineError(line_number, line, unicode(e))
@@ -144,7 +144,7 @@ class Sucursal(Adaptor):
         try:
             data['ciudad'] = City.objects.get(id=int(line['ciudad_relacionada_id']))
         except City.DoesNotExist as e:
-            raise ValidationError(str(e))
+            raise ValidationError(unicode(e))
         if line['lat'] and line['lon']:
             data['ubicacion'] = Point(float(line['lon']), float(line['lat']))
         return data
