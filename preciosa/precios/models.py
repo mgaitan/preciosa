@@ -89,8 +89,9 @@ class ProductoManager(SimilarManager):
             words = q.split()
             palabras = Q(reduce(operator.and_,
                                 (Q(busqueda__icontains=w) for w in words if len(w) > 2)))
-            tiene_palabras = Producto.objects.filter(palabras).values_list('id',
-                                                                           flat=True)
+            tiene_palabras = Producto.objects.filter(
+                palabras).values_list('id',
+                                      flat=True)
             similares = Producto.objects.filter_o(
                 busqueda__similar=q).values_list('id',
                                                  flat=True)
@@ -134,13 +135,15 @@ class Producto(models.Model):
 
     # TO DO: un queryset for defecto debe excluir los productos oculto=True
     # hacer una manager especial `objects_con_ocultos` que no los excluya
-    # El buscador por codigo de barra (``if q.isdigit()``) deberá usar este ultimo
+    # El buscador por codigo de barra (``if q.isdigit()``) deberá usar este
+    # ultimo
     oculto = models.BooleanField(default=False,
                                  help_text=u"Por ejemplo: productos discontinuados."
                                            u"Sólo se encuentran por código de barra")
     unidades_por_lote = models.IntegerField(null=True, blank=True,
-                                            help_text=u"Cuántas unidades vienen en un pack mayorista."  # NOQA
-                                                      u"Por ejemplo 12 (latas de tomate).")
+                                            help_text=u"Cuántas unidades vienen en un "
+                                                      u" pack mayorista. Por ejemplo 12 "
+                                                      u" (latas de tomate).")
 
     def __unicode__(self):
         return self.descripcion
@@ -302,7 +305,6 @@ class Sucursal(models.Model):
     url = models.URLField(max_length=200, null=True, blank=True)
     busqueda = models.CharField(max_length=300, editable=False)
 
-
     def _actualizar_busqueda(self, commit=True):
         """denormalizacion de varios atributos relacionados para
         agilizar una busqueda de sucursales por palabras claves"""
@@ -394,7 +396,8 @@ class Sucursal(models.Model):
             raise ValidationError(u'La sucursal debe ser online '
                                   u'o tener direccion física, pero no ambas')
 
-        if self.ubicacion and self.cercanas(radio=0.05, misma_cadena=True).exists():
+        if (self.ubicacion and self.cadena and
+                self.cercanas(radio=0.05, misma_cadena=True).exists()):
             raise ValidationError(
                 u'Hay una sucursal de la misma cadena a menos de 50 metros')
 
@@ -475,7 +478,7 @@ class PrecioManager(models.Manager):
         return []
 
     def mejores(self, producto, ciudad=None, punto_o_sucursal=None,
-                        radio=None, dias=None, limite=5):
+                radio=None, dias=None, limite=5):
         """
         devuelve una lista de instancias Precio para el producto,
         ordenados por menor precio (importe) para

@@ -58,6 +58,15 @@ class TestSucursalClean(TestCase):
         assert suc2.cadena != suc.cadena
         self.assertIsNone(suc2.clean())
 
+    def test_sucursales_sin_cadena_no_controlan_por_radio(self):
+        # las dos cadenas quedan a menos de 50, pero no son de una cadena
+        # conocida
+        suc = SucursalFactory(cadena=None, nombre="Chino 1")
+        otra_ubicacion = punto_destino(suc.ubicacion, 90, 0.03)
+        suc2 = SucursalFactory(cadena=None, nombre="Chino 2",
+                               ubicacion=otra_ubicacion)
+        self.assertIsNone(suc2.clean())
+
 
 class TestSucursalCercanas(TestCase):
 
