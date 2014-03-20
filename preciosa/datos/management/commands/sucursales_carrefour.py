@@ -63,7 +63,7 @@ class Command(BaseCommand):
         writer.writeheader()
 
         ciudades = City.objects.filter(country__name='Argentina',
-                                       population__gt=DESDE)[:1]
+                                       population__gt=DESDE)
         results = []
 
         bar = Bar('Obteniendo sucursales de Carrefour', suffix='%(percent)d%%')
