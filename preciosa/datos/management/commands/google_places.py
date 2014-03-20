@@ -21,53 +21,14 @@ except ImportError:
     raise
 
 from preciosa.datos.adaptors import SUCURSAL_COLS
-from preciosa.precios.models import Cadena
 from cities_light.models import City
-from tools import texto
 from tools.gis import reverse_geocode
+from tools.sucursales import inferir_ciudad, inferir_cadena
 
 
 logger = logging.getLogger(__name__)
 
 DESDE = 3990   # poblacion minima de ciudad donde buscar supermercados
-
-CADENAS = [(texto.normalizar(cadena), cadena, id)
-           for (cadena, id) in Cadena.objects.all().values_list('nombre', 'id')]
-
-
-def inferir_cadena(nombre):
-    """si el nombre de una y sólo una cadena está en
-    el nombre de la sucursal devolvemos esa cadena y su id"""
-    result = None
-    for cadena_normal, cadena, id in CADENAS:
-        if cadena_normal in texto.normalizar(nombre):
-            if result is None:
-                result = cadena, id
-            else:
-                return None
-    return result
-
-
-def inferir_ciudad(ciudad, provincia=None, estricto=False):
-    nombreciudad = texto.normalizar(ciudad.replace(' ', ''))
-    buscar = "%sargentina" % nombreciudad
-    try:
-        ciudad = City.objects.get(search_names__istartswith=buscar)
-    except (City.DoesNotExist, City.MultipleObjectsReturned):
-        ciudad = None
-
-    if ciudad and not estricto:
-        return ciudad.name, ciudad.region.name, ciudad.id
-    elif provincia:
-        nombreprov = texto.normalizar(provincia.replace(' ', ''))
-        buscar = "%s%sargentina" % (nombreciudad, nombreprov)
-        try:
-            ciudad = City.objects.get(search_names__istartswith=buscar)
-        except (City.DoesNotExist, City.MultipleObjectsReturned):
-            ciudad = None
-
-        if ciudad:
-            return ciudad.name, ciudad.region.name, ciudad.id
 
 
 class Command(BaseCommand):

@@ -16,7 +16,7 @@ REVERSE_GEOCODING_URL = BASE_URL + '&latlng=%(lat)s,%(lon)s'
 def geocode(ciudad=None, direccion=None):
     """
     usa google maps para obtener el
-    GeoCoding para ubicar geolocalizamente una direccion
+    GeoCoding para ubicar geolocalizadamente una direccion
 
     Si direccion o ciudad se pasa, sobreescribe la direccion de la instancia
     """
