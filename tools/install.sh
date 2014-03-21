@@ -8,7 +8,7 @@ sudo apt-get -y install libxml2-dev libxslt1-dev
 sudo apt-get -y install libjpeg-dev zlib1g-dev libpng12-dev
  
 
-# enforce UTF8 encoding in all databases (instead of SQL_ASCII):
+## enforce UTF8 encoding in all databases (instead of SQL_ASCII):
 sudo -u postgres pg_dropcluster --stop 9.1 main
 sudo -u postgres pg_createcluster 9.1 main -e UTF8
 sudo -u postgres pg_ctlcluster 9.1 main start
@@ -27,5 +27,4 @@ cp preciosa/local_settings.py.template preciosa/local_settings.py
 python manage.py syncdb --noinput
 python manage.py createsuperuser --username=preciosa --email=preciosa@god.com --noinput
 python manage.py migrate
-sudo -u postgres psql -d preciosa -f /home/vagrant/preciosa/preciosa/precios/sql/producto.sql
 python manage.py loaddata fixtures/flatpages.json fixtures/blog.json fixtures/newsletter.json fixtures/ciudades.json fixtures/sucursales.json fixtures/categorias.json fixtures/marcas.json fixtures/productos.json fixtures/precios.json
