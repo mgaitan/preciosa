@@ -92,7 +92,7 @@ class Command(BaseCommand):
             writer.writerow(supermercado)
             nuevas += 1
 
-        print "Se encontraron %d sucursales de únicas Carrefour (%d resultados)" % (nuevas,
+        print "Se encontraron %d sucursales únicas de Carrefour (%d resultados)" % (nuevas,
                                                                                     len(ciudades))
 
     def parse_suc(self, html_snippet):
