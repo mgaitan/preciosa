@@ -139,11 +139,11 @@ class Sucursal(Adaptor):
         data = {}
         for field in ['nombre', 'direccion', 'telefono', 'url', 'horarios']:
             data[field] = line[field]
-        if line['cadena_id']:
-            data['cadena'] = Cadena.objects.get(id=line['cadena_id'])
         try:
+            if line['cadena_id']:
+                data['cadena'] = Cadena.objects.get(id=line['cadena_id'])
             data['ciudad'] = City.objects.get(id=int(line['ciudad_relacionada_id']))
-        except (ValueError, City.DoesNotExist) as e:
+        except (ValueError, Cadena.DoesNotExist, City.DoesNotExist) as e:
             raise ValidationError(unicode(e))
         if line['lat'] and line['lon']:
             data['ubicacion'] = Point(float(line['lon']), float(line['lat']))
