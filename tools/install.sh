@@ -8,7 +8,7 @@ sudo apt-get -y install libxml2-dev libxslt1-dev
 sudo apt-get -y install libjpeg-dev zlib1g-dev libpng12-dev
  
 
-## enforce UTF8 encoding in all databases (instead of SQL_ASCII):
+# enforce UTF8 encoding in all databases (instead of SQL_ASCII):
 sudo -u postgres pg_dropcluster --stop 9.1 main
 sudo -u postgres pg_createcluster 9.1 main -e UTF8
 sudo -u postgres pg_ctlcluster 9.1 main start
