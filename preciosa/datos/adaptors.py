@@ -143,7 +143,7 @@ class Sucursal(Adaptor):
             data['cadena'] = Cadena.objects.get(id=line['cadena_id'])
         try:
             data['ciudad'] = City.objects.get(id=int(line['ciudad_relacionada_id']))
-        except City.DoesNotExist as e:
+        except (ValueError, City.DoesNotExist) as e:
             raise ValidationError(unicode(e))
         if line['lat'] and line['lon']:
             data['ubicacion'] = Point(float(line['lon']), float(line['lat']))
