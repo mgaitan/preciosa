@@ -15,29 +15,45 @@ class Migration(SchemaMigration):
             ('depth', self.gf('django.db.models.fields.PositiveIntegerField')()),
             ('numchild', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
             ('nombre', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('oculta', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('busqueda', self.gf('django.db.models.fields.CharField')(max_length=300)),
         ))
         db.send_create_signal(u'precios', ['Categoria'])
 
         # Adding model 'Producto'
         db.create_table(u'precios_producto', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('descripcion', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('descripcion', self.gf('django.db.models.fields.CharField')(max_length=250)),
+            ('busqueda', self.gf('django.db.models.fields.CharField')(max_length=250)),
             ('upc', self.gf('django.db.models.fields.CharField')(max_length=13, unique=True, null=True, blank=True)),
-            ('categoria', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['precios.Categoria'])),
+            ('categoria', self.gf('django.db.models.fields.related.ForeignKey')(related_name='productos', to=orm['precios.Categoria'])),
             ('marca', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['precios.Marca'], null=True, blank=True)),
             ('contenido', self.gf('django.db.models.fields.DecimalField')(null=True, max_digits=5, decimal_places=1, blank=True)),
             ('unidad_medida', self.gf('django.db.models.fields.CharField')(max_length=10, null=True, blank=True)),
             ('notas', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('foto', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
+            ('oculto', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('unidades_por_lote', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
         ))
         db.send_create_signal(u'precios', ['Producto'])
+
+        # Adding model 'DescripcionAlternativa'
+        db.create_table(u'precios_descripcionalternativa', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('producto', self.gf('django.db.models.fields.related.ForeignKey')(related_name='descripciones', to=orm['precios.Producto'])),
+            ('descripcion', self.gf('django.db.models.fields.CharField')(unique=True, max_length=250)),
+            ('busqueda', self.gf('django.db.models.fields.CharField')(max_length=250)),
+        ))
+        db.send_create_signal(u'precios', ['DescripcionAlternativa'])
 
         # Adding model 'Marca'
         db.create_table(u'precios_marca', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('nombre', self.gf('django.db.models.fields.CharField')(unique=True, max_length=100)),
-            ('logo', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
             ('fabricante', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['precios.EmpresaFabricante'], null=True, blank=True)),
+            ('nombre', self.gf('django.db.models.fields.CharField')(unique=True, max_length=100)),
+            ('logo', self.gf(u'django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
+            ('logo_cropped', self.gf(u'django.db.models.fields.CharField')(max_length=255, blank=True)),
+            ('logo_changed', self.gf('model_utils.fields.MonitorField')(default=datetime.datetime.now, monitor='logo')),
         ))
         db.send_create_signal(u'precios', ['Marca'])
 
@@ -48,7 +64,9 @@ class Migration(SchemaMigration):
         db.create_table(u'precios_cadena', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('nombre', self.gf('django.db.models.fields.CharField')(unique=True, max_length=100)),
-            ('logo', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
+            ('logo', self.gf(u'django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
+            ('logo_cropped', self.gf(u'django.db.models.fields.CharField')(max_length=255, blank=True)),
+            ('logo_changed', self.gf('model_utils.fields.MonitorField')(default=datetime.datetime.now, monitor='logo')),
             ('cadena_madre', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['precios.Cadena'], null=True, blank=True)),
         ))
         db.send_create_signal(u'precios', ['Cadena'])
@@ -57,7 +75,9 @@ class Migration(SchemaMigration):
         db.create_table(u'precios_empresafabricante', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('nombre', self.gf('django.db.models.fields.CharField')(unique=True, max_length=100)),
-            ('logo', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
+            ('logo', self.gf(u'django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
+            ('logo_cropped', self.gf(u'django.db.models.fields.CharField')(max_length=255, blank=True)),
+            ('logo_changed', self.gf('model_utils.fields.MonitorField')(default=datetime.datetime.now, monitor='logo')),
         ))
         db.send_create_signal(u'precios', ['EmpresaFabricante'])
 
@@ -65,12 +85,16 @@ class Migration(SchemaMigration):
         db.create_table(u'precios_sucursal', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('nombre', self.gf('django.db.models.fields.CharField')(max_length=100, null=True, blank=True)),
-            ('direccion', self.gf('django.db.models.fields.CharField')(max_length=120)),
+            ('direccion', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('ciudad', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cities_light.City'])),
             ('cp', self.gf('django.db.models.fields.CharField')(max_length=100, null=True, blank=True)),
             ('telefono', self.gf('django.db.models.fields.CharField')(max_length=100, null=True, blank=True)),
             ('horarios', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('cadena', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='sucursales', null=True, to=orm['precios.Cadena'])),
+            ('ubicacion', self.gf('django.contrib.gis.db.models.fields.PointField')(null=True, blank=True)),
+            ('online', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('url', self.gf('django.db.models.fields.URLField')(max_length=200, null=True, blank=True)),
+            ('busqueda', self.gf('django.db.models.fields.CharField')(max_length=300)),
         ))
         db.send_create_signal(u'precios', ['Sucursal'])
 
@@ -82,12 +106,24 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
             ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
-            ('producto', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['precios.Producto'])),
+            ('producto', self.gf('django.db.models.fields.related.ForeignKey')(related_name='precios', to=orm['precios.Producto'])),
             ('sucursal', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['precios.Sucursal'])),
             ('precio', self.gf('django.db.models.fields.DecimalField')(max_digits=8, decimal_places=2)),
             ('usuario', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
         ))
         db.send_create_signal(u'precios', ['Precio'])
+
+        # Adding model 'PrecioActivo'
+        db.create_table(u'precios_precioactivo', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('producto', self.gf('django.db.models.fields.related.ForeignKey')(related_name='precios_activos', to=orm['precios.Producto'])),
+            ('sucursal', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['precios.Sucursal'])),
+            ('precio', self.gf('django.db.models.fields.related.ForeignKey')(related_name='activo', to=orm['precios.Precio'])),
+        ))
+        db.send_create_signal(u'precios', ['PrecioActivo'])
+
+        # Adding unique constraint on 'PrecioActivo', fields ['producto', 'sucursal', 'precio']
+        db.create_unique(u'precios_precioactivo', ['producto_id', 'sucursal_id', 'precio_id'])
 
         # Adding model 'PrecioEnAcuerdo'
         db.create_table(u'precios_precioenacuerdo', (
@@ -101,6 +137,9 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
+        # Removing unique constraint on 'PrecioActivo', fields ['producto', 'sucursal', 'precio']
+        db.delete_unique(u'precios_precioactivo', ['producto_id', 'sucursal_id', 'precio_id'])
+
         # Removing unique constraint on 'Sucursal', fields ['direccion', 'ciudad']
         db.delete_unique(u'precios_sucursal', ['direccion', 'ciudad_id'])
 
@@ -112,6 +151,9 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Producto'
         db.delete_table(u'precios_producto')
+
+        # Deleting model 'DescripcionAlternativa'
+        db.delete_table(u'precios_descripcionalternativa')
 
         # Deleting model 'Marca'
         db.delete_table(u'precios_marca')
@@ -127,6 +169,9 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Precio'
         db.delete_table(u'precios_precio')
+
+        # Deleting model 'PrecioActivo'
+        db.delete_table(u'precios_precioactivo')
 
         # Deleting model 'PrecioEnAcuerdo'
         db.delete_table(u'precios_precioenacuerdo')
@@ -215,28 +260,43 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Cadena'},
             'cadena_madre': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['precios.Cadena']", 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'logo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'logo': (u'django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'logo_changed': ('model_utils.fields.MonitorField', [], {'default': 'datetime.datetime.now', u'monitor': "'logo'"}),
+            'logo_cropped': (u'django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'nombre': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'})
         },
         u'precios.categoria': {
             'Meta': {'object_name': 'Categoria'},
+            'busqueda': ('django.db.models.fields.CharField', [], {'max_length': '300'}),
             'depth': ('django.db.models.fields.PositiveIntegerField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'nombre': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'numchild': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
+            'oculta': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'path': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '255'})
+        },
+        u'precios.descripcionalternativa': {
+            'Meta': {'object_name': 'DescripcionAlternativa'},
+            'busqueda': ('django.db.models.fields.CharField', [], {'max_length': '250'}),
+            'descripcion': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '250'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'producto': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'descripciones'", 'to': u"orm['precios.Producto']"})
         },
         u'precios.empresafabricante': {
             'Meta': {'object_name': 'EmpresaFabricante'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'logo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'logo': (u'django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'logo_changed': ('model_utils.fields.MonitorField', [], {'default': 'datetime.datetime.now', u'monitor': "'logo'"}),
+            'logo_cropped': (u'django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'nombre': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'})
         },
         u'precios.marca': {
             'Meta': {'unique_together': "(('nombre', 'fabricante'),)", 'object_name': 'Marca'},
             'fabricante': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['precios.EmpresaFabricante']", 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'logo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'logo': (u'django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'logo_changed': ('model_utils.fields.MonitorField', [], {'default': 'datetime.datetime.now', u'monitor': "'logo'"}),
+            'logo_cropped': (u'django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'nombre': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'})
         },
         u'precios.precio': {
@@ -245,9 +305,16 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
             'precio': ('django.db.models.fields.DecimalField', [], {'max_digits': '8', 'decimal_places': '2'}),
-            'producto': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['precios.Producto']"}),
+            'producto': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'precios'", 'to': u"orm['precios.Producto']"}),
             'sucursal': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['precios.Sucursal']"}),
             'usuario': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True', 'blank': 'True'})
+        },
+        u'precios.precioactivo': {
+            'Meta': {'unique_together': "(('producto', 'sucursal', 'precio'),)", 'object_name': 'PrecioActivo'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'precio': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'activo'", 'to': u"orm['precios.Precio']"}),
+            'producto': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'precios_activos'", 'to': u"orm['precios.Producto']"}),
+            'sucursal': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['precios.Sucursal']"})
         },
         u'precios.precioenacuerdo': {
             'Meta': {'object_name': 'PrecioEnAcuerdo'},
@@ -260,26 +327,33 @@ class Migration(SchemaMigration):
         u'precios.producto': {
             'Meta': {'object_name': 'Producto'},
             'acuerdos': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['precios.Cadena']", 'through': u"orm['precios.PrecioEnAcuerdo']", 'symmetrical': 'False'}),
-            'categoria': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['precios.Categoria']"}),
+            'busqueda': ('django.db.models.fields.CharField', [], {'max_length': '250'}),
+            'categoria': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'productos'", 'to': u"orm['precios.Categoria']"}),
             'contenido': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '5', 'decimal_places': '1', 'blank': 'True'}),
-            'descripcion': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'descripcion': ('django.db.models.fields.CharField', [], {'max_length': '250'}),
             'foto': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'marca': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['precios.Marca']", 'null': 'True', 'blank': 'True'}),
             'notas': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'oculto': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'unidad_medida': ('django.db.models.fields.CharField', [], {'max_length': '10', 'null': 'True', 'blank': 'True'}),
+            'unidades_por_lote': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'upc': ('django.db.models.fields.CharField', [], {'max_length': '13', 'unique': 'True', 'null': 'True', 'blank': 'True'})
         },
         u'precios.sucursal': {
             'Meta': {'unique_together': "(('direccion', 'ciudad'),)", 'object_name': 'Sucursal'},
+            'busqueda': ('django.db.models.fields.CharField', [], {'max_length': '300'}),
             'cadena': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'sucursales'", 'null': 'True', 'to': u"orm['precios.Cadena']"}),
             'ciudad': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['cities_light.City']"}),
             'cp': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            'direccion': ('django.db.models.fields.CharField', [], {'max_length': '120'}),
+            'direccion': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'horarios': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'nombre': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            'telefono': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'})
+            'online': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'telefono': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'ubicacion': ('django.contrib.gis.db.models.fields.PointField', [], {'null': 'True', 'blank': 'True'}),
+            'url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'})
         }
     }
 
