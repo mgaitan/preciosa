@@ -177,7 +177,7 @@ class Producto(models.Model):
             return self.foto.url
 
     def mejor_precio(self):
-        best = self.precio_set.aggregate(Min('precio'))
+        best = self.precios.aggregate(Min('precio'))
         return best['precio__min']
 
     def similares(self, maxnum=None):
