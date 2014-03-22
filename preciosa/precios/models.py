@@ -180,7 +180,7 @@ class Producto(models.Model):
         best = self.precios.aggregate(Min('precio'))
         return best['precio__min']
 
-    def similares(self, maxnum=None):
+    def similares(self, maxnum=5):
         """devuelve un queryset de productos similares.
         (no incluye al producto en sí mismo)
         """

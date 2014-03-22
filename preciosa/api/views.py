@@ -174,6 +174,10 @@ class Detalle(object):
         return self._producto
 
     @property
+    def similares(self):
+        return self._producto.similares()
+
+    @property
     def sucursal(self):
         return self._sucursal
 
