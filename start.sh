@@ -8,6 +8,8 @@ NUM_WORKERS=3 # how many worker processes should Gunicorn spawn
 
 echo "Starting $NAME"
 
+cd $DJANGODIR
+
 # Start your Django Unicorn
 # Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
 gunicorn_django \
