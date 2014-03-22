@@ -73,6 +73,15 @@ class SucursalSerializer(serializers.ModelSerializer):
         )
 
 
+class RelatedProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Producto
+        fields = (
+            'id',
+            'descripcion',
+        )
+
+
 class ProductoSerializer(serializers.HyperlinkedModelSerializer):
 
     foto = serializers.CharField(source='foto_abs', required=False)
@@ -103,6 +112,7 @@ class PrecioSerializer(serializers.ModelSerializer):
 
 class ProductoDetalleSerializer(serializers.Serializer):
     producto = ProductoSerializer()
+    similares = RelatedProductSerializer(many=True, partial=True)
     sucursal = SucursalSerializer()
     mas_probables = PrecioSerializer(many=True, partial=True)
     mejores = PrecioSerializer(many=True, partial=True)

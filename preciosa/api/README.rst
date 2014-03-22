@@ -67,7 +67,7 @@ Listado de productos con precios conocidos en una sucursal
    hay precios conocidos.
 
 Detalle de producto para una sucursal en particular
-   ``http://preciosdeargentina.com.ar/api/v1/sucursales/<pk>/productos``
+   ``http://preciosdeargentina.com.ar/api/v1/sucursales/<pk>/productos/<pk_producto>``
 
    Este recurso devuelve un **detalle exhaustivo** de los precios probables y los mejores para una zona, incluyendo sucursales asociadas a esos mejores precios.
 
