@@ -1,9 +1,11 @@
 from collections import namedtuple
 import unicodecsv
+from django.db.utils import IntegrityError
 from django.core.exceptions import ValidationError
 from django.contrib.gis.geos import Point
 from cities_light.models import City
-from preciosa.precios.models import Sucursal, Cadena
+from preciosa.precios.models import (Sucursal, Marca,
+                                     Producto, Categoria, Cadena)
 
 
 SUCURSAL_COLS = ['nombre',
@@ -31,6 +33,8 @@ PRODUCTO_COLS = ['id',           # opcional
                  'unidad_medida',   # opcional. Producto.UNIDADES_CHOICES
                  'unidades_por_lote',   # opcional: cuantos productos
                                         #vienen en un pack mayorista
+                 'id_online',   # opcional, algun identificador en el sitio online
+                                # de la cadena
                  'oculto',      # opcional.default: false
                  'foto',        # opcional  path relativo, relativo al csv o url
                                 # de un thumbnail del producto
@@ -130,7 +134,8 @@ class Adaptor(object):
         return instance
 
 
-class Sucursal(Adaptor):
+class SucursalCSV(Adaptor):
+    NAME = 'sucursal'
     MODEL = Sucursal
     HEADERS = SUCURSAL_COLS
     SKIP_ON_ERROR = True
@@ -148,3 +153,56 @@ class Sucursal(Adaptor):
         if line['lat'] and line['lon']:
             data['ubicacion'] = Point(float(line['lon']), float(line['lat']))
         return data
+
+
+class ProductoCSV(Adaptor):
+    NAME = 'producto'
+    MODEL = Producto
+    HEADERS = PRODUCTO_COLS
+    SKIP_ON_ERROR = True
+
+    def process_line(self, line):
+        for k, v in line.items():
+            line[k] = v if v != '' else None
+        line['oculto'] = line['oculto'] == 'True'
+
+        if line['marca_id']:
+            line['marca'] = Marca.objects.get(id=line['marca_id'])
+        else:
+            del line['marca']
+            del line['marca_id']
+
+        if line['id_online']:
+            # TO DO: crear una instancia de IdProductoOnline si viene
+            pass
+        del line['id_online']
+
+        if not line['categoria_id']:
+            del line['categoria_id']
+            try:
+                line['categoria'] = Categoria.objects.get(nombre='A clasificar',
+                                                          oculta=True,
+                                                          depth=1)
+            except Categoria.DoesNotExist:
+                line['categoria'] = Categoria.add_root(nombre='A clasificar',
+                                                       oculta=True)
+        else:
+            line['categoria'] = Categoria.objects.get(id=line['categoria_id'])
+            del line['categoria_id']
+        return line
+
+    def create_instance(self, **line):
+        if line['id']:
+            instance = Producto.objects.get(id=line['id'])
+            instance.agregar_descripcion(line['descripcion'], ignorar=True)
+            instance.unidades_por_lote = line['unidades_por_lote']
+            instance.unidad_medida = line['unidad_medida']
+            instance.contenido = line['contenido']
+            # TO DO configurar foto
+            instance.save()
+        else:
+            try:
+                instance = Producto.objects.create(**line)
+            except IntegrityError as e:
+                raise ValidationError(unicode(e))
+        return instance

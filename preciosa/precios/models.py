@@ -190,13 +190,11 @@ class Producto(models.Model):
 
 
 class DescripcionAlternativa(models.Model):
-
-    """Este modelo guarda otras denominaciones posibles de un mismo producto.
+    """
+    Este modelo guarda otras denominaciones posibles de un mismo producto.
     Es útil para ampliar la *tabla de verdad* para hacer matching
     de productos provenientes de datasets sin UPC.
 
-    Por favor, asegurarse que el producto es el correcto antes de
-    crear una descripcion alternativa.
     """
 
     producto = models.ForeignKey('Producto', related_name='descripciones')
@@ -209,6 +207,9 @@ class DescripcionAlternativa(models.Model):
 
     def __unicode__(self):
         return self.descripcion
+
+    class Meta:
+        unique_together = (('producto', 'descripcion'))
 
 
 class Marca(models.Model):
