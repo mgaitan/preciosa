@@ -2,10 +2,11 @@
 """
 utilidades relacionadas a GIS
 """
-
+from copy import copy
 import math
 import requests
 from django.contrib.gis.geos import Point
+from cities_light.models import City
 
 
 BASE_URL = 'http://maps.googleapis.com/maps/api/geocode/json?sensor=false'
@@ -45,14 +46,59 @@ def geocode(ciudad=None, direccion=None):
     return {}
 
 
-def reverse_geocode(lat, lon):
+def reverse_geocode(lat, lon, formatted=True):
     """usa google map para intentar devolver una
      dirección a partir de coordenada"""
 
     r = requests.get(REVERSE_GEOCODING_URL % locals()).json()
     if r['status'] != 'OK':
         return ''
-    return r['results'][0]['formatted_address']
+    if formatted:
+        return r['results'][0]['formatted_address']
+    else:
+        return r['results'][0]['address_components']
+
+
+def donde_queda(lat, lon):
+    """hace un reverse geocoding
+       y parsea data. direccion y ciudad, ciudad_id_relacionada"""
+
+    # evito import circulares
+    from preciosa.precios.models import Sucursal
+
+    def unificar(components):
+        """devuelve un diccionario con cada type: long_name
+
+            >>> unificar([{u'long_name': u'9802-9878', u'short_name': u'9802-9878',   # NOQA
+                       u'types': [u'street_number']},
+                       {u'long_name': u'Avenida Rivadavia',
+                        u'short_name': u'Avenida Rivadavia',
+                        u'types': [u'route', 'street']}])
+
+                {'street_number': '9802-9878',
+                 'route': 'Avenida Rivadavia',
+                 'street': 'Avenida Rivadavia'}
+        """
+        # components = copy(components)
+        expandido = {type_: component['long_name']
+                     for component in components for type_ in component['types']}
+        return expandido
+
+    r = unificar(reverse_geocode(lat, lon, False))
+    data = {}
+    data['direccion'] = r['route'] + ' ' + r['street_number']
+    data['ciudad'] = None
+    try:
+        data['ciudad'] = City.objects.get(name=r['neighborhood'])
+    except (KeyError, City.DoesNotExist):
+        try:
+            data['ciudad'] = City.objects.get(name=r['locality'])
+        except City.DoesNotExist:
+            # aprovechar una sucursal cercana para inferir ciudad
+            qs = Sucursal.objects.alrededor_de((lon, lat), 5)
+            if qs.exists():
+                data['ciudad'] = qs[0].ciudad
+    return data
 
 
 TIERRA_RADIO = 6371  # kilometros
