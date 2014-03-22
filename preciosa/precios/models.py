@@ -10,6 +10,7 @@ from django.db import transaction, IntegrityError
 from django.db.models import Q
 from django.db.models import Min
 from django.contrib.gis.measure import D
+from django.contrib.gis.geos import Point
 from cities_light.models import City
 from django.db.models.signals import post_save
 from annoying.functions import get_object_or_None
@@ -279,6 +280,20 @@ class SucursalManager(models.GeoManager):
         palabras = Q(reduce(operator.and_,
                             (Q(busqueda__icontains=w) for w in words if len(w) > 2)))
         return Sucursal.objects.filter(palabras)
+
+    def alrededor_de(self, punto_o_lonlat, radio):
+        """
+        busca sucursales a la redonda.
+        orderna por menor
+
+        TO DO: hacer que este método se puede
+        encadenar (es decir: método de manager o queryset)
+        """
+        if not isinstance(punto_o_lonlat, Point):
+            punto_o_lonlat = Point(*punto_o_lonlat)
+        circulo = (punto_o_lonlat, D(km=radio))
+        qs = Sucursal.objects.filter(ubicacion__distance_lte=circulo)
+        return qs.distance(punto_o_lonlat).order_by('distance')
 
 
 class Sucursal(models.Model):
