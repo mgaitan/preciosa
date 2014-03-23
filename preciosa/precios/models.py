@@ -283,7 +283,7 @@ class SucursalQuerySet(GeoQuerySet):
                             (Q(busqueda__icontains=w) for w in words if len(w) > 2)))
         return self.filter(palabras)
 
-    def alrededor_de(self, punto_o_lonlat, radio):
+    def alrededor_de(self, punto_o_lonlat, radio=15):
         """
         busca sucursales a la redonda.
         orderna por menor

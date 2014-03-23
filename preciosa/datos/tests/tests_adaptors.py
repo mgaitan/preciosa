@@ -3,7 +3,7 @@ import os.path
 from django.test import TestCase
 from preciosa.precios.models import Sucursal
 from preciosa.precios.tests.factories import CadenaFactory, CityFactory
-from preciosa.datos.adaptors import Sucursal as SucursalCSVModel
+from preciosa.datos.adaptors import SucursalCSV as SucursalCSVModel
 
 DATASETS_PATH = os.path.join(os.path.dirname(__file__), 'datasets')
 

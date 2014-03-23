@@ -96,8 +96,7 @@ El listado de sucursales (http://preciosdeargentina.com.ar/api/v1/sucursales) pu
     cadena a buscar. Por ejemplo, nombre de ciudad, cadena, o calle.
 
 ``lat``, ``lon`` y ``radio``:
-   una posición y el radio que determina las zona donde se buscan sucursales.
-   Estos parámetros son interdependientes.
+   una posición y el radio en kilometros que determina las zona donde se buscan sucursales. Estos parámetros son interdependientes.
 
 
 Formatos

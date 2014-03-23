@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.contrib.gis.geos import Point
-from django.contrib.gis.measure import D
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, mixins, generics
 from rest_framework.response import Response
@@ -65,6 +64,8 @@ class SucursalesList(mixins.ListModelMixin,
 
     def get_queryset(self):
 
+        queryset = super(SucursalesList, self).get_queryset()
+
         q = self.request.QUERY_PARAMS.get('q', None)
         limite = self.request.QUERY_PARAMS.get('limite', None)
 
@@ -73,27 +74,18 @@ class SucursalesList(mixins.ListModelMixin,
         radio = self.request.QUERY_PARAMS.get('radio', None)
 
         if q:
-            queryset = Sucursal.objects.buscar(q)
-        else:
-            queryset = super(SucursalesList, self).get_queryset()
+            queryset = queryset.buscar(q)
 
+        import ipdb; ipdb.set_trace()
         if all((lat, lon, radio)):
-
-            # TODO: refactor para generalizar esto con el codigo
-            # de Sucursal.cercanas()
             try:
                 lat = float(lat)
                 lon = float(lon)
                 radio = float(radio)
-
             except ValueError:
                 pass
-
             else:
-                point = Point(lon, lat, srid=4326)
-                circulo = (point, D(km=radio))
-                queryset = queryset.filter(ubicacion__distance_lte=circulo)
-                queryset = queryset.distance(point).order_by('distance')
+                queryset = queryset.alrededor_de(Point(lon, lat), radio)
 
         if limite:
             queryset = queryset[:limite]
