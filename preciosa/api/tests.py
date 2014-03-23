@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse
 from rest_framework.test import APITestCase
 from mock import patch, MagicMock
-from preciosa.precios.tests.factories import SucursalFactory
+
+from preciosa.precios.tests.factories import SucursalFactory, ProductoFactory
 from tools.gis import punto_destino
 
 
@@ -65,4 +67,33 @@ class TestsSucursales(APITestCase):
         self.assertAlmostEqual(p.x, 1)
         self.assertAlmostEqual(p.y, -3)
         self.assertEqual(radio, 10.0)       # default
+
+
+class TestsDetalle(APITestCase):
+
+    def setUp(self):
+        self.suc = SucursalFactory()
+        self.prod = ProductoFactory(upc='779595')
+        self.url = reverse('producto_detalle', args=(self.suc.id, self.prod.id))
+
+    def test_detalle_producto(self):
+        r = self.client.get(self.url)
+        prod = r.data['producto']
+        self.assertEqual(prod['id'], self.prod.id)
+        self.assertEqual(prod['descripcion'],
+                         self.prod.descripcion)
+        self.assertEqual(prod['upc'],
+                         self.prod.upc)
+
+    def test_detalle_similares(self):
+        simil1 = ProductoFactory(descripcion=self.prod.descripcion + " plus")
+        simil2 = ProductoFactory(descripcion=self.prod.descripcion + " extra")
+        with patch('preciosa.precios.models.Producto.similares') as mock:
+            mock.return_value = [simil1, simil2]
+            r = self.client.get(self.url)
+        similares = r.data['similares']
+        self.assertEqual(similares[0]['id'], simil1.id)
+        self.assertEqual(similares[0]['descripcion'], simil1.descripcion)
+        self.assertEqual(similares[1]['id'], simil2.id)
+        self.assertEqual(similares[1]['descripcion'], simil2.descripcion)
 
