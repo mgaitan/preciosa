@@ -76,7 +76,6 @@ class SucursalesList(mixins.ListModelMixin,
         if q:
             queryset = queryset.buscar(q)
 
-        import ipdb; ipdb.set_trace()
         if all((lat, lon, radio)):
             try:
                 lat = float(lat)
@@ -209,9 +208,9 @@ def producto_sucursal_detalle(request, pk_sucursal, pk_producto):
         precio = request.DATA.get('precio', None)
         created = request.DATA.get('created', None)
         if precio:
-            kwargs = {}
+            p = Precio(sucursal=sucursal, producto=producto, precio=precio)
+            p.save()
             if created:
-                kwargs['created'] = created
-            Precio.objects.create(sucursal=sucursal, producto=producto,
-                                  precio=precio, **kwargs)
+                p.created = created
+                p.save(update_fields=['created'])
     return Response({'detail': '¡gracias!'})
