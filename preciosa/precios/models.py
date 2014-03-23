@@ -3,6 +3,7 @@ import operator
 from datetime import timedelta
 from django.utils import timezone
 from django.contrib.gis.db import models
+from django.contrib.gis.db.models.query import GeoQuerySet
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
@@ -269,7 +270,7 @@ class EmpresaFabricante(AbstractEmpresa):
     pass
 
 
-class SucursalManager(models.GeoManager):
+class SucursalQuerySet(GeoQuerySet):
 
     def buscar(self, q, limite=8):
         """
@@ -280,7 +281,7 @@ class SucursalManager(models.GeoManager):
         words = q.split()
         palabras = Q(reduce(operator.and_,
                             (Q(busqueda__icontains=w) for w in words if len(w) > 2)))
-        return Sucursal.objects.filter(palabras)
+        return self.filter(palabras)
 
     def alrededor_de(self, punto_o_lonlat, radio):
         """
@@ -293,8 +294,20 @@ class SucursalManager(models.GeoManager):
         if not isinstance(punto_o_lonlat, Point):
             punto_o_lonlat = Point(*punto_o_lonlat)
         circulo = (punto_o_lonlat, D(km=radio))
-        qs = Sucursal.objects.filter(ubicacion__distance_lte=circulo)
+        qs = self.filter(ubicacion__distance_lte=circulo)
         return qs.distance(punto_o_lonlat).order_by('distance')
+
+
+class SucursalManager(models.GeoManager):
+
+    def get_queryset(self):
+        return SucursalQuerySet(self.model, using=self._db)
+
+    def buscar(self, q, limite=8):
+        return self.get_queryset().buscar(q, limite)
+
+    def alrededor_de(self, punto_o_lonlat, radio):
+        return self.get_queryset().alrededor_de(punto_o_lonlat, radio)
 
 
 class Sucursal(models.Model):
@@ -385,8 +398,7 @@ class Sucursal(models.Model):
             otras = otras.filter(cadena=self.cadena)
 
         if radio and self.ubicacion:
-            circulo = (self.ubicacion, D(km=radio))
-            otras = otras.filter(ubicacion__distance_lte=circulo)
+            otras = otras.alrededor_de(self.ubicacion, radio)
         else:
             otras = otras.filter(ciudad=self.ciudad)
 
