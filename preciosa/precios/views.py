@@ -1,10 +1,11 @@
-
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from django.http import HttpResponse
 from preciosa.precios.models import Producto, Categoria
+from preciosa.precios.graficos import graphdata_comparando_sucursales
 import operator
+import json
 
 # Vistas web
 
@@ -41,6 +42,10 @@ class ProductoDetailView(DetailView):
         context['active'] = ','.join(['li.cat-%d a:first' % p.id
                                       for p in self.object.categoria.get_ancestors()])
         context['prods_similares'] = self.object.similares(5)
+
+        graph_data = graphdata_comparando_sucursales(self.object, dias=60)
+        context['graph_data'] = json.dumps(graph_data)
+
         return context
 
 
