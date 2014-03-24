@@ -11,8 +11,8 @@ class MovilInfo(models.Model):
 
     http://docs.phonegap.com/es/1.0.0/phonegap_device_device.md.html
     """
+    uuid = models.CharField(max_length=200, primary_key=True)
     user = models.ForeignKey(get_user_model(), related_name='movilinfo')
-    uuid = models.CharField(max_length=200, unique=True)
     nombre = models.CharField(max_length=200, null=True, blank=True)
     phonegap = models.CharField(max_length=100, null=True, blank=True)
     platform = models.CharField(max_length=200, null=True, blank=True)
