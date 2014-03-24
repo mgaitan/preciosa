@@ -8,8 +8,9 @@ from annoying.functions import get_object_or_None
 from rest_framework import status, viewsets, mixins, generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import exceptions
+# from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+# from rest_framework.permissions import IsAuthenticated
 from cities_light.models import City
 from preciosa.precios.models import (Sucursal, Cadena, Producto,
                                      EmpresaFabricante, Marca, Categoria, Precio)
@@ -245,35 +246,38 @@ def registro(request):
        que queda en request.user
     """
     user = None
-    user_data = {}
     VALID_USER_FIELDS = [f.name for f in get_user_model()._meta.fields]
     VALID_MOVIL_INFO_FIELDS = [f.name for f in MovilInfo._meta.fields]
     serialized = UserSerializer(data=request.DATA)
-    if serialized.is_valid():
-        user_data = {field: data for (field, data) in request.DATA.items()
-                     if field in VALID_USER_FIELDS}
 
-    if request.user.is_authenticated() and user_data:
-        # el usuario existía. actualizamos datos
+    user_data = {field: data for (field, data) in request.DATA.items()
+                 if field in VALID_USER_FIELDS}
+
+    if request.user.is_authenticated() and user_data and serialized.is_valid():
+        # el usuario existía pero se envian datos validos. actualizamos datos
         user = request.user
         for attribute, value in user_data.items():
             if attribute == 'password':
                 user.set_password(value)
             else:
-                setattr(user, value)
+                setattr(user, attribute, value)
         user.save()
         status_ = status.HTTP_202_ACCEPTED
 
     elif request.user.is_authenticated() and not user_data:
-        # el usuario existía. no se actualiza nada
+        # el usuario existía. no hay datos. no se actualiza nada
         user = request.user
         status_ = status.HTTP_200_OK
 
-    elif not request.user.is_authenticated() and user_data:
+    elif not request.user.is_authenticated() and user_data and serialized.is_valid():
         # es un registro nuevo con username y password,
         # lo creamos con los datos enviados
         user = get_user_model().objects.create_user(**user_data)
         status_ = status.HTTP_201_CREATED
+
+    elif user_data and not serialized.is_valid():
+        # se envia una data errorena. no se actualiza ni se crea un user
+        raise exceptions.AuthenticationFailed(serialized.errors)
 
     elif 'uuid' in request.DATA:
         # tratamos de conseguir el usuario via un uuid enviado
