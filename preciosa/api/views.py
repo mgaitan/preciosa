@@ -3,6 +3,7 @@ import uuid
 from django.contrib.gis.geos import Point
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
+from django.db import transaction
 from django.db.utils import IntegrityError
 from annoying.functions import get_object_or_None
 from rest_framework import status, viewsets, mixins, generics
@@ -281,8 +282,11 @@ def registro(request):
 
     elif 'uuid' in request.DATA:
         # tratamos de conseguir el usuario via un uuid enviado
-        user = get_object_or_None(MovilInfo, uuid=request.DATA['uuid'])
-        status_ = status.HTTP_200_OK
+        movil_user = get_object_or_None(MovilInfo, uuid=request.DATA['uuid'])
+
+        if movil_user:
+            user = movil_user.user
+            status_ = status.HTTP_200_OK
 
     if not user:
         # no se encontró usuario, creamos unos con username random
@@ -294,11 +298,13 @@ def registro(request):
 
     if 'uuid' in request.DATA:
         # intentamos asociar la info del movil al usuario
+
         try:
             movil_info = {field: data for (field, data) in request.DATA.items()
                           if field in VALID_MOVIL_INFO_FIELDS}
             movil_info['user'] = user
-            MovilInfo.objects.create(**movil_info)
+            with transaction.atomic():
+                MovilInfo.objects.create(**movil_info)
         except IntegrityError:
             # ya existe este uuid para otro user?
             pass
