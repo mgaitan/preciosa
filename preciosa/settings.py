@@ -158,7 +158,6 @@ INSTALLED_APPS = [
     "autocomplete_light",
     "easy_thumbnails",
     "image_cropping",
-    "rest_framework",
     "floppyforms",
     "djorm_pgtrgm",
 
@@ -172,10 +171,13 @@ INSTALLED_APPS = [
     "dbbackup",
 
     # tests / debug
-    "corsheaders",
     "django_nose",
     # "django_pdb",
 
+    # api
+    "rest_framework",
+    "rest_framework.authtoken",
+    "corsheaders",
 
     #blog
     "radpress",
