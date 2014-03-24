@@ -1,18 +1,23 @@
 # -*- coding: utf-8 -*-
+import uuid
 from django.contrib.gis.geos import Point
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets, mixins, generics
+from django.contrib.auth import get_user_model
+from django.db.utils import IntegrityError
+from annoying.functions import get_object_or_None
+from rest_framework import status, viewsets, mixins, generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from cities_light.models import City
 from preciosa.precios.models import (Sucursal, Cadena, Producto,
                                      EmpresaFabricante, Marca, Categoria, Precio)
 
+from preciosa.api.models import MovilInfo
 from preciosa.api.serializers import (CadenaSerializer, SucursalSerializer,
                                       CitySerializer, ProductoSerializer,
                                       EmpresaFabricanteSerializer, MarcaSerializer,
                                       CategoriaSerializer, PrecioSerializer,
-                                      ProductoDetalleSerializer)
+                                      ProductoDetalleSerializer, UserSerializer)
 
 
 class CreateListRetrieveViewSet(mixins.CreateModelMixin,
@@ -208,9 +213,89 @@ def producto_sucursal_detalle(request, pk_sucursal, pk_producto):
         precio = request.DATA.get('precio', None)
         created = request.DATA.get('created', None)
         if precio:
-            p = Precio(sucursal=sucursal, producto=producto, precio=precio)
-            p.save()
+            kwargs = {}
             if created:
-                p.created = created
-                p.save(update_fields=['created'])
+                kwargs['created'] = created
+            Precio.objects.create(sucursal=sucursal, producto=producto,
+                                  precio=precio, **kwargs)
+
     return Response({'detail': '¡gracias!'})
+
+
+@api_view(['POST'])
+def registro(request):
+    """esta vista crea o actualiza un usuario.
+       Devuelve el token unico, creado con la señal post_save de User.
+       que cada post debe enviar como header Authorization
+
+       Tambien actualiza crea o actualiza
+       una instancia de MovilInfo asociada al usuario si se envia un uuid.
+
+       por ejemplo, via jquery::
+
+            $.ajaxSetup({
+              headers: {
+                'Authorization': "Token XXXXX"
+              }
+            });
+
+       Con un token dado, DRF automáticamente loguea a un usuario
+       que queda en request.user
+    """
+    user = None
+    user_data = {}
+    VALID_USER_FIELDS = [f.name for f in get_user_model()._meta.fields]
+    VALID_MOVIL_INFO_FIELDS = [f.name for f in MovilInfo._meta.fields]
+    serialized = UserSerializer(data=request.DATA)
+    if serialized.is_valid():
+        user_data = {field: data for (field, data) in request.DATA.items()
+                     if field in VALID_USER_FIELDS}
+
+    if request.user.is_authenticated() and user_data:
+        # el usuario existía. actualizamos datos
+        user = request.user
+        for attribute, value in user_data.items():
+            if attribute == 'password':
+                user.set_password(value)
+            else:
+                setattr(user, value)
+        user.save()
+        status_ = status.HTTP_202_ACCEPTED
+
+    elif request.user.is_authenticated() and not user_data:
+        # el usuario existía. no se actualiza nada
+        user = request.user
+        status_ = status.HTTP_200_OK
+
+    elif not request.user.is_authenticated() and user_data:
+        # es un registro nuevo con username y password,
+        # lo creamos con los datos enviados
+        user = get_user_model().objects.create_user(**user_data)
+        status_ = status.HTTP_201_CREATED
+
+    elif 'uuid' in request.DATA:
+        # tratamos de conseguir el usuario via un uuid enviado
+        user = get_object_or_None(MovilInfo, uuid=request.DATA['uuid'])
+        status_ = status.HTTP_200_OK
+
+    if not user:
+        # no se encontró usuario, creamos unos con username random
+        username = uuid.uuid4().get_hex()
+        user = get_user_model.objects.create(username=username)
+        status_ = status.HTTP_201_CREATED
+
+    assert user
+
+    if 'uuid' in request.DATA:
+        # intentamos asociar la info del movil al usuario
+        try:
+            movil_info = {field: data for (field, data) in request.DATA.items()
+                          if field in VALID_MOVIL_INFO_FIELDS}
+            movil_info['user'] = user
+            MovilInfo.objects.create(**movil_info)
+        except IntegrityError:
+            # ya existe este uuid para otro user?
+            pass
+
+    token = user.auth_token.key
+    return Response({'token': token}, status=status_)
