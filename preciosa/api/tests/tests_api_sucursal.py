@@ -10,7 +10,7 @@ from preciosa.precios.tests.factories import (SucursalFactory,
 from tools.gis import punto_destino
 
 
-class TestsSucursales(APITestCase):
+class TestsApiSucursal(APITestCase):
 
     def setUp(self):
         self.suc = SucursalFactory()
