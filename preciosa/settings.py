@@ -2,7 +2,8 @@
 import os
 
 
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+PROJECT_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), os.pardir))
 PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = True
@@ -18,7 +19,7 @@ MANAGERS = ADMINS
 # modificá tu local_settings.py para la configuración de tu entorno
 DATABASES = {
     'default': {
-        'ENGINE':'django.contrib.gis.db.backends.postgis',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'preciosa',
         'USER': 'postgres',      # 'dev' si seguiste el tutorial textualmente
         'PASSWORD': '',          # 'dev' si seguiste el tutorial textualmente
@@ -179,10 +180,10 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
 
-    #blog
+    # blog
     "radpress",
 
-    #newsletter
+    # newsletter
     'imperavi',
     'sorl.thumbnail',
     'newsletter',
@@ -327,7 +328,12 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
         'rest_framework.renderers.JSONPRenderer',
     ),
-    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
 }
 
 # enable cross-site requests from any host
@@ -339,8 +345,8 @@ GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-123456-1'
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ['-s', '--nologcapture', '--nocapture',
              '--with-id', '--logging-clear-handlers']
-SOUTH_TESTS_MIGRATE = True # To disable migrations and use syncdb instead
-SKIP_SOUTH_TESTS = True # To disable South's own unit tests
+SOUTH_TESTS_MIGRATE = True  # To disable migrations and use syncdb instead
+SKIP_SOUTH_TESTS = True  # To disable South's own unit tests
 
 
 try:

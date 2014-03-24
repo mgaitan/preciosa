@@ -8,6 +8,8 @@ from annoying.functions import get_object_or_None
 from rest_framework import status, viewsets, mixins, generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 from cities_light.models import City
 from preciosa.precios.models import (Sucursal, Cadena, Producto,
                                      EmpresaFabricante, Marca, Categoria, Precio)
@@ -239,7 +241,7 @@ def registro(request):
               }
             });
 
-       Con un token dado, DRF automáticamente loguea a un usuario
+       Con un token dado, DRF automáticamente loguea a un usuario (via TokenAuth)
        que queda en request.user
     """
     user = None
@@ -280,8 +282,8 @@ def registro(request):
 
     if not user:
         # no se encontró usuario, creamos unos con username random
-        username = uuid.uuid4().get_hex()
-        user = get_user_model.objects.create(username=username)
+        username = uuid.uuid4().get_hex()[:30]
+        user = get_user_model().objects.create(username=username)
         status_ = status.HTTP_201_CREATED
 
     assert user
