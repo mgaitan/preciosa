@@ -43,7 +43,36 @@ Por ejemplo, los *endpoints* para modelos simples como ``Cadena`` (Walmart, Disc
     Si tenés ideas de cómo mejorar, recomendaciones, etc. estaremos contentos
     de recibirlas.
 
-¿que se puede hacer?
+Autenticación básica basada en token
+------------------------------------
+
+La API de preciosa utiliza una manera muy simple y opcionalmente anónima
+de autenticación. El motivo de usar autenticación es para prevenir/aminorar el vandalismo y el uso desleal de los recursos.
+
+Cada usuario está asociado a un token. Registrar un usuario para obtener un token
+es muy fácil. Basta hacer un ``POST`` al enpoint
+
+    http://preciosdeargentina.com.ar/api/v1/auth/registro
+
+Opcionalmente con esta información
+
+``uuid``
+    un identificador único del equipo  (ejemplo, el movil)
+
+``nombre``
+    un nombre elegido por el usuario para el equipo
+
+``plataforma``
+    la plataforma subyacente (ejemplo: "Android")
+
+``phonegap``
+    si el cliente es Phonegap, la versión.
+
+``version``
+    la versión de la plataforma
+
+
+¿qué se puede hacer?
 --------------------
 
 Como DRF ofrece una versión HTML del contenido de la API, gran parte de los
