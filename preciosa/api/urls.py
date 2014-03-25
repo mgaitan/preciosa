@@ -64,5 +64,10 @@ urlpatterns = patterns("preciosa.api.views",
     url(r"^precios/$", views.PreciosList.as_view(), name='precios'),
     url(r"^", include(router.urls))
 
-
 )
+
+urlpatterns += patterns('',
+    url(r'^auth/token$', 'rest_framework.authtoken.views.obtain_auth_token'),
+    url(r'^auth/registro$', views.registro, name='registro')
+)
+

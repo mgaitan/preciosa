@@ -43,7 +43,68 @@ Por ejemplo, los *endpoints* para modelos simples como ``Cadena`` (Walmart, Disc
     Si tenés ideas de cómo mejorar, recomendaciones, etc. estaremos contentos
     de recibirlas.
 
-¿que se puede hacer?
+Autenticación básica basada en token
+------------------------------------
+
+La API de preciosa utiliza una manera muy simple y opcionalmente anónima
+de autenticación. El motivo de usar autenticación es para prevenir/aminorar el vandalismo y el uso desleal de los recursos.
+
+Cada usuario está asociado a un token. Registrar un usuario para obtener un token
+es muy fácil. Basta hacer un ``POST`` al enpoint
+
+    http://preciosdeargentina.com.ar/api/v1/auth/registro
+
+Opcionalmente la petición puede enviar esta información
+
+``uuid``
+    un identificador único del equipo  (ejemplo, el movil)
+
+``nombre``
+    un nombre elegido por el usuario para el equipo
+
+``plataforma``
+    la plataforma subyacente (ejemplo: "Android")
+
+``phonegap``
+    si el cliente es Phonegap, la versión.
+
+``version``
+    la versión de la plataforma
+
+Los parámetros no son obligatorios, pero cualquiera subconjunto que se envie
+debe incluir un ``uuid``.
+
+Obtenido el token, este debe enviarse para cada subsecuente petición. Puede hacerse
+configurando el un header HTTP. Por ejemplo
+
+    Authorization: Token XXXXX
+
+Donde XXXX es el token dado.
+
+Desde jQuery, puede configurarse para todas las peticiones ajax
+
+.. code-block:: javascript
+
+            $.ajaxSetup({
+              headers: {
+                'Authorization': "Token XXXXX"
+              }
+            });
+
+Alternativamente, se puede enviar un token como parámetro en el ``QUERY``
+de la URL. Por ejemplo::
+
+    api/v1/<end_point>/?token=XXXX
+
+
+Si ya se cuenta con un usuario y contraseña (por ejemplo un Voluntario registrado via web) se puede obtener un token enviando parámetros ``usuario`` y ``password`` al recurso
+
+    http://preciosdeargentina.com.ar/api/v1/auth/token
+
+Devuelve el token en formato json de igual manera que ``/auth/registro``
+
+
+¿Qué se puede hacer?
 --------------------
 
 Como DRF ofrece una versión HTML del contenido de la API, gran parte de los
@@ -109,6 +170,22 @@ DRF sabe interpretar el ``content-type`` preferido en el encabezado de la petici
 
 Forzará el serializado de la lista de cadenas en formato JSON, aun desde un navegador web que acepta HTML.
 
+Tasas de limitación (throttling)
+---------------------------------
+
+Complementario a la autenticación, la API tiene un sistema de
+limitación de peticiones (*throttling*), para evitar el abuso de usuarios malintencionados.
+
+Actualmente las tasas son:
+
+- 30 peticiones por dia para usuarios anónimos. Actualmente permite
+  acceder a la URL ``/auth/registro``
+
+- 40 peticiones por minuto para usuarios autorizados.
+  Es para evitar los picos de peticiones automatizadas.
+
+- 1000 peticiones por dia para usuarios autorizados. Es para evitar
+  el "leeching".
 
 
 .. _Django Rest Framework: http://django-rest-framework.org/

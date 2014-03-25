@@ -2,7 +2,8 @@
 import os
 
 
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+PROJECT_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), os.pardir))
 PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = True
@@ -18,7 +19,7 @@ MANAGERS = ADMINS
 # modificá tu local_settings.py para la configuración de tu entorno
 DATABASES = {
     'default': {
-        'ENGINE':'django.contrib.gis.db.backends.postgis',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'preciosa',
         'USER': 'postgres',      # 'dev' si seguiste el tutorial textualmente
         'PASSWORD': '',          # 'dev' si seguiste el tutorial textualmente
@@ -158,7 +159,6 @@ INSTALLED_APPS = [
     "autocomplete_light",
     "easy_thumbnails",
     "image_cropping",
-    "rest_framework",
     "floppyforms",
     "djorm_pgtrgm",
 
@@ -172,15 +172,18 @@ INSTALLED_APPS = [
     "dbbackup",
 
     # tests / debug
-    "corsheaders",
     "django_nose",
     # "django_pdb",
 
+    # api
+    "rest_framework",
+    "rest_framework.authtoken",
+    "corsheaders",
 
-    #blog
+    # blog
     "radpress",
 
-    #newsletter
+    # newsletter
     'imperavi',
     'sorl.thumbnail',
     'newsletter',
@@ -317,28 +320,43 @@ THUMBNAIL_ALIASES = {
 }
 
 REST_FRAMEWORK = {
-    'PAGINATE_BY': 50,
+    'PAGINATE_BY': 30,
     'PAGINATE_BY_PARAM': 'page_size',
-    'MAX_PAGINATE_BY': 5000,    # for @ajlopez, an his lovely annalisa
+    'MAX_PAGINATE_BY': 100,
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
         'rest_framework.renderers.JSONPRenderer',
     ),
-    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'preciosa.api.authentication.QueryTokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.AnonRateThrottle',
+        'preciosa.api.throttling.AntiAnsiososThrottle',
+        'preciosa.api.throttling.AntiPerseverantesThrottle',
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '30/day',      # anonimamente somos poco permisivos
+        'anti_ansiosos': '40/min',
+        'anti_perseverantes': '1000/day',
+    }
 }
 
 # enable cross-site requests from any host
 CORS_ORIGIN_ALLOW_ALL = True
 
-# this code is a fake.
+# este codigo es de mentira. configurá el tuyo en local_settings.py
 GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-123456-1'
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ['-s', '--nologcapture', '--nocapture',
              '--with-id', '--logging-clear-handlers']
-SOUTH_TESTS_MIGRATE = True # To disable migrations and use syncdb instead
-SKIP_SOUTH_TESTS = True # To disable South's own unit tests
+SOUTH_TESTS_MIGRATE = True  # To disable migrations and use syncdb instead
+SKIP_SOUTH_TESTS = True  # To disable South's own unit tests
 
 
 try:

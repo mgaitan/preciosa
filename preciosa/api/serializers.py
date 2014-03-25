@@ -1,10 +1,16 @@
 import re
 from django.contrib.gis.geos import Point
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from cities_light.models import City
 
 from preciosa.precios.models import (Cadena, Sucursal, Producto, Categoria,
                                      EmpresaFabricante, Marca, Precio)
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
 
 
 class CategoriaSerializer(serializers.HyperlinkedModelSerializer):
@@ -55,7 +61,6 @@ class SucursalSerializer(serializers.ModelSerializer):
 
     def transform_ciudad_provincia(self, obj, value):
         return obj.ciudad.region.name
-
 
     class Meta:
         model = Sucursal
@@ -124,4 +129,3 @@ class CitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = City
         fields = ('name', 'latitude', 'longitude', 'geoname_id', 'region')
-
