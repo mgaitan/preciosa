@@ -91,9 +91,10 @@ class TestsRegistroNoAuth(APITestCase):
         self.assertEqual(user.movil_info.get().uuid, 'uuid-re-loco')
 
     def test_si_existe_movil_info_se_guarda(self):
-        data = {'uuid': 'uuid-re-loco', 'phonegap': '3.3',
+        data = {'uuid': 'uuid-re-loco',
+                'phonegap': '3.3',
                 'nombre': 'Passion',  # nexus one
-                'platform': 'Android',
+                'plataforma': 'Android',
                 'version': '2.3'}
         self.client.post(self.url, data)
         movil_info = User.objects.get().movil_info.get()

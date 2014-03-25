@@ -15,7 +15,7 @@ class MovilInfo(models.Model):
     user = models.ForeignKey(get_user_model(), related_name='movil_info')
     nombre = models.CharField(max_length=200, null=True, blank=True)
     phonegap = models.CharField(max_length=100, null=True, blank=True)
-    platform = models.CharField(max_length=200, null=True, blank=True)
+    plataforma = models.CharField(max_length=200, null=True, blank=True)
     version = models.CharField(max_length=200, null=True, blank=True)
 
 
