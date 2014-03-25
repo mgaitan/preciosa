@@ -97,6 +97,13 @@ de la URL. Por ejemplo::
     api/v1/<end_point>/?token=XXXX
 
 
+Si ya se cuenta con un usuario y contraseña (por ejemplo un Voluntario registrado via web) se puede obtener un token enviando parámetros ``usuario`` y ``password`` al recurso
+
+    http://preciosdeargentina.com.ar/api/v1/auth/token
+
+Devuelve el token en formato json de igual manera que ``/auth/registro``
+
+
 ¿Qué se puede hacer?
 --------------------
 
@@ -163,6 +170,22 @@ DRF sabe interpretar el ``content-type`` preferido en el encabezado de la petici
 
 Forzará el serializado de la lista de cadenas en formato JSON, aun desde un navegador web que acepta HTML.
 
+Tasas de limitación (throttling)
+---------------------------------
+
+Complementario a la autenticación, la API tiene un sistema de
+limitación de peticiones (*throttling*), para evitar el abuso de usuarios malintencionados.
+
+Actualmente las tasas son:
+
+- 30 peticiones por dia para usuarios anónimos. Actualmente permite
+  acceder a la URL ``/auth/registro``
+
+- 40 peticiones por minuto para usuarios autorizados.
+  Es para evitar los picos de peticiones automatizadas.
+
+- 1000 peticiones por dia para usuarios autorizados. Es para evitar
+  el "leeching".
 
 
 .. _Django Rest Framework: http://django-rest-framework.org/
