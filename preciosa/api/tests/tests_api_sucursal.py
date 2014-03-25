@@ -12,14 +12,19 @@ class TestsApiSucursal(APITestCase):
     def setUp(self):
         self.suc = SucursalFactory()
         self.url = reverse('sucursales')
-        token = UserFactory().auth_token.key
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token)
+        self.token = UserFactory().auth_token.key
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token)
 
     def test_requiere_auth(self):
         self.client.credentials()  # borra token
         r = self.client.get(self.url)
         self.assertEqual(r.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertIn('credentials', r.data['detail'])
+
+    def test_auth_puede_ser_por_query(self):
+        self.client.credentials()  # borra token
+        r = self.client.get(self.url + '?token=' + self.token)
+        self.assertEqual(r.status_code, status.HTTP_200_OK)
 
     def test_muestra_lista(self):
         suc2 = SucursalFactory()

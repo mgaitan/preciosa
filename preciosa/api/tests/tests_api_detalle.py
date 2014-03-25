@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
@@ -16,14 +17,19 @@ class TestsDetalle(APITestCase):
         self.suc = SucursalFactory()
         self.prod = ProductoFactory(upc='779595')
         self.url = reverse('producto_detalle', args=(self.suc.id, self.prod.id))
-        token = UserFactory().auth_token.key
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token)
+        self.token = UserFactory().auth_token.key
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token)
 
     def test_requiere_auth(self):
         self.client.credentials()  # borra token
         r = self.client.get(self.url)
         self.assertEqual(r.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertIn('credentials', r.data['detail'])
+
+    def test_auth_puede_ser_por_query(self):
+        self.client.credentials()  # borra token
+        r = self.client.get(self.url + '?token=' + self.token)
+        self.assertEqual(r.status_code, status.HTTP_200_OK)
 
     def test_detalle_producto(self):
         r = self.client.get(self.url)
