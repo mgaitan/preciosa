@@ -91,8 +91,8 @@ Desde jQuery, puede configurarse para todas las peticiones ajax
               }
             });
 
-Alternativamente, se puede enviar un token como parámetro (GET, POST).
-Por ejemplo::
+Alternativamente, se puede enviar un token como parámetro en el ``QUERY``
+de la URL. Por ejemplo::
 
     api/v1/<end_point>/?token=XXXX
 
