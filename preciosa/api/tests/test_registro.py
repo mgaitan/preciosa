@@ -101,7 +101,7 @@ class TestsRegistroNoAuth(APITestCase):
         self.assertEqual(movil_info.uuid, 'uuid-re-loco')
         self.assertEqual(movil_info.phonegap, '3.3')
         self.assertEqual(movil_info.nombre, 'Passion')
-        self.assertEqual(movil_info.platform, 'Android')
+        self.assertEqual(movil_info.plataforma, 'Android')
         self.assertEqual(movil_info.version, '2.3')
 
 
@@ -156,7 +156,7 @@ class TestsRegistroAuth(APITestCase):
     def test_si_existe_movil_info_se_guarda(self):
         data = {'uuid': 'uuid-re-loco', 'phonegap': '3.3',
                 'nombre': 'Passion',  # nexus one
-                'platform': 'Android',
+                'plataforma': 'Android',
                 'version': '2.3'}
         self.client.post(self.url, data)
         movil_info = User.objects.get().movil_info.get()
@@ -164,6 +164,6 @@ class TestsRegistroAuth(APITestCase):
         self.assertEqual(movil_info.uuid, 'uuid-re-loco')
         self.assertEqual(movil_info.phonegap, '3.3')
         self.assertEqual(movil_info.nombre, 'Passion')
-        self.assertEqual(movil_info.platform, 'Android')
+        self.assertEqual(movil_info.plataforma, 'Android')
         self.assertEqual(movil_info.version, '2.3')
 

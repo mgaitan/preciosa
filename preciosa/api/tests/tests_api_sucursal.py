@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse
 from rest_framework.test import APITestCase
+from rest_framework import status
 from mock import patch, MagicMock
-from preciosa.precios.tests.factories import SucursalFactory
+from preciosa.precios.tests.factories import UserFactory, SucursalFactory
 from tools.gis import punto_destino
 
 
@@ -11,6 +12,14 @@ class TestsApiSucursal(APITestCase):
     def setUp(self):
         self.suc = SucursalFactory()
         self.url = reverse('sucursales')
+        token = UserFactory().auth_token.key
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token)
+
+    def test_requiere_auth(self):
+        self.client.credentials()  # borra token
+        r = self.client.get(self.url)
+        self.assertEqual(r.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertIn('credentials', r.data['detail'])
 
     def test_muestra_lista(self):
         suc2 = SucursalFactory()

@@ -8,8 +8,9 @@ from django.db.utils import IntegrityError
 from annoying.functions import get_object_or_None
 from rest_framework import status, viewsets, mixins, generics
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework import exceptions
+from rest_framework.permissions import IsAuthenticated
 # from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 # from rest_framework.permissions import IsAuthenticated
 from cities_light.models import City
@@ -35,10 +36,11 @@ class CreateListRetrieveViewSet(mixins.CreateModelMixin,
     To use it, override the class and set the `.queryset` and
     `.serializer_class` attributes.
     """
-    pass
+    permission_classes = (IsAuthenticated,)
 
 
 class CityViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = City.objects.filter(country__name='Argentina')
     serializer_class = CitySerializer
 
@@ -49,16 +51,19 @@ class CadenaViewSet(CreateListRetrieveViewSet):
 
 
 class EmpresaFabricanteViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = EmpresaFabricante.objects.all()
     serializer_class = EmpresaFabricanteSerializer
 
 
 class MarcaViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = Marca.objects.all()
     serializer_class = MarcaSerializer
 
 
 class CategoriaViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
 
@@ -68,6 +73,7 @@ class SucursalesList(mixins.ListModelMixin,
                      mixins.CreateModelMixin,
                      generics.GenericAPIView):
 
+    permission_classes = (IsAuthenticated,)
     queryset = Sucursal.objects.all()
     serializer_class = SucursalSerializer
 
@@ -115,6 +121,7 @@ class ProductosList(mixins.ListModelMixin,
                     mixins.CreateModelMixin,
                     generics.GenericAPIView):
 
+    permission_classes = (IsAuthenticated,)
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
 
@@ -145,6 +152,7 @@ class PreciosList(mixins.ListModelMixin,
                   mixins.CreateModelMixin,
                   generics.GenericAPIView):
 
+    permission_classes = (IsAuthenticated,)
     queryset = Precio.objects.all()
     serializer_class = PrecioSerializer
 
@@ -201,6 +209,7 @@ class Detalle(object):
 
 
 @api_view(['GET', 'POST'])
+@permission_classes((IsAuthenticated,))
 def producto_sucursal_detalle(request, pk_sucursal, pk_producto):
     producto = get_object_or_404(Producto, id=pk_producto)
     sucursal = get_object_or_404(Sucursal, id=pk_sucursal)
