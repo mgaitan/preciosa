@@ -54,7 +54,7 @@ es muy fácil. Basta hacer un ``POST`` al enpoint
 
     http://preciosdeargentina.com.ar/api/v1/auth/registro
 
-Opcionalmente con esta información
+Opcionalmente la petición puede enviar esta información
 
 ``uuid``
     un identificador único del equipo  (ejemplo, el movil)
@@ -71,6 +71,8 @@ Opcionalmente con esta información
 ``version``
     la versión de la plataforma
 
+Los parámetros no son obligatorios, pero cualquiera subconjunto que se envie
+debe incluir un ``uuid``.
 
 Obtenido el token, este debe enviarse para cada subsecuente petición. Puede hacerse
 configurando el un header HTTP. Por ejemplo
