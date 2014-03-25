@@ -72,7 +72,30 @@ Opcionalmente con esta información
     la versión de la plataforma
 
 
-¿qué se puede hacer?
+Obtenido el token, este debe enviarse para cada subsecuente petición. Puede hacerse
+configurando el un header HTTP. Por ejemplo
+
+    Authorization: Token XXXXX
+
+Donde XXXX es el token dado.
+
+Desde jQuery, puede configurarse para todas las peticiones ajax
+
+.. code-block:: javascript
+
+            $.ajaxSetup({
+              headers: {
+                'Authorization': "Token XXXXX"
+              }
+            });
+
+Alternativamente, se puede enviar un token como parámetro (GET, POST).
+Por ejemplo::
+
+    api/v1/<end_point>/?token=XXXX
+
+
+¿Qué se puede hacer?
 --------------------
 
 Como DRF ofrece una versión HTML del contenido de la API, gran parte de los
