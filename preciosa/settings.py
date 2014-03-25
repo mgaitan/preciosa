@@ -320,9 +320,9 @@ THUMBNAIL_ALIASES = {
 }
 
 REST_FRAMEWORK = {
-    'PAGINATE_BY': 50,
+    'PAGINATE_BY': 30,
     'PAGINATE_BY_PARAM': 'page_size',
-    'MAX_PAGINATE_BY': 5000,    # for @ajlopez, an his lovely annalisa
+    'MAX_PAGINATE_BY': 100,
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
@@ -334,12 +334,18 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.AnonRateThrottle',
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '30/day',      # anonimamente somos poco permisivos
+    }
 }
 
 # enable cross-site requests from any host
 CORS_ORIGIN_ALLOW_ALL = True
 
-# this code is a fake.
+# este codigo es de mentira. configurá el tuyo en local_settings.py
 GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-123456-1'
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
