@@ -16,7 +16,8 @@ class MovilInfo(models.Model):
     nombre = models.CharField(max_length=200, null=True, blank=True)
     phonegap = models.CharField(max_length=100, null=True, blank=True)
     plataforma = models.CharField(max_length=200, null=True, blank=True)
-    version = models.CharField(max_length=200, null=True, blank=True)
+    plataforma_version = models.CharField(max_length=200, null=True, blank=True)
+    preciosa_version = models.CharField(max_length=200, null=True, blank=True)
 
 
 @receiver(post_save, sender=get_user_model())

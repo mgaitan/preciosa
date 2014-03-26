@@ -95,14 +95,16 @@ class TestsRegistroNoAuth(APITestCase):
                 'phonegap': '3.3',
                 'nombre': 'Passion',  # nexus one
                 'plataforma': 'Android',
-                'version': '2.3'}
+                'plataforma_version': '2.3',
+                'preciosa_version': '0.1 (natimit)'}
         self.client.post(self.url, data)
         movil_info = User.objects.get().movil_info.get()
         self.assertEqual(movil_info.uuid, 'uuid-re-loco')
         self.assertEqual(movil_info.phonegap, '3.3')
         self.assertEqual(movil_info.nombre, 'Passion')
         self.assertEqual(movil_info.plataforma, 'Android')
-        self.assertEqual(movil_info.version, '2.3')
+        self.assertEqual(movil_info.plataforma_version, '2.3')
+        self.assertEqual(movil_info.preciosa_version, '0.1 (natimit)')
 
 
 class TestsRegistroAuth(APITestCase):
@@ -157,7 +159,8 @@ class TestsRegistroAuth(APITestCase):
         data = {'uuid': 'uuid-re-loco', 'phonegap': '3.3',
                 'nombre': 'Passion',  # nexus one
                 'plataforma': 'Android',
-                'version': '2.3'}
+                'plataforma_version': '2.3',
+                'preciosa_version': '0.1 (natimit)'}
         self.client.post(self.url, data)
         movil_info = User.objects.get().movil_info.get()
         self.assertEqual(movil_info.user, self.user)
@@ -165,5 +168,5 @@ class TestsRegistroAuth(APITestCase):
         self.assertEqual(movil_info.phonegap, '3.3')
         self.assertEqual(movil_info.nombre, 'Passion')
         self.assertEqual(movil_info.plataforma, 'Android')
-        self.assertEqual(movil_info.version, '2.3')
-
+        self.assertEqual(movil_info.plataforma_version, '2.3')
+        self.assertEqual(movil_info.preciosa_version, '0.1 (natimit)')

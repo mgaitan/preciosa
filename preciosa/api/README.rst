@@ -68,14 +68,16 @@ Opcionalmente la petición puede enviar esta información
 ``phonegap``
     si el cliente es Phonegap, la versión.
 
-``version``
-    la versión de la plataforma
+``plataforma_version``
+    la versión de la plataforma (ejemplo "2.2" para Android)
+
+``preciosa_version``
+    la versión del cliente de preciosa.
 
 Los parámetros no son obligatorios, pero cualquiera subconjunto que se envie
-debe incluir un ``uuid``.
+debe incluir el ``uuid`` (sin uuid ninguna información quedará guardada)
 
-Obtenido el token, este debe enviarse para cada subsecuente petición. Puede hacerse
-configurando el un header HTTP. Por ejemplo
+Obtenido el token, este debe enviarse para cada subsecuente petición. Puede hacerse configurando el un header HTTP. Por ejemplo
 
     Authorization: Token XXXXX
 
