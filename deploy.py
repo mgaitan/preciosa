@@ -82,6 +82,7 @@ class Preciosa(Node):
     def update(self, branch='develop'):
         self.run_in_preciosa('git fetch')
         self.run_in_preciosa('git reset --hard origin/%s' % branch)
+        self.django_command('clean_pyc')
 
     def deploy(self, dbbackup=False, branch='develop'):
         self.update(branch)
@@ -91,7 +92,6 @@ class Preciosa(Node):
         self.django_command('syncdb')
         self.django_command('migrate')
         self.django_command('collectstatic --noinput')
-        self.django_command('clean_pyc')
         self.restart()
 
 if __name__ == '__main__':
