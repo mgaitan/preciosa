@@ -133,7 +133,6 @@ class Producto(models.Model):
                                      choices=UNIDADES_CHOICES, null=True, blank=True)
     notas = models.TextField(null=True, blank=True)
     foto = ThumbnailerImageField(null=True, blank=True, upload_to='productos')
-    acuerdos = models.ManyToManyField('Cadena', through='PrecioEnAcuerdo')
 
     # TO DO: un queryset for defecto debe excluir los productos oculto=True
     # hacer una manager especial `objects_con_ocultos` que no los excluya
@@ -208,9 +207,6 @@ class DescripcionAlternativa(models.Model):
 
     def __unicode__(self):
         return self.descripcion
-
-    class Meta:
-        unique_together = (('producto', 'descripcion'))
 
 
 class Marca(models.Model):
@@ -603,18 +599,4 @@ def actualizar_precio_activo(sender, **kwargs):
                                         sucursal=precio.sucursal,
                                         precio=precio)
 
-
 post_save.connect(actualizar_precio_activo, sender=Precio)
-
-
-class PrecioEnAcuerdo(models.Model):
-    producto = models.ForeignKey('Producto')
-    cadena = models.ForeignKey('Cadena',
-                               limit_choices_to={'cadena_madre__isnull': True})
-
-    precio_norte = models.DecimalField(max_digits=5, decimal_places=2)
-    precio_sur = models.DecimalField(max_digits=5, decimal_places=2)
-
-    class Meta:
-        verbose_name = u"precio en acuerdo"
-        verbose_name_plural = u"precios en acuerdo"
