@@ -62,6 +62,9 @@ class Preciosa(Node):
             self.hosts.run('vim preciosa/local_settings.py')
         self.restart()
 
+    def ngxtop(self, subcommand=''):
+        self.run_in_preciosa('ngxtop ' + subcommand)
+
     def debug(self, port='8000'):
         self.run_in_preciosa('git tag checkpoint_debug')
         self.update('debug')
