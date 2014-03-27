@@ -120,6 +120,7 @@ class TestsDetalle(APITestCase):
         self.assertEqual(r.data['mejores'][0]['precio'], 10.)
 
         # Se envia un mejor precio en la sucursal B
+
         suc_b = SucursalFactory(cadena=self.suc.cadena, ciudad=self.suc.ciudad,
                                 ubicacion=punto_destino(self.suc.ubicacion,
                                                         90, 1))
@@ -139,3 +140,41 @@ class TestsDetalle(APITestCase):
         r = self.client.get(self.url)
         self.assertEqual(r.data['mas_probables'][0]['precio'], 10.)
         self.assertEqual(r.data['mejores'][0]['precio'], 8)
+
+    def test_integracion_2(self):
+        """igual, pero la sucursal b es de otra ciudad.
+        """
+        r = self.client.get(self.url)
+        assert len(r.data['mas_probables']) == 0
+        assert len(r.data['mejores']) == 0
+        # se envia un precio original en A
+        self.client.post(self.url, {'precio': 10})
+
+        # ahora el mas probable y el mejor es 10
+        r = self.client.get(self.url)
+        self.assertEqual(r.data['mas_probables'][0]['precio'], 10.)
+        self.assertEqual(r.data['mejores'][0]['precio'], 10.)
+
+        # Se envia un mejor precio en la sucursal B
+
+        suc_b = SucursalFactory(cadena=self.suc.cadena,
+                                ubicacion=punto_destino(self.suc.ubicacion,
+                                                        90, 1))
+        assert suc_b.ciudad != self.suc.ciudad
+        url_b = reverse('producto_detalle', args=(suc_b.id, self.prod.id))
+        rb = self.client.get(url_b)
+
+        # no hay precios en esta suc
+        assert Precio.objects.filter(sucursal=suc_b).count() == 0
+
+        # pero el mas probable es el enviado en A
+        self.assertEqual(rb.data['mas_probables'][0]['precio'], 10)
+
+        # se envia un precio nuevo, mejor
+        self.client.post(url_b, {'precio': 8})
+
+        # de nuevo en la sucursal A, el precio se mantiene, pero hay mejor
+        r = self.client.get(self.url)
+        self.assertEqual(r.data['mas_probables'][0]['precio'], 10.)
+        self.assertEqual(r.data['mejores'][0]['precio'], 8)
+
