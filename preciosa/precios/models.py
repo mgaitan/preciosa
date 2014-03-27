@@ -472,14 +472,15 @@ class PrecioManager(models.Manager):
         # se ordenará de más nuevo a más viejo, pero
         return self._registro_precio(qs, distintos)
 
-    def mas_probables(self, producto, sucursal, dias=None, radio=None):
+    def mas_probables(self, producto, sucursal, dias=None, radio=10):
         """
         Cuando no hay datos especificos de un
         producto para una sucursal (:meth:`historico`),
         debe ofrecerse un precio más probable. Se calcula
 
          - Precio con más coincidencias para el producto en otras sucursales
-           de la misma cadena en la ciudad o un radio de distancia
+           de la misma cadena en la ciudad y/o un radio de distancia si es dado
+
          - En su defecto, precio online de la cadena
         """
         qs = self.historico(producto, sucursal, dias)
@@ -488,9 +489,17 @@ class PrecioManager(models.Manager):
 
         qs = super(PrecioManager, self).get_queryset()
 
-        # precios para sucursales de la misma cadena de la ciudad o cercana
-        cercanas = sucursal.cercanas(radio=radio,
-                                     misma_cadena=True).values_list('id', flat=True)
+        # precios para sucursales de la misma cadena de la ciudad
+        cercanas_ciudad = sucursal.cercanas(misma_cadena=True).values_list('id',
+                                                                           flat=True)
+        if radio:
+            cercanas_radio = sucursal.cercanas(radio=radio,
+                                               misma_cadena=True).values_list('id',
+                                                                              flat=True)
+        else:
+            cercanas_radio = []
+
+        cercanas = set(list(cercanas_ciudad) + list(cercanas_radio))
         qs = qs.filter(producto=producto,
                        sucursal__id__in=cercanas).distinct('precio')
         if qs.exists():
