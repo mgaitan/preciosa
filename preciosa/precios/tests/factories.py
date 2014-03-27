@@ -6,7 +6,7 @@ from django.contrib.gis.geos import Point
 from django.contrib.auth.models import User
 from cities_light.models import City, Country, Region
 from preciosa.precios.models import (EmpresaFabricante, Marca, Cadena, Producto, Precio,
-                                     PrecioEnAcuerdo, Sucursal, Categoria)
+                                     Sucursal, Categoria)
 
 
 class FuzzyPoint(BaseFuzzyAttribute):
@@ -96,11 +96,3 @@ class PrecioFactory(factory.DjangoModelFactory):
     producto = factory.SubFactory(ProductoFactory)
     sucursal = factory.SubFactory(SucursalFactory)
     precio = Decimal('1.0')
-
-
-class PrecioEnAcuerdoFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = PrecioEnAcuerdo
-    producto = factory.SubFactory(ProductoFactory)
-    cadena = factory.SubFactory(CadenaFactory)
-    precio_norte = Decimal('1.0')
-    precio_sur = Decimal('1.1')
