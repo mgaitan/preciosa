@@ -17,7 +17,8 @@ class TestsDetalle(APITestCase):
         self.suc = SucursalFactory()
         self.prod = ProductoFactory(upc='779595')
         self.url = reverse('producto_detalle', args=(self.suc.id, self.prod.id))
-        self.token = UserFactory().auth_token.key
+        self.user = UserFactory()
+        self.token = self.user.auth_token.key
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token)
 
     def test_requiere_auth(self):
@@ -95,6 +96,7 @@ class TestsDetalle(APITestCase):
         self.assertEqual(precio.precio, Decimal('10'))
         self.assertEqual(precio.producto, self.prod)
         self.assertEqual(precio.sucursal, self.suc)
+        self.assertEqual(precio.usuario, self.user)
         self.assertEqual(str(precio.created), str(fecha))
 
     def test_integracion(self):
