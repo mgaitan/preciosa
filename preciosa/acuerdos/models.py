@@ -68,8 +68,9 @@ class Acuerdo(models.Model):
 class PrecioEnAcuerdoManager(models.Manager):
 
     def en_acuerdo(self, producto, sucursal):
-        """dado un producto y sucursal, devuelve una lista
-           [(acuerdo, precio)]"""
+        """dado un producto y sucursal, devuelve una lista de diccionarios
+            con el precio y el nombre del acuerdo"""
+
         qs = super(PrecioEnAcuerdoManager, self).get_queryset()
         qs = qs.filter(producto=producto)
 
@@ -87,7 +88,7 @@ class PrecioEnAcuerdoManager(models.Manager):
             qs = qs.filter(acuerdo__sucursales=sucursal)
 
         qs = qs.filter(acuerdo__region__ciudades=sucursal.ciudad)
-        return qs.values_list('acuerdo__nombre', 'precio')
+        return qs.values('acuerdo__nombre', 'precio')
 
 
 class PrecioEnAcuerdo(models.Model):

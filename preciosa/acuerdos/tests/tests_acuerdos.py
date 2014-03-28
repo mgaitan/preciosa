@@ -70,7 +70,8 @@ class TestPrecioEnAcuerdo(TestCase):
         suc2 = self.sucursales_carrefour[1]
         suc3 = self.super_regional
         self.assertEqual(self.acuerdo(suc1),
-                         [(u'Precio en Acuerdo', Decimal('18.90'))])
+                         [{'acuerdo__nombre': u'Precio en Acuerdo',
+                           'precio': Decimal('18.90')}])
         self.assertEqual(self.acuerdo(suc2), [])
         self.assertEqual(self.acuerdo(suc3), [])
 
@@ -86,7 +87,8 @@ class TestPrecioEnAcuerdo(TestCase):
         suc2 = self.sucursales_carrefour[1]
 
         self.assertEqual(self.acuerdo(self.super_regional),
-                         [('Precio en Acuerdo', Decimal('32.9'))])
+                         [{'acuerdo__nombre': u'Precio en Acuerdo',
+                           'precio': Decimal('32.9')}])
         self.assertEqual(self.acuerdo(suc1), [])
         self.assertEqual(self.acuerdo(suc2), [])
 
@@ -104,6 +106,7 @@ class TestPrecioEnAcuerdo(TestCase):
         suc2 = self.sucursales_carrefour[1]
 
         self.assertEqual(self.acuerdo(self.super_regional),
-                         [('Precio en Acuerdo', Decimal('32.9'))])
+                         [{'acuerdo__nombre': 'Precio en Acuerdo',
+                           'precio': Decimal('32.9')}])
         self.assertEqual(self.acuerdo(suc1), [])
         self.assertEqual(self.acuerdo(suc2), [])
