@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
 import factory
-from preciosa.precios.tests.factories import RegionFactory as ProvinciaFactory
-from preciosa.acuerdos.models import Region
+from decimal import Decimal
+from preciosa.precios.tests.factories import (RegionFactory as ProvinciaFactory,
+                                              ProductoFactory)
+from preciosa.acuerdos.models import Region, Acuerdo, PrecioEnAcuerdo
 
 
 class RegionFactory(factory.DjangoModelFactory):
@@ -40,3 +43,35 @@ class RegionFactory(factory.DjangoModelFactory):
         if extracted:
             for ciudad in extracted:
                 self.ciudades_excluidas.add(ciudad)
+
+
+class AcuerdoFactory(factory.DjangoModelFactory):
+    FACTORY_FOR = Acuerdo
+    FACTORY_DJANGO_GET_OR_CREATE = ('nombre',)
+    nombre = factory.Sequence(lambda n: u'Acuerdo de precios {0}'.format(n))
+    region = factory.SubFactory(RegionFactory)
+
+    @factory.post_generation
+    def cadenas(self, create, extracted, **kwargs):
+        if not create:
+            return
+        if extracted:
+            for cadena in extracted:
+                self.cadenas.add(cadena)
+
+    @factory.post_generation
+    def sucursales(self, create, extracted, **kwargs):
+        if not create:
+            return
+
+        if extracted:
+            for suc in extracted:
+                self.sucursales.add(suc)
+
+
+class PrecioEnAcuerdoFactory(factory.DjangoModelFactory):
+    FACTORY_FOR = PrecioEnAcuerdo
+    acuerdo = factory.SubFactory(AcuerdoFactory)
+    producto = factory.SubFactory(ProductoFactory)
+    precio = Decimal('10.0')
+
