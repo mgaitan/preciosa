@@ -193,6 +193,7 @@ INSTALLED_APPS = [
     "preciosa.precios",
     "preciosa.voluntarios",
     "preciosa.datos",
+    "preciosa.acuerdos",
     "preciosa.api",
     "preciosa.flatpagex"
 ]
