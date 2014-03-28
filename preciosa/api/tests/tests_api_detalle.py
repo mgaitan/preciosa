@@ -88,6 +88,19 @@ class TestsDetalle(APITestCase):
         self.assertEqual(mejores[1]['created'], p2.created)
         self.assertEqual(mejores[1]['sucursal']['direccion'], p2.sucursal.direccion)
 
+    def test_sin_acuerdo(self):
+        r = self.client.get(self.url)
+        self.assertEqual(r.data['en_acuerdo'], [])
+
+    def test_producto_en_acuerdo(self):
+        with patch('preciosa.acuerdos.models.PrecioEnAcuerdoManager.en_acuerdo') as mock:
+            mock.return_value = [{'acuerdo__nombre': u'Precios culiados',
+                                  'precio': Decimal('123.30')}]
+            r = self.client.get(self.url)
+        en_acuerdo = r.data['en_acuerdo']
+        self.assertEqual(en_acuerdo, [{'nombre': u'Precios culiados',
+                                       'precio': Decimal('123.30')}])
+
     def test_envio_precio(self):
         fecha = datetime(year=2014, month=3, day=22, hour=0, minute=1)
         r = self.client.post(self.url, {'precio': 10, 'created': fecha})
@@ -177,4 +190,3 @@ class TestsDetalle(APITestCase):
         r = self.client.get(self.url)
         self.assertEqual(r.data['mas_probables'][0]['precio'], 10.)
         self.assertEqual(r.data['mejores'][0]['precio'], 8)
-

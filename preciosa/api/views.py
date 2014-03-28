@@ -16,7 +16,7 @@ from rest_framework.permissions import IsAuthenticated
 from cities_light.models import City
 from preciosa.precios.models import (Sucursal, Cadena, Producto,
                                      EmpresaFabricante, Marca, Categoria, Precio)
-
+from preciosa.acuerdos.models import PrecioEnAcuerdo
 from preciosa.api.models import MovilInfo
 from preciosa.api.serializers import (CadenaSerializer, SucursalSerializer,
                                       CitySerializer, ProductoSerializer,
@@ -174,38 +174,35 @@ class PreciosList(mixins.ListModelMixin,
 
 class Detalle(object):
     def __init__(self, producto, sucursal):
-        self._producto = producto
-        self._sucursal = sucursal
-
-    @property
-    def producto(self):
-        return self._producto
+        self.producto = producto
+        self.sucursal = sucursal
 
     @property
     def similares(self):
-        return self._producto.similares()
-
-    @property
-    def sucursal(self):
-        return self._sucursal
+        return self.producto.similares()
 
     @property
     def mas_probables(self):
-        probables = Precio.objects.mas_probables(self._producto,
-                                                 self._sucursal, dias=30)
+        probables = Precio.objects.mas_probables(self.producto,
+                                                 self.sucursal, dias=30)
         return probables
 
     @property
     def mejores(self):
-        if self._sucursal.ubicacion:
-            mejores = Precio.objects.mejores(self._producto,
-                                             punto_o_sucursal=self._sucursal,
+        if self.sucursal.ubicacion:
+            mejores = Precio.objects.mejores(self.producto,
+                                             punto_o_sucursal=self.sucursal,
                                              radio=20, dias=30)
         else:
-            mejores = Precio.objects.mejores(self._producto,
-                                             ciudad=self._sucursal.ciudad,
+            mejores = Precio.objects.mejores(self.producto,
+                                             ciudad=self.sucursal.ciudad,
                                              dias=30)
         return mejores
+
+    @property
+    def en_acuerdo(self):
+        return PrecioEnAcuerdo.objects.en_acuerdo(self.producto,
+                                                  self.sucursal)
 
 
 @api_view(['GET', 'POST'])
@@ -217,6 +214,7 @@ def producto_sucursal_detalle(request, pk_sucursal, pk_producto):
 
     if request.method == 'GET':
         serializer = ProductoDetalleSerializer(detalle)
+
         return Response(serializer.data)
     elif request.method == 'POST':
         # a futuro el POST requirá un token según issue #201

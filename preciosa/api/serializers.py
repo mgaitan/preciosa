@@ -115,12 +115,18 @@ class PrecioSerializer(serializers.ModelSerializer):
         )
 
 
+class EnAcuerdoSerializer(serializers.Serializer):
+    nombre = serializers.CharField(source='acuerdo__nombre', read_only=True)
+    precio = serializers.DecimalField(source='precio', read_only=True)
+
+
 class ProductoDetalleSerializer(serializers.Serializer):
     producto = ProductoSerializer()
-    similares = RelatedProductSerializer(many=True, partial=True)
     sucursal = SucursalSerializer()
     mas_probables = PrecioSerializer(many=True, partial=True)
+    en_acuerdo = EnAcuerdoSerializer(many=True, partial=True)
     mejores = PrecioSerializer(many=True, partial=True)
+    similares = RelatedProductSerializer(many=True, partial=True)
 
 
 class CitySerializer(serializers.HyperlinkedModelSerializer):
