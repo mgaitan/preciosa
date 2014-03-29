@@ -12,7 +12,7 @@ from cities_light.models import City, Region
 
 PROVINCIAS = [texto.normalizar(prov.name) for prov in Region.objects.all()]
 CADENAS = [(texto.normalizar(cadena), cadena, id)
-           for (cadena, id) in Cadena.objects.all().values_list('nombre', 'id')]
+           for (cadena, id) in Cadena.objects.extra(select={'length':'Length(nombre)'}).order_by('-length').values_list('nombre', 'id')]
 
 
 def inferir_cadena(nombre):

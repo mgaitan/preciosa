@@ -41,6 +41,7 @@ logger = logging.getLogger(__name__)
 class Command(BaseCommand):
     args = '<file_geojson>'
     help = __doc__
+    FILENAME = 'osm_%s.csv'
 
     def handle(self, *args, **options):
         if len(args) != 1:
@@ -53,20 +54,29 @@ class Command(BaseCommand):
             fh = urllib2.urlopen(geojson)
         else:
             fh = open(args[0])
-        data = json.load(fh)
+        self.data = json.load(fh)
 
         suc_dir = os.path.join(settings.DATASETS_ROOT, 'sucursales')
         if not os.path.exists(suc_dir):
             os.makedirs(suc_dir)
 
-        FILENAME = 'osm_%s.csv' % datetime.now().strftime("%Y-%m-%d-%H%M%S")
+        FILENAME = self.FILENAME % datetime.now().strftime("%Y-%m-%d-%H%M%S")
         FILENAME = os.path.join(suc_dir, FILENAME)
-        writer = unicodecsv.DictWriter(open(FILENAME, 'wb'), SUCURSAL_COLS)
+        writer = unicodecsv.DictWriter(open(FILENAME, 'wb'),
+                                       fieldnames=self.get_columnas())
         writer.writeheader()
         bar = Bar('Convirtiendo ', suffix='%(percent)d%%')
-        for feature in bar.iter(data['features']):
+        for feature in bar.iter(self.entrada()):
             sucursal = self.parse_sucursal(feature)
             writer.writerow(sucursal)
+
+    def get_columnas(self):
+        """devuelve una lista con los headers que debe escribir un CSV"""
+        return SUCURSAL_COLS
+
+    def entrada(self):
+        """devuelve un iterable con un input para parse_sucursal"""
+        return self.data['features']
 
     def parse_sucursal(self, feature):
         sucursal = {}
