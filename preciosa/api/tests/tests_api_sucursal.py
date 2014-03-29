@@ -80,3 +80,9 @@ class TestsApiSucursal(APITestCase):
         self.assertAlmostEqual(p.x, 1)
         self.assertAlmostEqual(p.y, -3)
         self.assertEqual(radio, 10.0)       # default
+
+    def test_no_muestra_sucursales_online(self):
+        self.suc.online = True
+        self.suc.save()
+        response = self.client.get(self.url)
+        self.assertEqual(response.data['results'], [])

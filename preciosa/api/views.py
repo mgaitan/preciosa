@@ -74,7 +74,7 @@ class SucursalesList(mixins.ListModelMixin,
                      generics.GenericAPIView):
 
     permission_classes = (IsAuthenticated,)
-    queryset = Sucursal.objects.all()
+    queryset = Sucursal.objects.filter(online=False)
     serializer_class = SucursalSerializer
 
     def get_queryset(self):
