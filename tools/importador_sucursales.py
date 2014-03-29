@@ -8,6 +8,7 @@ sucursales de supermercados de argentina
 import json
 import urllib
 from pprint import pprint
+from selenium import webdriver
 import re
 from django.db import IntegrityError
 from django.db.models import Q
@@ -240,6 +241,58 @@ def walmart():
         pprint(parse_info('http://www.walmart.com.ar' + i))
 
 
+
+def changomas():
+    """importador de sucursales changomas"""
+
+    CHANGO = Cadena.objects.get(id=16)
+
+    def clean_city(text):
+        text = text.replace('GBA', '').replace('Bs As', '').replace('Mendoza', '')
+        text = text.replace('-', '').strip()
+        d = {'Cabildo': u'Núñez', 'Constituyentes': 'Villa Urquiza',
+             'DOT  Baires': 'Saavedra', u'Nogoyá': 'Villa del Parque',
+              u'Ramón Falcón': 'Flores', 'Supermercado Caballito': 'Caballito',
+              u'Supermercado Honorio Pueyrredón': 'Caballito',
+              u'Córdoba Sur': u'Córdoba', u'Córdoba Av. Colón': u'Córdoba',
+              u'Córdoba Barrio Talleres': u'Córdoba', 'Comodoro Norte': 'Comodoro Rivadavia',
+              u'Tucumán': u'San Miguel de Tucumán', 'Resistencia  Chaco': 'Resistencia',
+              'Santa Fe': 'Santa Fe de la Vera Cruz'
+            }
+        return list(City.objects.filter(name=d.get(text, text)))[-1]
+
+    def parse_info(url):
+        # browser = webdriver.Firefox()
+        # browser.get(url)
+        # pq = PyQuery(html=browser.page_source)
+        pq = PyQuery(url)
+        ciudad = clean_city(pq('a.selected').text())
+
+        direccion = re.findall(': (.*)(Aper|Hora)', pq('p#direccion').text())[0][0].strip()
+        nombre = pq(pq('p#direccion strong')[0]).text().replace(':', '')
+        horarios = re.findall(u'[aA]tención:[ \n\t]+(.*)\.', pq('p#direccion').text(), re.MULTILINE)
+        horarios = horarios[0] if len(horarios) else ''
+        return Sucursal(nombre=nombre,
+                        ciudad=ciudad,
+                        direccion=direccion,
+                        horarios=horarios,
+                        cadena=CHANGO)
+
+    urls = ['1062', '1025', '1063', '1064', '1049', '1048', '1047', '1027',
+            '1090', '1091', '1035', '1028', '1030', '1061', '1050', '1032',
+            '1029', '1036', '1037', '1084', '1013', '1059', '1076', '1089',
+            '1044', '1045', '1069', '1046', '1026', '1056', '1060', '1097',
+            '1074', '1085', '1098', '1039', '1024', '1111', '1031', '1077',
+            '1100', '1023', '1007', '1015', '1067', '1051', '1099', '1021',
+            '1022', '1038', '1053', '1011', '1052', '1075', '1078', '1080',
+            '1012', '1081', '1092', '1055', '1033', '1082', '1106', '1088']    # NOQA
+
+    for i in urls:
+        pprint(parse_info('http://www.changomas.com.ar/sucursales/sucursal.php?id=' + i))
+
+
+
+
 def jumbo():
     JUMBO = Cadena.objects.get(id=4)
     pq = PyQuery('http://www.jumbo.com.ar/sucursales.html')
@@ -322,4 +375,4 @@ def vea():
 
 
 if __name__ == '__main__':
-    vea()
+    changomas()
