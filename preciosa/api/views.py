@@ -23,6 +23,7 @@ from preciosa.api.serializers import (CadenaSerializer, SucursalSerializer,
                                       EmpresaFabricanteSerializer, MarcaSerializer,
                                       CategoriaSerializer, PrecioSerializer,
                                       ProductoDetalleSerializer, UserSerializer)
+from tools import texto
 
 
 class CreateListRetrieveViewSet(mixins.CreateModelMixin,
@@ -40,9 +41,17 @@ class CreateListRetrieveViewSet(mixins.CreateModelMixin,
 
 
 class CityViewSet(viewsets.ReadOnlyModelViewSet):
-    permission_classes = (IsAuthenticated,)
-    queryset = City.objects.filter(country__name='Argentina')
+    # permission_classes = (IsAuthenticated,)
+    queryset = City.objects.all()
     serializer_class = CitySerializer
+
+    def get_queryset(self):
+        queryset = super(CityViewSet, self).get_queryset()
+        q = self.request.QUERY_PARAMS.get('q', None)
+        if q:
+            q = texto.normalizar(q).replace(' ', '')
+            queryset = queryset.filter(search_names__icontains=q)
+        return queryset
 
 
 class CadenaViewSet(CreateListRetrieveViewSet):

@@ -130,8 +130,11 @@ class ProductoDetalleSerializer(serializers.Serializer):
 
 
 class CitySerializer(serializers.HyperlinkedModelSerializer):
-    region = serializers.Field(source='region.name')
+    name = serializers.CharField(source='name', read_only=True)
+
+    def transform_name(self, obj, value=''):
+        return unicode(obj).replace(', Argentina', '')
 
     class Meta:
         model = City
-        fields = ('name', 'latitude', 'longitude', 'geoname_id', 'region')
+        fields = ('id', 'name', 'latitude', 'longitude', 'geoname_id')

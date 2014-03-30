@@ -162,6 +162,13 @@ El listado de sucursales (http://preciosdeargentina.com.ar/api/v1/sucursales) pu
    una posición y el radio en kilometros que determina las zona donde se buscan sucursales. Estos parámetros son interdependientes.
 
 
+El listado de Ciudades (http://preciosdeargentina.com.ar/api/v1/ciudades)
+ puede recibir los siguientes parámetros via ``GET``:
+
+``q``
+    cadena a buscar. Por ejemplo, nombre de ciudad o provincia.
+
+
 Formatos
 ---------
 
