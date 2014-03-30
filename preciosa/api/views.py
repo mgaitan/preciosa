@@ -46,7 +46,7 @@ class CityViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class CadenaViewSet(CreateListRetrieveViewSet):
-    queryset = Cadena.objects.all()
+    queryset = Cadena.objects.all().order_by('nombre')
     serializer_class = CadenaSerializer
 
 
