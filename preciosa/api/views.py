@@ -50,7 +50,7 @@ class CityViewSet(viewsets.ReadOnlyModelViewSet):
         q = self.request.QUERY_PARAMS.get('q', None)
         if q:
             q = texto.normalizar(q).replace(' ', '')
-            queryset = queryset.filter(search_names__icontains=q)
+            queryset = queryset.filter(search_names__startswith=q)[:6]
         return queryset
 
 
