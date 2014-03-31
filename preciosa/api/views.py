@@ -11,8 +11,6 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import exceptions
 from rest_framework.permissions import IsAuthenticated
-# from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-# from rest_framework.permissions import IsAuthenticated
 from cities_light.models import City
 from preciosa.precios.models import (Sucursal, Cadena, Producto,
                                      EmpresaFabricante, Marca, Categoria, Precio)
@@ -124,8 +122,7 @@ class SucursalesList(mixins.ListModelMixin,
         return self.list(request, *args, **kwargs)
 
     def create(self, request, *args, **kwargs):
-        # FIX ME: deberia ser MultiValueDict ?
-        data = dict(request.DATA)
+        data = request.DATA.copy()
         if data.get('cadena', None) == 'otra':
             data.pop('cadena')
 
