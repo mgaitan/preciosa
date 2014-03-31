@@ -129,9 +129,17 @@ class SucursalesList(mixins.ListModelMixin,
         if data.get('cadena', None) == 'otra':
             data.pop('cadena')
 
+        UBICACION_AUTO = False
+        if data.get('ubicacion', None) == 'auto':
+            UBICACION_AUTO = data.pop('ubicacion')
+
         serializer = self.get_serializer(data=data, files=request.FILES)
 
         if serializer.is_valid():
+            if UBICACION_AUTO:
+                geo = gis.geocode(serializer.object.ciudad, serializer.object.direccion)
+                ubicacion = Point(geo['lon'], geo['lat'])
+                serializer.object.ubicacion = ubicacion
             self.pre_save(serializer.object)
             self.object = serializer.save(force_insert=True)
             self.post_save(self.object, created=True)

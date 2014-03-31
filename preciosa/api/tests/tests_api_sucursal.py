@@ -159,3 +159,17 @@ class TestsCrearSucursal(BaseTestApiSucursal):
             nueva = Sucursal.objects.get(id=r.data['id'])
             self.assertEqual(nueva.lon, 33.56)
             self.assertEqual(nueva.lat, 18.5)
+
+    def test_crear_nueva_sucursal_ubicacion_auto(self):
+        with patch('tools.gis.geocode') as mock_geocode:
+            mock_geocode.return_value = {'lat': -33.3, 'lon': -55.5,
+                                         'direccion': 'zaraza'}
+            r = self.client.post(self.url, {'nombre': 'Lo de cacho',
+                                            'ciudad': self.suc.ciudad.id,
+                                            'direccion': u'durazno y convencion',
+                                            'ubicacion': 'auto'})
+        self.assertEqual(r.status_code, status.HTTP_201_CREATED)
+        nueva = Sucursal.objects.get(id=r.data['id'])
+        self.assertEqual(nueva.lon, -55.5)
+        self.assertEqual(nueva.lat, -33.3)
+
