@@ -8,13 +8,16 @@ from preciosa.precios.tests.factories import UserFactory, SucursalFactory, CityF
 from tools.gis import punto_destino
 
 
-class TestsApiSucursal(APITestCase):
+class BaseTestApiSucursal(APITestCase):
 
     def setUp(self):
         self.suc = SucursalFactory()
         self.url = reverse('sucursales')
         self.token = UserFactory().auth_token.key
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token)
+
+
+class TestsListaSucursal(BaseTestApiSucursal):
 
     def test_requiere_auth(self):
         self.client.credentials()  # borra token
@@ -90,6 +93,9 @@ class TestsApiSucursal(APITestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.data['results'], [])
 
+
+class TestsCrearSucursal(BaseTestApiSucursal):
+
     def test_crear_nueva_sucursal(self):
         assert self.suc.cadena.id
         ciudad = CityFactory()
@@ -103,3 +109,44 @@ class TestsApiSucursal(APITestCase):
         self.assertEqual(Sucursal.objects.count(), 2)
         self.assertEqual(r.data['cadena'], self.suc.cadena.id)
         self.assertEqual(r.data['direccion'], u'durazno y convencion')
+        nueva = Sucursal.objects.get(id=r.data['id'])
+        self.assertEqual(nueva.cadena, self.suc.cadena)
+        self.assertEqual(nueva.direccion, u'durazno y convencion')
+
+    def test_crear_nueva_sucursal_data_invalida(self):
+        r = self.client.post(self.url, {'nombre': 'zaraza',
+                                        'ciudad': 1354,
+                                        'direccion': u'durazno y convencion'})
+        self.assertEqual(r.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(r.data,
+                         {'ciudad': [u"Invalid pk '1354' - object does not exist."]})
+
+    def test_crear_nueva_sucursal_cadena_vacia(self):
+        r = self.client.post(self.url, {'cadena': '',
+                                        'nombre': 'zaraza',
+                                        'ciudad': self.suc.ciudad.id,
+                                        'direccion': u'durazno y convencion'})
+        self.assertEqual(r.status_code, status.HTTP_201_CREATED)
+        nueva = Sucursal.objects.get(id=r.data['id'])
+        self.assertIsNone(nueva.cadena)
+
+    def test_crear_nueva_sucursal_sin_clave_cadena(self):
+        r = self.client.post(self.url, {'nombre': 'zaraza',
+                                        'ciudad': self.suc.ciudad.id,
+                                        'direccion': u'durazno y convencion'})
+        self.assertEqual(r.status_code, status.HTTP_201_CREATED)
+        nueva = Sucursal.objects.get(id=r.data['id'])
+        self.assertIsNone(nueva.cadena)
+
+    def test_crear_nueva_sucursal_ubicacion(self):
+        for ubic in ['33.56 18.5', 'POINT (33.56 18.5)',
+                     'lon:33.56 lat:18.5', '33.56, 18.5']:
+            Sucursal.objects.all().delete()
+            r = self.client.post(self.url, {'nombre': 'zaraza',
+                                            'ciudad': self.suc.ciudad.id,
+                                            'direccion': u'durazno y convencion',
+                                            'ubicacion': ubic})
+            self.assertEqual(r.status_code, status.HTTP_201_CREATED)
+            nueva = Sucursal.objects.get(id=r.data['id'])
+            self.assertEqual(nueva.lon, 33.56)
+            self.assertEqual(nueva.lat, 18.5)
