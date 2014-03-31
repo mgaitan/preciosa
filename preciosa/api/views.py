@@ -123,6 +123,24 @@ class SucursalesList(mixins.ListModelMixin,
             return Response(serializer.data)
         return self.list(request, *args, **kwargs)
 
+    def create(self, request, *args, **kwargs):
+        # FIX ME: deberia ser MultiValueDict ?
+        data = dict(request.DATA)
+        if data.get('cadena', None) == 'otra':
+            data.pop('cadena')
+
+        serializer = self.get_serializer(data=data, files=request.FILES)
+
+        if serializer.is_valid():
+            self.pre_save(serializer.object)
+            self.object = serializer.save(force_insert=True)
+            self.post_save(self.object, created=True)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED,
+                            headers=headers)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 

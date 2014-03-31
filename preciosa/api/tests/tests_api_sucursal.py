@@ -130,6 +130,15 @@ class TestsCrearSucursal(BaseTestApiSucursal):
         nueva = Sucursal.objects.get(id=r.data['id'])
         self.assertIsNone(nueva.cadena)
 
+    def test_crear_nueva_sucursal_cadena_otra(self):
+        r = self.client.post(self.url, {'cadena': 'otra',
+                                        'nombre': 'zaraza',
+                                        'ciudad': self.suc.ciudad.id,
+                                        'direccion': u'durazno y convencion'})
+        self.assertEqual(r.status_code, status.HTTP_201_CREATED)
+        nueva = Sucursal.objects.get(id=r.data['id'])
+        self.assertIsNone(nueva.cadena)
+
     def test_crear_nueva_sucursal_sin_clave_cadena(self):
         r = self.client.post(self.url, {'nombre': 'zaraza',
                                         'ciudad': self.suc.ciudad.id,
