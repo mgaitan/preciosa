@@ -2,7 +2,6 @@
 """
 utilidades relacionadas a GIS
 """
-from copy import copy
 import math
 import requests
 from django.contrib.gis.geos import Point
@@ -86,7 +85,8 @@ def donde_queda(lat, lon):
 
     r = unificar(reverse_geocode(lat, lon, False))
     data = {}
-    data['direccion'] = r['route'] + ' ' + r['street_number']
+    import ipdb; ipdb.set_trace()
+    data['direccion'] = (r['route'] + ' ' + r.get('street_number', '')).strip()
     data['ciudad'] = None
     try:
         data['ciudad'] = City.objects.get(name=r['neighborhood'])

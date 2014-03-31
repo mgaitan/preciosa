@@ -24,6 +24,7 @@ from preciosa.api.serializers import (CadenaSerializer, SucursalSerializer,
                                       CategoriaSerializer, PrecioSerializer,
                                       ProductoDetalleSerializer, UserSerializer)
 from tools import texto
+from tools import gis
 
 
 class CreateListRetrieveViewSet(mixins.CreateModelMixin,
@@ -329,3 +330,19 @@ def registro(request):
 
     token = user.auth_token.key
     return Response({'token': token}, status=status_)
+
+
+@api_view(['POST', 'GET'])
+# @permission_classes((IsAuthenticated,))
+def donde_queda(request):
+    cualca = {}
+    cualca.update(request.DATA)
+    cualca.update(request.QUERY_PARAMS)
+
+    if 'lat' not in cualca or 'lon' not in cualca:
+        raise exceptions.APIException('lat y lon son obligatorios')
+    lon, lat = cualca['lon'][0], cualca['lat'][0]
+    queda = gis.donde_queda(lat, lon)
+    queda['ciudad_nombre'] = unicode(queda['ciudad']).replace(', Argentina', '')
+    queda['ciudad'] = queda['ciudad'].id
+    return Response(queda)

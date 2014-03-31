@@ -30,6 +30,7 @@ class MyRouter(routers.DefaultRouter):
                     'sucursales': reverse('sucursales', request=request),
                     'productos': reverse('productos', request=request),
                     'precios': reverse('precios', request=request),
+                    'donde_queda': reverse('donde_queda', request=request),
                     # listar acá otras urls que queremos que aparezcan en
                     # la home de la API
                 }
@@ -62,6 +63,8 @@ urlpatterns = patterns("preciosa.api.views",
 
     url(r"^productos/(?P<pk>\d+)$", views.ProductosList.as_view(), name='productos'),
     url(r"^precios/$", views.PreciosList.as_view(), name='precios'),
+    url(r"^utils/donde_queda$", views.donde_queda, name='donde_queda'),
+
     url(r"^", include(router.urls))
 
 )
