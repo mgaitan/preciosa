@@ -3,7 +3,8 @@ from django.core.urlresolvers import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
 from mock import patch, MagicMock
-from preciosa.precios.tests.factories import UserFactory, SucursalFactory
+from preciosa.precios.models import Sucursal
+from preciosa.precios.tests.factories import UserFactory, SucursalFactory, CityFactory
 from tools.gis import punto_destino
 
 
@@ -31,7 +32,8 @@ class TestsApiSucursal(APITestCase):
         response = self.client.get(self.url)
         for suc, js in zip((self.suc, suc2), response.data['results']):
             self.assertEqual(js['id'], suc.id)
-            self.assertEqual(js['cadena']['id'], suc.cadena.id)
+            self.assertEqual(js['cadena'], suc.cadena.id)
+            self.assertEqual(js['cadena_completa']['id'], suc.cadena.id)
             self.assertEqual(js['ubicacion'], str(suc.ubicacion))
             self.assertEqual(js['direccion'], suc.direccion)
 
@@ -40,7 +42,8 @@ class TestsApiSucursal(APITestCase):
         response = self.client.get(url_detalle)
         js = response.data
         self.assertEqual(js['id'], self.suc.id)
-        self.assertEqual(js['cadena']['id'], self.suc.cadena.id)
+        self.assertEqual(js['cadena'], self.suc.cadena.id)
+        self.assertEqual(js['cadena_completa']['id'], self.suc.cadena.id)
         self.assertEqual(js['ubicacion'], str(self.suc.ubicacion))
         self.assertEqual(js['direccion'], self.suc.direccion)
 
@@ -86,3 +89,17 @@ class TestsApiSucursal(APITestCase):
         self.suc.save()
         response = self.client.get(self.url)
         self.assertEqual(response.data['results'], [])
+
+    def test_crear_nueva_sucursal(self):
+        assert self.suc.cadena.id
+        ciudad = CityFactory()
+
+        r = self.client.post(self.url, {'cadena': self.suc.cadena.id,
+                                        'nombre': 'zaraza',
+                                        'ciudad': ciudad.id,
+                                        'direccion': u'durazno y convencion'})
+
+        self.assertEqual(r.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Sucursal.objects.count(), 2)
+        self.assertEqual(r.data['cadena'], self.suc.cadena.id)
+        self.assertEqual(r.data['direccion'], u'durazno y convencion')

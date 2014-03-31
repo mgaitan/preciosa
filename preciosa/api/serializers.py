@@ -51,7 +51,7 @@ class UbicacionField(serializers.WritableField):
 
 
 class SucursalSerializer(serializers.ModelSerializer):
-    cadena = CadenaSerializer(source='cadena')
+    cadena_completa = CadenaSerializer(source='cadena', read_only=True)
     ubicacion = UbicacionField(required=False)
     ciudad_nombre = serializers.CharField(source='ciudad', read_only=True)
     ciudad_provincia = serializers.CharField(source='ciudad', read_only=True)
@@ -72,6 +72,7 @@ class SucursalSerializer(serializers.ModelSerializer):
             'ciudad',
             'ciudad_nombre',
             'ciudad_provincia',
+            'cadena_completa',
             'direccion',
             'horarios',
             'telefono'
