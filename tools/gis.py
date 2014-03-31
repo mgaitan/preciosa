@@ -85,7 +85,6 @@ def donde_queda(lat, lon):
 
     r = unificar(reverse_geocode(lat, lon, False))
     data = {}
-    import ipdb; ipdb.set_trace()
     data['direccion'] = (r['route'] + ' ' + r.get('street_number', '')).strip()
     data['ciudad'] = None
     try:

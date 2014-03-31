@@ -333,8 +333,11 @@ def registro(request):
 
 
 @api_view(['POST', 'GET'])
-# @permission_classes((IsAuthenticated,))
+@permission_classes((IsAuthenticated,))
 def donde_queda(request):
+    """dado parámetros lat y lon en decimal,
+    devuelve una direccion y ciudad inferida"""
+
     cualca = {}
     cualca.update(request.DATA)
     cualca.update(request.QUERY_PARAMS)
