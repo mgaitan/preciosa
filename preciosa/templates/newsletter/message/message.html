@@ -11,23 +11,27 @@
     <h2>{{ message.title }}</h2>
     {% for article in message.articles.all %}
         <h3>{{ article.title }}</h3>
-        
+
+       {% comment %}
+
         {% thumbnail article.image "200x200" as image %}
             <img src="http://{{ site.domain }}{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}">
         {% endthumbnail %}
 
+       {% endcomment %}
+
         <div>{{ article.text|safe }}</div>
-        
+
         {% if article.url %}
-            <div><a href="{{ article.url }}">Read more</div></a>
+            <div><a href="{{ article.url }}">Leer más</div></a>
         {% endif %}
     {% endfor %}
-    
+
     <ul>
         {% if submission.publish %}
-        <li><a href="http://{{ site.domain }}{{ submission.get_absolute_url }}">Read message online</a></li>
+        <li><a href="http://{{ site.domain }}{{ submission.get_absolute_url }}">Leer online</a></li>
         {% endif %}
-        <li><a href="http://{{ site.domain }}{% url "newsletter_unsubscribe_request" newsletter.slug %}">Unsubscribe</a></li>
+        <li><a href="http://{{ site.domain }}{% url "newsletter_unsubscribe_request" newsletter.slug %}">Desuscribirme</a></li>
     </ul>
 </body>
 </html>
