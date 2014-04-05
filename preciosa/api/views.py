@@ -322,7 +322,7 @@ def registro(request):
         # se envia una data errorena. no se actualiza ni se crea un user
         raise exceptions.AuthenticationFailed(serialized.errors)
 
-    elif 'uuid' in request.DATA:
+    elif 'uuid' in request.DATA and request.DATA['uuid']:
         # tratamos de conseguir el usuario via un uuid enviado
         movil_user = get_object_or_None(MovilInfo, uuid=request.DATA['uuid'])
 
@@ -338,7 +338,7 @@ def registro(request):
 
     assert user
 
-    if 'uuid' in request.DATA:
+    if 'uuid' in request.DATA and request.DATA['uuid']:
         # intentamos asociar la info del movil al usuario
 
         try:
