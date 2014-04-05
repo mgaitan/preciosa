@@ -35,9 +35,12 @@ def inferir_ciudad(ciudad, provincia=None, estricto=False):
         nombreciudad = nombreciudad.split('.')[1]
     buscar = "%sargentina" % nombreciudad
     try:
-        ciudad = City.objects.get(search_names__icontains=buscar)
+        ciudad = City.objects.get(name__iexact=ciudad)
     except (City.DoesNotExist, City.MultipleObjectsReturned):
-        ciudad = None
+        try:
+            ciudad = City.objects.get(search_names__icontains=buscar)
+        except (City.DoesNotExist, City.MultipleObjectsReturned):
+            ciudad = None
 
     if ciudad and not estricto:
         return ciudad.name, ciudad.region.name, ciudad.id
