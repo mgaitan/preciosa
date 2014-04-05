@@ -1,1 +1,1 @@
-{{ newsletter.title }} - Update information
+{{ newsletter.title }} - Cambios en tu suscripción

@@ -1,9 +1,11 @@
-Dear {{ subscription.name }},
+Hola {{ subscription.name }},
 
-you, or someone in your name requested unsubscription from {{ newsletter.title }}.
+Vos o alguien más solicitó la desuscripción del newsletter {{ newsletter.title }}.
 
-If you would like to confirm your unsubscription, please follow this activation link:
+Si querés confirmar tu desuscripción, por favor hacé click en el siguiente link:
 http://{{ site.domain }}{{ subscription.unsubscribe_activate_url }}
 
-Kind regards,
+Si vos no solicitaste la desuscripción o cambiaste de opinión, podés ignorar este mensaje.
+
+Saludos,
 {{ newsletter.sender }}

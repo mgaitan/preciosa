@@ -1,9 +1,9 @@
-Dear {{ subscription.name }},
+Hola {{ subscription.name }},
 
-you, or someone in your name requested updating your personal information for {{ newsletter.title }}.
+Vos o alguien más solicitó actualizar tu información personal para {{ newsletter.title }}.
 
-To make changes to your information in our database, please follow this activation link:
+Si querés confirmar estos cambios, por favor hacé click en el siguiente link:
 http://{{ site.domain }}{{ subscription.update_activate_url }}
 
-Kind regards,
+Saludos,
 {{ newsletter.sender }}

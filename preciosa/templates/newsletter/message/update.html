@@ -4,17 +4,17 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Update of subscription to {{ newsletter.title }}</title>
+    <title>Cambios en tu suscripción a {{ newsletter.title }}</title>
 </head>
 <body>
-Dear {{ subscription.name }},
+Hola {{ subscription.name }},
 
-you, or someone in your name requested updating your personal information for {{ newsletter.title }}.
+Vos o alguien más solicitó actualizar tu información personal para {{ newsletter.title }}.
 
-To make changes to your information in our database, please follow this activation link:
+Si querés confirmar estos cambios, por favor hacé click en el siguiente link:
 http://{{ site.domain }}{{ subscription.update_activate_url }}
 
-Kind regards,
+Saludos,
 {{ newsletter.sender }}
 </body>
 </html>
