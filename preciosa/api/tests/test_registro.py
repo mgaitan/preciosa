@@ -170,3 +170,13 @@ class TestsRegistroAuth(APITestCase):
         self.assertEqual(movil_info.plataforma, 'Android')
         self.assertEqual(movil_info.plataforma_version, '2.3')
         self.assertEqual(movil_info.preciosa_version, '0.1 (natimit)')
+
+    def test_uuid_vacio_no_guarda_nada(self):
+        data = {'uuid': '',
+                'phonegap': '3.3',
+                'nombre': 'Passion',  # nexus one
+                'plataforma': 'Android',
+                'plataforma_version': '2.3',
+                'preciosa_version': '0.1 (natimit)'}
+        self.client.post(self.url, data)
+        self.assertEqual(MovilInfo.objects.count(), 0)
