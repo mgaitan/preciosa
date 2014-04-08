@@ -14,5 +14,14 @@
             "domain": "preciosdeargentina.com.ar",
             "name": "Preciosa - Precios de Argentina"
         }
+    },
+
+    {
+        "pk": 3,
+        "model": "sites.site",
+        "fields": {
+            "domain": "http://107.170.28.160/",
+            "name": "[DESARROLLO] Preciosa - Precios de Argentina"
+        }
     }
 ]
