@@ -335,16 +335,16 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
-    'DEFAULT_THROTTLE_CLASSES': (
-        'rest_framework.throttling.AnonRateThrottle',
-        'preciosa.api.throttling.AntiAnsiososThrottle',
-        'preciosa.api.throttling.AntiPerseverantesThrottle',
-    ),
-    'DEFAULT_THROTTLE_RATES': {
-        'anon': '30/day',      # anonimamente somos poco permisivos
-        'anti_ansiosos': '40/min',
-        'anti_perseverantes': '1000/day',
-    }
+    # 'DEFAULT_THROTTLE_CLASSES': (
+    #     'rest_framework.throttling.AnonRateThrottle',
+    #     'preciosa.api.throttling.AntiAnsiososThrottle',
+    #     'preciosa.api.throttling.AntiPerseverantesThrottle',
+    # ),
+    # 'DEFAULT_THROTTLE_RATES': {
+    #     'anon': '30/day',      # anonimamente somos poco permisivos
+    #     'anti_ansiosos': '40/min',
+    #     'anti_perseverantes': '1000/day',
+    # }
 }
 
 # usuarios que no tienen THROTTLING
