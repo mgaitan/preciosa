@@ -347,6 +347,9 @@ REST_FRAMEWORK = {
     }
 }
 
+# usuarios que no tienen THROTTLING
+MAGIC_TOKENS = []
+
 # enable cross-site requests from any host
 CORS_ORIGIN_ALLOW_ALL = True
 
