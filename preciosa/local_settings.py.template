@@ -22,12 +22,15 @@ RAVEN_CONFIG = {
 }
 
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'XXX@gmail.com'
-EMAIL_HOST_PASSWORD = 'YYY'
-EMAIL_PORT = 587
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'XXX@gmail.com'
+# EMAIL_HOST_PASSWORD = 'YYY'
+# EMAIL_PORT = 587
+
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+MANDRILL_API_KEY = "<your Mandrill key>"
 
 THUMBNAIL_DEBUG = True
 THUMBNAIL_BASEDIR = 'thumbs'
