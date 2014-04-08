@@ -36,3 +36,12 @@ urlpatterns = patterns("",
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.SITE_ID == 3:
+    # las crawlers no son bienvenidos en el sitio de desarrollo
+    from django.http import HttpResponse
+    urlpatterns += patterns('',
+                            (r'^robots\.txt$',
+                             lambda r: HttpResponse("User-agent: *\nDisallow: /",
+                                                    mimetype="text/plain"))
+                            )
