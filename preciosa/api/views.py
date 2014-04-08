@@ -23,6 +23,8 @@ from preciosa.api.serializers import (CadenaSerializer, SucursalSerializer,
                                       ProductoDetalleSerializer, UserSerializer)
 from tools import texto
 from tools import gis
+import logging
+logger = logging.getLogger('main')
 
 
 class CreateListRetrieveViewSet(mixins.CreateModelMixin,
@@ -292,9 +294,9 @@ def registro(request):
     VALID_USER_FIELDS = [f.name for f in get_user_model()._meta.fields]
     VALID_MOVIL_INFO_FIELDS = [f.name for f in MovilInfo._meta.fields]
     serialized = UserSerializer(data=request.DATA)
-
     user_data = {field: data for (field, data) in request.DATA.items()
                  if field in VALID_USER_FIELDS}
+    logger.debug("user_data: " + repr(user_data))
 
     if request.user.is_authenticated() and user_data and serialized.is_valid():
         # el usuario existía pero se envian datos validos. actualizamos datos

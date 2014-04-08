@@ -115,7 +115,7 @@ class TestsDetalle(APITestCase):
     def test_integracion(self):
         """1. se pide precio para un producto que aun no tiene precios
            2. se envia un precio para la sucursal A
-           3. En otra sucursal B (cercana a B) y de la misma cadena, el precio
+           3. En otra sucursal B (cercana a A) y de la misma cadena, el precio
               enviado aparece como mas probable.
            4. En B se envia un precio mejor
            5. en la sucursal original A, el precio sigue siendo el enviado,
