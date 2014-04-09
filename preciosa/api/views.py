@@ -262,10 +262,11 @@ def producto_sucursal_detalle(request, pk_sucursal, pk_producto):
             kwargs = {}
             if created:
                 kwargs['created'] = created
-            Precio.objects.create(sucursal=sucursal,
-                                  producto=producto,
-                                  usuario=request.user,
-                                  precio=precio, **kwargs)
+            if precio > 0:
+                Precio.objects.create(sucursal=sucursal,
+                                      producto=producto,
+                                      usuario=request.user,
+                                      precio=precio, **kwargs)
 
     return Response({'detail': '¡gracias!'})
 

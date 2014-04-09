@@ -112,6 +112,11 @@ class TestsDetalle(APITestCase):
         self.assertEqual(precio.usuario, self.user)
         self.assertEqual(str(precio.created), str(fecha))
 
+    def test_ignora_precio_0(self):
+        assert Precio.objects.count() == 0
+        self.client.post(self.url, {'precio': 0})
+        self.assertEqual(Precio.objects.count(), 0)
+
     def test_integracion(self):
         """1. se pide precio para un producto que aun no tiene precios
            2. se envia un precio para la sucursal A
