@@ -117,6 +117,14 @@ class TestsDetalle(APITestCase):
         self.client.post(self.url, {'precio': 0})
         self.assertEqual(Precio.objects.count(), 0)
 
+    def test_ignora_precio_con_diferencia_del_50(self):
+        PrecioFactory(sucursal=self.suc, precio=10, producto=self.prod)
+        assert Precio.objects.count() == 1
+        self.client.post(self.url, {'precio': 15.1})
+        self.assertEqual(Precio.objects.count(), 1)
+        self.client.post(self.url, {'precio': 14.9})
+        self.assertEqual(Precio.objects.count(), 2)
+
     def test_integracion(self):
         """1. se pide precio para un producto que aun no tiene precios
            2. se envia un precio para la sucursal A

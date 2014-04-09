@@ -247,28 +247,42 @@ def producto_sucursal_detalle(request, pk_sucursal, pk_producto):
     sucursal = get_object_or_404(Sucursal, id=pk_sucursal)
     detalle = Detalle(producto, sucursal)
 
+    def precio_valido(nuevo_precio):
+        if nuevo_precio <= 0:
+            return False
+
+        if detalle.mas_probables:
+            original = float(detalle.mas_probables[0].precio)
+            delta = abs(original - float(nuevo_precio)) / original
+            if delta > 0.5:
+                # si es un 50% mas caro o barato que lo que estaba,
+                # ignoramos
+                return False
+
+        return True
+
     if request.method == 'GET':
         serializer = ProductoDetalleSerializer(detalle)
-
         return Response(serializer.data)
+
     elif request.method == 'POST':
-        # a futuro el POST requirá un token según issue #201
-        # para encontrar el user
-        # token = request.QUERY_PARAMS.get('token', None)
-        # user = get_or_None(User, usertokens__token=token)
-        precio = request.DATA.get('precio', None)
+        precio = request.DATA.get('precio', 0)
         created = request.DATA.get('created', None)
-        if precio:
-            kwargs = {}
-            if created:
-                kwargs['created'] = created
-            if precio > 0:
-                Precio.objects.create(sucursal=sucursal,
-                                      producto=producto,
-                                      usuario=request.user,
-                                      precio=precio, **kwargs)
+
+        if not precio_valido(precio):
+            return Response({'detail': 'no aceptado'})
+
+        kwargs = {}
+        if created:
+            kwargs['created'] = created
+
+        Precio.objects.create(sucursal=sucursal,
+                              producto=producto,
+                              usuario=request.user,
+                              precio=precio, **kwargs)
 
     return Response({'detail': '¡gracias!'})
+
 
 
 @api_view(['POST'])
