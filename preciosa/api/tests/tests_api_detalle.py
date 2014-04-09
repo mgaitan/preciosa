@@ -114,7 +114,7 @@ class TestsDetalle(APITestCase):
 
     def test_ignora_precio_0(self):
         assert Precio.objects.count() == 0
-        self.client.post(self.url, {'precio': 0})
+        self.client.post(self.url, {'precio': '0.0'})
         self.assertEqual(Precio.objects.count(), 0)
 
     def test_ignora_precio_con_diferencia_del_50(self):

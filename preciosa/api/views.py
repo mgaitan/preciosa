@@ -248,6 +248,11 @@ def producto_sucursal_detalle(request, pk_sucursal, pk_producto):
     detalle = Detalle(producto, sucursal)
 
     def precio_valido(nuevo_precio):
+        try:
+            nuevo_precio = float(nuevo_precio)
+        except ValueError:
+            return False
+
         if nuevo_precio <= 0:
             return False
 
