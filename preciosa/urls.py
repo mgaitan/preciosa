@@ -3,6 +3,8 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from precios import views
 
+from accounts.views import SignupView
+
 from django.views.generic.base import RedirectView
 
 import autocomplete_light
@@ -16,6 +18,7 @@ urlpatterns = patterns("",
     url(r'^api/v1/', include("preciosa.api.urls")),  # noqa
     url(r'^api/auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r"^admin/", include(admin.site.urls)),
+    url(r"^account/signup/$", SignupView.as_view()),
     url(r"^account/", include("account.urls")),
     url(r'^newsletter/', include('newsletter.urls')),
     url(r'^feedback/', include('feedback.urls')),
