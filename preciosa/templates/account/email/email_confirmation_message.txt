@@ -1,0 +1,7 @@
+{% load i18n account_tags %}
+
+Un usuario en {{ current_site.name }} ha creado una cuenta usando esta dirección de correo electrónico.
+
+Para confirmar esta dirección de correo electrónico, vaya a {{ activate_url }}
+
+Si no desea registrarse en este sitio, puede ignorar este mensaje.

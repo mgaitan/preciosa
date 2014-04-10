@@ -18,7 +18,8 @@ urlpatterns = patterns("",
     url(r'^api/v1/', include("preciosa.api.urls")),  # noqa
     url(r'^api/auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r"^admin/", include(admin.site.urls)),
-    url(r"^account/signup/$", SignupView.as_view()),
+    url(r"^account/signup/$", SignupView.as_view(
+        template_name_email_confirmation_sent='account/email/template_name_email_confirmation_sent')),
     url(r"^account/", include("account.urls")),
     url(r'^newsletter/', include('newsletter.urls')),
     url(r'^feedback/', include('feedback.urls')),
