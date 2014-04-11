@@ -42,7 +42,8 @@ class SucursalAdmin(admin.OSMGeoAdmin):
     default_zoom = 3
 
     list_fields = ['cadena']
-    search_fields = ['ciudad__name', 'ciudad__region__name']
+    list_filter = ['cadena']
+    search_fields = ['busqueda']
 
 
 admin.site.register(Marca, MarcaAdmin)
