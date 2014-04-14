@@ -1,18 +1,17 @@
 {# carga el javascript necesario para que el autocompletado del buscador funcione #}
 {% load url from future %}
-    <script type="text/javascript">
-    $(function(){
-  // Make a javascript Autocomplete object and set it up
+<script type="text/javascript">
+  $(function(){
+    
+    // Make a javascript Autocomplete object and set it up
     var autocomplete = $('#buscar').yourlabsAutocomplete({
-        url: '{% url "buscador" %}',
+      url: '{% url "buscador" %}',
     });
 
-
-    $('#buscar').on('keypress', function(e) {
-      if(e.which == 13) {
-         window.location.href = $('a.hilight').attr('href');
-      }
+    // Para que funcione el teclado en el buscador de precios
+    $('#buscar').bind( 'selectChoice', function(e, choice, autocomplete) { 
+      window.location.href = $('a.hilight').attr('href');
     });
 
-    });
-    </script>
+  });
+</script>
