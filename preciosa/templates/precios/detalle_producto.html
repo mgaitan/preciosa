@@ -15,7 +15,7 @@
                         <img alt="" src="{{ producto.foto.url }}">
                     {% else %}
 
-                       <p style="margin-top:30px" class="text-center">(todavía no tenemos una foto para este producto)</p>
+                       <p style="margin-top:30px" class="text-center">(todavía no tenemos   una foto para este producto)</p>
                     {% endif %}
                     </div>
                     <div class="col-xs-9 col-md-9">
@@ -29,6 +29,11 @@
                                 <dd> {{ producto.upc }}</dd>
                             </dl>
 
+
+                            <h2>
+                              Últimos precios registrados
+                            </h2>
+
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -37,11 +42,11 @@
                                         <th>Relevado el</th>
                                     </tr>
                                 </thead>
-                                {% for precio in producto.precio_set.all %}
+                                {% for precio in precios %}
                                 <tr>
-                                <td>{{ precio.sucursal.nombre }}</td>
+                                <td><strong>{{ precio.sucursal.nombre }}</strong> <br> <p>{{ precio.sucursal.ciudad }}</p> </td>
                                 <td>$ {{ precio.precio }}</td>
-                                <td>{{ precio.created|date:"d/m/Y" }}</td>
+                                <td><span title="{{ precio.created|date:"d/m/Y h:s" }}">{{ precio.created|timesince }}</span> </td>
                                 </tr>
                                 {% endfor %}
                             </table>

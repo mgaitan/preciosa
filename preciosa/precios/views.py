@@ -36,6 +36,7 @@ class ProductoDetailView(DetailView):
     def get_context_data(self, **kwargs):
 
         context = super(ProductoDetailView, self).get_context_data(**kwargs)
+        context['precios'] = self.object.precios.order_by('created')[:8]
         # Add in the publisher
         context['active'] = ','.join(['li.cat-%d a:first' % p.id
                                       for p in self.object.categoria.get_ancestors()])
