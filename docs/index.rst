@@ -50,6 +50,7 @@ A modo de intro
    tutorial_mobile
    faq
    glosario
+   licencia
 
 
 Preciosa en los medios
