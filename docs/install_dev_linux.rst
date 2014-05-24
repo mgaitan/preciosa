@@ -1,8 +1,10 @@
+.. _install_linux:
+
 Creación de un entorno de desarrollo local en Linux
 ===================================================
 
 El objetivo de este documento es permitir que los desarrolladores puedan
-crear sus entornos de desarrollo **en una maquina local**. Esta instalación es para usuarios más avanzados, que prefieren un control particular sobre la instalación o necesitan mayor performance. En cualquier otro caso recomendamos la :ref:`vagrant`.
+crear sus entornos de desarrollo **en una maquina local**. Esta instalación es para usuarios más avanzados, que prefieren un control particular sobre la instalación o necesitan mayor performance. En cualquier otro caso recomendamos :ref:`vagrant <install_vagrant>`.
 
 
 Esta guía está pensada principalmente para sistemas Linux Ubuntu/Debian, aunque hay comentarios para otros entornos.

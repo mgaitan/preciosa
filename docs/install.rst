@@ -1,9 +1,9 @@
-Instalación
-===========
+Instalación de la plataforma
+============================
 
 Preciosa es una aplicación web basada en Django_ y Geodjango_. Como depende de una `base de dato espacial <http://es.wikipedia.org/wiki/Base_de_datos_espacial>`_ (en particular, usamos PostGis_) y de muchos otros componentes, no es trivial (pero tampoco difícil) armar un entorno de programación.
 
-Esta sección describe distintos modos de instalación, dependiendo el sistema operativo y el objetivo.
+Esta sección describe distintos modos, dependiendo el sistema operativo y el objetivo de la instalación.
 
 Para la configuración de un entorno de desarrollo rápido, la recomendación es utilizar Vagrant.
 

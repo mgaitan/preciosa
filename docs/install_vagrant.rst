@@ -1,4 +1,4 @@
-.. _vagrant:
+.. _install_vagrant:
 
 Creación de un entorno de desarrollo basado en Vagrant
 ======================================================
@@ -12,9 +12,9 @@ Se basa en Vagrant_, una herramienta para la creación y configuración de entor
 En una maquina virtual basada en Ubuntu, Vagrant realiza una instalación automatizada del entorno de desarrollo (configurando base de dato, dependencias, usuario, etc.) y configura la "conexión de red" y la carpeta compartida para trabajar desde la maquina física, independientemente del sistema operativo que tenga, y "ejecutar" el código en la maquina virtual.
 
 
-.. tip::
+.. attention::
 
-    Una forma alternativa para desarrolladores mas experimentados es armar un entorno de desarrollo local
+    Una forma alternativa para desarrolladores más experimentados o que desean mayor control sobre su entorno se describe en :ref:`install_linux`.
 
 
 .. _Vagrant: http://vagrantup.com/
@@ -81,6 +81,9 @@ Para manipular la base de datos podes  acceder a ``/admin`` en tu browser en el 
 El script de provisión
 ----------------------
 
-El script que Vagrant ejecuta para crear por primera la maquina virtual se encuentre en :path:`/tools/install.sh` y es el siguiente:
+El script que Vagrant ejecuta para crear por primera la maquina virtual se encuentre en :file:`/tools/install.sh` y es el siguiente:
 
-.. include:: ../tools/install.sh
+
+
+.. literalinclude:: ../tools/install.sh
+   :language: bash
