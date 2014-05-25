@@ -471,10 +471,10 @@ class PrecioManager(models.Manager):
     def mas_probables(self, producto, sucursal, dias=None, radio=10):
         """
         Cuando no hay datos especificos de un
-        producto para una sucursal (:meth:`historico`),
+        producto para una sucursal (:meth:`PrecioManager.historico`),
         debe ofrecerse un precio más probable. Se calcula
 
-         - Precio con más coincidencias para el producto en otras sucursales
+         - Precio más nuevo para el producto en otras sucursales
            de la misma cadena en la ciudad y/o un radio de distancia si es dado
 
          - En su defecto, precio online de la cadena

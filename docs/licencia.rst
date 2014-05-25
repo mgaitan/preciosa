@@ -17,5 +17,5 @@ Términos
 Podés leer el `texto completo de la licencia <http://www.gnu.org/licenses/agpl-3.0.html>`_ en el sitio de GNU.
 
 
-.. literalinclude:: ../LICENCE
+.. literalinclude:: ../LICENSE
 
