@@ -519,13 +519,19 @@ class PrecioManager(models.Manager):
 
         Sólo considera el último precio en cada sucursal.
         """
-        if not one((ciudad, radio)):
+        #si tiene puto.. tenemos que tener el radio
+        if punto_o_sucursal and not radio:
+            raise ValueError(
+                'Si se especifica el punto o sucursal debe proveer el radio')
+
+        if radio and not punto_o_sucursal and not ciudad:
+            raise ValueError(
+                'Si se especifica el radio debe proveer el punto o sucursal')
+
+        #si no tenemos una ciudad o un punto con radio
+        if not ciudad and not radio:
             raise ValueError(
                 'Debe proveer una ciudad o un radio en kilometros')
-
-        if one((radio, punto_o_sucursal)):
-            raise ValueError(
-                'Si se especifica radio debe proveer el punto o sucursal')
 
         qs = super(PrecioManager,
                    self).get_queryset().filter(producto=producto, activo__isnull=False)
@@ -534,7 +540,12 @@ class PrecioManager(models.Manager):
             desde = timezone.now() - timedelta(days=dias)
             qs = qs.filter(created__gte=desde)
 
-        if radio:
+        if ciudad:
+            if isinstance(ciudad, City):
+                ciudad = ciudad.id
+            qs = qs.filter(sucursal__ciudad__id=ciudad).distinct(
+                'sucursal')[:limite]
+        elif radio:
             if isinstance(punto_o_sucursal, Sucursal):
                 punto = punto_o_sucursal.ubicacion
             else:
@@ -544,11 +555,7 @@ class PrecioManager(models.Manager):
             cercanas = cercanas.values_list('id', flat=True)
             qs = qs.filter(sucursal__id__in=cercanas).distinct(
                 'sucursal')[:limite]
-        elif ciudad:
-            if isinstance(ciudad, City):
-                ciudad = ciudad.id
-            qs = qs.filter(sucursal__ciudad__id=ciudad).distinct(
-                'sucursal')[:limite]
+
         if qs.exists():
             return sorted(qs, key=lambda i: i.precio)
         return []

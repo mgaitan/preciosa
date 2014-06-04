@@ -167,8 +167,14 @@ class TestMejoresPrecios(BaseTestPrecio):
         with self.assertRaisesRegexp(ValueError, 'ciudad o un radio'):
             self.qs()
 
-    def test_punto_es_requerido_para_radio(self):
-        with self.assertRaisesRegexp(ValueError, 'radio debe proveer el punto'):
+    def test_radio_es_requerido_para_punto_o_sucursal(self):
+        with self.assertRaisesRegexp(ValueError,
+            'Si se especifica el punto o sucursal debe proveer el radio'):
+            self.qs(punto_o_sucursal=self.suc)
+
+    def test_punto_o_sucursal_es_requerido_para_radio_sin_ciudad(self):
+        with self.assertRaisesRegexp(ValueError,
+            'Si se especifica el radio debe proveer el punto o sucursal'):
             self.qs(radio=10)
 
     def test_precios_de_otra_ciudad_no_afectan(self):

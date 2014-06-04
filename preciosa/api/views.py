@@ -20,7 +20,8 @@ from preciosa.api.serializers import (CadenaSerializer, SucursalSerializer,
                                       CitySerializer, ProductoSerializer,
                                       EmpresaFabricanteSerializer, MarcaSerializer,
                                       CategoriaSerializer, PrecioSerializer,
-                                      ProductoDetalleSerializer, UserSerializer)
+                                      ProductoDetalleSerializer, UserSerializer,
+                                      ProductoDetalleCoorSerializer)
 from tools import texto
 from tools import gis
 import logging
@@ -88,7 +89,6 @@ class SucursalesList(mixins.ListModelMixin,
     serializer_class = SucursalSerializer
 
     def get_queryset(self):
-
         queryset = super(SucursalesList, self).get_queryset()
 
         q = self.request.QUERY_PARAMS.get('q', None)
@@ -208,9 +208,11 @@ class PreciosList(mixins.ListModelMixin,
 
 
 class Detalle(object):
-    def __init__(self, producto, sucursal):
+    def __init__(self, producto, sucursal, dias, radio):
         self.producto = producto
         self.sucursal = sucursal
+        self.dias = dias
+        self.radio = radio
 
     @property
     def similares(self):
@@ -219,7 +221,7 @@ class Detalle(object):
     @property
     def mas_probables(self):
         probables = Precio.objects.mas_probables(self.producto,
-                                                 self.sucursal, dias=30)
+                                                 self.sucursal, dias=self.dias)
         return probables
 
     @property
@@ -227,11 +229,11 @@ class Detalle(object):
         if self.sucursal.ubicacion:
             mejores = Precio.objects.mejores(self.producto,
                                              punto_o_sucursal=self.sucursal,
-                                             radio=20, dias=30)
+                                             radio=self.radio, dias=self.dias)
         else:
-            mejores = Precio.objects.mejores(self.producto,
+            mejores = Precio.objects.mejores(self.producto, radio=self.radio,
                                              ciudad=self.sucursal.ciudad,
-                                             dias=30)
+                                             dias=self.dias)
         return mejores
 
     @property
@@ -239,13 +241,34 @@ class Detalle(object):
         return PrecioEnAcuerdo.objects.en_acuerdo(self.producto,
                                                   self.sucursal)
 
+class DetalleCoor(object):
+    def __init__(self, producto, lat, lng, dias, radio):
+        self.producto = producto
+        self.dias = dias
+        self.radio = radio
+        self.lat = float(lat)
+        self.lng = float(lng)
+
+    @property
+    def similares(self):
+        return self.producto.similares()
+
+    @property
+    def mejores(self):
+        mejores = Precio.objects.mejores(self.producto,
+                                         punto_o_sucursal=Point(self.lng, self.lat),
+                                         radio=self.radio, dias=self.dias)
+        return mejores
+
 
 @api_view(['GET', 'POST'])
 @permission_classes((IsAuthenticated,))
 def producto_sucursal_detalle(request, pk_sucursal, pk_producto):
     producto = get_object_or_404(Producto, id=pk_producto)
     sucursal = get_object_or_404(Sucursal, id=pk_sucursal)
-    detalle = Detalle(producto, sucursal)
+    radio = int(request.GET.get('radio', 15))
+    dias = int(request.GET.get('dias', 30))
+    detalle = Detalle(producto, sucursal, dias, radio)
 
     def precio_valido(nuevo_precio):
         try:
@@ -287,6 +310,22 @@ def producto_sucursal_detalle(request, pk_sucursal, pk_producto):
                               precio=precio, **kwargs)
 
     return Response({'detail': '¡gracias!'})
+
+
+@api_view(['GET', 'POST'])
+@permission_classes((IsAuthenticated,))
+def producto_detalle(request, pk_producto):
+    producto = get_object_or_404(Producto, id=pk_producto)
+    radio = int(request.GET.get('radio', 15))
+    dias = int(request.GET.get('dias', 30))
+    lat = request.GET.get('lat', None)
+    lng = request.GET.get('lng', None)
+    if lat and lng and request.method == 'GET':
+        detalle = DetalleCoor(producto, lat, lng, dias, radio)
+        serializer = ProductoDetalleCoorSerializer(detalle)
+        return Response(serializer.data)
+
+    return Response({'detail': 'Erroral obtener la información'})
 
 
 
