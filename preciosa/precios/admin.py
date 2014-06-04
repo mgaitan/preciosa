@@ -33,8 +33,9 @@ class ProductoAdmin(admin.ModelAdmin):
 class DescripcionAlternativaAdmin(admin.ModelAdmin):
     search_fields = ['descripcion', 'marca__nombre', 'UPC']
 
+from  django.contrib.gis.admin import OSMGeoAdmin
 
-class SucursalAdmin(admin.OSMGeoAdmin):
+class SucursalAdmin(OSMGeoAdmin):
     center = Point((-45, -55), srid=4326)
     center.transform(900913)
     default_lat = center.x

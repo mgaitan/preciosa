@@ -203,3 +203,46 @@ class TestsDetalle(APITestCase):
         r = self.client.get(self.url)
         self.assertEqual(r.data['mas_probables'][0]['precio'], 10.)
         self.assertEqual(r.data['mejores'][0]['precio'], 8)
+
+
+class TestsDetalleCoord(APITestCase):
+
+    def setUp(self):
+        self.suc = SucursalFactory()
+        self.prod = ProductoFactory(upc='779595')
+        self.url = reverse('producto_detalle_coor', args=(self.prod.id,))
+        self.user = UserFactory()
+        self.token = self.user.auth_token.key
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token)
+
+    def test_requiere_auth(self):
+        self.client.credentials()  # borra token
+        r = self.client.get(self.url)
+        self.assertEqual(r.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertIn('credentials', r.data['detail'])
+
+    def test_auth_puede_ser_por_query(self):
+        self.client.credentials()  # borra token
+        r = self.client.get(self.url + '?token=' + self.token)
+        self.assertEqual(r.status_code, status.HTTP_200_OK)
+
+    def test_detalle_producto(self):
+        r = self.client.get("%s?lat=-32.000&lng=-45.000" % self.url)
+        prod = r.data['producto']
+        self.assertEqual(prod['id'], self.prod.id)
+        self.assertEqual(prod['descripcion'],
+                         self.prod.descripcion)
+        self.assertEqual(prod['upc'],
+                         self.prod.upc)
+
+    def test_detalle_similares(self):
+        simil1 = ProductoFactory(descripcion=self.prod.descripcion + " plus")
+        simil2 = ProductoFactory(descripcion=self.prod.descripcion + " extra")
+        with patch('preciosa.precios.models.Producto.similares') as mock:
+            mock.return_value = [simil1, simil2]
+            r = self.client.get("%s?lat=-32.000&lng=-45.000" % self.url)
+        similares = r.data['similares']
+        self.assertEqual(similares[0]['id'], simil1.id)
+        self.assertEqual(similares[0]['descripcion'], simil1.descripcion)
+        self.assertEqual(similares[1]['id'], simil2.id)
+        self.assertEqual(similares[1]['descripcion'], simil2.descripcion)

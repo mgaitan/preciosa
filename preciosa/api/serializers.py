@@ -130,6 +130,12 @@ class ProductoDetalleSerializer(serializers.Serializer):
     similares = RelatedProductSerializer(many=True, partial=True)
 
 
+class ProductoDetalleCoorSerializer(serializers.Serializer):
+    producto = ProductoSerializer()
+    mejores = PrecioSerializer(many=True, partial=True)
+    similares = RelatedProductSerializer(many=True, partial=True)
+
+
 class CitySerializer(serializers.HyperlinkedModelSerializer):
     name = serializers.CharField(source='name', read_only=True)
 
