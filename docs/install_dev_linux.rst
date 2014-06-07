@@ -81,13 +81,17 @@ Crear esquemas y cargar datos
 
 1. Crear base de datos
 
-   Para crear el schema de la base de datos basta ejecutar el comando::
+   Para crear el schema de la base de datos basta ejecutar los comandos::
+  
+        python manage.py syncdb --noinput
 
-        python manage.py syncdb
+   luego::
+     
+        python manage.py migrate
 
    y luego::
 
-        python manage.py migrate
+        python manage.py createsuperuser
 
 
 2. Cargar los fixtures::
