@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from models import Region, Acuerdo, PrecioEnAcuerdo
+
+admin.site.register(Region)
+admin.site.register(Acuerdo)
+admin.site.register(PrecioEnAcuerdo)
