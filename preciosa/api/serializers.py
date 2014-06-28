@@ -6,6 +6,7 @@ from cities_light.models import City
 
 from preciosa.precios.models import (Cadena, Sucursal, Producto, Categoria,
                                      EmpresaFabricante, Marca, Precio)
+from preciosa.acuerdos.models import PrecioEnAcuerdo
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -105,6 +106,10 @@ class ProductoSerializer(serializers.HyperlinkedModelSerializer):
 
 class PrecioSerializer(serializers.ModelSerializer):
     sucursal = SucursalSerializer()
+    acuerdos = serializers.SerializerMethodField('get_acuerdos')
+
+    def get_acuerdos(self, foo):
+        return PrecioEnAcuerdo.objects.en_acuerdo(foo.producto, foo.sucursal)
 
     class Meta:
         model = Precio
@@ -112,7 +117,8 @@ class PrecioSerializer(serializers.ModelSerializer):
             'producto',
             'sucursal',
             'created',
-            'precio'
+            'precio',
+            'acuerdos'
         )
 
 
