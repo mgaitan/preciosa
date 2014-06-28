@@ -73,7 +73,6 @@ class PrecioEnAcuerdoManager(models.Manager):
 
         qs = super(PrecioEnAcuerdoManager, self).get_queryset()
         qs = qs.filter(producto=producto)
-
         # para evitar calcular todo. Si bien hacemos una query mas,
         # el porcentaje de productos bajo acuerdo es muy pequeño
         # la mayoria de las veces no existe.
@@ -87,7 +86,7 @@ class PrecioEnAcuerdoManager(models.Manager):
         else:
             qs = qs.filter(acuerdo__sucursales=sucursal)
 
-        qs = qs.filter(acuerdo__region__ciudades=sucursal.ciudad)
+        qs = qs.filter(acuerdo__region__ciudades=sucursal.ciudad).distinct()
         return qs.values('acuerdo__nombre', 'precio')
 
 
