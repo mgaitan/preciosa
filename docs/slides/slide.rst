@@ -29,7 +29,7 @@ Un poco de prehistoria
 - Programa "Mirar para cuidar"
 - *"bien, se asume el problema, pero esa solución no escala"*
 
-.. image:: Captura de pantalla de 2015-03-04 14:54:18.png
+.. image:: mirar.png
 
 -----
 
@@ -39,7 +39,7 @@ Mi experiencia "democrática"
 
 - Elecciones 2013: Sospechas de fraude al "FIT" en Córdoba
 
-.. image:: Captura de pantalla de 2015-03-04 01:06:44.png
+.. image:: fit.png
    :width: 70%
 
 
@@ -109,7 +109,7 @@ Necesitamos información para decidir
 Luego de mucho trabajo...
 -------------------------
 
-.. image:: Captura de pantalla de 2015-03-04 03:01:20.png
+.. image:: commits.png
    :width: 80%
 
 ----
@@ -145,7 +145,7 @@ El boom (?)
 
 ----
 
-.. image:: Captura de pantalla de 2015-03-04 03:08:42.png
+.. image:: youtube.png
    :width: 70%
 
 
@@ -159,7 +159,7 @@ pero no hay que creerle a la tv
 - Baja **confianza de datos**
 - Fácil, pero no tanto
 
-.. image:: Captura de pantalla de 2015-03-04 02:10:07.png
+.. image:: tv.png
 
 -------
 
