@@ -36831,25 +36831,6 @@
   }
 },
 {
-  "pk": 1922, 
-  "model": "cities_light.city", 
-  "fields": {
-    "display_name": "Sauce Yacu, Tucum\u00e1n, Argentina", 
-    "name": "Sauce Yacu", 
-    "country": 10, 
-    "region": 104, 
-    "alternate_names": "", 
-    "search_names": "sauceyacuargentina sauceyacutucumanargentina sauceyacurepublicaargentina sauceyacutucumanrepublicaargentina", 
-    "longitude": "-65.41374", 
-    "geoname_id": 3835616, 
-    "feature_code": "PPL", 
-    "name_ascii": "Sauce Yacu", 
-    "latitude": "-26.63541", 
-    "slug": "sauce-yacu", 
-    "population": 0
-  }
-},
-{
   "pk": 1923, 
   "model": "cities_light.city", 
   "fields": {
@@ -108134,25 +108115,6 @@
     "name_ascii": "San Miguel", 
     "latitude": null, 
     "slug": "san-miguel", 
-    "population": null
-  }
-},
-{
-  "pk": 5675, 
-  "model": "cities_light.city", 
-  "fields": {
-    "display_name": "San Cristobal, Buenos Aires F.D., Argentina", 
-    "name": "San Cristobal", 
-    "country": 10, 
-    "region": 100, 
-    "alternate_names": "", 
-    "search_names": "sancristobalargentina sancristobalbuenosairesfdargentina sancristobalcapitalfederalargentina sancristobalciudaddebuenosairesargentina sancristobalrepublicaargentina sancristobalbuenosairesfdrepublicaargentina sancristobalcapitalfederalrepublicaargentina sancristobalciudaddebuenosairesrepublicaargentina", 
-    "longitude": null, 
-    "geoname_id": null, 
-    "feature_code": null, 
-    "name_ascii": "San Cristobal", 
-    "latitude": null, 
-    "slug": "san-cristobal", 
     "population": null
   }
 },
