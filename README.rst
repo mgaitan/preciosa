@@ -8,7 +8,7 @@ Preciosa es una plataforma web con `aplicaciones para teléfonos inteligentes <h
 
 A diferencia de otras aplicaciones existentes, Preciosa no limita la información a precios de productos bajo acuerdo y enfatiza la participación de los usuarios para mantener la información actualizada.
 
-
+:web: http://preciosdeargentina.com.ar
 :documentación: http://preciosa.readthedocs.org/
 :issue tracker: https://github.com/mgaitan/preciosa/issues
 :twitter: `@PreciosaApp <http://twitter.com/PreciosaApp>`_
