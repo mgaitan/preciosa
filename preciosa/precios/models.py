@@ -12,7 +12,6 @@ from django.db.models import Q
 from django.db.models import Min
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import Point
-from cities_light.models import City
 from django.db.models.signals import post_save
 from annoying.functions import get_object_or_None
 from model_utils import Choices
@@ -21,7 +20,8 @@ from model_utils.models import TimeStampedModel
 from easy_thumbnails.fields import ThumbnailerImageField
 from image_cropping import ImageRatioField, ImageCropField
 from treebeard.mp_tree import MP_Node
-from djorm_pgtrgm import SimilarManager
+from djorm_pgtrgm.models import SimilarManager
+from cities_light.models import City
 from tools.utils import one
 from tools.gis import geocode
 from tools import texto
@@ -519,6 +519,7 @@ class PrecioManager(models.Manager):
 
         Sólo considera el último precio en cada sucursal.
         """
+
         #si tiene puto.. tenemos que tener el radio
         if punto_o_sucursal and not radio:
             raise ValueError(

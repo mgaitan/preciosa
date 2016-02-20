@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-
+from .views import CityAutocomplete
 
 urlpatterns = patterns("preciosa.voluntarios.views",
     url(r"^$", 'dashboard', name='voluntarios_dashboard'),      # noqa
@@ -14,5 +14,7 @@ urlpatterns = patterns("preciosa.voluntarios.views",
     url(r"^sucursal/autocomplete/nombre/$", 'autocomplete_nombre_sucursal',
         name='autocomplete_nombre_sucursal'),
     url(r"^sucursal/voto/(?P<pk>\d+)/$", 'voto_item', name='voto_item'),
-    url(r"^sucursal/geo_code/$", 'geo_code_data', name='geo_code_data')
+    url(r"^sucursal/geo_code/$", 'geo_code_data', name='geo_code_data'),
+    url(r'^city-autocomplete/$', CityAutocomplete.as_view(), name='city-autocomplete',
+    ),
 )

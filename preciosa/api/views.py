@@ -49,7 +49,7 @@ class CityViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         queryset = super(CityViewSet, self).get_queryset()
-        q = self.request.QUERY_PARAMS.get('q', None)
+        q = self.request.query_params.get('q', None)
         if q:
             q = texto.normalizar(q).replace(' ', '')
             queryset = queryset.filter(search_names__startswith=q)[:6]
@@ -91,12 +91,12 @@ class SucursalesList(mixins.ListModelMixin,
     def get_queryset(self):
         queryset = super(SucursalesList, self).get_queryset()
 
-        q = self.request.QUERY_PARAMS.get('q', None)
-        limite = self.request.QUERY_PARAMS.get('limite', None)
+        q = self.request.query_params.get('q', None)
+        limite = self.request.query_params.get('limite', None)
 
-        lat = self.request.QUERY_PARAMS.get('lat', None)
-        lon = self.request.QUERY_PARAMS.get('lon', None)
-        radio = self.request.QUERY_PARAMS.get('radio', None)
+        lat = self.request.query_params.get('lat', None)
+        lon = self.request.query_params.get('lon', None)
+        radio = self.request.query_params.get('radio', None)
 
         if q:
             queryset = queryset.buscar(q)
@@ -119,12 +119,12 @@ class SucursalesList(mixins.ListModelMixin,
     def get(self, request, *args, **kwargs):
         if 'pk' in kwargs:
             sucursal = self.get_object()
-            serializer = SucursalSerializer(sucursal)
+            serializer = SucursalSerializer(sucursal, context={'request': request})
             return Response(serializer.data)
         return self.list(request, *args, **kwargs)
 
     def create(self, request, *args, **kwargs):
-        data = request.DATA.copy()
+        data = request.data.copy()
         if data.get('cadena', None) == 'otra':
             data.pop('cadena')
 
@@ -132,16 +132,14 @@ class SucursalesList(mixins.ListModelMixin,
         if data.get('ubicacion', None) == 'auto':
             UBICACION_AUTO = data.pop('ubicacion')
 
-        serializer = self.get_serializer(data=data, files=request.FILES)
+        serializer = self.get_serializer(data=data) #, files=request.FILES)
 
         if serializer.is_valid():
+            self.object = serializer.save()
             if UBICACION_AUTO:
-                geo = gis.geocode(serializer.object.ciudad, serializer.object.direccion)
+                geo = gis.geocode(serializer.instance.ciudad, serializer.instance.direccion)
                 ubicacion = Point(geo['lon'], geo['lat'])
-                serializer.object.ubicacion = ubicacion
-            self.pre_save(serializer.object)
-            self.object = serializer.save(force_insert=True)
-            self.post_save(self.object, created=True)
+                self.object = serializer.save(ubicacion=ubicacion)
             headers = self.get_success_headers(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED,
                             headers=headers)
@@ -161,9 +159,9 @@ class ProductosList(mixins.ListModelMixin,
     serializer_class = ProductoSerializer
 
     def get_queryset(self):
-        pk = self.request.QUERY_PARAMS.get('pk', None)  # pk para producto
-        q = self.request.QUERY_PARAMS.get('q', None)
-        limite = self.request.QUERY_PARAMS.get('limite', None)
+        pk = self.request.query_params.get('pk', None)  # pk para producto
+        q = self.request.query_params.get('q', None)
+        limite = self.request.query_params.get('limite', None)
 
         queryset = super(ProductosList, self).get_queryset()
 
@@ -193,8 +191,8 @@ class PreciosList(mixins.ListModelMixin,
 
     def get_queryset(self):
         queryset = super(PreciosList, self).get_queryset()
-        producto_id = self.request.QUERY_PARAMS.get('producto_id', None)
-        sucursal_id = self.request.QUERY_PARAMS.get('sucursal_id', None)
+        producto_id = self.request.query_params.get('producto_id', None)
+        sucursal_id = self.request.query_params.get('sucursal_id', None)
 
         producto = get_object_or_404(Producto, pk=producto_id)
         sucursal = get_object_or_404(Sucursal, pk=sucursal_id)
@@ -290,12 +288,12 @@ def producto_sucursal_detalle(request, pk_sucursal, pk_producto):
         return True
 
     if request.method == 'GET':
-        serializer = ProductoDetalleSerializer(detalle)
+        serializer = ProductoDetalleSerializer(detalle, context={'request': request})
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        precio = request.DATA.get('precio', 0)
-        created = request.DATA.get('created', None)
+        precio = request.data.get('precio', 0)
+        created = request.data.get('created', None)
 
         if not precio_valido(precio):
             return Response({'detail': 'no aceptado'})
@@ -322,7 +320,7 @@ def producto_detalle(request, pk_producto):
     lng = request.GET.get('lng', None)
     if lat and lng and request.method == 'GET':
         detalle = DetalleCoor(producto, lat, lng, dias, radio)
-        serializer = ProductoDetalleCoorSerializer(detalle)
+        serializer = ProductoDetalleCoorSerializer(detalle, context={'request': request})
         return Response(serializer.data)
 
     return Response({'detail': 'Erroral obtener la información'})
@@ -352,8 +350,8 @@ def registro(request):
     user = None
     VALID_USER_FIELDS = [f.name for f in get_user_model()._meta.fields]
     VALID_MOVIL_INFO_FIELDS = [f.name for f in MovilInfo._meta.fields]
-    serialized = UserSerializer(data=request.DATA)
-    user_data = {field: data for (field, data) in request.DATA.items()
+    serialized = UserSerializer(data=request.data, context={'request': request})
+    user_data = {field: data for (field, data) in request.data.items()
                  if field in VALID_USER_FIELDS}
     logger.debug("user_data: " + repr(user_data))
 
@@ -383,9 +381,9 @@ def registro(request):
         # se envia una data errorena. no se actualiza ni se crea un user
         raise exceptions.AuthenticationFailed(serialized.errors)
 
-    elif 'uuid' in request.DATA and request.DATA['uuid']:
+    elif 'uuid' in request.data and request.data['uuid']:
         # tratamos de conseguir el usuario via un uuid enviado
-        movil_user = get_object_or_None(MovilInfo, uuid=request.DATA['uuid'])
+        movil_user = get_object_or_None(MovilInfo, uuid=request.data['uuid'])
 
         if movil_user:
             user = movil_user.user
@@ -399,11 +397,11 @@ def registro(request):
 
     assert user
 
-    if 'uuid' in request.DATA and request.DATA['uuid']:
+    if 'uuid' in request.data and request.data['uuid']:
         # intentamos asociar la info del movil al usuario
 
         try:
-            movil_info = {field: data for (field, data) in request.DATA.items()
+            movil_info = {field: data for (field, data) in request.data.items()
                           if field in VALID_MOVIL_INFO_FIELDS}
             movil_info['user'] = user
             with transaction.atomic():
@@ -423,8 +421,8 @@ def donde_queda(request):
     devuelve una direccion y ciudad inferida"""
 
     cualca = {}
-    cualca.update(request.DATA)
-    cualca.update(request.QUERY_PARAMS)
+    cualca.update(request.data)
+    cualca.update(request.query_params)
 
     if 'lat' not in cualca or 'lon' not in cualca:
         raise exceptions.APIException('lat y lon son obligatorios')

@@ -156,7 +156,9 @@ INSTALLED_APPS = [
     "treebeard",
     "django_extensions",
     "cities_light",
-    "autocomplete_light",
+    "dal",
+    "dal_select2",
+
     "easy_thumbnails",
     "image_cropping",
     "floppyforms",
@@ -168,12 +170,10 @@ INSTALLED_APPS = [
     "analytical",
 
     # migrations/deploy
-    "south",
     "dbbackup",
 
     # tests / debug
     "django_nose",
-    # "django_pdb",
 
     # api
     "rest_framework",
@@ -183,10 +183,9 @@ INSTALLED_APPS = [
     # blog
     "radpress",
 
-    # newsletter
+    'newsletter',
     'imperavi',
     'sorl.thumbnail',
-    'newsletter',
 
     # project
     "preciosa",
@@ -199,8 +198,6 @@ INSTALLED_APPS = [
 ]
 
 import sys
-if not 'test' in sys.argv:
-    INSTALLED_APPS += ["django_pdb"]
 
 
 # compatibilidad con class="alert" de bootstrap 3
@@ -327,7 +324,7 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
-        'rest_framework.renderers.JSONPRenderer',
+        'rest_framework_jsonp.renderers.JSONPRenderer',
     ),
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -359,8 +356,6 @@ GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-123456-1'
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ['-s', '--nologcapture', '--nocapture',
              '--with-id', '--logging-clear-handlers']
-SOUTH_TESTS_MIGRATE = True  # To disable migrations and use syncdb instead
-SKIP_SOUTH_TESTS = True  # To disable South's own unit tests
 
 
 try:
