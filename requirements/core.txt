@@ -20,7 +20,7 @@ django-dbbackup==2.5.0
 django-extensions==1.6.1
 https://github.com/jaredly/django-feedback/archive/master.zip
 django-forms-bootstrap==3.0.1
-django-floppyforms==1.6.1
+django-floppyforms==1.6.2
 django-image-cropping==1.0.3
 django-imperavi==0.2.3
 django-jsonfield==0.9.19
