@@ -27,7 +27,7 @@ django-jsonfield==0.9.19
 django-nose==1.4.3
 django-model-utils==2.5
 django-newsletter==0.6
-django-treebeard==4.0
+django-treebeard==4.0.1
 django-pdb==0.5.0
 https://github.com/mgaitan/django-user-accounts/archive/master.zip
 djangorestframework==3.3.3
