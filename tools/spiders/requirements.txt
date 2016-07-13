@@ -1,2 +1,2 @@
-Scrapy==1.1.0
+Scrapy==1.1.1
 pytz==2016.6
