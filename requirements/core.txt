@@ -30,7 +30,7 @@ django-newsletter==0.6
 django-treebeard==4.0.1
 django-pdb==0.5.1
 https://github.com/mgaitan/django-user-accounts/archive/master.zip
-djangorestframework==3.4.0
+djangorestframework==3.4.1
 https://github.com/mgaitan/djorm-ext-pgtrgm/archive/master.zip#egg=djorm_ext_pgtrgm-dev
 easy-thumbnails==2.3
 eventlog==0.11.0
