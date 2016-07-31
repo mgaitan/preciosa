@@ -36,7 +36,7 @@ easy-thumbnails==2.3
 eventlog==0.11.0
 factory-boy==2.7.0
 metron==1.3.7
-pinax-theme-bootstrap==7.10.0
+pinax-theme-bootstrap==7.10.1
 https://github.com/mgaitan/pinax-theme-bootstrap-account/archive/master.zip
 radpress==0.4.3
 unicodecsv==0.14.1
