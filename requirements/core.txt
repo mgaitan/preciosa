@@ -11,7 +11,7 @@ mock==2.0.0
 South==1.0.2
 django-analytical==2.2.1
 django-annoying==0.9.0
-django-autocomplete-light==3.1.6
+django-autocomplete-light==3.1.7
 django-autoslug==1.9.3
 django-bootstrap-form==3.2.1
 django-cities-light==3.3.0
