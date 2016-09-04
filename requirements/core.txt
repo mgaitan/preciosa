@@ -16,7 +16,7 @@ django-autoslug==1.9.3
 django-bootstrap-form==3.2.1
 django-cities-light==3.3.0
 django-cors-headers==1.1.0
-django-dbbackup==3.0.1
+django-dbbackup==3.0.2
 django-extensions==1.7.3
 https://github.com/jaredly/django-feedback/archive/master.zip
 django-forms-bootstrap==3.0.1
