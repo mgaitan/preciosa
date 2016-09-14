@@ -1,42 +1,42 @@
 # base
 
-Django==1.6.2
+https://github.com/django/django/archive/stable/1.10.x.zip
 psycopg2==2.5.2
-Pillow>=2.0.0
-requests==2.2.1
-mock==1.0.1
+Pillow>=3.1.1
+requests==2.9
+mock==1.3.0
+django_nose==1.4.4
 
 # django packages
 
-South==0.8.4
-django-analytical==0.16.0
-django-annoying==0.7.9
-django-autocomplete-light==2.0.0a15
-django-autoslug==1.7.2
+django-analytical==2.2.1
+django-annoying==0.10.1
+django-autocomplete-light==3.1.7
+django-autoslug==1.9.3
+django-appconf==1.0.1
 django-bootstrap-form==3.1
-django-cities-light==2.1.11
-django-cors-headers==0.12
-django-dbbackup==1.80.2
-django-extensions==1.1.1
-https://github.com/jaredly/django-feedback/archive/master.zip
-django-forms-bootstrap==3.0.0
-django-floppyforms==1.1.1
-django-image-cropping==0.8
+django-cities-light==3.3.0
+django-cors-headers==1.1.0
+django-dbbackup==3.0.2
+django-extensions==1.7.4
+https://github.com/mgaitan/django-feedback/archive/master.zip
+django-forms-bootstrap==3.0.1
+django-floppyforms==1.6.1
+django-image-cropping==1.0.3
 django-imperavi==0.2.3
-django-jsonfield==0.8.12
-django-nose==1.2
-django-model-utils==1.4.0
-django-newsletter==0.5.1
-django-treebeard==2.0b2
-django-pdb==0.3.2
-https://github.com/mgaitan/django-user-accounts/archive/master.zip
-djangorestframework==2.3.12
-https://github.com/mgaitan/djorm-ext-pgtrgm/archive/master.zip#egg=djorm_ext_pgtrgm-dev
-easy-thumbnails==1.4
-eventlog==0.6.2
+django-jsonfield==1.0.1
+django-model-utils==2.5.2
+django-newsletter==0.6
+https://github.com/fladi/django-treebeard/archive/django-1.10.zip#egg=django-treebeard==4.0.1
+djangorestframework==3.4.6
+djangorestframework-jsonp==1.0.2
+django-user-accounts==1.3.1
+# https://github.com/mgaitan/djorm-ext-pgtrgm/archive/master.zip#egg=djorm_ext_pgtrgm-dev
+easy-thumbnails==2.3
+eventlog==0.11.0
 factory-boy==2.3.1
-metron==1.1
+metron==1.3.7
 pinax-theme-bootstrap==5.0.3
 https://github.com/mgaitan/pinax-theme-bootstrap-account/archive/master.zip
-radpress==0.4.1
-unicodecsv==0.9.4
+radpress==0.4.3
+unicodecsv==0.14.1

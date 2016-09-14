@@ -7,6 +7,6 @@ class QueryTokenAuthentication(TokenAuthentication):
     en query de la petición"""
 
     def authenticate(self, request):
-        if 'token' in request.QUERY_PARAMS:
-            return self.authenticate_credentials(request.QUERY_PARAMS['token'])
+        if 'token' in request.query_params:
+            return self.authenticate_credentials(request.query_params['token'])
         return super(QueryTokenAuthentication, self).authenticate(request)

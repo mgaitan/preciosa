@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import autocomplete_light
+from dal import autocomplete
 import floppyforms as forms
 
 from cities_light.models import City
@@ -27,6 +27,7 @@ class MapaCategoriaForm(forms.ModelForm):
         widgets = {
             'origen': forms.HiddenInput(),
         }
+        exclude = []
 
 
 class MarcaModelForm(forms.ModelForm, CleanNombreMixin):
@@ -86,7 +87,7 @@ class SucursalModelForm(forms.ModelForm, CleanNombreMixin):
     puede_ser_vacio = True
 
     ciudad = forms.ModelChoiceField(
-        City.objects.all(), widget=autocomplete_light.ChoiceWidget('CityAutocomplete'))
+        City.objects.all(), widget=autocomplete.ModelSelect2(url='city-autocomplete'))
 
     ubicacion = forms.gis.PointField(widget=PointWidget, required=False)
 

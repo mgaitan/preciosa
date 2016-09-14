@@ -44,7 +44,7 @@ class TestsRegistroNoAuth(APITestCase):
         r = self.client.post(self.url, data)
         self.assertEqual(r.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertIn('password', r.data['detail'])
-        self.assertIn('obligatorio', r.data['detail']['password'][0])
+        self.assertIn('requerido', r.data['detail'])
 
         self.assertEqual(User.objects.count(), 0)
 
@@ -56,7 +56,7 @@ class TestsRegistroNoAuth(APITestCase):
         r = self.client.post(self.url, data)
         self.assertEqual(r.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertIn('username', r.data['detail'])
-        self.assertIn('existe', r.data['detail']['username'][0])
+        self.assertIn('existe', r.data['detail'])
 
     def test_obtiene_usuario_existente_via_uuid(self):
 
@@ -153,7 +153,7 @@ class TestsRegistroAuth(APITestCase):
         self.assertEqual(serialize('json', User.objects.all()), antes)
         self.assertEqual(r.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertIn('username', r.data['detail'])
-        self.assertIn('obligatorio', r.data['detail']['username'][0])
+        self.assertIn('requerido', r.data['detail'])
 
     def test_si_existe_movil_info_se_guarda(self):
         data = {'uuid': 'uuid-re-loco', 'phonegap': '3.3',

@@ -7,7 +7,7 @@ ver https://github.com/mgaitan/preciosa/issues/137
 from django.db import models
 from django.db.models.signals import m2m_changed
 from django.db.models import Q
-from cities_light.models import City
+
 
 
 class Region(models.Model):
@@ -36,6 +36,7 @@ class Region(models.Model):
         """devuelve un QS de ciudades incluyendo todas las ciudades
            que abarca la region. considera provincia, ciudades incluidas y
            excluidas"""
+        from cities_light.models import City
         base = City.objects.filter(Q(incluida_en_region_acuerdo=self) |
                                    Q(region__in=self.provincias.all()))
         return base.exclude(Q(excluida_de_region_acuerdo=self))

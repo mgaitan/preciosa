@@ -94,4 +94,4 @@ class VoluntariosTests(TestCase):
             'cadena': u'', 'nombre': u'nombre', 'direccion': u'Callecita',
             'btn_form_sucursal': u'Agregar'})
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(response, 'form_sucursal', 'ciudad', 'Este campo es obligatorio.')
+        self.assertFormError(response, 'form_sucursal', 'ciudad', 'Este campo es requerido.')

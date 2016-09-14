@@ -1,5 +1,5 @@
 {% load staticfiles %}
-{% load url from future %}
+
 {% load blocktrans trans from i18n %}
 {% load radpress_static_url from radpress_tags %}
 {% load account_tags %}
@@ -208,7 +208,9 @@
     <script src="{% static "js/jquery-1.10.2.js" %}"></script>
     <script src="{% static "js/bootstrap.min.js" %}"></script>
     <script src="{% static "js/plugins/metisMenu/jquery.metisMenu.js" %}"></script>
-    {% include 'autocomplete_light/static.html' %}
+
+    <script src="{% static "autocomplete_light/jquery.init.js" %}"></script>
+    <script src="{% static "autocomplete_light/autocomplete.init.js" %}"></script>
     <!-- Page-Level Plugin Scripts - Blank -->
 
     <!-- SB Admin Scripts - Include with every page -->
