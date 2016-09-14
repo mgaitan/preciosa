@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
+from collections import OrderedDict
 from django.core.urlresolvers import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
@@ -68,14 +69,13 @@ class TestsDetalle(APITestCase):
             r = self.client.get(self.url)
         mas_probables = r.data['mas_probables']
         self.assertEqual(mas_probables[0]['precio'], p1.precio)
-        self.assertEqual(mas_probables[0]['created'], p1.created)
         self.assertEqual(mas_probables[1]['precio'], p2.precio)
-        self.assertEqual(mas_probables[1]['created'], p2.created)
+
 
     def test_mejores(self):
-        p1, p2 = mis_precios = [PrecioFactory(precio=12.2,
+        p1, p2 = mis_precios = [PrecioFactory(precio='12.20',
                                               producto=self.prod),
-                                PrecioFactory(precio=14.4,
+                                PrecioFactory(precio='14.40',
                                               producto=self.prod)]
 
         with patch('preciosa.precios.models.PrecioManager.mejores') as mock:
@@ -84,10 +84,8 @@ class TestsDetalle(APITestCase):
 
         mejores = r.data['mejores']
         self.assertEqual(mejores[0]['precio'], p1.precio)
-        self.assertEqual(mejores[0]['created'], p1.created)
         self.assertEqual(mejores[0]['sucursal']['direccion'], p1.sucursal.direccion)
         self.assertEqual(mejores[1]['precio'], p2.precio)
-        self.assertEqual(mejores[1]['created'], p2.created)
         self.assertEqual(mejores[1]['sucursal']['direccion'], p2.sucursal.direccion)
 
     def test_sin_acuerdo(self):
@@ -100,8 +98,8 @@ class TestsDetalle(APITestCase):
                                   'precio': Decimal('123.30')}]
             r = self.client.get(self.url)
         en_acuerdo = r.data['en_acuerdo']
-        self.assertEqual(en_acuerdo, [{'nombre': u'Precios culiados',
-                                       'precio': Decimal('123.30')}])
+        self.assertEqual(en_acuerdo, [OrderedDict([('nombre', u'Precios culiados'),
+                                                   ('precio', u'123.30')])])
 
     def test_envio_precio(self):
         fecha = datetime(year=2014, month=3, day=22, hour=0, minute=1)
