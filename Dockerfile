@@ -1,14 +1,12 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 ENV PYTHONUNBUFFERED 1
 
-
 RUN apt-get -qq update && apt-get install -y  --no-install-recommends \
-    python \
     build-essential \
+    python \
     python-dev \
     libffi-dev libssl-dev \
-    language-pack-es-base language-pack-en-base \
     libpq-dev \
     libxml2-dev libxslt1-dev \
     libjpeg-dev zlib1g-dev libpng12-dev \
@@ -20,7 +18,7 @@ RUN mkdir /code
 WORKDIR /code
 
 ADD . /code/
-RUN pip install -U pip
+RUN pip install -U pip setuptools
 RUN pip install -r requirements.txt
 
 RUN python manage.py createsuperuser --username=admin

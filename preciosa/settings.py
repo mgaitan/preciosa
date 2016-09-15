@@ -20,10 +20,10 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'preciosa',
+        'NAME': 'postgres',
         'USER': 'postgres',      # 'dev' si seguiste el tutorial textualmente
-        'PASSWORD': '',          # 'dev' si seguiste el tutorial textualmente
-        'HOST': '127.0.0.1',
+        # 'PASSWORD': 'dev',          # 'dev' si seguiste el tutorial textualmente
+        'HOST': 'db',   #127.0.0.1',
         'PORT': '5432',
     }
 }
@@ -183,7 +183,7 @@ INSTALLED_APPS = [
     "radpress",
 
     'newsletter',
-    'imperavi',
+    'django_summernote',
     'sorl.thumbnail',
 
     # project
@@ -303,7 +303,7 @@ AUTHENTICATION_BACKENDS = [
 
 # See http://django-newsletter.readthedocs.org/en/latest/installation.html
 NEWSLETTER_CONFIRM_EMAIL = False
-NEWSLETTER_RICHTEXT_WIDGET = "imperavi.widget.ImperaviWidget"
+NEWSLETTER_RICHTEXT_WIDGET = "django_summernote.widgets.SummernoteInplaceWidget"
 
 # django-db backups
 DBBACKUP_STORAGE = 'dbbackup.storage.filesystem_storage'
