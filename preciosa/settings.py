@@ -20,9 +20,9 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'postgres',
-        'USER': 'postgres',      # 'dev' si seguiste el tutorial textualmente
-        # 'PASSWORD': 'dev',          # 'dev' si seguiste el tutorial textualmente
+        'NAME': 'preciosa',
+        'USER': 'preciosa',      # 'dev' si seguiste el tutorial textualmente
+        'PASSWORD': 'dev',          # 'dev' si seguiste el tutorial textualmente
         'HOST': 'db',   #127.0.0.1',
         'PORT': '5432',
     }
@@ -142,12 +142,13 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'django.contrib.flatpages',
 
-    # theme
+
+    # # theme
     "bootstrapform",
     "pinax_theme_bootstrap",
     "pinax_theme_bootstrap_account",
 
-    # external
+    # # external
     "annoying",
     "account",
     "metron",
@@ -205,11 +206,12 @@ MESSAGE_TAGS = {
     message_constants.ERROR: 'danger'
 }
 
+"""
 from easy_thumbnails.conf import Settings as thumbnail_settings
 THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
-
+"""
 
 CACHES = {
     'default': {

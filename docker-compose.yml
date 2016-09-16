@@ -1,11 +1,22 @@
-db:
+version: '2'
+
+volumes:
+  db_data:
+
+services:
+  db:
     image: mdillon/postgis
-web:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-        - .:/code
     ports:
-        - "8000:8000"
-    links:
-        - db
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  web:
+      build: .
+      command: python manage.py runserver 0.0.0.0:8000
+      volumes:
+          - .:/code
+      ports:
+          - "8000:8000"
+      links:
+        - db:postgres
