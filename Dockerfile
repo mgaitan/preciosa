@@ -21,12 +21,3 @@ WORKDIR /code
 ADD . /code/
 RUN pip install -U pip setuptools
 RUN pip install -r requirements.txt
-RUN python manage.py migrate
-
-RUN python manage.py loaddata fixtures/initial_data.json \
-    fixtures/admin_dev.json fixtures/flatpages.json \
-    fixtures/blog.json fixtures/newsletter.json \
-    fixtures/ciudades.json fixtures/sucursales.json \
-    fixtures/categorias.json fixtures/marcas.json \
-    fixtures/productos.json fixtures/precios.json
-

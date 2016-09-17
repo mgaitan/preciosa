@@ -5,9 +5,10 @@ volumes:
 
 services:
   db:
+    container_name: 'postgres'
     image: mdillon/postgis
     ports:
-      - "5432:5432"
+      - "5432"
     volumes:
       - db_data:/var/lib/postgresql/data
 
@@ -19,4 +20,5 @@ services:
       ports:
           - "8000:8000"
       links:
-        - db:postgres
+        - db
+
