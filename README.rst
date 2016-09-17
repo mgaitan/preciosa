@@ -13,3 +13,10 @@ A diferencia de otras aplicaciones existentes, Preciosa no limita la informació
 :issue tracker: https://github.com/mgaitan/preciosa/issues
 :twitter: `@PreciosaApp <http://twitter.com/PreciosaApp>`_
 :lista: https://groups.google.com/forum/#!forum/preciosa-devs
+
+
+### NECESITAMOS COLABORACION
+
+Si sabés python, javascript, diseño/desarrollo web, desarrollo de apps moviles, desarrollar
+scrapper en cualquier lenguaje o cualquier otra tecnologia o conocimiento que consideres relevante
+para Preciosa, por favor, sumate a la lista de correo y ponete en contacto. **¡Te necesitamos!**
