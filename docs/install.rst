@@ -9,7 +9,7 @@ Por ello, la manera recomendada es utilizar docker
 1. Forkear y clonar el código del repositorio
 2. Instalar `docker-compose <https://docs.docker.com/compose/install/>`_ de la manera correspondiente y conveniente a tu sistema operativo.
 3. Construir el contenedor ejecutando ``docker-compose build web``.
-4. Inicializar la base de datos ``docker-compose run web initialize.db``
+4. Inicializar la base de datos ``docker-compose run web ./initialize.sh``
 
 ya podés empezar a programar!
 
