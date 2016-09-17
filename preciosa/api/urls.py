@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from collections import OrderedDict
-from django.conf.urls import patterns, url, include
+from django.conf.urls import url, include
 from rest_framework.schemas import SchemaGenerator
 from rest_framework import routers, exceptions
 from django.core.urlresolvers import NoReverseMatch
@@ -90,7 +90,7 @@ router.register(r'fabricantes', views.EmpresaFabricanteViewSet)
 router.register(r'categorias', views.CategoriaViewSet)
 
 
-urlpatterns = patterns("preciosa.api.views",
+urlpatterns = [
     url(r"^sucursales/$", views.SucursalesList.as_view(), name='sucursales'),
     url(r"^sucursales/(?P<pk>\d+)$", views.SucursalesList.as_view(),
         name='sucursal_detalle'),
@@ -109,12 +109,8 @@ urlpatterns = patterns("preciosa.api.views",
     url(r"^precios/$", views.PreciosList.as_view(), name='precios'),
     url(r"^utils/donde_queda$", views.donde_queda, name='donde_queda'),
 
-    url(r"^", include(router.urls))
+    url(r"^", include(router.urls)),
 
-)
-
-urlpatterns += patterns('',
     url(r'^auth/token$', 'rest_framework.authtoken.views.obtain_auth_token'),
     url(r'^auth/registro$', views.registro, name='registro')
-)
-
+]

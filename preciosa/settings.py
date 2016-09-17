@@ -20,10 +20,10 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'preciosa',
-        'USER': 'preciosa',      # 'dev' si seguiste el tutorial textualmente
-        'PASSWORD': 'dev',          # 'dev' si seguiste el tutorial textualmente
-        'HOST': 'db',   #127.0.0.1',
+        'NAME': 'postgres',
+        'USER': 'postgres',      # 'dev' si seguiste el tutorial textualmente
+        # 'PASSWORD': 'dev',          # 'dev' si seguiste el tutorial textualmente
+        'HOST': 'postgres',     #127.0.0.1',
         'PORT': '5432',
     }
 }
