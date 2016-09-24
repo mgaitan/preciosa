@@ -7,7 +7,7 @@ PROJECT_ROOT = os.path.abspath(
 PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+# TEMPLATE_DEBUG = DEBUG
 
 ADMINS = [
     # ("Your Name", "your_email@example.com"),
@@ -91,24 +91,24 @@ STATICFILES_FINDERS = [
 SECRET_KEY = "0u06gl%=^$%!4_0*jrp^w-6#xle1w*yh%^qpg9$%zw4hd#yu_^"
 
 # List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = [
-    "django.template.loaders.filesystem.Loader",
-    "django.template.loaders.app_directories.Loader",
-]
+# TEMPLATE_LOADERS = [
+#     "django.template.loaders.filesystem.Loader",
+#     "django.template.loaders.app_directories.Loader",
+# ]
 
-TEMPLATE_CONTEXT_PROCESSORS = [
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.core.context_processors.request",
-    "django.contrib.messages.context_processors.messages",
-    "account.context_processors.account",
-    "pinax_theme_bootstrap.context_processors.theme",
-    "preciosa.context_processors.menu"
-]
+# TEMPLATE_CONTEXT_PROCESSORS = [
+#     "django.contrib.auth.context_processors.auth",
+#     "django.core.context_processors.debug",
+#     "django.core.context_processors.i18n",
+#     "django.core.context_processors.media",
+#     "django.core.context_processors.static",
+#     "django.core.context_processors.tz",
+#     "django.core.context_processors.request",
+#     "django.contrib.messages.context_processors.messages",
+#     "account.context_processors.account",
+#     "pinax_theme_bootstrap.context_processors.theme",
+#     "preciosa.context_processors.menu"
+# ]
 
 
 MIDDLEWARE_CLASSES = [
@@ -126,9 +126,50 @@ ROOT_URLCONF = "preciosa.urls"
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = "preciosa.wsgi.application"
 
-TEMPLATE_DIRS = [
-    os.path.join(PACKAGE_ROOT, "templates"),
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(PACKAGE_ROOT, "templates"),
+        ],
+        # 'APP_DIRS': True,
+        # 'DEBUG': True,
+        'OPTIONS': {
+            'context_processors': [
+                # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
+                # list if you haven't customized them:
+                "django.core.context_processors.request",
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+                "account.context_processors.account",
+                "pinax_theme_bootstrap.context_processors.theme",
+                "preciosa.context_processors.menu",
+                # 'easy_thumbnails.processors.filters',
+            ],
+            'loaders': [
+                # insert your TEMPLATE_LOADERS here
+                "django.template.loaders.filesystem.Loader",
+                "django.template.loaders.app_directories.Loader",
+            ]
+        },
+    },
 ]
+
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    'easy_thumbnails.processors.scale_and_crop',  # disable this one
+    'easy_thumbnails.processors.filters',
+)
+
+# TEMPLATE_DIRS = [
+#     os.path.join(PACKAGE_ROOT, "templates"),
+# ]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -206,12 +247,11 @@ MESSAGE_TAGS = {
     message_constants.ERROR: 'danger'
 }
 
-"""
 from easy_thumbnails.conf import Settings as thumbnail_settings
 THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
+    'easy_thumbnails.processors.filters',
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
-"""
 
 CACHES = {
     'default': {
