@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import random
-from django.db.models.loading import get_model
+from django.apps import apps as django_apps
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -18,6 +18,19 @@ from preciosa.voluntarios.forms import (
     MapaCategoriaForm, MarcaModelForm,
     LogoMarcaModelForm, SucursalModelForm)
 from tools.gis import geocode
+from dal import autocomplete
+from django.db.models import Q
+from cities_light.models import City
+
+
+get_model = django_apps.get_model
+
+class CityAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        if not self.q or len(self.q) < 4:
+            return City.objects.none()
+        return City.objects.filter(Q(name__icontains=self.q) |
+                                   Q(alternate_names__icontains=self.q))
 
 
 MSG_EXITO = [u'Buenísimo, Guardamos tu elección ¿Otra?',

@@ -7,8 +7,6 @@ from accounts.views import SignupView
 
 from django.views.generic.base import RedirectView
 
-import autocomplete_light
-autocomplete_light.autodiscover()
 
 from django.contrib import admin
 admin.autodiscover()
@@ -25,7 +23,6 @@ urlpatterns = patterns("",
     url(r'^feedback/', include('feedback.urls')),
     url(r'^imperavi/', include('imperavi.urls')),
     url(r'^buscador/', views.buscador, name='buscador'),
-    url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^(\d+)-([a-z0-9-_]+)/$',
         views.ProductosListView.as_view(), name='lista_productos'),
     url(r'^(\d+)-([a-z0-9-_]+)/(?P<pk>\d+)-([a-z0-9-_]+)$',

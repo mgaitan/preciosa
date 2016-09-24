@@ -1,8 +1,6 @@
-{% load url from future %}
-
 {% for sucursal in sucursales %}
 <div class="choice">
-    {{ sucursal.nombre  }}  
+    {{ sucursal.nombre  }}
     {% if sucursal.cadena %}
         ({{ sucursal.cadena.nombre }})
     {% endif %}

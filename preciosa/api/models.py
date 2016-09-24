@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.contrib.gis.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -12,7 +12,7 @@ class MovilInfo(models.Model):
     http://docs.phonegap.com/es/1.0.0/phonegap_device_device.md.html
     """
     uuid = models.CharField(max_length=200, primary_key=True)
-    user = models.ForeignKey(get_user_model(), related_name='movil_info')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='movil_info')
     nombre = models.CharField(max_length=200, null=True, blank=True)
     phonegap = models.CharField(max_length=100, null=True, blank=True)
     plataforma = models.CharField(max_length=200, null=True, blank=True)
@@ -20,7 +20,7 @@ class MovilInfo(models.Model):
     preciosa_version = models.CharField(max_length=200, null=True, blank=True)
 
 
-@receiver(post_save, sender=get_user_model())
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)

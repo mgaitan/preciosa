@@ -7,7 +7,7 @@ ver https://github.com/mgaitan/preciosa/issues/137
 from django.db import models
 from django.db.models.signals import m2m_changed
 from django.db.models import Q
-from cities_light.models import City
+
 
 
 class Region(models.Model):
@@ -36,6 +36,7 @@ class Region(models.Model):
         """devuelve un QS de ciudades incluyendo todas las ciudades
            que abarca la region. considera provincia, ciudades incluidas y
            excluidas"""
+        from cities_light.models import City
         base = City.objects.filter(Q(incluida_en_region_acuerdo=self) |
                                    Q(region__in=self.provincias.all()))
         return base.exclude(Q(excluida_de_region_acuerdo=self))
@@ -57,8 +58,8 @@ m2m_changed.connect(actualizar_ciudades_de_region,
 class Acuerdo(models.Model):
     nombre = models.CharField(max_length=150)
     region = models.ForeignKey(Region)
-    sucursales = models.ManyToManyField('precios.Sucursal')
-    cadenas = models.ManyToManyField('precios.Cadena')
+    sucursales = models.ManyToManyField('precios.Sucursal', null=True, blank=True)
+    cadenas = models.ManyToManyField('precios.Cadena', null=True, blank=True)
 
     def __unicode__(self):
         tipo = 'Cadenas Nacionales' if self.cadenas.exists() else 'Super Regionales'
@@ -73,7 +74,6 @@ class PrecioEnAcuerdoManager(models.Manager):
 
         qs = super(PrecioEnAcuerdoManager, self).get_queryset()
         qs = qs.filter(producto=producto)
-
         # para evitar calcular todo. Si bien hacemos una query mas,
         # el porcentaje de productos bajo acuerdo es muy pequeño
         # la mayoria de las veces no existe.
@@ -87,7 +87,7 @@ class PrecioEnAcuerdoManager(models.Manager):
         else:
             qs = qs.filter(acuerdo__sucursales=sucursal)
 
-        qs = qs.filter(acuerdo__region__ciudades=sucursal.ciudad)
+        qs = qs.filter(acuerdo__region__ciudades=sucursal.ciudad).distinct()
         return qs.values('acuerdo__nombre', 'precio')
 
 

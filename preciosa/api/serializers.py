@@ -6,6 +6,7 @@ from cities_light.models import City
 
 from preciosa.precios.models import (Cadena, Sucursal, Producto, Categoria,
                                      EmpresaFabricante, Marca, Precio)
+from preciosa.acuerdos.models import PrecioEnAcuerdo
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -38,11 +39,11 @@ class CadenaSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'url', 'nombre', 'cadena_madre',)
 
 
-class UbicacionField(serializers.WritableField):
-    def to_native(self, obj):
+class UbicacionField(serializers.Field):
+    def to_representation(self, obj):
         return "%s" % obj
 
-    def from_native(self, data):
+    def to_internal_value(self, data):
         try:
             lon, lat = map(float, re.findall(r'(-?\d+\.\d*)', data))
             return Point(lon, lat)
@@ -105,6 +106,10 @@ class ProductoSerializer(serializers.HyperlinkedModelSerializer):
 
 class PrecioSerializer(serializers.ModelSerializer):
     sucursal = SucursalSerializer()
+    acuerdos = serializers.SerializerMethodField()
+
+    def get_acuerdos(self, foo):
+        return PrecioEnAcuerdo.objects.en_acuerdo(foo.producto, foo.sucursal)
 
     class Meta:
         model = Precio
@@ -112,13 +117,14 @@ class PrecioSerializer(serializers.ModelSerializer):
             'producto',
             'sucursal',
             'created',
-            'precio'
+            'precio',
+            'acuerdos'
         )
 
 
 class EnAcuerdoSerializer(serializers.Serializer):
     nombre = serializers.CharField(source='acuerdo__nombre', read_only=True)
-    precio = serializers.DecimalField(source='precio', read_only=True)
+    precio = serializers.DecimalField(read_only=True, max_digits=8, decimal_places=2)
 
 
 class ProductoDetalleSerializer(serializers.Serializer):
@@ -126,6 +132,12 @@ class ProductoDetalleSerializer(serializers.Serializer):
     sucursal = SucursalSerializer()
     mas_probables = PrecioSerializer(many=True, partial=True)
     en_acuerdo = EnAcuerdoSerializer(many=True, partial=True)
+    mejores = PrecioSerializer(many=True, partial=True)
+    similares = RelatedProductSerializer(many=True, partial=True)
+
+
+class ProductoDetalleCoorSerializer(serializers.Serializer):
+    producto = ProductoSerializer()
     mejores = PrecioSerializer(many=True, partial=True)
     similares = RelatedProductSerializer(many=True, partial=True)
 

@@ -8,11 +8,9 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 from django.db import transaction, IntegrityError
-from django.db.models import Q
-from django.db.models import Min
+from django.db.models import Q, Min, Manager
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import Point
-from cities_light.models import City
 from django.db.models.signals import post_save
 from annoying.functions import get_object_or_None
 from model_utils import Choices
@@ -21,7 +19,8 @@ from model_utils.models import TimeStampedModel
 from easy_thumbnails.fields import ThumbnailerImageField
 from image_cropping import ImageRatioField, ImageCropField
 from treebeard.mp_tree import MP_Node
-from djorm_pgtrgm import SimilarManager
+# from djorm_pgtrgm.models import SimilarManager
+from cities_light.models import City
 from tools.utils import one
 from tools.gis import geocode
 from tools import texto
@@ -77,7 +76,7 @@ class Categoria(MP_Node):
         return cls.objects.get(nombre='A CLASIFICAR').get_children()
 
 
-class ProductoManager(SimilarManager):
+class ProductoManager(Manager):
 
     def buscar(self, q, limite=8):
         """Si q son digitos, busca por código de barra.
@@ -94,9 +93,10 @@ class ProductoManager(SimilarManager):
             tiene_palabras = Producto.objects.filter(
                 palabras).values_list('id',
                                       flat=True)
-            similares = Producto.objects.filter_o(
-                busqueda__similar=q).values_list('id',
-                                                 flat=True)
+            # similares = Producto.objects.filter_o(
+            #    busqueda__similar=q).values_list('id',
+            #                                     flat=True)
+            similares = []
             productos = Producto.objects.filter(Q(id__in=tiene_palabras) |
                                                 Q(id__in=similares)).distinct()[0:limite]
         return productos
@@ -185,8 +185,9 @@ class Producto(models.Model):
         """devuelve un queryset de productos similares.
         (no incluye al producto en sí mismo)
         """
-        qs = Producto.objects.exclude(id=self.id)
-        return qs.filter_o(busqueda__similar=self.busqueda)[:maxnum]
+        #qs = Producto.objects.exclude(id=self.id)
+        #return qs.filter_o(busqueda__similar=self.busqueda)[:maxnum]
+        return []
 
 
 class DescripcionAlternativa(models.Model):
@@ -471,10 +472,10 @@ class PrecioManager(models.Manager):
     def mas_probables(self, producto, sucursal, dias=None, radio=10):
         """
         Cuando no hay datos especificos de un
-        producto para una sucursal (:meth:`historico`),
+        producto para una sucursal (:meth:`PrecioManager.historico`),
         debe ofrecerse un precio más probable. Se calcula
 
-         - Precio con más coincidencias para el producto en otras sucursales
+         - Precio más nuevo para el producto en otras sucursales
            de la misma cadena en la ciudad y/o un radio de distancia si es dado
 
          - En su defecto, precio online de la cadena
@@ -519,13 +520,20 @@ class PrecioManager(models.Manager):
 
         Sólo considera el último precio en cada sucursal.
         """
-        if not one((ciudad, radio)):
+
+        #si tiene puto.. tenemos que tener el radio
+        if punto_o_sucursal and not radio:
+            raise ValueError(
+                'Si se especifica el punto o sucursal debe proveer el radio')
+
+        if radio and not punto_o_sucursal and not ciudad:
+            raise ValueError(
+                'Si se especifica el radio debe proveer el punto o sucursal')
+
+        #si no tenemos una ciudad o un punto con radio
+        if not ciudad and not radio:
             raise ValueError(
                 'Debe proveer una ciudad o un radio en kilometros')
-
-        if one((radio, punto_o_sucursal)):
-            raise ValueError(
-                'Si se especifica radio debe proveer el punto o sucursal')
 
         qs = super(PrecioManager,
                    self).get_queryset().filter(producto=producto, activo__isnull=False)
@@ -534,7 +542,12 @@ class PrecioManager(models.Manager):
             desde = timezone.now() - timedelta(days=dias)
             qs = qs.filter(created__gte=desde)
 
-        if radio:
+        if ciudad:
+            if isinstance(ciudad, City):
+                ciudad = ciudad.id
+            qs = qs.filter(sucursal__ciudad__id=ciudad).distinct(
+                'sucursal')[:limite]
+        elif radio:
             if isinstance(punto_o_sucursal, Sucursal):
                 punto = punto_o_sucursal.ubicacion
             else:
@@ -544,11 +557,7 @@ class PrecioManager(models.Manager):
             cercanas = cercanas.values_list('id', flat=True)
             qs = qs.filter(sucursal__id__in=cercanas).distinct(
                 'sucursal')[:limite]
-        elif ciudad:
-            if isinstance(ciudad, City):
-                ciudad = ciudad.id
-            qs = qs.filter(sucursal__ciudad__id=ciudad).distinct(
-                'sucursal')[:limite]
+
         if qs.exists():
             return sorted(qs, key=lambda i: i.precio)
         return []

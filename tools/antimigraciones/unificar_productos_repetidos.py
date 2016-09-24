@@ -10,13 +10,14 @@ except ImportError:
     print """Instalaste las dependecias extra?:
         $ pip install -r requirements/extra.txt  """
     raise
-from preciosa.precios.models import Producto
+from preciosa.precios.models import Producto, DescripcionAlternativa
 
 
 def main():
     prods13 = Producto.objects.extra(where=["CHAR_LENGTH(upc) = 13"])
     prods12 = Producto.objects.extra(where=["CHAR_LENGTH(upc) = 12"])
 
+    antes = DescripcionAlternativa.objects.count()
     bar = Bar('Migrando', suffix='%(percent)d%%')
     with transaction.atomic():
         for p13 in bar.iter(prods13):
@@ -31,7 +32,8 @@ def main():
                 precio.producto = p13
                 precio.save(update_fields=['producto'])
             p12.delete()
-
+    despues = DescripcionAlternativa.objects.count()
+    print "se unificaron %d productos" % (despues - antes)
 
 if __name__ == '__main__':
     main()

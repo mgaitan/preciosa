@@ -23,7 +23,7 @@ class TestsListaSucursal(BaseTestApiSucursal):
         self.client.credentials()  # borra token
         r = self.client.get(self.url)
         self.assertEqual(r.status_code, status.HTTP_401_UNAUTHORIZED)
-        self.assertIn('credentials', r.data['detail'])
+        self.assertIn('creden', r.data['detail'])
 
     def test_auth_puede_ser_por_query(self):
         self.client.credentials()  # borra token
@@ -33,7 +33,7 @@ class TestsListaSucursal(BaseTestApiSucursal):
     def test_muestra_lista(self):
         suc2 = SucursalFactory()
         response = self.client.get(self.url)
-        for suc, js in zip((self.suc, suc2), response.data['results']):
+        for suc, js in zip((self.suc, suc2), response.data):
             self.assertEqual(js['id'], suc.id)
             self.assertEqual(js['cadena'], suc.cadena.id)
             self.assertEqual(js['cadena_completa']['id'], suc.cadena.id)
@@ -91,7 +91,7 @@ class TestsListaSucursal(BaseTestApiSucursal):
         self.suc.online = True
         self.suc.save()
         response = self.client.get(self.url)
-        self.assertEqual(response.data['results'], [])
+        self.assertEqual(response.data, [])
 
 
 class TestsCrearSucursal(BaseTestApiSucursal):
@@ -118,8 +118,7 @@ class TestsCrearSucursal(BaseTestApiSucursal):
                                         'ciudad': 1354,
                                         'direccion': u'durazno y convencion'})
         self.assertEqual(r.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(r.data,
-                         {'ciudad': [u"Invalid pk '1354' - object does not exist."]})
+        self.assertIn('ciudad', r.data)
 
     def test_crear_nueva_sucursal_cadena_vacia(self):
         r = self.client.post(self.url, {'cadena': '',
