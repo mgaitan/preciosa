@@ -20,10 +20,10 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'preciosa',
+        'NAME': 'postgres',
         'USER': 'postgres',      # 'dev' si seguiste el tutorial textualmente
-        'PASSWORD': '',          # 'dev' si seguiste el tutorial textualmente
-        'HOST': '127.0.0.1',
+        # 'PASSWORD': 'dev',          # 'dev' si seguiste el tutorial textualmente
+        'HOST': 'postgres',     #127.0.0.1',
         'PORT': '5432',
     }
 }
@@ -142,12 +142,13 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'django.contrib.flatpages',
 
-    # theme
+
+    # # theme
     "bootstrapform",
     "pinax_theme_bootstrap",
     "pinax_theme_bootstrap_account",
 
-    # external
+    # # external
     "annoying",
     "account",
     "metron",
@@ -183,7 +184,7 @@ INSTALLED_APPS = [
     "radpress",
 
     'newsletter',
-    'imperavi',
+    'django_summernote',
     'sorl.thumbnail',
 
     # project
@@ -205,11 +206,12 @@ MESSAGE_TAGS = {
     message_constants.ERROR: 'danger'
 }
 
+"""
 from easy_thumbnails.conf import Settings as thumbnail_settings
 THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
-
+"""
 
 CACHES = {
     'default': {
@@ -303,7 +305,7 @@ AUTHENTICATION_BACKENDS = [
 
 # See http://django-newsletter.readthedocs.org/en/latest/installation.html
 NEWSLETTER_CONFIRM_EMAIL = False
-NEWSLETTER_RICHTEXT_WIDGET = "imperavi.widget.ImperaviWidget"
+NEWSLETTER_RICHTEXT_WIDGET = "django_summernote.widgets.SummernoteInplaceWidget"
 
 # django-db backups
 DBBACKUP_STORAGE = 'dbbackup.storage.filesystem_storage'

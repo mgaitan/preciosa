@@ -2,10 +2,10 @@ from django.contrib import admin
 
 from django.contrib.flatpages.models import FlatPage
 from preciosa.flatpagex.models import FlatPageX
-from imperavi.admin import ImperaviAdmin
+from django_summernote.admin import SummernoteModelAdmin
 
 
-class CustomFlatPageAdmin(ImperaviAdmin):
+class CustomFlatPageAdmin(SummernoteModelAdmin):
     pass
 
 
