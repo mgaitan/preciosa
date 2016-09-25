@@ -15,6 +15,10 @@ ADMINS = [
 
 MANAGERS = ADMINS
 
+
+SITE_ID = int(os.environ.get("SITE_ID", 1))
+
+
 # esta configuración es apta para Travis CI.
 # modificá tu local_settings.py para la configuración de tu entorno
 DATABASES = {
@@ -39,8 +43,6 @@ TIME_ZONE = "UTC"
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = "es-ES"
-
-SITE_ID = int(os.environ.get("SITE_ID", 1))
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
