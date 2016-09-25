@@ -3,6 +3,7 @@ from collections import OrderedDict
 from django.conf.urls import url, include
 from rest_framework.schemas import SchemaGenerator
 from rest_framework import routers, exceptions
+from rest_framework.authtoken import views as authviews
 from django.core.urlresolvers import NoReverseMatch
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -111,6 +112,6 @@ urlpatterns = [
 
     url(r"^", include(router.urls)),
 
-    url(r'^auth/token$', 'rest_framework.authtoken.views.obtain_auth_token'),
+    url(r'^auth/token$', authviews.obtain_auth_token),
     url(r'^auth/registro$', views.registro, name='registro')
 ]
