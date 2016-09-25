@@ -1,25 +1,16 @@
-language: python
-python:
-  - "2.7"
+sudo: required
 
-env:
-  - CFLAGS="-O0"
+language: python
+
+services:
+  - docker
 
 before_install:
-  - sudo apt-get install -qq libxml2-dev libxslt-dev postgresql-contrib
+  - docker build -t web .
+  - docker run -d -p 127.0.0.1:80:80 --name web web
 
-# command to install dependencies
-install:
-  - "pip install -r requirements.txt"
+after_failure:
+  - docker logs mycontainer
 
-# virtualenv:
-#    system_site_packages: true
-
-# database creation
-before_script:
-  - psql -c 'create database preciosa;' -U postgres
-  - psql -c 'CREATE EXTENSION postgis;' -U postgres -d preciosa
-  - psql -c 'CREATE EXTENSION postgis_topology;' -U postgres -d preciosa
-
-# command to run tests
-script: python manage.py test
+script:
+  - python manage.py test
