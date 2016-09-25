@@ -15,8 +15,8 @@ A diferencia de otras aplicaciones existentes, Preciosa no limita la informació
 :lista: https://groups.google.com/forum/#!forum/preciosa-devs
 
 
-### NECESITAMOS COLABORACION
+Necesitamos tu ayuda!
+---------------------
 
-Si sabés python, javascript, diseño/desarrollo web, desarrollo de apps moviles, desarrollar
-scrapper en cualquier lenguaje o cualquier otra tecnologia o conocimiento que consideres relevante
+Si sabés python, javascript, diseño/desarrollo web, desarrollo de apps para móviles, webscraping en cualquier lenguaje o cualquier otra tecnologia o conocimiento que consideres relevante
 para Preciosa, por favor, sumate a la lista de correo y ponete en contacto. **¡Te necesitamos!**
