@@ -5,12 +5,9 @@ language: python
 services:
   - docker
 
-before_install:
-  - docker build -t web .
-  - docker run -d -p 127.0.0.1:80:80 --name web web
-
-after_failure:
-  - docker logs mycontainer
+before_script:
+  - docker-compose build .
 
 script:
-  - python manage.py test
+  - docker-compose run web python manage.py test
+
