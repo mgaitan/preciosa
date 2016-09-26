@@ -19,7 +19,7 @@ django-cities-light==3.3.0
 django-cors-headers==1.1.0
 django-dbbackup==3.0.2
 django-extensions==1.7.4
-https://github.com/mgaitan/django-feedback/archive/master.zip
+django-feedback==1.1.1
 django-forms-bootstrap==3.0.1
 django-floppyforms==1.6.1
 django-image-cropping==1.0.3
