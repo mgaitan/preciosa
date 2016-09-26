@@ -5,13 +5,20 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get -qq update && apt-get install -y  --no-install-recommends \
     build-essential \
     git \
+    postgresql-client \
     python \
     python-dev \
-    libffi-dev libssl-dev \
+    libffi-dev \
+    libssl-dev \
     libpq-dev \
-    libxml2-dev libxslt1-dev \
-    libjpeg-dev zlib1g-dev libpng12-dev \
-    binutils libproj-dev gdal-bin \
+    libxml2-dev \
+    libxslt1-dev \
+    libjpeg-dev \
+    zlib1g-dev \
+    libpng12-dev \
+    binutils \
+    libproj-dev \
+    gdal-bin \
     python-pip \
     && rm -rf /var/lib/apt/lists/*
 
