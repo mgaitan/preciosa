@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from django.core.management.base import BaseCommand
-from optparse import make_option
 from annoying.functions import get_object_or_None
 from django.db.models import Q
 import logging
@@ -59,32 +58,33 @@ class Annalisa(object):
 
 class Command(BaseCommand):
     help = 'Utiliza Annalisa para inferir detalles a partir de la descripcion'
-    option_list = BaseCommand.option_list + (
-        make_option('--force-marca',
+    
+    def add_arguments(self, parser):
+
+        parser.add_argument('--force-marca',
                     action='store_true',
                     dest='force_marca',
                     default=False,
                     help='Fuerza la marca encontrada por Annalisa, '
                     'aunque esté definida en la instancia'),
-        make_option('--force-categoria',
+        parser.add_argument('--force-categoria',
                     action='store_true',
                     dest='force_categoria',
                     default=False,
                     help='Fuerza la categoria encontrada por Annalisa, '
                     'aunque esté definida en la instancia'),
-        make_option('--force-unidad',
+        parser.add_argument('--force-unidad',
                     action='store_true',
                     dest='force_unidad_medida',
                     default=False,
                     help='Fuerza la unidad encontrada por Annalisa, '
                     'aunque esté definida en la instancia'),
-        make_option('--force-cantidad',
+        parser.add_argument('--force-cantidad',
                     action='store_true',
                     dest='force_cantidad',
                     default=False,
                     help='Fuerza la cantidad encontrada por Annalisa, '
                     'aunque esté definida en la instancia'),
-    )
 
     def __init__(self, *args, **kwargs):
         super(Command, self).__init__(*args, **kwargs)
