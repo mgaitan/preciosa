@@ -12,6 +12,7 @@ from django.db.models import Q, Min, Manager
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import Point
 from django.db.models.signals import post_save
+from django.contrib.postgres.search import TrigramSimilarity
 from annoying.functions import get_object_or_None
 from model_utils import Choices
 from model_utils.fields import MonitorField
@@ -93,10 +94,10 @@ class ProductoManager(Manager):
             tiene_palabras = Producto.objects.filter(
                 palabras).values_list('id',
                                       flat=True)
-            # similares = Producto.objects.filter_o(
-            #    busqueda__similar=q).values_list('id',
-            #                                     flat=True)
-            similares = []
+            similares = Producto.objects.annotate(
+                similarity=TrigramSimilarity('busqueda', q)
+            ).filter(similarity__gt=0.3).order_by('-similarity').values_list('id', flat=True)
+
             productos = Producto.objects.filter(Q(id__in=tiene_palabras) |
                                                 Q(id__in=similares)).distinct()[0:limite]
         return productos
@@ -305,6 +306,7 @@ class SucursalManager(models.GeoManager):
 
     def alrededor_de(self, punto_o_lonlat, radio):
         return self.get_queryset().alrededor_de(punto_o_lonlat, radio)
+
 
 
 class Sucursal(models.Model):

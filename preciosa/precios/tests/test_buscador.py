@@ -53,11 +53,11 @@ class TestBuscador(TestCase):
             for p in prods:
                 self.assertNotResult(response, p)
 
-    # def test_busca_por_similaridad(self):
-    #    response = self.client.get(self.url, {'q': 'salsa de tomate cica'})
-    #    arcor = self.productos[0]
-    #    assert 'Arcor' in arcor.descripcion
-    #    self.assertResult(response, arcor)
+    def test_busca_por_similaridad(self):
+        response = self.client.get(self.url, {'q': 'salsa de tomate cica'})
+        arcor = self.productos[0]
+        assert 'Arcor' in arcor.descripcion
+        self.assertResult(response, arcor)
 
     def test_busca_por_upc(self):
         arcor = self.productos[0]
