@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
-
-from django.http import HttpResponse
+from django.http import JsonResponse
 from preciosa.precios.models import Producto, Categoria
 
 # Vistas web
@@ -44,10 +43,23 @@ class ProductoDetailView(DetailView):
         return context
 
 
-def buscador(request):
-    q = request.GET.get('q', '')
-    if len(q) < 3:
-        return HttpResponse('')
-    context = {'q': q}
-    context['productos'] = Producto.objects.buscar(q)
-    return render(request, "precios/buscador.html", context)
+class ProductosSearchAutocomplete(ListView):
+    model = Producto
+
+    def get_queryset(self):
+        q = self.request.GET.get('q', None)
+        if not q or len(q) < 3:
+            return Producto.objects.none()
+        qs = Producto.objects.buscar(q)[:8]
+        return qs
+
+    def get(self, request, *args, **kwargs):
+        data = {
+            'results': [{
+                'id': result.id,
+                'value': result.descripcion,
+                'url': result.get_absolute_url()
+            } for result in self.get_queryset()
+            ]
+        }
+        return JsonResponse(data)

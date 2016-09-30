@@ -92,27 +92,6 @@ STATICFILES_FINDERS = [
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = "0u06gl%=^$%!4_0*jrp^w-6#xle1w*yh%^qpg9$%zw4hd#yu_^"
 
-# List of callables that know how to import templates from various sources.
-# TEMPLATE_LOADERS = [
-#     "django.template.loaders.filesystem.Loader",
-#     "django.template.loaders.app_directories.Loader",
-# ]
-
-# TEMPLATE_CONTEXT_PROCESSORS = [
-#     "django.contrib.auth.context_processors.auth",
-#     "django.core.context_processors.debug",
-#     "django.core.context_processors.i18n",
-#     "django.core.context_processors.media",
-#     "django.core.context_processors.static",
-#     "django.core.context_processors.tz",
-#     "django.core.context_processors.request",
-#     "django.contrib.messages.context_processors.messages",
-#     "account.context_processors.account",
-#     "pinax_theme_bootstrap.context_processors.theme",
-#     "preciosa.context_processors.menu"
-# ]
-
-
 MIDDLEWARE_CLASSES = [
     "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -140,7 +119,8 @@ TEMPLATES = [
             'context_processors': [
                 # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
                 # list if you haven't customized them:
-                "django.core.context_processors.request",
+
+                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
@@ -177,6 +157,7 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
+    "django.contrib.postgres",
     "django.contrib.gis",
     "django.contrib.messages",
     "django.contrib.sessions",

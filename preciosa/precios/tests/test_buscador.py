@@ -33,7 +33,7 @@ class TestBuscador(TestCase):
         base = render_to_string('base.html', {})
         buscador = render_to_string('_buscador_js.html', {})
         self.assertIn(buscador, base)
-        self.assertIn("url: '%s'" % self.url, buscador)
+        self.assertIn(self.url, buscador)
 
     def test_busca_productos(self):
         mayo = self.productos[-1]
@@ -53,11 +53,11 @@ class TestBuscador(TestCase):
             for p in prods:
                 self.assertNotResult(response, p)
 
-    # def test_busca_por_similaridad(self):
-    #    response = self.client.get(self.url, {'q': 'salsa de tomate cica'})
-    #    arcor = self.productos[0]
-    #    assert 'Arcor' in arcor.descripcion
-    #    self.assertResult(response, arcor)
+    def test_busca_por_similaridad(self):
+        response = self.client.get(self.url, {'q': 'salsa de tomate cica'})
+        arcor = self.productos[0]
+        assert 'Arcor' in arcor.descripcion
+        self.assertResult(response, arcor)
 
     def test_busca_por_upc(self):
         arcor = self.productos[0]
@@ -68,6 +68,7 @@ class TestBuscador(TestCase):
         for p in self.productos[1:]:
             self.assertNotResult(response, p)
 
+    """ TO DO
     def test_ignora_acentos(self):
         pure = self.productos[2]
         assert u'Puré' in pure.descripcion
@@ -75,3 +76,4 @@ class TestBuscador(TestCase):
         self.assertResult(response, pure)
         response = self.client.get(self.url, {'q': 'Pure  '})
         self.assertResult(response, pure)
+    """

@@ -1,7 +1,5 @@
 from django.conf import settings
 from django.conf.urls import include, url
-from django.conf.urls.static import static
-from django.conf.urls import patterns
 from precios import views
 
 
@@ -24,7 +22,7 @@ urlpatterns = [
     url(r'^newsletter/', include('newsletter.urls')),
     url(r'^feedback/', include('feedback.urls')),
     url(r'^summernote/', include('django_summernote.urls')),
-    url(r'^buscador/', views.buscador, name='buscador'),
+    url(r'^buscador/', views.ProductosSearchAutocomplete.as_view(), name='buscador'),
     url(r'^(\d+)-([a-z0-9-_]+)/$',
         views.ProductosListView.as_view(), name='lista_productos'),
     url(r'^(\d+)-([a-z0-9-_]+)/(?P<pk>\d+)-([a-z0-9-_]+)$',
@@ -41,8 +39,7 @@ urlpatterns = [
 if settings.SITE_ID == 3:
     # las crawlers no son bienvenidos en el sitio de desarrollo
     from django.http import HttpResponse
-    urlpatterns += patterns('',
-                            url(r'^robots\.txt$',
-                             lambda r: HttpResponse("User-agent: *\nDisallow: /",
-                                                    mimetype="text/plain"))
-                            )
+    urlpatterns += [
+        url(r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: /", mimetype="text/plain"))
+    ]
+                            

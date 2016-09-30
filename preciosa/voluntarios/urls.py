@@ -1,9 +1,9 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from .views import (CityAutocomplete, dashboard, mapa_categorias, logos, alta_marca, voto_item,
                     alta_cadena_sucursal, autocomplete_nombre_marca, autocomplete_nombre_sucursal,
                     geo_code_data)
 
-urlpatterns = patterns("preciosa.voluntarios.views",
+urlpatterns = [
     url(r"^$", dashboard, name='voluntarios_dashboard'),      # noqa
     url(r"^mapa_categorias/$", mapa_categorias, name='mapa_categorias'),
     url(r"^logos/$", logos, name='logos'),
@@ -17,6 +17,5 @@ urlpatterns = patterns("preciosa.voluntarios.views",
         name='autocomplete_nombre_sucursal'),
     url(r"^sucursal/voto/(?P<pk>\d+)/$", voto_item, name='voto_item'),
     url(r"^sucursal/geo_code/$", geo_code_data, name='geo_code_data'),
-    url(r'^city-autocomplete/$', CityAutocomplete.as_view(), name='city-autocomplete',
-    ),
-)
+    url(r'^city-autocomplete/$', CityAutocomplete.as_view(), name='city-autocomplete'),
+]
