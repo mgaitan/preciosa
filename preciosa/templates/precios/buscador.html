@@ -1,6 +1,0 @@
-{# renderiza los resultados del buscador #}
-
-
-{% for producto in productos %}
-    <a class="div choice" href="{{ producto.get_absolute_url }}">{{ producto.descripcion }}</a>
-{% endfor %}
