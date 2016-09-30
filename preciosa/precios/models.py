@@ -184,11 +184,10 @@ class Producto(models.Model):
 
     def similares(self, maxnum=5):
         """devuelve un queryset de productos similares.
-        (no incluye al producto en sí mismo)
+        (excluye al producto en sí mismo)
         """
-        #qs = Producto.objects.exclude(id=self.id)
-        #return qs.filter_o(busqueda__similar=self.busqueda)[:maxnum]
-        return []
+        qs = Producto.objects.exclude(id=self.id)
+        return qs.filter(busqueda__trigram_similar=self.busqueda)[:maxnum]
 
 
 class DescripcionAlternativa(models.Model):
