@@ -21,7 +21,7 @@ django-dbbackup==3.0.2
 django-extensions==1.7.4
 django-feedback==1.1.1
 django-forms-bootstrap==3.0.1
-django-floppyforms==1.6.1
+django-floppyforms==1.7.0
 django-image-cropping==1.0.3
 django-summernote==0.8.5
 django-jsonfield==1.0.1
