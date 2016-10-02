@@ -131,7 +131,6 @@ TEMPLATES = [
                 "account.context_processors.account",
                 "pinax_theme_bootstrap.context_processors.theme",
                 "preciosa.context_processors.menu",
-                # 'easy_thumbnails.processors.filters',
             ],
             'loaders': [
                 # insert your TEMPLATE_LOADERS here
@@ -148,6 +147,7 @@ THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.scale_and_crop',  # disable this one
     'easy_thumbnails.processors.filters',
 )
+THUMBNAIL_DEBUG = True
 
 # TEMPLATE_DIRS = [
 #     os.path.join(PACKAGE_ROOT, "templates"),
@@ -186,9 +186,7 @@ INSTALLED_APPS = [
     "easy_thumbnails",
     "image_cropping",
     "floppyforms",
-    #"djorm_pgtrgm",
-
-
+    
     # community and stats
     "feedback",
     "analytical",
@@ -207,9 +205,7 @@ INSTALLED_APPS = [
     # blog
     "radpress",
 
-    'newsletter',
     'django_summernote',
-    'sorl.thumbnail',
 
     # project
     "preciosa",

@@ -7,6 +7,15 @@ from preciosa.precios.tests.factories import ProductoFactory, CategoriaFactory
 from tools.texto import normalizar
 
 
+class TestProductoDetail(TestCase):
+    def setUp(self):
+        self.p1 = ProductoFactory(descripcion=u"Salsa de Tomate Arcor 500ml")
+
+    def test_detail_view_use_correct_template(self):
+        response = self.client.get(self.p1.get_absolute_url())
+        self.assertTemplateUsed(response, 'precios/detalle_producto.html')
+
+
 class TestSimilaresAProducto(TestCase):
 
     def setUp(self):

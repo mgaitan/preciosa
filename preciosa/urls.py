@@ -19,7 +19,7 @@ urlpatterns = [
     url(r"^account/signup/$", SignupView.as_view(
         template_name_email_confirmation_sent='account/email/template_name_email_confirmation_sent')),
     url(r"^account/", include("account.urls")),
-    url(r'^newsletter/', include('newsletter.urls')),
+    # url(r'^newsletter/', include('newsletter.urls')),
     url(r'^feedback/', include('feedback.urls')),
     url(r'^summernote/', include('django_summernote.urls')),
     url(r'^buscador/', views.ProductosSearchAutocomplete.as_view(), name='buscador'),
