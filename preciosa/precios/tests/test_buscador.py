@@ -3,7 +3,6 @@ from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from preciosa.precios.tests.factories import ProductoFactory
-from django.utils.encoding import smart_str
 
 
 class TestBuscador(TestCase):
@@ -20,14 +19,18 @@ class TestBuscador(TestCase):
                           ProductoFactory(descripcion=u"Mayonesa Hellmanns 350gr")]
 
     def assertResult(self, response, p):
-        # es una regresión de django ?
-        # NOQA https://code.djangoproject.com/attachment/ticket/10183/10183-django.test.testcases_assertContainsPatch.3.diff
-        self.assertIn(smart_str(p.descripcion), response.content)
-        self.assertIn(smart_str(p.get_absolute_url()), response.content)
-
+        self.assertIn({
+            'id': p.id,
+            'value': p.descripcion,
+            'url': p.get_absolute_url()
+        }, response.json()['results'])
+        
     def assertNotResult(self, response, p):
-        self.assertNotIn(smart_str(p.descripcion), response.content)
-        self.assertNotIn(smart_str(p.get_absolute_url()), response.content)
+        self.assertNotIn({
+            'id': p.id,
+            'value': p.descripcion,
+            'url': p.get_absolute_url()
+        }, response.json()['results'])
 
     def test_js_requerido(self):
         base = render_to_string('base.html', {})
@@ -68,7 +71,6 @@ class TestBuscador(TestCase):
         for p in self.productos[1:]:
             self.assertNotResult(response, p)
 
-    """ TO DO
     def test_ignora_acentos(self):
         pure = self.productos[2]
         assert u'Puré' in pure.descripcion
@@ -76,4 +78,3 @@ class TestBuscador(TestCase):
         self.assertResult(response, pure)
         response = self.client.get(self.url, {'q': 'Pure  '})
         self.assertResult(response, pure)
-    """
