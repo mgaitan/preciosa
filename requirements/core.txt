@@ -39,3 +39,4 @@ pinax-theme-bootstrap==5.0.3
 https://github.com/mgaitan/pinax-theme-bootstrap-account/archive/master.zip
 https://github.com/mgaitan/radpress/archive/master.zip
 unicodecsv==0.14.1
+ipython==5.1.0
