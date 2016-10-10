@@ -58,8 +58,8 @@ m2m_changed.connect(actualizar_ciudades_de_region,
 class Acuerdo(models.Model):
     nombre = models.CharField(max_length=150)
     region = models.ForeignKey(Region)
-    sucursales = models.ManyToManyField('precios.Sucursal', null=True, blank=True)
-    cadenas = models.ManyToManyField('precios.Cadena', null=True, blank=True)
+    sucursales = models.ManyToManyField('precios.Sucursal')
+    cadenas = models.ManyToManyField('precios.Cadena')
 
     def __unicode__(self):
         tipo = 'Cadenas Nacionales' if self.cadenas.exists() else 'Super Regionales'
