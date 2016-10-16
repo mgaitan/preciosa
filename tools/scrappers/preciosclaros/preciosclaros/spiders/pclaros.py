@@ -5,7 +5,7 @@ import scrapy
 from preciosclaros.items import SucursalItem, ProductoItem, PrecioItem
 
 
-HEADERS = {'x-api-key': 'mBurRHh5lEHTFkC11Its1zcQuE1Gn4N58SGwD135',
+HEADERS = {'x-api-key': 'PkVRKmPu0k6O2F0Y9J78TaFekqe3mAAe3RWJ5Vaj',
            'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.89 Safari/537.36'}
 
 base_url = 'https://8kdx6rx8h4.execute-api.us-east-1.amazonaws.com/'
