@@ -1,6 +1,6 @@
 # base
 
-Django==1.11.1
+Django==1.11.2
 psycopg2==2.7.1
 Pillow>=3.1.1
 requests[security]==2.17.3
