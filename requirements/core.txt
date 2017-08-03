@@ -14,7 +14,7 @@ django-annoying==0.10.3
 git+https://github.com/yourlabs/django-autocomplete-light.git@3.1.8#egg=django-autocomplete-light
 django-autoslug==1.9.3
 django-appconf==1.0.2
-django-bootstrap-form==3.2.1
+django-bootstrap-form==3.3
 django-cities-light==3.3.0
 django-cors-headers==2.1.0
 django-dbbackup==3.1.3
