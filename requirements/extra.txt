@@ -13,4 +13,4 @@
 #
 
 progress
-python-google-places==1.4.0
+python-google-places==1.4.1
