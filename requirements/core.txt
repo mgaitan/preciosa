@@ -23,7 +23,7 @@ django-feedback==1.1.1
 django-forms-bootstrap==3.1.0
 django-floppyforms==1.7.0
 django-image-cropping==1.1.0
-django-summernote==0.8.8.2
+django-summernote==0.8.8.3
 django-jsonfield==1.0.1
 django-model-utils==3.0.0
 # django-newsletter==0.6
