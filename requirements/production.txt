@@ -2,5 +2,5 @@
 -r optional.txt
 -r extra.txt
 djrill==2.1.0
-raven==6.6.0
+raven==6.7.0
 ngxtop
