@@ -8,7 +8,7 @@ from preciosclaros.items import SucursalItem, ProductoItem, PrecioItem
 HEADERS = {'x-api-key': 'PkVRKmPu0k6O2F0Y9J78TaFekqe3mAAe3RWJ5Vaj',
            'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.89 Safari/537.36'}
 
-base_url = 'https://8kdx6rx8h4.execute-api.us-east-1.amazonaws.com/'
+base_url = 'https://d3e6htiiul5ek9.cloudfront.net/'
 sucursales_url = base_url + 'prod/sucursales'     # ?limit=50&offset=50
 productos_url = base_url + 'prod/productos'  # ?id_sucursal
 

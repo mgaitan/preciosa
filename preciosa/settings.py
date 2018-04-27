@@ -186,7 +186,7 @@ INSTALLED_APPS = [
     "easy_thumbnails",
     "image_cropping",
     "floppyforms",
-    
+
     # community and stats
     "feedback",
     "analytical",
@@ -246,6 +246,11 @@ CACHES = {
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    'formatters': {
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
     "filters": {
         "require_debug_false": {
             "()": "django.utils.log.RequireDebugFalse"
@@ -260,11 +265,19 @@ LOGGING = {
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'logfile': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(PROJECT_ROOT, "preciosa.log"),
+            'maxBytes': '16777216', # 16megabytes
+            'formatter': 'simple'
         },
     },
     "loggers": {
         "main": {
-            "handlers": ["console"],
+            "handlers": ["console", "logfile"],
             "level": "INFO",
             "propagate": True,
         },

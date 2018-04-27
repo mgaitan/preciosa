@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from model_utils import Choices
 
 
 class IdProductoOnline(models.Model):
@@ -20,3 +21,18 @@ class IdProductoOnline(models.Model):
                           null=True, blank=True,
                           help_text=u"Url al detalle del producto en la "
                                     u"sucursal, si existe")
+
+
+
+class SucursalMapper(models.Model):
+    """
+    Un modelo para mapear sucursales, por ejemplo, para ser utilizado por importaderos de datos.
+    """
+    class Meta:
+        unique_together = [('source', 'id_source')]
+
+    SOURCES = Choices('preciosclaros',)
+    source = models.CharField(max_length=20, choices=SOURCES)
+    id_source = models.CharField(max_length=20)
+    sucursal = models.ForeignKey('precios.Sucursal')
+

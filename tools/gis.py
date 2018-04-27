@@ -85,14 +85,14 @@ def donde_queda(lat, lon):
 
     r = unificar(reverse_geocode(lat, lon, False))
     data = {}
-    data['direccion'] = (r['route'] + ' ' + r.get('street_number', '')).strip()
+    data['direccion'] = (r.get('route', '') + ' ' + r.get('street_number', '')).strip()
     data['ciudad'] = None
     try:
-        data['ciudad'] = City.objects.get(name=r['neighborhood'])
-    except (KeyError, City.DoesNotExist):
+        data['ciudad'] = City.objects.get(name=r.get('neighborhood', ''))
+    except (KeyError, City.DoesNotExist, City.MultipleObjectsReturned):
         try:
-            data['ciudad'] = City.objects.get(name=r['locality'])
-        except City.DoesNotExist:
+            data['ciudad'] = City.objects.get(name=r['administrative_area_level_2'], region__name=r['administrative_area_level_1'])
+        except (KeyError, City.DoesNotExist):
             # aprovechar una sucursal cercana para inferir ciudad
             qs = Sucursal.objects.alrededor_de((lon, lat), 5)
             if qs.exists():

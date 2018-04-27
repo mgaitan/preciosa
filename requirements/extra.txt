@@ -1,8 +1,8 @@
 # En este listado de dependencias poner todas aquellas que
-# no son obligatorias para el funcionamiento estándar.
+# no son obligatorias para el funcionamiento estandar.
 # Por ejemplo, aquellas requeridas para management commands de aquisicion de
 # datos.
-# Se puede importar así
+# Se puede importar asi
 #
 #   try:
 #       import zaraza

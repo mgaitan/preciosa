@@ -331,6 +331,7 @@ class Sucursal(models.Model):
                                  help_text='Es una sucursal online, no física')
     url = models.URLField(max_length=200, null=True, blank=True)
     busqueda = models.CharField(max_length=300, editable=False)
+    tipo = models.CharField(max_length=50, null=True, blank=True)
 
     def _actualizar_busqueda(self, commit=True):
         """denormalizacion de varios atributos relacionados para
@@ -428,7 +429,7 @@ class Sucursal(models.Model):
                 u'Hay una sucursal de la misma cadena a menos de 50 metros')
 
     def __unicode__(self):
-        return u"%s (%s)" % (self.nombre or self.cadena, self.direccion or self.url)
+        return u"%s [%s] (%s)" % (self.nombre, self.cadena, self.direccion or self.url)
 
     class Meta:
         unique_together = (('direccion', 'ciudad'))
