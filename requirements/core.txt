@@ -25,7 +25,7 @@ django-floppyforms==1.7.0
 django-image-cropping==1.1.0
 django-summernote==0.8.8.7
 django-jsonfield==1.0.1
-django-model-utils==3.1.1
+django-model-utils==3.1.2
 # django-newsletter==0.6
 https://github.com/fladi/django-treebeard/archive/django-1.10.zip#egg=django-treebeard==4.0.1
 djangorestframework==3.8.2
