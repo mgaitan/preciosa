@@ -31,7 +31,7 @@ https://github.com/fladi/django-treebeard/archive/django-1.10.zip#egg=django-tre
 djangorestframework==3.11.0
 djangorestframework-jsonp==1.0.2
 django-user-accounts==2.1.0
-easy-thumbnails==2.6
+easy-thumbnails==2.7
 eventlog==0.11.0
 factory-boy==2.12.0
 metron==1.3.7
