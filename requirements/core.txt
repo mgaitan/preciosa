@@ -30,7 +30,7 @@ django-model-utils==4.0.0
 https://github.com/fladi/django-treebeard/archive/django-1.10.zip#egg=django-treebeard==4.0.1
 djangorestframework==3.11.0
 djangorestframework-jsonp==1.0.2
-django-user-accounts==2.1.0
+django-user-accounts==3.0.0
 easy-thumbnails==2.7
 eventlog==0.11.0
 factory-boy==2.12.0
