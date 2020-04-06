@@ -1,7 +1,7 @@
 # base
 
 Django==3.0.5
-psycopg2==2.8.4
+psycopg2==2.8.5
 Pillow>=3.1.1
 requests[security]==2.23.0
 mock==4.0.2
