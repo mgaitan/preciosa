@@ -12,7 +12,7 @@ django-nose==1.4.6
 django-analytical==2.5.0
 django-annoying==0.10.6
 git+https://github.com/yourlabs/django-autocomplete-light.git@3.1.8#egg=django-autocomplete-light
-django-autoslug==1.9.6
+django-autoslug==1.9.7
 django-appconf==1.0.4
 django-bootstrap-form==3.4
 django-cities-light==3.5.0
