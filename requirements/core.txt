@@ -15,7 +15,7 @@ git+https://github.com/yourlabs/django-autocomplete-light.git@3.1.8#egg=django-a
 django-autoslug==1.9.8
 django-appconf==1.0.4
 django-bootstrap-form==3.4
-django-cities-light==3.8.0
+django-cities-light==3.8.1
 django-cors-headers==3.5.0
 django-dbbackup==3.3.0
 django-extensions==3.0.9
