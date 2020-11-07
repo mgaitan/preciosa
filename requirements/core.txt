@@ -28,7 +28,7 @@ django-jsonfield==1.4.1
 django-model-utils==4.0.0
 # django-newsletter==0.6
 https://github.com/fladi/django-treebeard/archive/django-1.10.zip#egg=django-treebeard==4.0.1
-djangorestframework==3.12.1
+djangorestframework==3.12.2
 djangorestframework-jsonp==1.0.2
 django-user-accounts==3.0.2
 easy-thumbnails==2.7
