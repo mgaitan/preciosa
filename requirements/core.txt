@@ -9,7 +9,7 @@ django-nose==1.4.7
 
 # django packages
 
-django-analytical==2.6.0
+django-analytical==3.0.0
 django-annoying==0.10.6
 git+https://github.com/yourlabs/django-autocomplete-light.git@3.1.8#egg=django-autocomplete-light
 django-autoslug==1.9.8
