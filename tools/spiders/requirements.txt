@@ -1,2 +1,2 @@
-Scrapy==2.4.1
+Scrapy==2.5.0
 pytz==2021.1
