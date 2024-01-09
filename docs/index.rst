@@ -32,9 +32,9 @@ A modo de intro
 
     (...) Entran a un super, agarran el paquete de harina, le sacan una fotito con su cámara al código de barra (o buscan el producto por nombre, marca, etc.) y la app les dice cuál es el precio de referencia (o del acuerdo), en qué super cercano está más barato, cuándo y cuánto aumentó, etc.
 
-- `Idea original <http://mgaitan.github.io/posts/mirar-tu-smartphone-para-cuidar.html>`_
+- `Idea original <http://mgaitan.github.io/posts/mirar-tu-smartphone-para-cuidar/>`_
 
-- `Repercusión y primeros pasos <http://mgaitan.github.io/posts/hola-preciosa.html>`_
+- `Repercusión y primeros pasos <http://mgaitan.github.io/posts/hola-preciosa/>`_
 
 Índice
 -------
