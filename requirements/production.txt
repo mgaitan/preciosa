@@ -1,6 +1,6 @@
 -r core.txt
 -r optional.txt
 -r extra.txt
-djrill==0.9.0
-raven==4.0.4
+djrill==2.1.0
+raven==6.10.0
 ngxtop
